@@ -52,28 +52,28 @@ https://item.taobao.com/item.htm?spm=a1z10.3-c.w4002-18447093278.24.46a24c57weAW
 
 此工程存放OpenHarmony提供的快速入门、开发指南、API参考等开发者文档，欢迎参与OpenHarmony开发者文档开源项目，与我们一起完善开发者文档。
 
-[View English](OpenHarmony/Openharmony v1.0/docs/docs-en/Readme-EN.md)
+[View English](Openharmony%20v1.0/docs-en/Readme-EN.md)
 
 ## 文档目录结构<a name="section135134412620"></a>
 
--   quick-start：[快速入门](OpenHarmony/Openharmony v1.0/docs/quick-start/Readme-CN.md)
--   get-code：[获取源码/获取工具](OpenHarmony/Openharmony v1.0/docs/get-code/Readme-CN.md)
--   driver：[驱动](OpenHarmony/Openharmony v1.0/docs/driver/Readme-CN.md)
--   kernel：[内核](OpenHarmony/Openharmony v1.0/docs/kernel/Readme-CN.md)
--   subsystems：[子系统](OpenHarmony/Openharmony v1.0/docs/subsystems/Readme-CN.md)
--   bundles：[组件开发](OpenHarmony/Openharmony v1.0/docs/bundles/Readme-CN.md)
--   guide：[设备开发](OpenHarmony/Openharmony v1.0/docs/guide/Readme-CN.md)
--   security：[安全](OpenHarmony/Openharmony v1.0/docs/security/Readme-CN.md)
--   api-LinkIoT：[联接类模组API](OpenHarmony/Openharmony v1.0/docs/api/api-LinkIoT/Readme-CN.md)
--   api-SmartVision-Devices：[智慧视觉设备API](OpenHarmony/Openharmony v1.0/docs/api/api-SmartVision-Devices/Readme-CN.md)
--   contribute：[贡献](OpenHarmony/Openharmony v1.0/docs/contribute/参与贡献.md)
--   term：[术语](OpenHarmony/Openharmony v1.0/docs/term/术语.md)
+-   quick-start：[快速入门](Openharmony%20v1.0/docs/quick-start/Readme-CN.md)
+-   get-code：[获取源码/获取工具](Openharmony%20v1.0/docs/get-code/Readme-CN.md)
+-   driver：[驱动](Openharmony%20v1.0/docs/driver/Readme-CN.md)
+-   kernel：[内核](Openharmony%20v1.0/docs/kernel/Readme-CN.md)
+-   subsystems：[子系统](Openharmony%20v1.0/docs/subsystems/Readme-CN.md)
+-   bundles：[组件开发](Openharmony%20v1.0/docs/bundles/Readme-CN.md)
+-   guide：[设备开发](Openharmony%20v1.0/docs/guide/Readme-CN.md)
+-   security：[安全](Openharmony%20v1.0/docs/security/Readme-CN.md)
+-   api-LinkIoT：[联接类模组API](Openharmony%20v1.0/api/api-LinkIoT/Readme-CN.md)
+-   api-SmartVision-Devices：[智慧视觉设备API](Openharmony%20v1.0/api/api-SmartVision-Devices/Readme-CN.md)
+-   contribute：[贡献](Openharmony%20v1.0/docs/contribute/参与贡献.md)
+-   term：[术语](Openharmony%20v1.0/docs/term/术语.md)
 
 ## 贡献<a name="section897211181655"></a>
 
 非常欢迎您贡献文档，我们鼓励开发者以各种方式参与文档反馈和贡献。
 
-您可以对现有文档进行评价、简单更改、反馈文档质量问题、贡献您的原创内容，详细请参考[贡献文档](OpenHarmony/Openharmony v1.0/docs/contribute/贡献文档.md)。
+您可以对现有文档进行评价、简单更改、反馈文档质量问题、贡献您的原创内容，详细请参考[贡献文档](Openharmony%20v1.0/docs/contribute/贡献文档.md)。
 
 卓越贡献者将会在开发者社区文档贡献专栏表彰公示。
 
