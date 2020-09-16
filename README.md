@@ -1,5 +1,5 @@
 # OpenHarmony
-华为鸿蒙分布式操作系统（Huawei OpenHarmony）开发技术交流，鸿蒙技术资料，手册，指南，共建国产操作系统。
+华为鸿蒙分布式操作系统（Huawei OpenHarmony）开发技术交流，鸿蒙技术资料，手册，指南，共建国产操作系统新生态。
 
 鸿蒙 OS 开源量子基金会：
 https://www.openatom.org/openharmony
