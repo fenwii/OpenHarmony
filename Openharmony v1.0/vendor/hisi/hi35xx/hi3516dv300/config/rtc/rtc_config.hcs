@@ -1,0 +1,19 @@
+root {
+    platfrom {
+        rtc_config {
+            controller_0x12080000 {
+                match_attr = "hisilicon_hi35xx_rtc";
+                supportAnaCtrl = false;
+                supportLock = false;
+                rtcSpiBaseAddr = 0x12080000;
+                regAddrLength = 0x100;
+                irq = 37;
+                anaCtrlAddr = 0xff;
+                lock0Addr = 0xff;
+                lock1Addr = 0xff;
+                lock2Addr = 0xff;
+                lock3Addr = 0xff;
+            }
+        }
+    }
+}

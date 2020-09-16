@@ -1,0 +1,5 @@
+config DRIVERS_HDF_PLATFORM_UART
+    bool "Enable HDF platform uart driver"
+    depends on DRIVERS_HDF_PLATFORM
+    help
+      Answer Y to enable HDF platform uart driver.

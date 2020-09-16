@@ -1,0 +1,15 @@
+# Copyright (C) 2019. Huawei Technologies Co., Ltd. All rights reserved.
+
+import("//build/lite/config/component/lite_component.gni")
+
+shared_library("iniparser") {
+    sources = [
+        "src/iniparser.c",
+        "src/dictionary.c",
+    ]
+    public_configs = [":iniparser_external_library_config"]
+}
+config("iniparser_external_library_config") {
+    include_dirs = ["//third_party/iniparser/src"]
+}
+

@@ -1,0 +1,68 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/lite/config/component/lite_component.gni")
+
+lite_component("init_lite") {
+    features = [
+        ":init"
+    ]
+}
+
+# feature: init
+executable("init") {
+    sources = [
+        "src/main.c",
+        "src/init_cmds.c",
+        "src/init_jobs.c",
+        "src/init_read_cfg.c",
+        "src/init_adapter.c",
+        "src/init_service.c",
+        "src/init_service_manager.c",
+        "src/init_signal_handler.c",
+    ]
+
+    include_dirs = [
+        "include",
+        "//third_party/cJSON",
+        "//third_party/bounds_checking_function/include",
+        "//base/startup/interfaces/kits/syspara_lite",
+    ]
+
+    cflags = [
+        "-Wall",
+    ]
+
+    deps = [
+        "//third_party/bounds_checking_function:libsec_shared",
+        "//third_party/cJSON:cjson_shared",
+        "//base/startup/frameworks/syspara_lite/parameter:parameter",
+    ]
+
+    ldflags = [ ]
+
+    if (ohos_kernel_type == "liteos_a") {
+        include_dirs += [
+            "//kernel/liteos_a/syscall",
+        ]
+
+        output_name = "init"
+    }
+
+    if (ohos_kernel_type == "linux") {
+        output_name = "ohosinit"
+
+        ldflags += [
+            "-lm",
+        ]
+    }
+}

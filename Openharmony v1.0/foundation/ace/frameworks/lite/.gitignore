@@ -1,0 +1,8 @@
+x64/
+x32
+*.vcxproj.user
+.vscode
+
+target/
+node_modules/
+moduletest/

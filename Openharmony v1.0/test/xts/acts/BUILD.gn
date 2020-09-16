@@ -1,0 +1,101 @@
+ # Copyright (c) 2020 Huawei Device Co., Ltd.
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #     http://www.apache.org/licenses/LICENSE-2.0
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+
+import("//test/xts/tools/build/suite_lite.gni")
+import("//build/lite/config/subsystem/aafwk/config.gni")
+
+lite_component("acts_compoment") {
+    all_features = []
+    features = []
+    if (ohos_xts_test_args != "") {
+         all_features += [ ohos_xts_test_args ]
+    } else {
+        if(ohos_kernel_type == "liteos_riscv") {
+            all_features += [
+                "//test/xts/acts/communication_lite/lwip_hal:ActsLwipTest",
+                "//test/xts/acts/communication_lite/softbus_hal:ActsSoftBusTest",
+                "//test/xts/acts/communication_lite/wifiservice_hal:ActsWifiServiceTest",
+                "//test/xts/acts/utils_lite/utilsfile_hal:ActsUtilsFileTest",
+                "//test/xts/acts/utils_lite/parameter_hal:ActsParameterTest",
+                "//test/xts/acts/iot_hardware_lite/wifiiot_hal:ActsWifiIotTest",
+                "//test/xts/acts/kernel_lite/kernelcmsis_hal:ActsCMSISTest",
+                "//test/xts/acts/kernel_lite/kernelkal_hal:ActsKalTest",
+                "//test/xts/acts/hiviewdfx_lite/dfx_hal:ActsDfxFuncTest",
+                "//test/xts/acts/utils_lite/kvstore_hal:ActsKvStoreTest",
+                "//test/xts/acts/security_lite/datahuks_hal:ActsSecurityDataTest",
+                "//test/xts/acts/distributedschedule_lite/samgr_hal:ActsSamgrTest",
+            ]
+        } else if(ohos_kernel_type == "liteos_a") {
+            all_features += [
+               "//test/xts/acts/kernel_lite:ActsKernelTest",
+               "//test/xts/acts/security_lite:securitytest",
+               "//test/xts/acts/utils_lite/kvstore_posix:ActsKvStoreTest",
+               "//test/xts/acts/startup_lite/parameter_posix:ActsParameterTest",
+               "//test/xts/acts/startup_lite/bootstrap_posix:ActsBootstrapTest",
+               #"//test/xts/acts/multimedia_lite/multimedia_posix/camera:ActsMediaCameraTest",
+               "//test/xts/acts/open_posix_testsuite/conformance/interfaces:ActsOpenPosixTest",
+               "//test/xts/acts/distributedschedule_lite/samgr_posix:ActsSamgrTest",
+               #"//test/xts/acts/multimedia_lite/multimedia_posix/recorder:ActsMediaRecorderTest",
+               #"//test/xts/acts/uikit_lite:uikit_test",
+               "//test/xts/acts/appexecfwk_lite/bundlems_posix:ActsBundleMgrTest",
+               "//test/xts/acts/communication_lite/softbus_posix:ActsSoftBusTest",
+               "//test/xts/acts/communication_lite/lwip_posix:ActsLwipTest",
+            ]
+            if (enable_ohos_appexecfwk_feature_ability == true) {
+                all_features += [
+                    "//test/xts/acts/appexecfwk_lite/abilityms_posix:ActsAbilityMgrTest",
+                ]
+            }
+        } else if(ohos_kernel_type == "linux") {
+            all_features += [
+               "//test/xts/acts/utils_lite/kvstore_posix:ActsKvStoreTest",
+               "//test/xts/acts/startup_lite/parameter_posix:ActsParameterTest"
+            ]
+        }
+    }
+
+    if (ohos_build_type == "debug") {
+        _all_features = ""
+        _product_json = rebase_path("//build/lite/product/${product}.json")
+        foreach(one_feature, all_features) {
+            _all_features = _all_features + one_feature + ","
+        }
+        _args = [
+            "--method_name", "filter_by_subsystem",
+            "--arguments",   "testsuites=${_all_features}#product_json=${_product_json}"
+        ]
+        features += exec_script(rebase_path("//test/xts/tools/build/utils.py"), _args, "list lines")
+    }
+}
+
+test_suite("acts") {
+    deps = [ ":acts_compoment" ]
+    version = "OpenHarmony-ACTS-1.11.0"
+    if (ohos_kernel_type == "liteos_a") {
+        deps += [ "//test/xts/tools/others/query:query" ]
+        copy("query_copy") {
+           sources = ["$root_out_dir/bin/query.bin"]
+           outputs = ["$root_out_dir/suites/acts/resource/tools/query.bin"]
+        }
+    }
+}
+
+generate_notice_file("acts_notice_file") {
+    module_name = "acts"
+    module_source_dir_list = [
+        "//third_party/googletest",
+        "//third_party/unity",
+        "//third_party/bounds_checking_function",
+        "//third_party/iniparser"
+    ]
+}

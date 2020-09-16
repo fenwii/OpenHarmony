@@ -1,0 +1,45 @@
+import("//build/lite/config/component/lite_component.gni")
+
+shared_library("camera") {
+    sources = [
+        "camera_ability.cpp",
+        "camera_config.cpp",
+        "camera_device.cpp",
+        "camera_impl.cpp",
+        "camera_kit.cpp",
+        "camera_manager.cpp",
+        "camera_service.cpp",
+        "event_handler.cpp",
+        "frame_config.cpp",
+    ]
+    cflags = ["-fPIC"]
+    cflags += ["-Wall"]
+    cflags_cc = cflags
+    include_dirs = [
+        "//base/security/interfaces/kits/iam_lite",
+        "//foundation/multimedia/hals/camera_lite",
+        "//drivers/hdf/lite/hdi/codec/include"
+    ]
+
+    ldflags = ["-lstdc++"]
+    ldflags += ["-lcodec"]
+    ldflags += ["-lhdi_media"]
+    ldflags += ["-L$ohos_root_path/$root_out_dir"]
+    public_configs = [":camera_external_library_config"]
+    deps = [
+        "//base/hiviewdfx/frameworks/hilog_lite/featured:hilog_shared",
+        "//base/security/services/iam_lite/pms_client:pms_client",
+        "//third_party/bounds_checking_function:libsec_shared",
+        "$ohos_vendor_adapter_dir/../../hardware:hardware_media_sdk",
+        "$ohos_vendor_adapter_dir/../../middleware:middleware_source_sdk",
+        "$ohos_vendor_adapter_dir/hals/multimedia:hdi_media",
+    ]
+    public_deps = [
+        "//foundation/graphic/lite/frameworks/surface:surface",
+    ]
+}
+
+config("camera_external_library_config") {
+    include_dirs = ["//foundation/multimedia/interfaces/kits/camera_lite"]
+    include_dirs += ["//foundation/multimedia/utils/lite/include"]
+}

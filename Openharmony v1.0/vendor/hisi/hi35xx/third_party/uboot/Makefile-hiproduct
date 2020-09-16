@@ -1,0 +1,75 @@
+ifeq ($(CONFIG_OSD_ENABLE),y)
+# FOR DEC of all chip
+ifneq ($(CONFIG_PRODUCTNAME),"hi3516ev200")
+ifneq ($(CONFIG_PRODUCTNAME),"hi3516ev300")
+ifneq ($(CONFIG_PRODUCTNAME),"hi3518ev300")
+ifneq ($(CONFIG_PRODUCTNAME),"hi3516dv200")
+libs-y += ./product/hiosd/dec/
+endif
+endif
+endif
+endif
+
+# FOR VO,HDMI,MIPI_Tx of hi3559av100
+ifeq ($(CONFIG_PRODUCTNAME),"hi3559av100")
+libs-y += ./product/hiosd/vo/hi3559av100/
+libs-y += ./product/hiosd/mipi_tx/hi3559av100/
+libs-y += ./product/hiosd/hdmi/hdmi_2_0/drv/
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3519av100")
+libs-y += ./product/hiosd/vo/hi3519av100/
+libs-y += ./product/hiosd/mipi_tx/hi3519av100/
+libs-y += ./product/hiosd/hdmi/hdmi_2_0/drv/
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3516cv500")
+libs-y += ./product/hiosd/vo/hi3516cv500/
+libs-y += ./product/hiosd/mipi_tx/hi3516cv500/
+libs-y += ./product/hiosd/rgb/hi3516cv500/
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3516dv300")
+libs-y += ./product/hiosd/vo/hi3516cv500/
+libs-y += ./product/hiosd/mipi_tx/hi3516cv500/
+libs-y += ./product/hiosd/rgb/hi3516cv500/
+libs-y += ./product/hiosd/hdmi/hdmi_2_0/drv/
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3516av300")
+libs-y += ./product/hiosd/vo/hi3516cv500/
+libs-y += ./product/hiosd/mipi_tx/hi3516cv500/
+libs-y += ./product/hiosd/hdmi/hdmi_2_0/drv/
+libs-y += ./product/hiosd/rgb/hi3516cv500/
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3516ev300")
+libs-y += ./product/hiosd/vo/hi3516ev200/
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3516ev200")
+libs-y += ./product/hiosd/vo/hi3516ev200/
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3518ev300")
+libs-y += ./product/hiosd/vo/hi3516ev200/
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3516dv200")
+libs-y += ./product/hiosd/vo/hi3516ev200/
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3556v200")
+libs-y += ./product/hiosd/vo/hi3516cv500/
+libs-y += ./product/hiosd/mipi_tx/hi3516cv500/
+libs-y += ./product/hiosd/hdmi/hdmi_2_0/drv/
+libs-y += ./product/hiosd/rgb/hi3516cv500/
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3559v200")
+libs-y += ./product/hiosd/vo/hi3516cv500/
+libs-y += ./product/hiosd/mipi_tx/hi3516cv500/
+libs-y += ./product/hiosd/hdmi/hdmi_2_0/drv/
+libs-y += ./product/hiosd/rgb/hi3516cv500/
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3562v100")
+libs-y += ./product/hiosd/vo/hi3516cv500/
+libs-y += ./product/hiosd/mipi_tx/hi3516cv500/
+libs-y += ./product/hiosd/hdmi/hdmi_2_0/drv/
+libs-y += ./product/hiosd/rgb/hi3516cv500/
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3566v100")
+libs-y += ./product/hiosd/vo/hi3516cv500/
+libs-y += ./product/hiosd/mipi_tx/hi3516cv500/
+libs-y += ./product/hiosd/hdmi/hdmi_2_0/drv/
+libs-y += ./product/hiosd/rgb/hi3516cv500/
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3569v100")
+libs-y += ./product/hiosd/vo/hi3559av100/
+libs-y += ./product/hiosd/mipi_tx/hi3559av100/
+libs-y += ./product/hiosd/hdmi/hdmi_2_0/drv/
+else ifeq ($(CONFIG_PRODUCTNAME),$(filter $(CONFIG_PRODUCTNAME), "hi3531dv200" "hi3535av100" "hi3521dv200" "hi3520dv500"))
+libs-y += ./product/hiosd/vo/
+libs-y += ./product/hiosd/hdmi/hdmi_2_0/drv/
+else
+$(warning "warning: "$(CONFIG_PRODUCTNAME)" is invalid")
+endif
+
+endif # end of ifeq ($(CONFIG_OSD_ENABLE),y)

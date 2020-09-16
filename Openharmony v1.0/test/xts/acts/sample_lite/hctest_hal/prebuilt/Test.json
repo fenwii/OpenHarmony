@@ -1,0 +1,13 @@
+{
+    "description": "Config for $module test cases",
+    "kits": [
+        {
+            "type": "DeployKit",
+            "timeout": "20000",
+            "burn_file": "$subsystem/$module.bin"
+        }
+    ],
+    "driver": {
+        "type": "CTestLite"
+    }
+}

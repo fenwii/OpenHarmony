@@ -1,0 +1,58 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#     http://www.apache.org/licenses/LICENSE-2.0
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/lite/config/component/lite_component.gni")
+
+shared_library("graphic_hals") {
+    sources = [
+        "src/gfx_engines.cpp",
+        "src/hal_tick.cpp",
+        "src/hi_fbdev.cpp",
+    ]
+
+    public_configs = [":hals_external_library_config"]
+    include_dirs = [
+        "//foundation/graphic/lite/interfaces/kits/utils",
+        "//foundation/graphic/lite/interfaces/kits/surface",
+        "//foundation/graphic/lite/interfaces/kits/config",
+        "//foundation/graphic/lite/interfaces/innerkits/ui",
+        "//foundation/graphic/lite/interfaces/innerkits/wms",
+        "//foundation/graphic/lite/frameworks/ui/include",
+        "//foundation/graphic/lite/utils/include",
+        "//foundation/graphic/lite/services/wms/include",
+        "//kernel/liteos_a/kernel/include/",
+        "//kernel/liteos_a/kernel/common",
+        "//third_party/bounds_checking_function/include",
+        "//drivers/hdf/lite/hdi/display/include",
+    ]
+    public_deps = [
+        "//third_party/bounds_checking_function:libsec_shared",
+        "//vendor/huawei/hdf/display/hdi:display_layer",
+        "//vendor/huawei/hdf/display/hdi:display_gfx",
+        "//vendor/huawei/hdf/display/hdi:display_gralloc",
+    ]
+    ldflags = ["-ldisplay_layer", "-ldisplay_gfx", "-ldisplay_gralloc"]
+    cflags = ["-Wall"]
+    cflags_cc = cflags
+}
+
+config("hals_external_library_config") {
+    include_dirs = [
+        "//foundation/graphic/lite/hals/include",
+        "//drivers/hdf/lite/hdi/display/include",
+    ]
+}
+
+lite_component("hals") {
+    features = [
+        ":graphic_hals",
+    ]
+}

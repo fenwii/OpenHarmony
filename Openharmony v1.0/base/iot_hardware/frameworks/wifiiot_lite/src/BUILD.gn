@@ -1,0 +1,50 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/lite/ndk/ndk.gni")
+static_library("iothardware") {
+    if (ohos_kernel_type == "liteos_riscv") {
+        sources = [
+            "wifiiot_gpio.c",
+            "wifiiot_adc.c",
+            "wifiiot_flash.c",
+            "wifiiot_kal.c",
+            "wifiiot_watchdog.c",
+            "wifiiot_partition.c",
+            "reset.c",
+            "lowpower.c",
+            "wifiiot_at.c",
+            "wifiiot_i2s.c",
+            "wifiiot_pwm.c",
+            "wifiiot_uart.c",
+            "wifiiot_i2c.c",
+            "wifiiot_spi.c",
+            "wifiiot_sdio.c"
+        ]
+        include_dirs = [
+            "//utils/native/lite/include",
+            "//base/iot_hardware/interfaces/kits/wifiiot_lite",
+            "//base/iot_hardware/hals/wifiiot_lite"
+        ]
+    }
+}
+if (ohos_kernel_type == "liteos_riscv") {
+    ndk_lib("iothardware_ndk") {
+        deps = [
+            ":iothardware"
+        ]
+        head_files = [
+            "//base/iot_hardware/interfaces/kits/wifiiot_lite"
+        ]
+    }
+}

@@ -1,0 +1,6 @@
+Import('env')
+
+env = env.Clone()
+
+objs = env.Object(Glob('*.c'))
+Return('objs')

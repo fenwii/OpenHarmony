@@ -1,0 +1,6 @@
+# Copyright (c) Huawei Technologies Co., Ltd. 2020-2020. All rights reserved.
+
+source "../../vendor/hisi/hi35xx/platform/Kconfig"
+source "../../vendor/huawei/hdf/wifi/driver/Kconfig"
+source "../../vendor/huawei/hdf/input/driver/Kconfig"
+source "../../vendor/huawei/hdf/display/driver/Kconfig"

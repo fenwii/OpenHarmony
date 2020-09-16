@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2020 Huawei Device Co., Ltd.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<framework_config>
+    <productform>
+        <option name="ipcamera|hi3518ev300|liteos_a"/>
+        <option name="ipcamera|hi3518ev300|linux"/>
+        <option name="ipcamera|hi3516dv300|liteos_a"/>
+        <option name="ipcamera|hi3516dv300|linux"/>
+    </productform>
+    <test_category>
+        <option name="ut"   desc="unittest"    timeout="300"/>
+        <option name="mst"  desc="moduletest"  timeout="300"/>
+        <option name="st"   desc="systemtest"  timeout="300"/>
+        <option name="perf" desc="performance" timeout="172800"/>
+        <option name="sec"  desc="security"    timeout="172800"/>
+        <option name="reli" desc="reliability" timeout="172800"/>
+        <option name="dst"  desc="distributedtest" timeout="300"/>
+        <option name="all"  desc="ALL"/>
+    </test_category>
+    <all_category>
+        <option name="unittest"/>
+        <option name="moduletest"/>
+        <option name="systemtest"/>
+        <option name="performance"/>
+        <option name="security"/>
+        <option name="reliability"/>
+    </all_category>
+</framework_config>

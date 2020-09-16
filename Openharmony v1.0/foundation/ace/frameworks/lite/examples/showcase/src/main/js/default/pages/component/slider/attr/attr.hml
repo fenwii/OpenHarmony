@@ -1,0 +1,96 @@
+<!--
+Copyright (c) 2020 Huawei Device Co., Ltd.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+    <list class = "list">
+        <list-item style="width:454px;height:60px;">
+        </list-item>
+        <list-item class= "item-title">
+                <input type = "button" style="margin-left:85px;width:130px;height:60px;" onclick = "goHome" value = "首页"/>
+                <input type = "button" style="margin-left:20px;width:130px;height:60px;" onclick = "goPrevious" value = "上一页"/>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-types">
+            <text class = "whole-text">通用属性</text>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-two">
+            <div class = "two-div">
+                <div class = "two-left-div" style="margin-left:30px;width:170px;">
+                    <text class = "text">show</text>
+                </div>
+                <div class = "two-right-div" style = "flex-direction:column">
+                    <slider show="{{status}}" class = "slider" />
+                    <input type="button" class = "text" onclick=changeStatus value="改变显示"></input>
+                </div>
+            </div>
+        </list-item>
+         <list-item class = "item-two">
+            <div class = "two-div">
+                <div class = "two-left-div" style="margin-left:30px;width:170px;">
+                    <text class = "text">display</text>
+                </div>
+                <div class = "two-right-div" style = "flex-direction:column">
+                    <slider display="{{isDisplay}}" class = "slider" />
+                    <input type="button" class = "text" onclick=changeDisplay value="改变显示"></input>
+                </div>
+            </div>
+        </list-item>
+        <list-item class = "item-two">
+            <div class = "two-div">
+                <div class = "two-left-div" style="margin-left:30px;width:170px;">
+                    <text class = "text">if</text>
+                </div>
+                <div class = "two-right-div" style = "flex-direction:column">
+                    <slider if="{{ifStatus}}" class = "slider" />
+                    <input type="button" class = "text" onclick=changeIfStatus value="改变显示"></input>
+                </div>
+            </div>
+        </list-item>
+         <list-item class = "item-two">
+            <div class = "two-div">
+                <div class = "two-left-div" style="margin-left:30px;width:170px;">
+                    <text class = "text">for</text>
+                </div>
+                <div class = "two-right-div" style = "flex-direction:column">
+                    <slider for="{{sliders}}" class = "slider">
+                    </slider>
+                </div>
+            </div>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-types">
+            <text class = "whole-text">特有属性</text>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class ="item-three">
+            <div class = "three-div">
+                <div class = "three-left-div" style="margin-left:30px;width:170px;">
+                    <text class = "text">min为10</text>
+                    <text class = "text">max为80</text>
+                    <text class = "text">value为40</text>
+                </div>
+                <div class = "three-right-div" style = "flex-direction:column">
+                    <slider class = "slider" min = "10" max = "80" value = "40" onchange = "slideEvent"/>
+                    <text class = "text">{{slideValue}}</text>
+                </div>
+            </div>
+        </list-item>
+        <list-item style="width:454px;height:60px;">
+        </list-item>
+    </list>

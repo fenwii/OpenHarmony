@@ -1,0 +1,163 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#     http://www.apache.org/licenses/LICENSE-2.0
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/lite/config/component/lite_component.gni")
+
+generate_notice_file("ui_lite_notice_file") {
+    module_name = "ui_lite"
+    module_source_dir_list = [
+        "//third_party/bounds_checking_function",
+        "//third_party/cJSON",
+        "//third_party/libjpeg",
+        "//third_party/libpng",
+        "//third_party/freetype"
+    ]
+}
+
+config("vector_font_config") {
+    include_dirs = [
+        "//third_party/freetype/include",
+    ]
+}
+
+shared_library("ui") {
+    sources = [
+        "src/animator/animator.cpp",
+        "src/animator/easing_equation.cpp",
+        "src/animator/interpolation.cpp",
+        "src/common/image.cpp",
+        "src/common/text.cpp",
+        "src/common/screen.cpp",
+        "src/common/task.cpp",
+        "src/common/typed_text.cpp",
+        "src/common/ui_text_language.cpp",
+        "src/common/screen_device_proxy.cpp",
+        "src/components/ui_button.cpp",
+        "src/common/input_device_manager.cpp",
+        "src/common/graphic_startup.cpp",
+        "src/components/ui_checkbox.cpp",
+        "src/components/ui_label_button.cpp",
+        "src/components/ui_radiobutton.cpp",
+        "src/components/ui_repeat_button.cpp",
+        "src/components/ui_toggle_button.cpp",
+        "src/components/ui_canvas.cpp",
+        "src/components/ui_axis.cpp",
+        "src/components/ui_chart.cpp",
+        "src/components/ui_abstract_clock.cpp",
+        "src/components/ui_analog_clock.cpp",
+        "src/components/ui_digital_clock.cpp",
+        "src/components/root_view.cpp",
+        "src/components/ui_abstract_scroll.cpp",
+        "src/components/ui_view.cpp",
+        "src/components/ui_view_group.cpp",
+        "src/components/ui_image_animator.cpp",
+        "src/components/ui_image_view.cpp",
+        "src/components/ui_arc_label.cpp",
+        "src/components/ui_label.cpp",
+        "src/components/text_adapter.cpp",
+        "src/components/ui_list.cpp",
+        "src/components/ui_picker.cpp",
+        "src/components/ui_time_picker.cpp",
+        "src/components/ui_abstract_progress.cpp",
+        "src/components/ui_box_progress.cpp",
+        "src/components/ui_circle_progress.cpp",
+        "src/components/ui_scroll_view.cpp",
+        "src/components/ui_slider.cpp",
+        "src/components/ui_surface_view.cpp",
+        "src/components/ui_swipe_view.cpp",
+        "src/components/ui_texture_mapper.cpp",
+        "src/components/ui_dialog.cpp",
+        "src/core/render_manager.cpp",
+        "src/core/measure_manager.cpp",
+        "src/core/task_manager.cpp",
+        "src/default_resource/check_box_res.cpp",
+        "src/default_resource/radio_button_res.cpp",
+        "src/default_resource/toggle_button_res.cpp",
+        "src/dfx/ui_dump_dom_tree.cpp",
+        "src/dfx/event_injector.cpp",
+        "src/dfx/point_event_injector.cpp",
+        "src/dfx/ui_screenshot.cpp",
+        "src/dock/input_device.cpp",
+        "src/dock/ohos/ohos_input_device.cpp",
+        "src/dock/key_input_device.cpp",
+        "src/dock/pointer_input_device.cpp",
+        "src/dock/virtual_input_device.cpp",
+        "src/events/event.cpp",
+        "src/font/ui_dynamic_font.cpp",
+        "src/font/ui_font_allocator.cpp",
+        "src/font/ui_font_cache.cpp",
+        "src/font/ui_font.cpp",
+        "src/font/ui_base_font.cpp",
+        "src/font/ui_font_vector.cpp",
+        "src/imgdecode/cache_manager.cpp",
+        "src/imgdecode/file_img_decoder.cpp",
+        "src/layout/flex_layout.cpp",
+        "src/layout/grid_layout.cpp",
+        "src/layout/list_layout.cpp",
+        "src/themes/theme.cpp",
+        "src/themes/theme_manager.cpp",
+        "src/window/window.cpp",
+        "src/window/window_impl.cpp",
+        "src/draw/draw_arc.cpp",
+        "src/draw/draw_curve.cpp",
+        "src/draw/draw_image.cpp",
+        "src/draw/draw_label.cpp",
+        "src/draw/draw_line.cpp",
+        "src/draw/draw_rect.cpp",
+        "src/draw/draw_triangle.cpp",
+        "src/draw/draw_utils.cpp",
+    ]
+    include_dirs = [
+        "//foundation/graphic/lite",
+        "//foundation/graphic/lite/hals/include",
+        "//foundation/graphic/lite/frameworks/ui/include",
+        "//foundation/graphic/lite/frameworks/ui/src",
+        "//foundation/graphic/lite/interfaces",
+        "//foundation/graphic/lite/interfaces/kits/surface",
+        "//foundation/graphic/lite/interfaces/kits/ui",
+        "//foundation/graphic/lite/interfaces/kits/utils",
+        "//foundation/graphic/lite/utils/include",
+        "//foundation/graphic/lite/interfaces/kits/config",
+        "//foundation/graphic/lite/interfaces/innerkits/ui",
+        "//foundation/graphic/lite/interfaces/innerkits/wms",
+        "//foundation/graphic/lite/frameworks",
+        "//foundation/graphic/lite/services/wms/include",
+        "//foundation/graphic/lite/services/ims/include",
+        "//foundation/graphic/lite/tools",
+        "//kernel/liteos_a/kernel/include/",
+        "//kernel/liteos_a/kernel/common",
+        "//third_party/bounds_checking_function/include",
+        "//third_party/cJSON",
+        "//third_party/libpng",
+        "//third_party/libjpeg",
+    ]
+    public_configs = [ ":vector_font_config" ]
+    public_deps = [
+        "//third_party/bounds_checking_function:libsec_shared",
+        "//third_party/freetype:freetype_shared",
+        "//base/hiviewdfx/frameworks/hilog_lite/featured:hilog_shared",
+        "//third_party/cJSON:cjson_shared",
+        "//foundation/graphic/lite/utils:litegraphicutils",
+        "//foundation/graphic/lite/hals:graphic_hals",
+        "//foundation/graphic/lite/services/ims:ims",
+        "//foundation/graphic/lite/services/wms:wms_client",
+        "//third_party/libjpeg:libjpeg",
+        "//third_party/libpng:libpng",
+    ]
+    cflags = ["-Wall"]
+    cflags_cc = cflags
+}
+
+lite_component("liteui") {
+    features = [
+        ":ui",
+    ]
+}

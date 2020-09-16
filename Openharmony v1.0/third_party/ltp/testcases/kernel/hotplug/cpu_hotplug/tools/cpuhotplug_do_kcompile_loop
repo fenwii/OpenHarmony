@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Must be run from a kernel source code directory
+
+echo $$
+
+KERNEL_DIR=${1:-/usr/src/linux}
+
+if [ ! -d $KERNEL_DIR ]; then
+	echo "${0##*/}: ERROR: kernel directory - $KERNEL_DIR - does not exist"
+	exit 1
+fi
+
+cd $KERNEL_DIR || exit $?
+
+while :
+do
+	make mrproper
+	make defconfig
+	make -j20 bzImage
+done

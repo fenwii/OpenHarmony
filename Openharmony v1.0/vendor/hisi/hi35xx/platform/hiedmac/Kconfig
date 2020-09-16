@@ -1,0 +1,6 @@
+config DRIVERS_HIEDMAC
+    bool "Enable HIEDMAC"
+    default n
+    depends on DRIVERS && PLATFORM_HI3559AV100
+    help
+      Answer Y to enable LiteOS support hiedmac.

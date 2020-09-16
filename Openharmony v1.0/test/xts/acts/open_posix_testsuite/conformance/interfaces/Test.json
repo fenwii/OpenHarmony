@@ -1,0 +1,26 @@
+{
+    "description": "Config for hcpptest demo test cases",
+    "environment": [
+        {
+            "type": "device",
+            "label": "ipcamera"
+        }
+    ],
+    "kits": [
+        {
+            "type": "MountKit",
+            "server": "NfsServer",
+            "mount": [
+                {
+                    "source": "testcases/open_posix_testsuite/ActsOpenPosixTest",
+                    "target": "/test_root/open_posix_testsuite/ActsOpenPosixTest"
+                }
+            ]
+        }
+    ],
+    "driver": {
+        "type": "OpenSourceTest",
+        "pre_cmd": "su",
+        "execute": "/test_root/open_posix_testsuite/ActsOpenPosixTest"
+    }
+}

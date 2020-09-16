@@ -1,0 +1,61 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+config("broadcast_public") {
+    include_dirs = [
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/communication/broadcast",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/samgr",
+        "//foundation/distributedschedule/services/samgr_lite/samgr/adapter",
+        "//utils/native/lite/include",
+    ]
+}
+
+if (ohos_kernel_type == "liteos_riscv" || ohos_kernel_type == "liteos_m") {
+    static_library("broadcast") {
+        sources = [
+            "source/pub_sub_implement.c",
+            "source/pub_sub_feature.c",
+            "source/broadcast_service.c",
+        ]
+        public_configs = [":broadcast_public"]
+        cflags = [ "-Wall" ]
+        include_dirs = [
+            "//kernel/liteos_m/components/cmsis",
+        ]
+    }
+}
+
+if (ohos_kernel_type == "liteos_a" || ohos_kernel_type == "linux") {
+    shared_library("broadcast") {
+        sources = [
+            "source/pub_sub_implement.c",
+            "source/pub_sub_feature.c",
+            "source/broadcast_service.c",
+        ]
+        public_configs = [":broadcast_public"]
+        configs -= [ "//build/lite/config:language_c" ]
+        cflags_c = [
+            "-std=c11",
+            "-Wall"
+        ]
+        include_dirs = [
+            "//kernel/liteos_a/kernel/include/",
+            "//third_party/bounds_checking_function/include",
+            "//kernel/liteos_a/kernel/common",
+        ]
+        public_deps = [
+            "//third_party/bounds_checking_function:libsec_shared",
+            "//foundation/distributedschedule/services/samgr_lite/samgr:samgr",
+        ]
+    }
+}

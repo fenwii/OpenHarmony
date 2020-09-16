@@ -1,0 +1,15 @@
+root {
+    platfrom {
+        gpio_config {
+            controller_0x120b0000 {
+                match_attr = "hisilicon_hi35xx_pl061";
+                groupNum = 10;
+                bitNum = 10;
+                regBase = 0x120b0000;
+                regStep = 0x1000;
+                irqStart = 48;
+                irqShare = 0;
+            }
+        }
+    }
+}

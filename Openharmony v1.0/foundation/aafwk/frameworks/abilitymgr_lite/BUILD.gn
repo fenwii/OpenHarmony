@@ -1,0 +1,63 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/lite/config/component/lite_component.gni")
+import("//build/lite/config/subsystem/aafwk/config.gni")
+
+lite_library("abilitymanager") {
+    target_type = "shared_library"
+    cflags = [ "-Wall" ]
+    cflags_cc = cflags
+
+    sources = [
+        "src/abilityms_client.cpp",
+        "src/ability_manager.cpp",
+        "src/ability_service_manager.cpp",
+    ]
+
+    deps = [
+        "//base/hiviewdfx/frameworks/hilog_lite/featured:hilog_shared",
+        "//foundation/appexecfwk/frameworks/bundle_lite:bundle",
+        "//foundation/communication/frameworks/ipc_lite:liteipc_adapter",
+    ]
+
+    include_dirs = [
+        "//foundation/aafwk/frameworks/abilitymgr_lite/include",
+        "//foundation/aafwk/frameworks/want_lite/include",
+        "//foundation/aafwk/interfaces/innerkits/abilitymgr_lite",
+        "//foundation/aafwk/interfaces/kits/want_lite",
+        "//foundation/aafwk/interfaces/kits/ability_lite",
+        "//foundation/appexecfwk/utils/bundle_lite",
+        "//foundation/appexecfwk/interfaces/kits/bundle_lite",
+        "//foundation/appexecfwk/frameworks/bundle_lite/include",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/registry",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/samgr",
+        "//kernel/liteos_a/kernel/include",
+        "//kernel/liteos_a/kernel/common",
+        "//third_party/bounds_checking_function/include",
+        "//utils/native/lite/kv_store/innerkits",
+        "//utils/native/lite/include",
+        "//utils/native/lite/memory",
+        "./include",
+        "./",
+    ]
+
+    defines = [
+        "OHOS_APPEXECFWK_BMS_BUNDLEMANAGER",
+    ]
+}
+
+lite_component("aafwk_abilityManager_lite") {
+    features = [
+        ":abilitymanager",
+    ]
+}

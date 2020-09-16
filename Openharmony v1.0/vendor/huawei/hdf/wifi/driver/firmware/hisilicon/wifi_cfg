@@ -1,0 +1,11 @@
+@WiFi patch info
+CFG_COUNTRY_CODE=CN;
+CFG_RSSI_OFFSET=0;
+CFG_MAC=00:00:00:00:00:00;
+CFG_DBB_PARAMS=0x6B6B6D6E,0x67676767,0x50545F60,0x565E5E5E,0x4F4F5656,0x00000000,0x01000000;
+CFG_FREQ_COMP=105,100,-30;
+CFG_CH_TXPWR_OFFSET=0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff;
+PARA_VERSION=Hi3881V100;
+ADDR_FILE_FILES=1,0xe4800,/vendor/firmware/hisilicon/hi3881_fw.bin;
+PARA_CONFIG=0xe4800,4;
+QUIT;

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2020 Huawei Device Co., Ltd.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<user_config>
+    <common>
+        <doublefwk>true</doublefwk>
+    </common>
+    <build>
+        <example>false</example>
+        <version>false</version>
+    </build>
+    <environment>
+        <support_device>
+            <lite_scene>true</lite_scene>
+        </support_device>
+        <device type="usb-hdc">
+            <ip></ip>
+            <port></port>
+            <sn></sn>
+        </device>
+        <device type="emulator">
+            <ip></ip>
+            <port></port>
+            <sn></sn>
+        </device>
+        <device type="serial">
+            <com></com>
+            <baud_rate></baud_rate>
+        </device>
+    </environment>
+    <test_cases>
+        <dir></dir>
+    </test_cases>
+    <NFS>
+        <host_dir></host_dir>
+        <board_dir></board_dir>
+    </NFS>
+</user_config>

@@ -1,0 +1,33 @@
+root {
+    platfrom {
+        template uart_controller {
+            match_attr = "";
+            num = 0;
+            baudrate = 115200;
+            fifoRxEn = 1;
+            fifoTxEn = 1;
+            flags = 4;
+            regPbase = 0x12040000;
+            interrupt = 39;
+            iomemCount = 0x48;
+        }
+        controller_0x12040000 :: uart_controller {
+            match_attr = "hisilicon_hi35xx_uart_0";
+        }
+
+        controller_0x12041000 :: uart_controller {
+            num = 1;
+            baudrate = 9600;
+            regPbase = 0x12041000;
+            interrupt = 40;
+            match_attr = "hisilicon_hi35xx_uart_1";
+        }
+
+        controller_0x12042000 :: uart_controller {
+            num = 2;
+            regPbase = 0x12042000;
+            interrupt = 41;
+            match_attr = "hisilicon_hi35xx_uart_2";
+        }
+    }
+}

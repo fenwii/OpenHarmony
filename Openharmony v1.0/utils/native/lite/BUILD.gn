@@ -1,0 +1,48 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/lite/config/subsystem/lite_subsystem.gni")
+import("//build/lite/ndk/ndk.gni")
+
+lite_subsystem("utils") {
+    subsystem_components = [
+        "kv_store:kv_store"
+    ]
+
+    if (ohos_kernel_type == "liteos_riscv") {
+        subsystem_components += [
+            "file:file",
+        ]
+    }
+}
+
+ndk_lib("native_api") {
+    if (ohos_kernel_type != "liteos_riscv") {
+        lib_extension = ".so"
+    }
+    deps = [
+        "kv_store/src:utils_kv_store",
+    ]
+    head_files = [
+        "//utils/native/lite/include/kv_store.h",
+        "//utils/native/lite/include/utils_config.h",
+    ]
+    if (ohos_kernel_type == "liteos_riscv") {
+        deps += [
+            "file:native_file"
+        ]
+        head_files += [
+            "//utils/native/lite/include/utils_file.h",
+        ]
+    }
+}

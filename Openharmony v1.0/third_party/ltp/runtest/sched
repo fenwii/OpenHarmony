@@ -1,0 +1,16 @@
+#DESCRIPTION:Scheduler Stress Tests
+pth_str01 pth_str01
+pth_str02 pth_str02 -n1000
+pth_str03 pth_str03
+
+time-schedule01		time-schedule
+trace_sched01		trace_sched -c 1
+
+hackbench01 hackbench 50 process 1000
+hackbench02 hackbench 20 thread 1000
+
+sched_cli_serv run_sched_cliserv.sh
+# Run this stress test for 2 minutes
+sched_stress sched_stress.sh
+
+autogroup01 autogroup01

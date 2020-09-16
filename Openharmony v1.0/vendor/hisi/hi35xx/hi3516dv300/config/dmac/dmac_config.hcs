@@ -1,0 +1,17 @@
+root {
+    module = "dmac";
+    template dmac {
+        index = 0;
+        serviceName = "DMAC0";
+        base = 0x10060000;
+        irq = 60;
+    }
+    dmac0 :: dmac {
+    }
+
+    dmac1 :: dmac {
+        index = 1;
+        serviceName = "DMAC1";
+        base = 0x10061000;
+    }
+}

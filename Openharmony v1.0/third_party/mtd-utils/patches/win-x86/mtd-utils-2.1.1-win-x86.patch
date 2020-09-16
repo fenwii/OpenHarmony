@@ -1,0 +1,170 @@
+diff -uprwN mtd-utils-2.1.1/include/mtd/mtd-abi.h mtd-utils-2.1.1_liteos/include/mtd/mtd-abi.h
+--- mtd-utils-2.1.1/include/mtd/mtd-abi.h	2016-07-12 20:16:45.000000000 +0800
++++ mtd-utils-2.1.1_liteos/include/mtd/mtd-abi.h	2020-05-20 16:16:14.330987200 +0800
+@@ -20,7 +20,13 @@
+ #ifndef __MTD_ABI_H__
+ #define __MTD_ABI_H__
+ 
+-#include <linux/types.h>
++//patch for cygwin
++//#include <linux/types.h>
++#include <asm/types.h>
++#define __USE_LINUX_IOCTL_DEFS
++#include <sys/ioctl.h>
++//#include <sys/posix_types.h>
++typedef long long __kernel_loff_t;
+ 
+ struct erase_info_user {
+ 	__u32 start;
+@@ -161,12 +167,16 @@ struct otp_info {
+ /* Read out-of-band data from MTD */
+ #define MEMREADOOB		_IOWR('M', 4, struct mtd_oob_buf)
+ /* Lock a chip (for MTD that supports it) */
++//patch for cygwin
++# define _IOW	_LINUX_IOW
+ #define MEMLOCK			_IOW('M', 5, struct erase_info_user)
+ /* Unlock a chip (for MTD that supports it) */
+ #define MEMUNLOCK		_IOW('M', 6, struct erase_info_user)
+ /* Get the number of different erase regions */
+ #define MEMGETREGIONCOUNT	_IOR('M', 7, int)
+ /* Get information about the erase region for a specific index */
++//patch for cygwin
++# define _IOWR	_LINUX_IOWR
+ #define MEMGETREGIONINFO	_IOWR('M', 8, struct region_info_user)
+ /* Get info about OOB modes (e.g., RAW, PLACE, AUTO) - legacy interface */
+ #define MEMGETOOBSEL		_IOR('M', 10, struct nand_oobinfo)
+@@ -187,6 +197,8 @@ struct otp_info {
+ /* Get statistics about corrected/uncorrected errors */
+ #define ECCGETSTATS		_IOR('M', 18, struct mtd_ecc_stats)
+ /* Set MTD mode on a per-file-descriptor basis (see "MTD file modes") */
++//patch for cygwin
++# define _IO	_LINUX_IO
+ #define MTDFILEMODE		_IO('M', 19)
+ /* Erase segment of MTD (supports 64-bit address) */
+ #define MEMERASE64		_IOW('M', 20, struct erase_info_user64)
+@@ -195,6 +207,8 @@ struct otp_info {
+ /* Read data from OOB (64-bit version) */
+ #define MEMREADOOB64		_IOWR('M', 22, struct mtd_oob_buf64)
+ /* Check if chip is locked (for MTD that supports it) */
++//patch for cygwin
++# define _IOR	_LINUX_IOR
+ #define MEMISLOCKED		_IOR('M', 23, struct erase_info_user)
+ /*
+  * Most generic write interface; can write in-band and/or out-of-band in various
+diff -uprwN mtd-utils-2.1.1/include/mtd/ubi-media.h mtd-utils-2.1.1_liteos/include/mtd/ubi-media.h
+--- mtd-utils-2.1.1/include/mtd/ubi-media.h	2018-06-28 19:50:07.000000000 +0800
++++ mtd-utils-2.1.1_liteos/include/mtd/ubi-media.h	2020-05-21 11:34:41.977993500 +0800
+@@ -31,6 +31,14 @@
+ #define __UBI_MEDIA_H__
+ 
+ #include <asm/byteorder.h>
++//patch for cygwin
++#include <asm/types.h>
++typedef __u16  __le16;
++typedef __u16  __be16;
++typedef __u32  __le32;
++typedef __u32  __be32;
++typedef __u64  __le64;
++typedef __u64  __be64;
+ 
+ /* The version of UBI images supported by this implementation */
+ #define UBI_VERSION 1
+diff -uprwN mtd-utils-2.1.1/include/mtd/ubi-user.h mtd-utils-2.1.1_liteos/include/mtd/ubi-user.h
+--- mtd-utils-2.1.1/include/mtd/ubi-user.h	2018-06-28 19:50:07.000000000 +0800
++++ mtd-utils-2.1.1_liteos/include/mtd/ubi-user.h	2020-05-20 16:00:54.325890000 +0800
+@@ -159,6 +159,10 @@
+ 
+ #define UBI_IOC_MAGIC 'o'
+ 
++//patch for cygwin
++#define __USE_LINUX_IOCTL_DEFS
++#include <sys/ioctl.h>
++
+ /* Create an UBI volume */
+ #define UBI_IOCMKVOL _IOW(UBI_IOC_MAGIC, 0, struct ubi_mkvol_req)
+ /* Remove an UBI volume */
+@@ -173,6 +177,8 @@
+ #define UBI_CTRL_IOC_MAGIC 'o'
+ 
+ /* Attach an MTD device */
++//patch for cygwin
++# define _IOW	_LINUX_IOW
+ #define UBI_IOCATT _IOW(UBI_CTRL_IOC_MAGIC, 64, struct ubi_attach_req)
+ /* Detach an MTD device */
+ #define UBI_IOCDET _IOW(UBI_CTRL_IOC_MAGIC, 65, int32_t)
+@@ -192,6 +198,8 @@
+ /* Unmap LEB command */
+ #define UBI_IOCEBUNMAP _IOW(UBI_VOL_IOC_MAGIC, 4, int32_t)
+ /* Check if LEB is mapped command */
++//patch for cygwin
++# define _IOR	_LINUX_IOR
+ #define UBI_IOCEBISMAP _IOR(UBI_VOL_IOC_MAGIC, 5, int32_t)
+ /* Set an UBI volume property */
+ #define UBI_IOCSETVOLPROP _IOW(UBI_VOL_IOC_MAGIC, 6, \
+@@ -199,6 +207,8 @@
+ /* Create a R/O block device on top of an UBI volume */
+ #define UBI_IOCVOLCRBLK _IOW(UBI_VOL_IOC_MAGIC, 7, struct ubi_blkcreate_req)
+ /* Remove the R/O block device */
++//patch for cygwin
++# define _IO	_LINUX_IO
+ #define UBI_IOCVOLRMBLK _IO(UBI_VOL_IOC_MAGIC, 8)
+ 
+ /* Maximum MTD device name length supported by UBI */
+diff -uprwN mtd-utils-2.1.1/jffsX-utils/rbtree.h mtd-utils-2.1.1_liteos/jffsX-utils/rbtree.h
+--- mtd-utils-2.1.1/jffsX-utils/rbtree.h	2016-07-12 20:16:45.000000000 +0800
++++ mtd-utils-2.1.1_liteos/jffsX-utils/rbtree.h	2020-05-20 16:33:40.496881900 +0800
+@@ -94,8 +94,9 @@ static inline struct page * rb_insert_pa
+ #ifndef	_LINUX_RBTREE_H
+ #define	_LINUX_RBTREE_H
+ 
+-#include <linux/kernel.h>
+-#include <linux/stddef.h>
++//patch for cygwin
++//#include <linux/kernel.h>
++//#include <linux/stddef.h>
+ 
+ struct rb_node
+ {
+diff -uprwN mtd-utils-2.1.1/misc-utils/mtdpart.c mtd-utils-2.1.1_liteos/misc-utils/mtdpart.c
+--- mtd-utils-2.1.1/misc-utils/mtdpart.c	2018-12-17 15:13:00.000000000 +0800
++++ mtd-utils-2.1.1_liteos/misc-utils/mtdpart.c	2020-05-20 16:14:23.812421000 +0800
+@@ -16,7 +16,38 @@
+ #include <fcntl.h>
+ #include <getopt.h>
+ #include <limits.h>
+-#include <linux/blkpg.h>
++//patch for cygwin
++//#include <linux/blkpg.h>
++#define __USE_LINUX_IOCTL_DEFS
++#include <sys/ioctl.h>
++#define BLKPG      _IO(0x12,105)
++
++/* The argument structure */
++struct blkpg_ioctl_arg {
++        int op;
++        int flags;
++        int datalen;
++        void *data;
++};
++
++/* The subfunctions (for the op field) */
++#define BLKPG_ADD_PARTITION	1
++#define BLKPG_DEL_PARTITION	2
++#define BLKPG_RESIZE_PARTITION	3
++
++/* Sizes of name fields. Unused at present. */
++#define BLKPG_DEVNAMELTH	64
++#define BLKPG_VOLNAMELTH	64
++
++/* The data structure for ADD_PARTITION and DEL_PARTITION */
++struct blkpg_partition {
++	long long start;		/* starting offset in bytes */
++	long long length;		/* length in bytes */
++	int pno;			/* partition number */
++	char devname[BLKPG_DEVNAMELTH];	/* partition name, like sda5 or c0d1p2,
++					   to be used in kernel messages */
++	char volname[BLKPG_VOLNAMELTH];	/* volume label */
++};
+ #include <stdio.h>
+ #include <string.h>
+ #include <sys/ioctl.h>

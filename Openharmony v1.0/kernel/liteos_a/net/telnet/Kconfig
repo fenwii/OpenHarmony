@@ -1,0 +1,6 @@
+config NET_TELNET
+    bool "Enable Telnet"
+    default y
+    depends on NET_LWIP_SACK && SHELL && DEBUG_VERSION
+    help
+      Answer Y to enable LiteOS support telnet tool.

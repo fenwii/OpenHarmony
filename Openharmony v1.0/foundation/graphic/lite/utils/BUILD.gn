@@ -1,0 +1,59 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#     http://www.apache.org/licenses/LICENSE-2.0
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/lite/config/component/lite_component.gni")
+
+generate_notice_file("graphic_utils_lite_notice_file") {
+    module_name = "graphic_utils_lite"
+    module_source_dir_list = [
+        "//third_party/bounds_checking_function",
+    ]
+}
+
+if (board_name == "hi3516dv300") {
+    copy("utils_config") {
+        sources = ["fonts/SourceHanSansSC-Regular.otf"]
+        outputs = [ "$root_out_dir/data/SourceHanSansSC-Regular.otf" ]
+    }
+}
+
+shared_library("graphic_utils") {
+    sources = [
+        "src/color.cpp",
+        "src/file.c",
+        "src/geometry2d.cpp",
+        "src/graphic_math.cpp",
+        "src/mem_api.cpp",
+        "src/transform.cpp",
+        "src/version.cpp",
+        "src/style.cpp",
+        "src/linux_file.c",
+    ]
+    include_dirs = [
+        "//foundation/graphic/lite/interfaces/kits/utils",
+        "//foundation/graphic/lite/interfaces/kits/config",
+        "//foundation/graphic/lite/frameworks/ui/include",
+        "//foundation/graphic/lite/utils/include",
+        "//third_party/bounds_checking_function/include",
+    ]
+    public_deps = [
+        "//third_party/bounds_checking_function:libsec_shared",
+        "//base/hiviewdfx/frameworks/hilog_lite/featured:hilog_shared",
+    ]
+    cflags = ["-fPIC"]
+    cflags += ["-Wall"]
+    cflags_cc = cflags
+}
+lite_component("litegraphicutils") {
+    features = [
+        ":graphic_utils",
+    ]
+}

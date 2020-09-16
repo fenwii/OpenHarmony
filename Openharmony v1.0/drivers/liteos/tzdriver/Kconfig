@@ -1,0 +1,6 @@
+config DRIVERS_TZDRIVER
+    bool "Enable iTrustee tzdriver"
+    default n
+    depends on TEE_ENABLE
+    help
+      Enable iTrustee liteos tzdriver.

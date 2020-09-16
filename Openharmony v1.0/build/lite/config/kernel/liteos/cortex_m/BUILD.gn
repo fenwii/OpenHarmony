@@ -1,0 +1,106 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+config("riscv32") {
+    defines = []
+    cflags = []
+    include_dirs = []
+
+    defines = [
+        "LOS_COMPILE_LDM",
+        "PRODUCT_USR_SOFT_VER_STR=\"None\"",
+        "CYGPKG_POSIX_SIGNALS",
+        "__ECOS__",
+        "__RTOS_",
+        "PRODUCT_CFG_HAVE_FEATURE_SYS_ERR_INFO",
+        "__LITEOS__",
+        "LIB_CONFIGURABLE",
+        "LOSCFG_SHELL",
+        "LOSCFG_CACHE_STATICS",
+        "CUSTOM_AT_COMMAND",
+        "LOS_COMPILE_LDM",
+        "LOS_CONFIG_IPERF3",
+        "CMSIS_OS_VER=2",
+        "SECUREC_ENABLE_SCANF_FILE=0",
+        "CONFIG_AT_COMMAND",
+        "PRODUCT_CFG_CHIP_VER_STR=\"Hi3861V100\"",
+        "CHIP_VER_Hi3861",
+        "PRODUCT_CFG_SOFT_VER_STR=\"Hi3861\"",
+        "HI_BOARD_ASIC",
+        "HI_ON_FLASH",
+        "LITEOS_WIFI_IOT_VERSION",
+    ]
+
+    cflags = [
+        "-falign-functions=2",
+        "-msave-restore",
+        "-fno-optimize-strlen",
+        "-freorder-blocks-algorithm=simple",
+        "-fno-schedule-insns",
+        "-fno-inline-small-functions",
+        "-fno-inline-functions-called-once",
+        "-mtune=size",
+        "-mno-small-data-limit=0",
+        "-fno-aggressive-loop-optimizations",
+        "-std=c99",
+        "-Wpointer-arith",
+        "-Wstrict-prototypes",
+        "-fstack-protector-all",
+        "-Os",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fno-exceptions",
+        "-fno-short-enums",
+        "-Wextra",
+        "-Wall",
+        "-Wundef",
+        "-U",
+        "PRODUCT_CFG_BUILD_TIME",
+    ]
+
+    include_dirs += [
+        "//vendor/hisi/hi3861/hi3861/include",
+        "//vendor/hisi/hi3861/hi3861/platform/include",
+        "//vendor/hisi/hi3861/hi3861/platform/system/include",
+        "//vendor/hisi/hi3861/hi3861/config",
+        "//vendor/hisi/hi3861/hi3861/config/nv",
+        "//utils/native/lite/include",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/kernel/base/include",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/targets/hi3861v100/include",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/kernel/include",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/arch/risc-v/rv32im",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/components/lib/libm/include",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/components/lib/libsec/include",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/net/wpa_supplicant-2.7/src/common",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/targets/hi3861v100/plat/riscv",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/kernel/include",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/kernel/extended/runstop",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/components/posix/include",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/components/linux/include",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/net/lwip_sack/include",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/components/lib/libc/musl/include",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/components/lib/libc/musl/arch/generic",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/components/lib/libc/musl/arch/riscv32",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/components/lib/libc/hw/include",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/components/lib/libc/nuttx/include",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/components/lib/libsec/include",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/targets/hi3861v100/config",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/targets/hi3861v100/user",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/targets/hi3861v100/plat",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/targets/hi3861v100/extend/include",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/arch",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/components/lib/libc/bionic/libm",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/shell/include",
+        "//vendor/hisi/hi3861/hi3861/platform/os/Huawei_LiteOS/net/telnet/include",
+    ]
+}

@@ -1,0 +1,61 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/lite/config/component/lite_component.gni")
+import("//build/lite/ndk/ndk.gni")
+
+shared_library("recorder") {
+    sources = [
+        "recorder.cpp",
+        "recorder_impl.cpp",
+        "recorder_sink/src/recorder_sink.cpp",
+        "recorder_source/src/recorder_audio_source.cpp",
+        "recorder_source/src/recorder_video_source.cpp",
+    ]
+    cflags = ["-fPIC"]
+    cflags += ["-Wall"]
+    cflags_cc = cflags
+    include_dirs = [
+        "recorder_sink/include",
+        "recorder_source/include",
+        "//third_party/bounds_checking_function/include",
+        "//foundation/multimedia/hals/camera_lite",
+        "//drivers/hdf/lite/hdi/audio/include",
+        "//drivers/hdf/lite/hdi/codec/include",
+        "//drivers/hdf/lite/hdi/format/include",
+        "//base/security/interfaces/kits/iam_lite",
+    ]
+    public_configs = [":recorder_external_library_config"]
+    outdir = rebase_path("$root_out_dir")
+    ldflags = [
+        "-L$outdir",
+        "-lformat_muxer",
+        "-lformat_demuxer"
+    ]
+    deps = [
+        "//base/security/services/iam_lite/pms_client:pms_client",
+        "//third_party/bounds_checking_function:libsec_shared",
+        "//foundation/graphic/lite/frameworks/surface:surface",
+        "//foundation/multimedia/utils/lite:media_common",
+        "//foundation/multimedia/frameworks/audio_lite:audio_capturer",
+    ]
+}
+config("recorder_external_library_config") {
+    include_dirs = ["//foundation/multimedia/interfaces/kits/recorder_lite"]
+    include_dirs += ["//foundation/multimedia/utils/lite/include"]
+}
+
+lite_component("media_lite") {
+    features = [
+        ":recorder",
+    ]
+}

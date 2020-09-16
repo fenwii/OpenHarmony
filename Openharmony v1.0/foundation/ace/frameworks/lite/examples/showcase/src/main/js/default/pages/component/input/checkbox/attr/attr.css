@@ -1,0 +1,107 @@
+/*
+ * Copyright (c) 2020 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+.checkbox {
+  margin-left: 10px;
+  margin-top: 30px;
+  height: 50px;
+  width: 50px;
+}
+
+.list {
+  left: 0px;
+  top: 0px;
+  width: 454px;
+  height: 454px;
+}
+
+.text {
+  width: 200px;
+  height: 50px;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size:30px;
+}
+
+.item-title {
+  width: 454px;
+  height: 80px;
+}
+
+.separatorContainerStyle {
+  width: 454px;
+  height: 4px;
+  background-color: #8b8b7a;
+}
+
+.item-types {
+  width: 454px;
+  height: 80px;
+}
+
+.whole-text {
+  margin-top:10px;
+  margin-left:150px;
+  width:200px;
+  height:60px;
+  font-size:30px;
+  color: red;
+}
+
+.item-two {
+  width: 450px;
+  height: 150px;
+}
+
+.two-right-div {
+  width: 230px;
+  height: 150px;
+  top: 40px;
+  left: 0px;
+}
+
+.two-left-div {
+  width: 220px;
+  height: 150px;
+  left: 0px;
+  top: 0px;
+  flex-direction: column;
+}
+
+.two-div {
+  width: 450px;
+  height: 150px;
+  left: 0px;
+  top: 0px;
+}
+
+.item-attribute {
+  width: 450px;
+  height: 150px;
+}
+
+.attribute-left-div {
+  width: 150px;
+  height: 150px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.attribute-right-div {
+  width: 300px;
+  height: 150px;
+  margin-top: 20px;
+  margin-left: 10px;
+  flex-direction: column;
+}

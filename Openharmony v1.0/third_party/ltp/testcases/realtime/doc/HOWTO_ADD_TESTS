@@ -1,0 +1,40 @@
+rt-test - HOWTO_ADD_TESTS
+==========================
+
+1. Select the appropriate bucket
+	- func, stress, perf
+	- under those, should it go into an existing
+	  subdirectory?
+	- note that only the top level subdirectory
+	  (which has a run_auto.sh script) gets listed
+	  individually as an available test.
+	- run "run.sh -t list" to see available tests
+
+2. If you are creating a new subdirectory:
+   Provide:
+	- your test files
+	- your GNUMakefile.am
+	- your run_auto.sh script (use template: doc/run_auto.sh.tpl)
+
+3. Modify tests profiles if to be run automatically
+	- profile/default
+	- other profiles if needed
+
+4. Test the following:
+	$make
+	$run.sh -t list
+	$run.sh -t clean
+	$run.sh -t subdir # entire bucket
+	$run.sh -t subdir/your_test_dir
+	$subdir/your_test_dir/run_auto.sh
+
+5. Test source files:
+	(Ideally...:))
+	- your test source files have
+		- a clear description of test purpose and criteria
+		- author
+		- license
+		- requirements for set up, etc
+	- your test has clear PASS/FAIL criteria if functional
+	- your test logs some result
+	- your test has a -h option which displays usage

@@ -1,0 +1,115 @@
+SECTIONS:
+1. Overview
+2. Framework Functionality
+3. Building and Running the Tests
+
+1. Overview
+------------
+This document describes how to run the tests in the POSIX Test Suite.
+
+Our framework currently has the ability to build and run conformance,
+functional, and stress tests.  All tests are built with make all, but
+certain care should be used when running the stress test suite as the
+tests may leave the system in an indeterminate state.
+
+2. Framework Functionality
+----------------------------------------------------
+
+  * Conformance Tests
+The build and execution process varies for conformance tests.
+
+For definitions tests, the build and execution process is the same since
+the pass/fail criterion is determine by whether or not the test compiles.
+A definitions test will be compiled, not linked, by the toolchain.
+
+For all other tests, they will have one test for the compile, one for the
+link, and one for the execution of the test.  Successful tests return
+PTS_PASS, which the interprets as success.  All other return values are
+considered failures [For more info, see HOWTO_ResultCodes].
+
+  * Functional/Stress Tests
+Functional and stress tests have their own Makefile and method for running,
+and the framework merely calls these mechanisms.  To build functional and
+stress tests, the framework calls the main Makefile for each functional
+area.  To run these tests, the framework calls the run.sh file for each
+functional area.
+
+3. Building and Running the Tests
+----------------------------------
+
+** See the BUILD file for info on how to set up the build for the specific
+area you are testing (threads, mqs, semaphores, etc.), as well as setup the
+build specific to your environment.
+
+To build and run the tests, you should be in the main posix test suite
+directory.
+
+From there, execute:
+    # make all
+
+This will build all of the conformance, functional, and stress tests.
+
+To disable known failures on Linux do make filter-known-fails.
+
+* Conformance-specific items *
+
+To run conformance tests for a specific directory, just cd to the directory
+and run make all test.
+
+Example:
+    # cd conformance/definitions/time_h ; make all test
+
+To just build conformance tests, run:
+    # make conformance-all
+
+To just run conformance tests, run:
+    # make conformance-test
+
+* Functional/Stress-specific items *
+
+To run only functional tests, run:
+    # make functional-test
+
+To run only stress tests, run:
+    # make stress-test
+
+To make only functional tests, run:
+    # make functional-all
+
+To make only stress tests, run:
+    # make stress-all
+
+To skip known failures on Linux, run:
+    # make filter-known-fails
+    # make test
+
+4. Running POSIX Option Group Feature Tests
+-----------------------------------------------------
+
+There are several POSIX option groups available that can be tested with this
+test suite. The available groups are:
+
+	AIO	| Asynchonous I/O
+	MEM	| Memory
+	MSG	| IPC
+	SEM	| Semaphores
+	SIG	| Signals
+	THR	| Threading
+	TMR	| Timers
+	TPS	| Thread Execution Scheduling
+
+You can run the tests by executing:
+
+	bin/run-posix-option-group-test.sh [OPTION-GROUP]
+
+or run all of the tests by executing:
+
+	bin/run-all-posix-option-group-tests.sh
+
+More details about these features can be found on the OpenGroup site
+(http://www.opengroup.org).
+
+Contributors:	rusty.lynch REMOVE-THIS AT intel DOT com
+		julie.n.fleischer REMOVE-THIS AT intel DOT com
+		rolla.n.selbak REMOVE-THIS AT intel DOT com
+		yaneurabeya REMOVE-THIS AT gmail DOT com

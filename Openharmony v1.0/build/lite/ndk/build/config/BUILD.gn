@@ -1,0 +1,206 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+config("cpu_arch") {
+    cflags = []
+    if (target_cpu == "cortex-a7") {
+        cflags += [
+            "-mcpu=cortex-a7",
+            "-mfloat-abi=softfp",
+            "-mfpu=neon-vfpv4"
+        ]
+    } else if (target_cpu == "cortex-m4") {
+        cflags += [
+            "-mcpu=cortex-m4",
+            "-march=armv7e-m",
+            "-mthumb"
+        ]
+    }
+    asmflags = cflags
+    cflags_cc = cflags
+}
+
+config("base") {
+    defines = [
+        "_FORTIFY_SOURCE=2"
+    ]
+
+    if (ohos_kernel_type == "liteos_a" || ohos_kernel_type == "liteos_m" || ohos_kernel_type == "liteos_riscv") {
+        defines += [
+            "__LITEOS__",
+        ]
+    } else if (ohos_kernel_type == "linux_4_9") {
+        defines += [
+            "__LINUX__",
+        ]
+    }
+
+    cflags = [
+        "-fno-omit-frame-pointer",
+        "-nostdlib",
+        "-mno-unaligned-access",
+        "-fno-builtin",
+        "-Werror",
+    ]
+
+    cflags_cc = cflags
+    cflags += [
+        "-std=c99"
+    ]
+
+    ldflags = [
+        "-lc",
+        "-Wl,-z,now",
+        "-Wl,-z,relro",
+        "-Wl,-z,noexecstack"
+    ]
+}
+
+config("exceptions") {
+  cflags_cc = [ "-fexceptions" ]
+  cflags_objcc = cflags_cc
+}
+
+config("no_exceptions") {
+  cflags_cc = [ "-fno-exceptions" ]
+  cflags_objcc = cflags_cc
+  ldflags = cflags_cc
+}
+
+config("stack_protector") {
+    cflags = [ "-fstack-protector-all" ]
+    cflags_cc = cflags
+}
+
+config("static_pie_config") {
+    cflags = [ "-fPIE" ]
+    cflags_cc = cflags
+}
+
+config("shared_library_config") {
+    cflags = [ "-fPIC" ]
+    cflags_cc = cflags
+}
+
+config("pie_executable_config") {
+    ldflags = [ "-pie" ]
+}
+
+config("clang") {
+    include_dirs = [
+        "//llvm/include/c++/v1",
+        "//sysroot/usr/include/arm-liteos",
+    ]
+
+    cflags = [
+        "--target=arm-liteos",
+        "-mcpu=cortex-a7",
+        "-march=armv7-a",
+        "-mfloat-abi=softfp",
+        "--sysroot=${ohos_root_path}sysroot"
+    ]
+    cflags_cc = cflags
+
+    ldflags = cflags
+
+    ldflags += [
+        "-L../llvm/lib/arm-liteos/c++",
+        "-L../sysroot/usr/lib/arm-liteos",
+        "-L../llvm/lib/clang/9.0.0/lib/arm-liteos",
+        "-L../llvm/lib/arm-liteos/c++",
+        "-lclang_rt.builtins",
+        "-lc",
+        "-lc++",
+        "-lc++abi",
+        "--sysroot=${ohos_root_path}sysroot"
+    ]
+}
+
+config("clang_release") {
+    cflags = [
+        "-Oz",
+        "-flto"
+    ]
+    cflags_cc = cflags
+}
+
+config("release") {
+    defines = [
+        "OHOS_RELEASE",
+    ]
+    cflags = [
+        "-O2"
+    ]
+    cflags_cc = cflags
+}
+
+config("debug") {
+    defines = [
+        "OHOS_DEBUG",
+    ]
+    cflags = [
+        "-g"
+    ]
+    cflags_cc = cflags
+}
+
+config("gcc") {
+    include_dirs = []
+    if (ohos_kernel_type == "liteos_a") {
+        include_dirs += [
+            "//gcc/target/usr/include",
+        ]
+        ldflags = [
+            "-L$ohos_root_path/gcc/target/usr/lib"
+        ]
+    }
+}
+
+config("sysroot") {
+    include_dirs = [
+        "//sysroot/usr/include"
+    ]
+    ldflags = [
+        "-L$ohos_root_path/sysroot/usr/lib"
+    ]
+}
+
+config("ohos") {
+    configs = [
+        ":base",
+        ":cpu_arch",
+        ":stack_protector",
+        ":exceptions",
+        ":sysroot"
+    ]
+
+    if (ohos_build_type == "release") {
+        configs += [ ":release" ]
+    } else if (ohos_build_type == "debug") {
+        configs += [ ":debug" ]
+    }
+
+    if (ohos_build_compiler == "gcc") {
+        configs += [ ":gcc" ]
+    } else if (ohos_build_compiler == "clang") {
+        configs += [":clang"]
+
+        if(ohos_build_type == "release") {
+            configs += [":clang_release"]
+        }
+    }
+}
+
+config("tools") {
+    # Add tools configs if any
+}

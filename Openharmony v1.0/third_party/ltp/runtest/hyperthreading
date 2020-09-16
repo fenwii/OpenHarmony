@@ -1,0 +1,4 @@
+#DESCRIPTION:Hyperthreading stress tests
+smt_smp_enabled smt_smp_enabled.sh
+smt_smp_affinity smt_smp_affinity.sh
+

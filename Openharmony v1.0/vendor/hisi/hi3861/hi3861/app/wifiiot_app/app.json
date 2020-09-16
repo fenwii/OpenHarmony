@@ -1,0 +1,30 @@
+{
+    "TARGET_LIB": "wifiiot_app",
+    "APP_SRCS": [
+        "init",
+        "src"
+    ],
+    "INCLUDE": [
+        "components/iperf2/include",
+        "app/wifiiot_app/include",
+        "app/wifiiot_app/init",
+        "app/wifiiot_app/src",
+        "config/app",
+        "config/diag",
+        "platform/os/Huawei_LiteOS/net/ripple/exports",
+        "components/ripple/exports",
+        "components/hilink/include"
+    ],
+    "CC_FLAGS": [
+    ],
+    "DEFINES": [
+        "_PRE_WLAN_FEATURE_CSI",
+        "_PRE_WLAN_FEATURE_P2P",
+        "LWIP_ENABLE_DIAG_CMD=0"
+    ],
+    "AR_FLAGS": [],
+    "LD_FLAGS": [],
+    "AS_FLAGS": [],
+    "LD_DIRS": [],
+    "CLEAN": []
+}

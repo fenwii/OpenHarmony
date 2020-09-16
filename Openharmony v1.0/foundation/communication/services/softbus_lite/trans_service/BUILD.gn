@@ -1,0 +1,62 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/lite/config/component/lite_component.gni")
+import("//build/lite/ndk/ndk.gni")
+
+if (ohos_kernel_type == "liteos_riscv" || ohos_kernel_type == "liteos_m") {
+    config("trans_service_config") {
+        include_dirs = [
+            "include/libdistbus",
+            "include/utils",
+            "source/libdistbus",
+            "source/utils",
+            "../authmanager/include",
+            "//kernel/liteos_a/lib/libsec/include",
+            "//third_party/cJSON",
+            "//foundation/communication/services/softbus_lite/discovery/discovery_service/include",
+            "//foundation/communication/services/softbus_lite/os_adapter/include",
+            "//foundation/communication/interfaces/kits/softbus_lite/transport",
+            "//third_party/bounds_checking_function/include",
+            "$ohos_third_party_dir/lwip_sack/include",
+            "$ohos_third_party_dir/mbedtls/include",
+        ]
+
+        defines = ["SOFTBUS_DEBUG"]
+        include_dirs += [
+            "//kernel/liteos_m/components/cmsis/",
+        ]
+
+    }
+
+    trans_service_sources = [
+        "source/libdistbus/tcp_session.c",
+        "source/libdistbus/tcp_session_manager.c",
+        "source/libdistbus/auth_conn_manager.c",
+        "source/libdistbus/trans_lock.c",
+        "source/utils/tcp_socket.c",
+        "source/utils/message.c",
+        "source/utils/aes_gcm.c",
+    ]
+
+    lite_library("trans_service") {
+        target_type = "static_library"
+        output_name = "trans_service"
+        sources = trans_service_sources
+        public_configs = [ ":trans_service_config" ]
+        public_deps = [
+            "//third_party/cJSON:cjson_shared",
+        ]
+    }
+
+}

@@ -1,0 +1,113 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/lite/ndk/ndk.gni")
+
+ndk_toolchains("build_script")
+{
+    src_type = "file"
+    src_dir = [
+        "//build/lite/ndk/build/BUILD.gn",
+        "//build/lite/ndk/build/build.py",
+        "//build/lite/ndk/README.md",
+        "//build/lite/ndk/build/.gn",
+    ]
+    dest_dir = [
+        "$root_out_dir/ndk",
+        "$root_out_dir/ndk",
+        "$root_out_dir/ndk",
+        "$root_out_dir/ndk/build",
+    ]
+}
+
+ndk_toolchains("source") {
+    src_dir = [
+        "//build/lite/ndk/sample",
+        "//build/lite/ndk/build/config",
+        "//build/lite/ndk/build/toolchain"
+    ]
+    dest_dir = [
+        "$root_out_dir/ndk/sample",
+        "$root_out_dir/ndk/build/config",
+        "$root_out_dir/ndk/build/toolchain"
+    ]
+    if (ohos_build_compiler == "clang") {
+        src_dir += [
+            "//prebuilts/lite/sysroot/usr/lib",
+            "//prebuilts/lite/sysroot/usr/include"
+        ]
+        dest_dir += [
+            "$root_out_dir/ndk/sysroot/usr/lib",
+            "$root_out_dir/ndk/sysroot/usr/include"
+        ]
+    }
+}
+
+group("ndk_build") {
+    deps = [
+        ":source",
+        ":build_script",
+        "//foundation/communication/services/softbus_lite:softbus_lite_ndk",
+        "//base/startup/services/bootstrap_lite:bootstrap_lite_ndk",
+        "//utils/native/lite:native_api",
+        "//base/startup/frameworks/syspara_lite/parameter:parameter_notes",
+    ]
+    if (ohos_kernel_type != "liteos_riscv") {
+        deps += [
+            "//base/security/interfaces/kits/iam_lite:permission_notes",
+            "//base/hiviewdfx/frameworks/hilog_lite/featured:hilog_ndk",
+            "//foundation/distributedschedule/services/samgr_lite:samgr_lite_ndk",
+            "//foundation/graphic/lite:ndk_build",
+            "//foundation/aafwk/frameworks/ability_lite:ability_notes",
+            "//foundation/appexecfwk/frameworks/bundle_lite:bundle_notes",
+            "//foundation/multimedia/services/media_lite:media_ndk",
+            "//base/startup/frameworks/syspara_lite/token:token_notes",
+            "//foundation/communication/frameworks/ipc_lite:liteipc_ndk",
+            "//third_party/mbedtls:mbedtls_ndk",
+            "//third_party/cJSON:cjson_ndk",
+            "//drivers/hdf/lite/hdi:native_api",
+            "//third_party/wpa_supplicant/wpa_supplicant-2.9:wpa_supplicant",
+        ]
+        if (ohos_build_type == "debug") {
+            deps += [
+                "//prebuilts/lite/sysroot/apidoc:lite_kernel_ndk"
+            ]
+        }
+    } else {
+        deps += [
+            "$ohos_vendor_adapter_dir/hals/communication/wifi_lite/wifiservice:wifiservice_ndk",
+            "//base/iot_hardware/frameworks/wifiiot_lite/src:iothardware_ndk",
+            "//prebuilts/lite/sysroot/apidoc:lite_kernel_ndk",
+            "//base/hiviewdfx/frameworks/hilog_lite/mini:hilog_lite_ndk",
+        ]
+    }
+}
+
+action("ndk") {
+    if (ohos_build_ndk) {
+        deps = ["doc"]
+        script = "//build/lite//ndk/archive_ndk.py"
+        depfile = "${target_gen_dir}/${target_name}.d"
+        ndk_name =
+          "$ohos_build_ndk_target_host-$ohos_build_compiler-$ohos_build_ndk_version"
+        args = [
+            "--src_dir",
+            rebase_path("$root_build_dir/ndk"),
+            "--name",
+            ndk_name,
+            "--dest_dir",
+            rebase_path("$root_build_dir/packages/ndk")
+        ]
+        outputs = [ "$root_build_dir/packages/ndk/$ndk_name.zip" ]
+    }
+}

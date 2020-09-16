@@ -1,0 +1,64 @@
+/*
+ * Copyright (c) 2020 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+.stack {
+  left: 0px;
+  top: 0px;
+  width: 454px;
+  height: 454px;
+}
+
+.divBlock {
+  width: 200px;
+  height: 70px;
+  left:80px;
+  background-color: #ff0000;
+}
+
+.divAnimationStyle1 {
+  animation-duration: 3000ms;
+  animation-timing-function: linear;
+  animation-fill-mode: none;
+  animation-iteration-count:1;
+}
+
+.divAnimationStyle2 {
+  animation-duration: 3000ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: none;
+  animation-iteration-count:1;
+}
+
+.divAnimationStyle3 {
+  animation-duration: 3000ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: none;
+  animation-iteration-count:1;
+}
+
+.divAnimationStyle4 {
+  animation-duration: 3000ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: none;
+  animation-iteration-count:1;
+}
+
+@keyframes animationChange {
+  from {
+    width:200px;
+  }
+  to {
+    width:280px;
+  }
+}

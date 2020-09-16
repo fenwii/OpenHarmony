@@ -1,0 +1,76 @@
+<!--
+/*
+ * Copyright (c) 2020 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ -->
+<div class="container" style="left:0px; top:0px; border-radius:227px; border-color:#8b0000; border-width: 1px">
+        <list style="left:0px; top:0px; height: 454px;" class="itemWidth">
+            <list-item type="listItem" style="width: 314px; height:150px;">
+                <div style="justify-content:center; align-items:center;width:390px" class="itemDiv">
+                    <text class="textLarger" style="width:210px">Edit alarm</text>
+                </div>
+            </list-item>
+            <list-item type="listItem" style="width: 419px; height: 150px;">
+                <div style="width: 35px; height:150px;"></div>
+                <div class="itemDiv">
+                    <div class="itemLeft" onclick="switchToTimePicker">
+                        <div class="textLargeDiv" style="width: 120px">
+                            <text class="textLarger" style="width:120px;">{{dataWrapper.time}}</text>
+                        </div>
+                        <div class="textMiniDiv" style="width:85px;">
+                            <text class="textStandard" style="width:85px">Time</text>
+                        </div>
+                    </div>
+                </div>
+                <image src="common/jiantou.png" style="width: 70px; height:150px;"></image>
+            </list-item>
+            <list-item type="listItem" style="width: 419px; height: 200px;">
+                <div style="width: 35px; height:150px;"></div>
+                <div class="itemDiv" style="height:200px">
+                    <div class="itemLeft" onclick="switchToWeekSelector" style="height:200px">
+                        <div class="textLargeDiv" style="width:330px;height:140px;
+                        flex-direction:column;">
+                            <text class="textLarger" style="height:140px;width:330px;text-overflow:ellipsis">{{dataWrapper.repeat}}</text>
+                        </div>
+                        <div class="textMiniDiv" style="width:120px;">
+                            <text class="textStandard" style="width:120px;">Repeat</text>
+                        </div>
+                    </div>
+                </div>
+                <image src="common/jiantou.png" style="width: 70px; height:150px;"></image>
+            </list-item>
+            <list-item type="listItem" style="width: 314px; height: 150px;">
+                <div class="itemDiv" style="width: 390px">
+                    <div class="itemLeft" style="width: 390px">
+                        <div class="textLargeDiv" style="width:120px;">
+                            <text class="textLarger" style="width:120px;">Alarm</text>
+                        </div>
+                        <div class="textMiniDiv" style="width:90px;">
+                            <text class="textStandard" style="width:90px;">Name</text>
+                        </div>
+                    </div>
+                </div>
+            </list-item>
+            <list-item type="listItem" style="width: 419px; height: 150px;">
+                <div style="width:419px; height:150px; flex-direction:column; align-items:center;">
+                    <div style="width:419px; height:60px;"></div>
+                    <div style="width:419px; height:90px; justify-content:center; align-items:center; border-radius:227px;">
+                        <text style="color:#0000ff; font-size: 30px; width:70px; height:50px" onclick="submit">OK</text>
+                        <div style="width:30px; height:50px;"></div>
+                        <text style="color:#b22222; font-size: 30px; width:105px; height:50px" onclick="remove">Delete</text>
+                    </div>
+                </div>
+            </list-item>
+        </list>
+    </div>

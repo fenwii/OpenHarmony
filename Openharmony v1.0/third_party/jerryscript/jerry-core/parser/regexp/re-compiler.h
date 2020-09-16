@@ -1,0 +1,61 @@
+/* Copyright JS Foundation and other contributors, http://js.foundation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#ifndef RE_COMPILER_H
+#define RE_COMPILER_H
+
+#if ENABLED (JERRY_BUILTIN_REGEXP)
+
+#include "ecma-globals.h"
+#include "re-bytecode.h"
+#include "re-parser.h"
+
+/** \addtogroup parser Parser
+ * @{
+ *
+ * \addtogroup regexparser Regular expression
+ * @{
+ *
+ * \addtogroup regexparser_compiler Compiler
+ * @{
+ */
+
+/**
+ * Context of RegExp compiler
+ */
+typedef struct
+{
+  uint16_t flags;                    /**< RegExp flags */
+  uint32_t captures_count;           /**< number of capture groups */
+  uint32_t non_captures_count;       /**< number of non-capture groups */
+  uint32_t highest_backref;          /**< highest backreference */
+  re_bytecode_ctx_t *bytecode_ctx_p; /**< pointer of RegExp bytecode context */
+  re_token_t current_token;          /**< current token */
+  re_parser_ctx_t *parser_ctx_p;     /**< pointer of RegExp parser context */
+} re_compiler_ctx_t;
+
+ecma_value_t
+re_compile_bytecode (const re_compiled_code_t **out_bytecode_p, ecma_string_t *pattern_str_p, uint16_t flags);
+
+void re_cache_gc_run (void);
+
+/**
+ * @}
+ * @}
+ * @}
+ */
+
+#endif /* ENABLED (JERRY_BUILTIN_REGEXP) */
+#endif /* !RE_COMPILER_H */

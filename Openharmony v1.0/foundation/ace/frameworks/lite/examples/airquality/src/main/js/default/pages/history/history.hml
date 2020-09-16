@@ -1,0 +1,42 @@
+<!--
+/*
+ * Copyright (c) 2020 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ -->
+<list style="width:321px;height:321px;top:67;left:67;">
+    <list-item class="info-list-item">
+        <div style="width:321px;height:80px;flex-direction:column;align-items:flex-start;">
+            <text class="div-info-historical-data">{{historicalData}}</text>
+        </div>
+    </list-item>
+    <list-item style="width:321px;height:160px;" for="{{datasets}}">
+        <div style="width:321px;height:160px;flex-direction:column;">
+            <div style="width:321px;height:2px;background-color:#f5fffa;"></div>
+            <text class="gas-name">{{$item}}</text>
+            <div style="width:321px;height:100px;margin-top:4px;justify-content:flex-start;align-items:flex-end;">
+                <div style="width:21px;margin-left:21px;height:10px;backgroundColor:#00ff00;"></div>
+                <div style="width:21px;margin-left:21px;height:20px;;backgroundColor:#00ff00;"></div>
+                <div style="width:21px;margin-left:21px;height:90px;backgroundColor:#ff0000;"></div>
+                <div style="width:21px;margin-left:21px;height:80px;backgroundColor:#ff0000;"></div>
+                <div style="width:21px;margin-left:21px;height:60px;backgroundColor:#999999;"></div>
+                <div style="width:21px;margin-left:21px;height:50px;backgroundColor:#999999;"></div>
+                <div style="width:21px;margin-left:21px;height:100px;backgroundColor:#ff0000;"></div>
+            </div>
+            <image style="width:321px;height:20px;" src="common/week.png"></image>
+        </div>
+    </list-item>
+    <list-item class="info-list-item">
+        <input type="button" value="Back" style="border-width:2px;border-color:#90ee90;width:256px;height:60px;margin-left: 30px;margin-top: 10px;" onclick="backDetail" /> 
+    </list-item>
+</list>

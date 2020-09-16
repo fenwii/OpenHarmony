@@ -1,0 +1,21 @@
+Index: mtd-utils-2.1.1/ubi-utils/ubiformat.c
+===================================================================
+--- mtd-utils-2.1.1.orig/ubi-utils/ubiformat.c
++++ mtd-utils-2.1.1/ubi-utils/ubiformat.c
+@@ -334,14 +334,14 @@ static int read_all(int fd, void *buf, s
+ 	while (len > 0) {
+ 		ssize_t l = read(fd, buf, len);
+ 		if (l == 0)
+-			return errmsg("eof reached; %zu bytes remaining", len);
++			return errmsg("eof reached; %zu bytes remaining", (int)len);
+ 		else if (l > 0) {
+ 			buf += l;
+ 			len -= l;
+ 		} else if (errno == EINTR || errno == EAGAIN)
+ 			continue;
+ 		else
+-			return sys_errmsg("reading failed; %zu bytes remaining", len);
++			return sys_errmsg("reading failed; %zu bytes remaining", (int)len);
+ 	}
+ 
+ 	return 0;

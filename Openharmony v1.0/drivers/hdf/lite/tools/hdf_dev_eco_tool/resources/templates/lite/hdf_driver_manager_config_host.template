@@ -1,0 +1,3 @@
+        ${module_lower_case} :: host {
+            hostName = "${module_lower_case}_host";
+        }

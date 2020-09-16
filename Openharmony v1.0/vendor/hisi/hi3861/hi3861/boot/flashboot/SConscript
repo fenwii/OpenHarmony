@@ -1,0 +1,126 @@
+#!/usr/bin/env python3
+# coding=utf-8
+
+import os
+from scripts.scons_utils import scons_usr_bool_option
+from scripts.scons_utils import scons_get_cfg_val
+from scripts.scons_utils import scons_usr_int_option
+from scripts.scons_utils import cleanup
+from scripts import scons_env_cfg
+
+Import('env')
+Import('env_cfg')
+Import('module')
+
+if scons_usr_bool_option('CONFIG_TARGET_CHIP_HI3861') == 'y':
+    CONFIG_TARGET_BIN_NAME="Hi3861"
+else:
+    CONFIG_TARGET_BIN_NAME="Hi3861L"
+
+obj_path = env_cfg.obj_path
+bin_path = env_cfg.bin_path
+lib_path = env_cfg.lib_path
+cache_path = env_cfg.cache_path
+
+sign_tool = os.path.join("tools", "sign_tool", "sign_tool")
+link_path = os.path.join(env_cfg.root, "build", "link", "flashboot_sha256.lds")
+encrypt_key_path = os.path.join('tools', 'sign_tool', 'aes_key.txt')
+if scons_usr_bool_option('CONFIG_TARGET_SIG_SHA256') == 'y':
+    link_path = os.path.join(env_cfg.root, "build", "link", "flashboot_sha256.lds")
+if scons_usr_bool_option('CONFIG_TARGET_SIG_RSA_V15') == 'y':
+    link_path = os.path.join(env_cfg.root, "build", "link", "flashboot_rsa.lds")
+    root_key_path = os.path.join('tools', 'sign_tool', 'root_rsa.pem')
+    sub_key_path = os.path.join('tools', 'sign_tool', 'sub_rsa.pem')
+    sign_type = 0
+if scons_usr_bool_option('CONFIG_TARGET_SIG_RSA_PSS') == 'y':
+    link_path = os.path.join(env_cfg.root, "build", "link", "flashboot_rsa.lds")
+    root_key_path = os.path.join('tools', 'sign_tool', 'root_rsa.pem')
+    sub_key_path = os.path.join('tools', 'sign_tool', 'sub_rsa.pem')
+    sign_type = 1
+if scons_usr_bool_option('CONFIG_TARGET_SIG_ECC') == 'y':
+    link_path = os.path.join(env_cfg.root, "build", "link", "flashboot_ecc.lds")
+    root_key_path = os.path.join('tools', 'sign_tool', 'root_ecc.pem')
+    sub_key_path = os.path.join('tools', 'sign_tool', 'sub_ecc.pem')
+    sign_type = 2
+
+#boot_ver
+boot_ver = scons_usr_int_option('CONFIG_TARGET_BOOT_VER')
+if (boot_ver < 0 or boot_ver > 16):
+        raise scons_utils.SconsBuildError("%s============== boot_ver invalied, should be 0-16 =============%s"%(scons_utils.colors['red'], scons_utils.colors['end']))
+
+module_path = env_cfg.get_module_dir(module)
+module_libs = env_cfg.get_module_libs(module)
+
+env['LIBS'] = list(map(lambda x:'-l%s'%x, env_cfg.get_boot_libs()))
+env['LIBPATH'] = env_cfg.get_bootlib_path()
+env.Append(LIBPATH=os.path.join('-Lbuild', 'libs', 'boot_libs'))
+env = env.Clone()
+ld_flags = ["-nostdlib", "-nostartfiles", "-static", "--gc-sections"]
+boot_cflags = ["-mabi=ilp32", "-march=rv32imc", "-freorder-blocks-algorithm=simple", "-fno-schedule-insns",
+    "-nostdinc", "-fno-aggressive-loop-optimizations", "-fno-builtin", "-fstack-protector-strong",
+    "-fno-exceptions", "-fno-short-enums", "-mtune=size", "-msmall-data-limit=0", "-Wall", "-Werror", "-Os",
+    "-std=c99", "-falign-functions=2", "-fdata-sections", "-ffunction-sections", "-fno-common"]
+boot_asflags = ["-mabi=ilp32", "-march=rv32imc", "-x", "assembler-with-cpp", "-Os", "-Wall", "-Werror",
+    "-nostdinc", "-fno-common"]
+defines = ["-DARCH_RISCV", "-DLOS_COMPILE_LDM", "-DHI_BOARD_ASIC"]
+incs = [os.path.join('#', 'boot', 'flashboot', 'fixed', 'include'), os.path.join('#', 'boot', 'flashboot', 'upg'),
+        os.path.join('#', 'boot', 'flashboot', 'include'), os.path.join('#', 'boot', 'flashboot', 'drivers', 'lsadc'), os.path.join('#', 'boot', 'flashboot', 'drivers', 'efuse'),
+        os.path.join('#', 'boot', 'flashboot', 'include', 'lzma'), os.path.join('#', 'boot', 'flashboot', 'drivers', 'gpio'), os.path.join('#', 'boot', 'flashboot', 'drivers', 'io'),
+        os.path.join('#', 'third_party', 'u-boot-v2019.07', 'u-boot-v2019.07', 'lib', 'lzma'), os.path.join('#', 'boot', 'flashboot', 'secure'), os.path.join('#', 'boot', 'commonboot')]
+
+if scons_usr_bool_option('CONFIG_COMPRESSION_OTA_SUPPORT') == 'y':
+    defines.append("-DCONFIG_COMPRESSION_OTA_SUPPORT")
+if scons_usr_bool_option('CONFIG_DUAL_PARTITION_OTA_SUPPORT') == 'y':
+    defines.append("-DCONFIG_DUAL_PARTITION_OTA_SUPPORT")
+if scons_usr_bool_option('CONFIG_TARGET_SIG_ECC') == 'y':
+    defines.append("-DCONFIG_TARGET_SIG_ECC")
+if scons_usr_bool_option('CONFIG_TARGET_SIG_RSA_V15') == 'y':
+    defines.append("-DCONFIG_TARGET_SIG_RSA_V15")
+if scons_usr_bool_option('CONFIG_TARGET_SIG_RSA_PSS') == 'y':
+    defines.append("-DCONFIG_TARGET_SIG_RSA_PSS")
+if scons_usr_bool_option('CONFIG_FLASH_ENCRYPT_SUPPORT') == 'y':
+    defines.append("-DCONFIG_FLASH_ENCRYPT_SUPPORT")
+if scons_usr_bool_option('CONFIG_FACTORY_TEST_SUPPORT') == 'y':
+    defines.append("-DCONFIG_FACTORY_TEST_SUPPORT")
+if scons_usr_bool_option('CONFIG_QUICK_SEND_MODE') == 'y':
+    defines.append("-DCONFIG_QUICK_SEND_MODE")
+
+if scons_get_cfg_val('CONFIG_CHIP_PKT_48K') == 'y':
+    defines.append("-DCONFIG_CHIP_PKT_48K")
+else:
+    defines.append("-DCONFIG_CHIP_PKT_32K")
+
+env.Replace(CPPDEFINES=defines)
+env.Replace(CCFLAGS=boot_cflags)
+env.Replace(ASFLAGS=boot_asflags)
+env.Replace(CPPPATH=incs)
+env.Replace(LINKFLAGS=ld_flags)
+
+src_path = module_libs['boot']
+
+objs = []
+for src in src_path:
+    path = src if '..' not in src else os.path.relpath(os.path.realpath(os.path.abspath(src)), os.path.join(env_cfg.root))
+    objs += env.SConscript(os.path.join(src, 'SConscript'), {'env':env,}, variant_dir = os.path.join('#', obj_path, "flashboot", path), duplicate=0)
+
+boot_elf = env.Command(target=os.path.join("#", cache_path, "flash_boot.elf"), source=sorted(objs), action="$LINK $LINKFLAGS -T%s $LIBPATH $SOURCES -o $TARGET --start-group $LIBS --end-group"%(link_path))
+boot_bin = env.Command(target=os.path.join("#", cache_path, "hi_flash_boot.bin"), source=boot_elf,
+    action="$OBJCOPY -Obinary -R .rom.text -R .rom.code.text -R .u_boot_cmd  -R .rom.data -R .rom.code.data -R .rom.bss \
+        -R .rom.code.bss -S $SOURCE $TARGET")
+boot_bin_B = os.path.join(bin_path, "%s_boot_signed_B.bin"%(CONFIG_TARGET_BIN_NAME))
+if scons_usr_bool_option('CONFIG_TARGET_SIG_SHA256') == 'y':
+    boot_signed_bin = env.Command(target=os.path.join("#", bin_path, "%s_boot_signed.bin"%(CONFIG_TARGET_BIN_NAME)), source=boot_bin,
+        action="%s -i $SOURCE -o $TARGET -n -t%s"%(sign_tool, boot_bin_B))
+else:
+    if  scons_usr_bool_option('CONFIG_BOOT_ENCRYPT') == 'y':
+        boot_signed_bin = env.Command(target=os.path.join("#", bin_path, "%s_boot_signed.bin"%(CONFIG_TARGET_BIN_NAME)), source=boot_bin,
+            action="%s -i $SOURCE -o $TARGET -r%s -s%s -v %d -a %d -e%s -t%s"%(sign_tool, root_key_path, sub_key_path, boot_ver, sign_type, encrypt_key_path, boot_bin_B))
+    else:
+        boot_signed_bin = env.Command(target=os.path.join("#", bin_path, "%s_boot_signed.bin"%(CONFIG_TARGET_BIN_NAME)), source=boot_bin,
+            action="%s -i $SOURCE -o $TARGET -r%s -s%s -v %d -a %d -t%s"%(sign_tool, root_key_path, sub_key_path, boot_ver, sign_type, boot_bin_B))
+
+env.AddPostAction(boot_bin, cleanup)
+env.AddPostAction(boot_signed_bin, cleanup)
+
+Return('boot_signed_bin')
+

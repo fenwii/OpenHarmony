@@ -1,0 +1,9 @@
+language: c
+
+env:
+ - ENV_CC=clang
+ - ENV_CC=clang++
+ - ENV_CC=gcc
+ - ENV_CC=g++
+
+script: CC=$ENV_CC make && CC=$ENV_CC make check

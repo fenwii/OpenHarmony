@@ -1,0 +1,6 @@
+config  COMPAT_POSIX
+    bool "Enable Posix"
+    default y
+
+    help
+      Answer Y to enable LiteOS support posix interface.

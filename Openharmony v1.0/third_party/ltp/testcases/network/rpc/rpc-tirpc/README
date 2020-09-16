@@ -1,0 +1,51 @@
+************************************************************************
+***                                                                  ***
+***             RPC and TI-RPC Test Suite for Unix and Linux         ***
+***                         Release 2007-07-19                       ***
+***                                                                  ***
+************************************************************************
+
+
+Copyright (c) Bull S.A.  2007 All Rights Reserved.
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of version 2 of the GNU General Public License as
+published by the Free Software Foundation.
+
+This program is distributed in the hope that it would be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+Further, this software is distributed without any warranty that it is
+free of the rightful claim of any third person regarding infringement
+or the like.  Any license provided herein, whether implied or
+otherwise, applies only to this software file.  Patent licenses, if
+any, provided herein do not apply to combinations of this program with
+other software, or any other product whatsoever.
+
+You should have received a copy of the GNU General Public License along
+with this program; if not, write the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+----------------------------
+History and project overview
+----------------------------
+Created by: Cyril Lacabanne - Bull SA
+Maintain by: Aurélien Charbon - Bull SA - aurelien.charbon@ext.bull.net
+11-27-08: Updated by Aime Le Rouzic - Bull SA - aime.lerouzic@bull.net
+
+Web page: http://nfsv4.bullopensource.org/doc/rpc_testsuite.php
+
+----------------------------
+LTP modifications
+----------------------------
+
+The sources here are modified a bit to use the LTP wrapper - rpc_test.sh -
+instead of a bunch of scripts from the above web page.
+
+The basic group of test cases can be executed from
+ * runtest/net.rpc_tests - for TS-RPC testing
+ * runtest/net.tirpc_tests - for TI-RPC testing
+using the LTP framework (ltp-pan, runltp and etc).
+
+Additional test cases (like stress, complex and etc) are to be integrated.

@@ -1,0 +1,2 @@
+LITEOS_BASELIB += -lhdf_config
+LIB_SUBDIRS += $(LITEOSTOPDIR)/../../${board_parent_path}/$(LITEOS_PLATFORM)/config

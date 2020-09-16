@@ -1,0 +1,83 @@
+
+TEST SUITE:
+
+The directory cpuctl contains the tests related to the cpu controller.
+There are total 10 testcases that have been added till date.
+More testcases are expected to be added in future.
+
+TESTS AIM:
+
+The aim of the tests is to test cpu controller functionality.
+
+FILES DESCRIPTION:
+
+cpuctl_testN.c
+---------------
+These are the tasks to run for cpu controller testing.
+The tasks have been automated in the sense that they can assign themselves to
+the appropriate group, can modify their group shares, can migrate etc.
+Each task runs for an interval TIME_INTERVAL seconds and reports the total time
+it could run on all cpus in an interval of INTERVAL seconds. (for convinience
+calculate cpu time is given in % and seconds both).
+A task can call a library routine from libcontrollers library to calculate
+total amount of shares of all the groups, total number of tasks in it's group etc.
+And thus a task knows what is the expected cpu time it should get to run.
+
+After say n SETS it modifies it's parameters and again report the cpu
+usage.
+Maximum effort has been used to reuse the code and keep total code size low.
+
+parameters.sh
+----------
+This file contains the functions which do setup for the test. It creates a
+/dev/cpuctl directory, mounts cgroup filesystem on it with cpu. It then creates
+a number(n) of groups in /dev/cpuctl. The cleanup function does a complete cleanup
+of the system.
+(*However most of the error scenarios have been tested for a sane cleanup, still if
+sometime it is unable to do it justt manualy execute the commands written in cleanup
+function)
+
+run_cpuctl_test.sh
+------------------
+This script creates different scenarios for cpu controller testing and fires (n) tasks
+in different groups to run at the same time. It waits for the return status from
+tasks and reports test pass/fail accordingly.
+
+Makefile
+--------
+
+The usual makefile for this directory
+
+$LTPROOT/output/cpuctl_resultsN.txt
+--------------
+This file will be created to log the results once the test is run. It contains the test
+results which are numbers and following is a description which will help to understand
+the results.
+
+There are two common major expected outcomes of all the tests:
+
+1. A group should get cpu time in the same ratio as it's shares.
+
+2. This time should not change with the changes in share values while the ratio in those
+   values is same.
+
+The results file are straight forward to read. To keep things very simple just look at
+the two fields calc:- and exp:- in % as below:
+
+CPU TIME{calc:- 60.01(s)i.e.  50.01(%) exp:- 50.00(%)}
+
+PASS/FAIL CRITERIO:
+==================
+A major difference in the two % values is a failure of cpu controller.
+Also the difference between consecutive runs under similar conditions is fail.
+Because of some feature which is not currently developed in kernel it is not
+possible to create an ideal scenario and hence the decision of PASS/FAIL is
+not taken for all the tests at the moment. The statistics is generated in the
+results file and a quick look on it gives a proper understanding.
+
+NOTE: In current scenario a variation of 1-3 % is acceptable.
+
+README:
+--------
+The one you have gone through.
+

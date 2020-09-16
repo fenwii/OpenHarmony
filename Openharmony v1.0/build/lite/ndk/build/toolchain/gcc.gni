@@ -1,0 +1,132 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+ohos_build_compiler = "gcc"
+ohos_build_compiler_dir = rebase_path("//gcc/bin", root_build_dir)
+ohos_build_compiler_prefix = "arm-linux-ohoseabi"
+ohos_build_compiler_so_strip = "$ohos_build_compiler_prefix-strip --strip-unneeded"
+ohos_build_compiler_bin_strip = "$ohos_build_compiler_prefix-strip --strip-unneeded"
+
+template("gcc_toolchain") {
+    toolchain(target_name) {
+        assert(defined(invoker.ar), "gcc toolchain must specify a \"ar\" value")
+        assert(defined(invoker.cc), "gcc toolchain must specify a \"cc\" value")
+        assert(defined(invoker.cxx), "gcc toolchain must specify a \"cxx\" value")
+        assert(defined(invoker.ld), "gcc toolchain must specify a \"ld\" value")
+
+        cc = invoker.cc
+        cxx = invoker.cxx
+        ar = invoker.ar
+        ld = invoker.ld
+
+        need_strip = false
+        if(defined(invoker.strip)) {
+            strip = invoker.strip
+            need_strip = true
+        }
+
+        if (defined(invoker.extra_ldflags) && invoker.extra_ldflags != "") {
+          extra_ldflags = " " + invoker.extra_ldflags
+        } else {
+          extra_ldflags = ""
+        }
+
+        tool("cc") {
+            command = "$cc {{defines}} {{include_dirs}} {{cflags}} {{cflags_c}} -c {{source}} -o {{output}}"
+            depsformat = "gcc"
+            description = "cross compiler {{output}}"
+            outputs = [
+                "{{source_out_dir}}/{{source_name_part}}.o",
+            ]
+        }
+        tool("cxx") {
+            depfile = "{{output}}.d"
+            command = "$cxx {{defines}} {{include_dirs}} {{cflags_cc}} -c {{source}} -o {{output}}"
+            depsformat = "gcc"
+            description = "CXX {{output}}"
+            outputs = [
+                "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o",
+            ]
+        }
+        tool("asm") {
+            depfile = "{{output}}.d"
+            command = "$cc {{defines}} {{include_dirs}} {{asmflags}} {{source}} -c -o {{output}}"
+            depsformat = "gcc"
+            description = "cross compiler {{output}}"
+            outputs = [
+                "{{source_out_dir}}/{{source_name_part}}.o"
+            ]
+        }
+        tool("alink") {
+            outfile = "{{output_dir}}/{{target_output_name}}{{output_extension}}"
+            rspfile = "{{output}}.rsp"
+            rspfile_content = "{{inputs}}"
+            command = "$ar cr {{output}} @\"$rspfile\""
+
+            description = "AR {{output}}"
+            outputs = [
+                outfile
+            ]
+
+            default_output_dir = "{{root_out_dir}}/libs"
+            default_output_extension = ".a"
+            output_prefix = "lib"
+        }
+        tool("solink") {
+            outfile = "{{output_dir}}/{{target_output_name}}{{output_extension}}"
+            rspfile = "{{output}}.rsp"
+            rspfile_content = "{{inputs}}"
+            command = "$ld -shared {{ldflags}} $extra_ldflags " +
+                      "-Wl,--start-group {{inputs}} {{libs}} -Wl,--end-group -o $outfile"
+            if(need_strip) {
+                command += "&& $strip $outfile"
+            }
+            description = "SOLINK $outfile"
+            outputs = [
+                outfile
+            ]
+
+            default_output_dir = "{{root_out_dir}}"
+            default_output_extension = ".so"
+            output_prefix = "lib"
+        }
+        tool("link") {
+            outfile = "{{output_dir}}/bin/{{target_output_name}}{{output_extension}}"
+            rspfile = "$outfile.rsp"
+            command = "$ld {{ldflags}} $extra_ldflags " +
+                        "-Wl,--start-group {{inputs}} {{libs}} -Wl,--end-group -o $outfile "
+            if(need_strip) {
+                command += "&& $strip $outfile"
+            }
+
+            description = "LINK $outfile"
+            default_output_dir = "{{root_out_dir}}"
+            rspfile_content = "{{inputs}}"
+            outputs = [
+                outfile
+            ]
+        }
+        tool("stamp") {
+            if (host_os == "win") {
+                command = "cmd /c type nul > \"{{output}}\""
+            } else {
+                command = "/usr/bin/touch {{output}}"
+            }
+            description = "STAMP {{output}}"
+        }
+        tool("copy") {
+            command = "cp -afd {{source}} {{output}}"
+            description = "COPY {{source}} {{output}}"
+        }
+    }
+}

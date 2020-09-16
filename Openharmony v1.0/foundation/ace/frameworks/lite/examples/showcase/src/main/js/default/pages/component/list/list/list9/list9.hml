@@ -1,0 +1,32 @@
+<!--
+Copyright (c) 2020 Huawei Device Co., Ltd.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+    <div style="width:454px;height:454px;left:0px;top:0px;flex-direction:column;" >
+        <stack style="width:454px;height:80px;margin-top:80px;">
+          <input type="button" style="left:85px;width:130px;height:60px;top:10px;" value="首页" onclick=backMain>
+          </input>
+          <input type="button" style="left:235px;width:130px;height:60px;top:10px;" value="上一页" onclick=backSuperior>
+          </input>
+        </stack>
+        <list if="{{status}}" style="width:280px;height:110px;margin-top:10px;margin-left:85px;background-color:#00ff00;">
+           <list-item>
+           </list-item>
+        </list>
+        <input type="button" style="width:140px;height:60px;margin-left:150px;margin-top:10px;" value="if" onclick=changeStatus>
+        </input>
+        <text class="text" style="margin-left:105px;">
+          {{text1}}
+        </text>
+    </div>

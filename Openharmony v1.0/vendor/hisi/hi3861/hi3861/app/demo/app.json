@@ -1,0 +1,31 @@
+{
+    "TARGET_LIB": "demo",
+    "APP_SRCS": [
+        "init",
+        "src"
+    ],
+    "INCLUDE": [
+        "components/iperf2/include",
+        "app/demo/include",
+        "app/demo/init",
+        "app/demo/src",
+        "config/app",
+        "config/diag",
+        "platform/os/Huawei_LiteOS/net/ripple/exports",
+        "components/ripple/exports",
+        "components/hilink/include",
+        "third_party/mbedtls/include/mbedtls/"
+    ],
+    "CC_FLAGS": [
+    ],
+    "DEFINES": [
+        "_PRE_WLAN_FEATURE_CSI",
+        "_PRE_WLAN_FEATURE_P2P",
+        "LWIP_ENABLE_DIAG_CMD=0"
+    ],
+    "AR_FLAGS": [],
+    "LD_FLAGS": [],
+    "AS_FLAGS": [],
+    "LD_DIRS": [],
+    "CLEAN": []
+}

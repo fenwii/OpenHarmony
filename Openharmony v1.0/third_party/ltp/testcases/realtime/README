@@ -1,0 +1,127 @@
+/******************************************************************************/
+/*                                                                            */
+/* Copyright (c) International Business Machines  Corp., 2007                 */
+/*                                                                            */
+/* This program is free software;  you can redistribute it and/or modify      */
+/* it under the terms of the GNU General Public License as published by       */
+/* the Free Software Foundation; either version 2 of the License, or          */
+/* (at your option) any later version.                                        */
+/*                                                                            */
+/* This program is distributed in the hope that it will be useful,            */
+/* but WITHOUT ANY WARRANTY;  without even the implied warranty of            */
+/* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See                  */
+/* the GNU General Public License for more details.                           */
+/*                                                                            */
+/* You should have received a copy of the GNU General Public License          */
+/* along with this program;  if not, write to the Free Software               */
+/* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA    */
+/*                                                                            */
+/******************************************************************************/
+
+realtime tests is an open-source testsuite for testing real-time Linux.  It is
+licensed under the GPL.  The latest version of this testsuite is available
+from http://rt.wiki.kernel.org.  This testsuite is maintained by the IBM
+Real-Time team.  Please send bug reports, contributions, questions to
+the discussion list also available at: http://rt.wiki.kernel.org.
+
+The testsuite contains some functional tests and a few performance
+and latency measurement tests.  This is still a work in (early) progress!
+
+
+DEPENDENCIES
+============
+The testsuite expects glibc ("C" library) (version 2.4 onwards) and
+the underlying kernel (version 2.6.18 onwards) to support
+Robust and Priority Inheritance (PI) Mutexes.
+
+Most of the tests need the user to have a privileges that allow
+him/her to create SCHED_FIFO threads of priorities upto 99
+
+RUNNING TESTS THROUGH LTP
+=========================
+Simplest method to run realtime tests through LTP is:
+The command will configure,build and run tests specified through
+argument provided to the script.
+
+Run command below from LTP root directory with argument:
+
+        $./testscripts/test_realtime.sh -t $arg
+
+        or
+
+        $./test_realtime.sh -t $arg   # From $LTPROOT/testscripts directory
+
+Here $arg takes values as :
+
+        func =        all functional tests will be run "
+        stress =      all stress tests will be run "
+        perf =        all perf tests will be run "
+        all =         all tests will be run "
+        list =        all available tests will be listed "
+        clean =       all logs deleted, make clean performed "
+        test_name =   only test_name subdir will be run (e.g: func/pi-tests) "
+
+
+BUILD
+=====
+To build the tests execute the following command:
+
+		$make
+
+
+RUNNING THE TESTS
+==================
+The top level script run.sh can be used to invoke all or a subset of tests.
+
+1. Running the script with no arguments will list usage:
+
+		$run.sh
+
+
+2. Running the script with the list option will list the available tests.
+
+		$run.sh -t list
+
+   Note that the tests available are determined by the presence
+   of a local script run_auto.sh in the individual test subdirectories
+   at this time.
+
+
+3. Individual tests can also be run. For example, to run the prio-wake tests
+   for 20 iterations:
+
+		$run.sh -t func/prio-wake -l 20
+
+   Note, the test must be specified with the path relative to the test
+   home (where run.sh lives).
+
+
+4. Alternatively, you can run the individual tests from their local directory.
+   For example, to run the prio-wake tests:
+
+		$cd func/prio-wake
+		$./run_auto.sh
+
+
+5. You can also run sets of tests:
+
+		$run.sh -t func
+
+        will run all the functional tests once
+
+		$run.sh -t perf -l 3
+
+        will run all the perf tests (if any!) thrice
+
+        Use the -h option to see the various arguments taken.
+
+6. Or you can run the binaries...
+
+
+
+RESULTS
+=======
+All the automated run scripts set up logging in the logs/ directory.  Not all
+the tests have a clear PASS/FAIL outcome quite yet.  Work on parsing results
+is ongoing.
+

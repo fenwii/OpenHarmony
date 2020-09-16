@@ -1,0 +1,12 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * Copyright 2018-2019 Toradex AG
+ */
+
+#include "imx6ull-colibri.dtsi"
+#include "imx6ull-colibri-u-boot.dtsi"
+
+/ {
+	model = "Toradex Colibri iMX6ULL";
+	compatible = "toradex,colibri-imx6ull", "fsl,imx6ull";
+};

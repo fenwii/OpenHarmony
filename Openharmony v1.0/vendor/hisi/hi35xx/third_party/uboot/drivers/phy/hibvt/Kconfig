@@ -1,0 +1,9 @@
+
+config PHY_HISI_USB
+	bool "Hisi usb phy driver"
+	default y
+	---help---
+	  support for PHY on Hisilicon Socs. This Phy supports
+	  USB 1.5Mb/s, USB 12Mb/s, USB 480Mb/s speeds. It suppots one
+	  USB host port to accept one USB device. Support init the phy
+	  and adjust phy Eye Diagram.

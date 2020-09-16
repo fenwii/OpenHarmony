@@ -1,0 +1,63 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+if (ohos_kernel_type == "liteos_riscv") {
+    static_library("sysparam") {
+        include_dirs = [
+        "//base/startup/interfaces/kits/syspara_lite",
+        "//utils/native/lite/include",
+        "//base/startup/frameworks/syspara_lite/parameter/src",
+        "//base/startup/hals/syspara_lite",
+        ]
+        sources = [
+            "parameter_common.c",
+            "param_impl_hal/param_impl_hal.c"
+        ]
+        deps = ["//vendor/huawei/wifi-iot/hals/utils/sys_param:hal_sysparam"]
+        defines = [
+            "INCREMENTAL_VERSION=\"${ohos_version}\"",
+            "BUILD_TYPE=\"${ohos_build_type}\"",
+            "BUILD_USER=\"${ohos_build_user}\"",
+            "BUILD_TIME=\"${ohos_build_time}\"",
+            "BUILD_HOST=\"${ohos_build_host}\"",
+            "BUILD_ROOTHASH=\"${ohos_build_roothash}\"",
+        ]
+    }
+} else {
+    shared_library("sysparam") {
+        cflags = ["-Wall"]
+        public_deps = [
+            "//third_party/bounds_checking_function:libsec_shared",
+            "//vendor/huawei/camera/hals/utils/sys_param:hal_sysparam"
+        ]
+        sources = [
+            "parameter_common.c",
+            "param_impl_posix/param_impl_posix.c"
+        ]
+        include_dirs = [
+        "//base/startup/interfaces/kits/syspara_lite",
+        "//utils/native/lite/include",
+        "//third_party/bounds_checking_function/include",
+        "//base/startup/frameworks/syspara_lite/parameter/src",
+        "//base/startup/hals/syspara_lite",
+        ]
+        defines = [
+            "INCREMENTAL_VERSION=\"${ohos_version}\"",
+            "BUILD_TYPE=\"${ohos_build_type}\"",
+            "BUILD_USER=\"${ohos_build_user}\"",
+            "BUILD_TIME=\"${ohos_build_time}\"",
+            "BUILD_HOST=\"${ohos_build_host}\"",
+            "BUILD_ROOTHASH=\"${ohos_build_roothash}\"",
+        ]
+    }
+}

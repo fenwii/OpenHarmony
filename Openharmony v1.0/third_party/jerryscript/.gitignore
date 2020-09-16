@@ -1,0 +1,41 @@
+# Produced files
+.mbedignore
+build/*
+
+# IDE related files
+nbproject
+*.sublime-project
+*.sublime-workspace
+.idea
+
+# Random Trash
+*.swp
+*.swo
+*~
+core
+vgcore.*
+*.orig
+*.directory
+*.patch
+.tags*
+cscope.*
+__pycache__
+*.pyc
+.DS_Store
+
+# ctags and ID database
+tags
+ID
+
+# targets
+jerry-targetjs.h
+.output
+targets/esp8266/output.map
+targets/esp8266/libs
+
+# Generated documentation
+docs/doxygen
+
+# Tests
+tests/test262/
+.vs

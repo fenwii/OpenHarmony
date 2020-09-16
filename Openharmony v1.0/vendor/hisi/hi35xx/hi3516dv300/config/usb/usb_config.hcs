@@ -1,0 +1,32 @@
+root {
+    hisi_usb_0x100E0000 {
+        match_attr = "hisilicon,hi35xx-xhci";
+        controller_list = ["xhci"];
+        template dev_cfg {
+            controller = "";
+            res_type = 0; /* 1-interrupt 2-dma 3-io memory 4-io port */
+            res_unit = 0;
+            res_start = 0;
+            res_end = 0;
+            res_count = 0;
+        }
+
+        xhci_res_memory :: dev_cfg {
+            controller = "xhci";
+            res_type = 3;
+            res_unit = 0;
+            res_start = 0x100E0000;
+            res_end = 0x100F0000;
+            res_count = 0x10000;
+        }
+
+        xhci_res_irq :: dev_cfg {
+            controller = "xhci";
+            res_type = 1;
+            res_unit = 0;
+            res_start = 59;
+            res_end = 59;
+            res_count = 1;
+        }
+    }
+}

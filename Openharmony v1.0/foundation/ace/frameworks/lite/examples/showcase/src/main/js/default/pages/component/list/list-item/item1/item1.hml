@@ -1,0 +1,39 @@
+<!--
+Copyright (c) 2020 Huawei Device Co., Ltd.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+  <stack class="stack" >
+    <stack style="width:454px;height:80px;top:80px;">
+      <input type="button" style="left:85px;width:130px;height:60px;" value="首页" onclick=backMain>
+      </input>
+      <input type="button" style="left:235px;width:130px;height:60px;" value="上一页" onclick=backSuperior>
+      </input>
+    </stack>
+    <list style="width:280px;height:80px;top:170px;left:85px;background-color:#00ff00;">
+      <list-item style="width:280px;height:40px;background-color:#1e90ff" onclick=clickFunc onlongpress=longPressFunc>
+        <text style="margin-left:10px;height:40px;width:320px;">
+          {{text1}}
+        </text>
+      </list-item>
+    </list>
+    <text class="text" style="left:10px;width:440px;top:260px;">
+      矩形为list组件
+    </text>
+    <text class="text" style="left:10px;width:440px;top:300px;">
+      蓝色区域为list-item
+    </text>
+    <text class="text" style="left:10px;width:440px;top:340px;">
+      点击或长按list-item内部任意位置
+    </text>
+  </stack>

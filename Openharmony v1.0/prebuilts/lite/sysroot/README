@@ -1,0 +1,18 @@
+ SYSROOT
+
+ DESCRIPTION
+ -----------
+
+ Sysroot is a directory which is considered to be the root directory for
+ the purpose of locating headers and libraries.
+
+ Most of the headers were generated from MUSL by compilation, you can see
+ the license information of MUSL in COPYRIGHT file.
+
+ usr/include/arm-liteos/fb.h was generated from NUTTX headers, to provide
+ necessary information from kernel to userspace.
+
+ usr/include/arm-liteos/linux, usr/include/arm-liteos/asm,
+ usr/include/arm-liteos/asm-generic were generated from the Linux kernel
+ headers by update_headers.py, to provide necessary information from
+ kernel to userspace.

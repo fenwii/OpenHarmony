@@ -1,0 +1,6 @@
+config PLATFORM_ROOTFS
+    bool "Enable ROOTFS"
+    default y
+    depends on FS_JFFS || FS_FAT
+    help
+      Answer Y to enable LiteOS support rootfs.

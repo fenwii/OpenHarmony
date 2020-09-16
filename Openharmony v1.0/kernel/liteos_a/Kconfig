@@ -1,0 +1,381 @@
+# Copyright (c) 2013-2019, Huawei Technologies Co., Ltd. All rights reserved.
+# Copyright (c) 2020, Huawei Device Co., Ltd. All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice, this list of
+#    conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright notice, this list
+#    of conditions and the following disclaimer in the documentation and/or other materials
+#    provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its contributors may be used
+#    to endorse or promote products derived from this software without specific prior written
+#    permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+#
+# For a description of the syntax of this configuration file,
+# see extra/config/Kconfig-language.txt
+#
+mainmenu "Huawei LiteOS Configuration"
+
+menu "Compiler"
+choice
+    prompt "LiteOS_Compiler_Type"
+    default COMPILER_CLANG_LLVM
+    help
+      Enable arm-himix100 or aarch64-himix100 or compiler.
+
+config COMPILER_HIMIX_32
+    bool "arm-linux-ohoseabi"
+    depends on PLATFORM_HI3518EV300 || PLATFORM_HI3516DV300
+
+config COMPILER_CLANG_LLVM
+    bool "clang-llvm"
+        depends on PLATFORM_HI3518EV300 || PLATFORM_HI3516DV300
+
+endchoice
+endmenu
+
+menu "Platform"
+
+######################### config options of bsp #####################
+source "../../kernel/liteos_a/platform/Kconfig"
+
+######################### config options of cpu arch ################
+source "../../kernel/liteos_a/arch/Kconfig"
+
+######################### config options of rootfs #####################
+source "../../kernel/liteos_a/kernel/common/Kconfig"
+endmenu
+
+######################### config options of kernel #####################
+source "../../kernel/liteos_a/kernel/Kconfig"
+######################### config options of lib ########################
+source "../../kernel/liteos_a/lib/Kconfig"
+######################### config options of compatibility ##############
+menu "Compat"
+source "../../kernel/liteos_a/compat/posix/Kconfig"
+source "../../kernel/liteos_a/bsd/Kconfig"
+endmenu
+
+######################### config options of framework ##################
+#source "../../frameworks/m2mcomm/Kconfig"
+
+######################## config options of filesystem ##################
+menu "FileSystem"
+source "../../kernel/liteos_a/fs/vfs/Kconfig"
+source "../../kernel/liteos_a/fs/fat/Kconfig"
+source "../../kernel/liteos_a/fs/ramfs/Kconfig"
+source "../../kernel/liteos_a/fs/nfs/Kconfig"
+source "../../kernel/liteos_a/fs/proc/Kconfig"
+source "../../kernel/liteos_a/fs/jffs2/Kconfig"
+endmenu
+
+######################## config options of net ############################
+source "../../kernel/liteos_a/net/Kconfig"
+
+######################## config options of debug ########################
+menu "Debug"
+config COMPILE_DEBUG
+    bool "Enable GCC -g Option"
+    default n
+    help
+      Answer Y to add -g option in gcc command. But the LiteOS size will be much larger.
+
+config PLATFORM_ADAPT
+    bool "Enable Os_adapt"
+    default y
+    help
+      Answer Y to add os_adapt.c to LiteOS.
+
+config ENABLE_OOM_LOOP_TASK
+    bool "Enable Oom loop task"
+    default n
+    help
+      Answer Y to enable oom loop kthread to check system out of memory.
+
+config DO_ALIGN
+    bool "Enable do align for hi3518e"
+    default y
+    depends on PLATFORM_HI3518EV200
+    help
+      Answer Y to enable do align for hi3518e.
+
+
+config ENABLE_MAGICKEY
+    bool "Enable MAGIC KEY"
+    default y
+    help
+      Answer Y to enable LiteOS Magic key.
+        ctrl + r : Magic key check switch;
+        ctrl + z : Show all magic op key;
+        ctrl + t : Show task information;
+        ctrl + p : System panic;
+        ctrl + e : Check system memory pool.
+
+config THUMB
+    bool "Enable Thumb"
+    default n
+    help
+      Answer Y to build thumb version.  This will make LiteOS smaller.
+config PLATFORM_DVFS
+    bool "Enable Dvfs"
+    default n
+    depends on  COMPAT_LINUXKPI
+    help
+      Answer Y to enable LiteOS support dynamic voltage and frequency scaling feature for
+      low power consumption.
+
+config DEBUG_VERSION
+    bool "Enable a Debug Version"
+    default n
+    help
+      If you do not select this option that means you enable a release version for LiteOS.
+      It also means you do not want to use debug modules, like shell,telnet,tftp,
+      ,nfs,ramfs proc and memory check.
+      If you select this option that means you enable a debug version for LiteOS.
+      That means you want a opposite behaviour compared to release version.
+
+config DEBUG_KERNEL
+    bool "Enable Debug LiteOS Kernel Resource"
+    default n
+    depends on DEBUG_VERSION
+    help
+      If you select this option that means you enable debugging kernel resource.
+      It also means you want to get queue, mutex, semaphore, memory debug information.
+      That means you want a opposite behaviour compared to release version.
+
+config DEBUG_QUEUE
+    bool "Enable Queue Debugging"
+    default n
+    depends on DEBUG_KERNEL
+    help
+      Answer Y to enable debug queue.
+
+config DEBUG_DEADLOCK
+    bool "Enable Mutex Deadlock Debugging"
+    default n
+    depends on DEBUG_KERNEL
+    help
+      Answer Y to enable debug mutex deadlock.
+
+config DEBUG_SEMAPHORE
+    bool "Enable Semaphore Debugging"
+    default n
+    depends on DEBUG_KERNEL
+    help
+      Answer Y to enable debug semaphore.
+
+source "../../kernel/liteos_a/shell/Kconfig"
+config NET_LWIP_SACK_TFTP
+    bool "Enable Tftp"
+    default y
+    depends on SHELL && NET_LWIP_SACK && DEBUG_VERSION
+    help
+      Answer Y to enable LiteOS support tftp cmd and tftp tool.
+source "../../kernel/liteos_a/net/telnet/Kconfig"
+config EXC_INTERACTION
+    bool "Enable exc interaction"
+    default n
+    depends on SHELL
+    help
+      Answer Y to enable exception interaction for LiteOS, when the system enter exception, user can also interact with system by shell
+      command like readreg, writereg,task,hwi.
+
+config USER_INIT_DEBUG
+    bool "Enable user init Debug"
+    default n
+    depends on DEBUG_VERSION
+
+config SHELL_CMD_DEBUG
+    bool "Enable shell cmd Debug"
+    default n
+    depends on DEBUG_VERSION && SHELL
+
+config USB_DEBUG
+    bool "Enable USB Debug"
+    default n
+    depends on SHELL && DRIVERS_USB && DEBUG_VERSION
+    help
+      Answer Y to enable LiteOS support usb debug.
+      use shell command to open the specified debug level print.
+config MEM_DEBUG
+    bool "Enable MEM Debug"
+    default n
+    depends on DEBUG_VERSION
+    help
+      Answer Y to enable LiteOS support mem debug.
+
+config MEM_MUL_MODULE
+    bool "Enable Memory module statistics"
+    default n
+    depends on MEM_DEBUG
+    help
+      Answer Y to enable LiteOS support memory statistics depend on different module
+config MEM_MUL_POOL
+    bool "Enable Memory multi-pool control"
+    default y
+    depends on DEBUG_VERSION && MEM_DEBUG
+    help
+      Answer Y to enable LiteOS support memory multi-pool control
+config MEM_HEAD_BACKUP
+    bool "Enable Node Head Backup"
+    default 0
+    depends on DEBUG_VERSION && MEM_DEBUG
+    help
+      Answer Y to enable node head backup
+config MEM_RECORDINFO
+    bool "Enable Mem Record"
+    default n
+    depends on DEBUG_VERSION && MEM_DEBUG
+    help
+      Answer Y to enable mem record
+config MEM_LEAKCHECK
+    bool "Enable Function call stack of Mem operation recorded"
+    default n
+    depends on DEBUG_VERSION && MEM_DEBUG
+    help
+      Answer Y to enable record the LR of Function call stack of Mem operation, it can check the mem leak through the infomations of mem node.
+config BASE_MEM_NODE_INTEGRITY_CHECK
+    bool "Enable integrity check or not "
+    default n
+    depends on DEBUG_VERSION && MEM_DEBUG
+config BASE_MEM_NODE_SIZE_CHECK
+    bool "Enable size check or not"
+    default n
+    depends on DEBUG_VERSION && MEM_DEBUG
+config SLAB_INFO_STATISTIC
+    bool "Enable SLAB Statistic"
+    default n
+    depends on  DEBUG_VERSION && KERNEL_MEM_SLAB && MEM_DEBUG
+
+config VM_OVERLAP_CHECK
+    bool "Enable VM overlap check or not"
+    default n
+    depends on DEBUG_VERSION && MEM_DEBUG
+    help
+      Answer Y to enable vm overlap check.
+
+config NULL_ADDRESS_PROTECT
+    bool "Enable NULL Address protect"
+    default n
+    depends on (PLATFORM_HI3518EV200 || PLATFORM_HI3516CV300 || PLATFORM_HI3518EV300 || PLATFORM_HI3516DV300) && DEBUG_VERSION
+    help
+      Answer Y to set mem address 0~1M prohibit to access, read or write will trigger exception.
+
+choice
+    prompt "Enable Uart"
+    default DRIVERS_HDF_PLATFORM_UART
+    help
+      Enable simple uart (without vfs) only for litekernel.
+      Enable general uart (with vfs) for full code.
+source "../../vendor/hisi/hi35xx/platform/uart/Kconfig"
+config PLATFORM_UART_WITHOUT_VFS
+    bool "Simple Uart"
+config PLATFORM_NO_UART
+    bool "NO Uart"
+
+endchoice
+endmenu
+
+######################## config options os drivers ########################
+menu "Driver"
+config DRIVERS
+    bool "Enable Driver"
+    default y
+    help
+      Answer Y to enable LiteOS support driver.
+
+source "../../vendor/hisi/hi35xx/platform/hiedmac/Kconfig"
+source "../../kernel/liteos_a/bsd/dev/usb/Kconfig"
+source "../../drivers/hdf/lite/Kconfig"
+
+config DRIVERS_NETDEV
+    bool "Enable Net Device"
+    default y
+    depends on DRIVERS && NET_LWIP_SACK
+    help
+      Answer Y to enable LiteOS support net device.
+
+choice
+    depends on DRIVERS_NETDEV
+    prompt "MAC"
+    default n
+    help
+      Enable higmac for hi3516a hi3519 hi3559a_cortex-a53_aarch64.
+      Enable hieth-sf for hi3516cv300 hi3516ev200 and hi3518ev200.
+source "../../vendor/hisi/hi35xx/platform/hieth-sf/Kconfig"
+endchoice
+
+source "../../drivers/liteos/mem/Kconfig"
+source "../../vendor/hisi/hi35xx/platform/mmc/Kconfig"
+
+
+config DRIVERS_MTD
+    bool "Enable MTD"
+    default y
+    depends on DRIVERS && FS_VFS
+    help
+      Answer Y to enable LiteOS support jffs2 multipartion.
+
+source "../../vendor/hisi/hi35xx/platform/mtd/spi_nor/Kconfig"
+source "../../drivers/liteos/random/Kconfig"
+source "../../drivers/liteos/tzdriver/Kconfig"
+source "../../drivers/liteos/video/Kconfig"
+source "../../drivers/liteos/hievent/Kconfig"
+
+endmenu
+
+menu "Security"
+source "../../kernel/liteos_a/security/Kconfig"
+endmenu
+
+menu "Stack Smashing Protector (SSP) Compiler Feature"
+
+choice
+    prompt "Enable stack buffer overflow detection"
+    default  CC_STACKPROTECTOR_STRONG
+    ---help---
+    This option turns on the -fstack-protector GCC feature. This
+    feature puts, at the beginning of functions, a canary value on
+    the stack just before the return address, and validates
+    the value just before actually returning.  Stack based buffer
+    overflows (that need to overwrite this return address) now also
+    overwrite the canary, which gets detected and the attack is then
+    neutralized via a kernel panic.
+
+    This feature requires gcc version 4.2 or above, or a distribution
+    gcc with the feature backported. Older versions are automatically
+    detected and for those versions, this configuration option is
+    ignored. (and a warning is printed during bootup)
+
+config CC_NO_STACKPROTECTOR
+    bool "-fno-stack-protector"
+
+config CC_STACKPROTECTOR
+    bool "-fstack-protector"
+
+config CC_STACKPROTECTOR_STRONG
+    bool "-fstack-protector-strong"
+
+config CC_STACKPROTECTOR_ALL
+    bool "-fstack-protector-all"
+
+endchoice
+
+endmenu

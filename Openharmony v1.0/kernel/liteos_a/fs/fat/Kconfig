@@ -1,0 +1,43 @@
+config FS_FAT
+    bool "Enable FAT"
+    default y
+    depends on FS_VFS
+    help
+      Answer Y to enable LiteOS support fat filesystem.
+
+config FS_FAT_CACHE
+    bool "Enable FAT Cache"
+    default y
+    depends on FS_FAT
+    help
+      Answer Y to enable LiteOS fat filesystem support cache.
+
+config FS_FAT_CACHE_SYNC_THREAD
+    bool "Enable FAT Cache Sync Thread"
+    default n
+    depends on FS_FAT_CACHE
+    help
+      Answer Y to enable LiteOS fat filesystem support cache sync thread.
+
+config FS_FAT_CHINESE
+    bool "Enable Chinese"
+    default y
+    depends on FS_FAT
+    help
+      Answer Y to enable LiteOS fat filesystem support Chinese.
+
+config FS_FAT_VIRTUAL_PARTITION
+    bool "Enabel Virtual Partition"
+    default n
+    depends on FS_FAT
+
+config FS_FAT_VOLUMES
+    int
+    depends on FS_FAT
+    default 32 if PLATFORM_HI3731
+    default 16
+
+config FS_FAT_DISK
+    bool "Enable partinfo for storage device"
+    depends on FS_FAT || DRIVERS_MMC || DRIVERS_USB
+    default y

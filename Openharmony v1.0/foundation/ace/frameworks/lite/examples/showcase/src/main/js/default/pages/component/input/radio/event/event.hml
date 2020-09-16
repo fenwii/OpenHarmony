@@ -1,0 +1,63 @@
+<!--
+Copyright (c) 2020 Huawei Device Co., Ltd.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+    <list class = "list">
+        <list-item style="width:454px;height:60px;">
+        </list-item>
+        <list-item class= "item-title">
+                <input type = "button" style="margin-left:85px;width:130px;height:60px;" onclick = "goHome" value = "首页"/>
+                <input type = "button" style="margin-left:20px;width:130px;height:60px;" onclick = "goPrevious" value = "上一页"/>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-types">
+            <text class = "whole-text">通用事件</text>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-two">
+            <div class = "two-div">
+                <div class = "two-left-div" style="margin-left:30px;width:170px;">
+                    <text class = "text">click</text>
+                    <text class = "text">longpress</text>
+                    <text class = "text">swipe</text>
+                </div>
+                <div class = "two-right-div" style = "flex-direction:column">
+                    <input type = "radio" class = "radio" onclick = "clickEvent" onlongpress = "longpressEvent" onswipe = "swipeEvent"/>
+                    <text class = "text2">{{name}}</text>
+                </div>
+            </div>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-types">
+            <text class = "whole-text">特有事件</text>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-change">
+            <div class = "change-div">
+                <div class = "change-left-div" style="margin-left:30px;width:170px;">
+                    <text class = "text">change</text>
+                </div>
+                <div class = "change-right-div">
+                    <input type = "radio" onchange = "changeEvent" class = "change-radio"/>
+                    <text class = "text">{{checked}}</text>
+                </div>
+            </div>
+        </list-item>
+        <list-item style="width:454px;height:60px;">
+        </list-item>
+    </list>

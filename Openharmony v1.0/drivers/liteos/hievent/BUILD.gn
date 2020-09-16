@@ -1,0 +1,14 @@
+# Copyright (c) Huawei Technologies Co., Ltd. 2020-2020. All rights reserved.
+# Description: To build hiviewdfx_lite
+
+static_library("drivers_hievent") {
+
+    sources = [
+        "hievent_driver.c",
+        "hiview_hievent.c"
+    ]
+
+    include_dirs = [
+        "./",
+    ]
+}

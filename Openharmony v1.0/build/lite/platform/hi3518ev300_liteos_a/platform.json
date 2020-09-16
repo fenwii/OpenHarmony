@@ -1,0 +1,684 @@
+{
+    "subsystems": [
+      {
+        "subsystem": "kernel",
+        "optional": "false",
+        "components": [
+          {
+            "component": "liteos_a",
+            "optional": "false",
+            "targets": [
+              "//kernel/liteos_a:kernel"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "hdf",
+                "hilog_a",
+                "oem_smartvision"
+              ],
+              "third_party": [
+                "freebsd",
+                "lwip",
+                "bounds_checking_function",
+                "fatfs",
+                "linux_kernel",
+                "musl",
+                "nuttx",
+                "zlib",
+                "mtd_utils"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "drivers",
+        "optional": "false",
+        "components": [
+          {
+            "component": "hdf",
+            "optional": "false",
+            "targets": [
+              "//drivers/hdf/lite/posix:hdf_posix",
+              "//drivers/hdf/lite/manager:hdf_manager",
+              "//vendor/huawei/hdf/wifi:wifi_firmware",
+              "//vendor/huawei/hdf/display/hdi:hdi_display",
+              "//vendor/huawei/hdf/input/hdi:hdi_input"
+            ],
+            "features": [],
+            "deps": {
+              "third_party": [
+                "bounds_checking_function"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "startup",
+        "optional": "true",
+        "components": [
+          {
+            "component": "syspara",
+            "optional": "true",
+            "targets": [
+              "//base/startup/frameworks/syspara_lite/parameter:parameter"
+            ],
+            "features": [],
+            "deps": {
+              "third_party": [
+                "bounds_checking_function"
+              ],
+              "components": []
+            }
+          },
+          {
+            "component": "bootstrap",
+            "optional": "true",
+            "targets": [
+              "//base/startup/services/bootstrap_lite/source:bootstrap"
+            ],
+            "features": [],
+            "deps": {
+              "third_party": [
+                "bounds_checking_function"
+              ],
+              "components": [
+                "system_ability_manager",
+                "utils"
+              ]
+            }
+          },
+          {
+            "component": "token",
+            "optional": "true",
+            "targets": [
+              "//base/startup/frameworks/syspara_lite/token:token"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "oem_smartvision",
+                "hilog_a"
+              ],
+              "third_party": []
+            }
+          },
+          {
+            "component": "init",
+            "optional": "true",
+            "targets": [
+              "//base/startup/services/init_lite:init_lite",
+              "//vendor/huawei/camera/init_configs:init_config"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "syspara"
+              ],
+              "third_party": [
+                "bounds_checking_function",
+                "cjson"
+              ]
+            }
+          },
+          {
+            "component": "appspawn",
+            "optional": "true",
+            "targets": [
+              "//base/startup/services/appspawn_lite:appspawn_lite"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "ipc",
+                "system_ability_manager"
+              ],
+              "third_party": [
+                "bounds_checking_function",
+                "cjson"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "utils",
+        "optional": "true",
+        "components": [
+          {
+            "component": "utils",
+            "optional": "true",
+            "targets": [
+              "//utils/native/lite/kv_store:kv_store"
+            ],
+            "features": [],
+            "deps": {
+              "third_party": [
+                "bounds_checking_function"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "aafwk",
+        "optional": "true",
+        "components": [
+          {
+            "component": "ability",
+            "optional": "true",
+            "targets": [
+              "//foundation/aafwk/frameworks/ability_lite:aafwk_abilitykit_lite",
+              "//foundation/aafwk/frameworks/ability_lite:aafwk_abilityMain_lite",
+              "//foundation/aafwk/frameworks/abilitymgr_lite:aafwk_abilityManager_lite",
+              "//foundation/aafwk/services/abilitymgr_lite:aafwk_services_lite"
+            ],
+            "features": [
+              {"enable_ohos_appexecfwk_feature_ability": "false"}
+            ],
+            "deps": {
+              "components": [
+                "hilog_a",
+                "bundle_mgr",
+                "system_ability_manager",
+                "distributed_scheduler",
+                "graphic",
+                "utils",
+                "ipc"
+              ],
+              "third_party": [
+                "cjson",
+                "bounds_checking_function"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "applications",
+        "optional": "true",
+        "components": [
+          {
+            "component": "camera_sample_app",
+            "optional": "true",
+            "targets": [
+              "//applications/sample/camera/app:camera_app",
+              "//applications/sample/camera/communication:sample"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "system_ability_manager",
+                "utils",
+                "graphic",
+                "syspara",
+                "ipc"
+              ],
+              "third_party": [
+                "wpa_supplicant"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "hiviewdfx",
+        "optional": "true",
+        "components": [
+          {
+            "component": "hilog_a",
+            "optional": "false",
+            "targets": [
+              "//base/hiviewdfx/frameworks/hilog_lite/featured:hilog_static",
+              "//base/hiviewdfx/frameworks/hilog_lite/featured:hilog_shared",
+              "//base/hiviewdfx/services/hilogcat_lite/hilogcat:hilogcat_static",
+              "//base/hiviewdfx/services/hilogcat_lite/apphilogcat:apphilogcat_static"
+            ],
+            "features": [],
+            "deps": {
+              "third_party": [
+                "bounds_checking_function"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "distributedschedule",
+        "optional": "true",
+        "components": [
+          {
+            "component": "system_ability_manager",
+            "optional": "false",
+            "targets": [
+              "//foundation/distributedschedule/services/samgr_lite:samgr"
+            ],
+            "features": [],
+            "deps": {
+              "componets": [
+                "hilog_a",
+                "ipc",
+                "iam"
+              ],
+              "third_party": [
+                "bounds_checking_function"
+              ]
+            }
+          },
+          {
+            "component": "foundation",
+            "optional": "true",
+            "targets": [
+              "//foundation/distributedschedule/services/safwk_lite:safwk_lite"
+            ],
+            "features": [],
+            "deps": {
+              "componets": [
+                "system_ability_manager",
+                "ipc",
+                "hilog_a",
+                "bundle_mgr",
+                "iam",
+                "ability",
+                "utils",
+                "distributed_scheduler"
+              ]
+            }
+          },
+          {
+            "component": "distributed_scheduler",
+            "optional": "true",
+            "targets": [
+              "//foundation/distributedschedule/services/dtbschedmgr_lite:dtbschedmgr"
+            ],
+            "features": [],
+            "deps": {
+              "componets": [
+                "system_ability_manager",
+                "hilog_a",
+                "soft_bus",
+                "bundle_mgr",
+                "ipc",
+                "utils"
+              ],
+              "third_party": [
+                "bounds_checking_function",
+                "cjson"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "security",
+        "optional": "true",
+        "components": [
+          {
+            "component": "hichainsdk",
+            "optional": "true",
+            "targets": [
+              "//base/security/frameworks/hichainsdk_lite:hichainsdk"
+            ],
+            "features": [],
+            "deps": {
+              "third_party": [
+                "cjson",
+                "bounds_checking_function"
+              ],
+              "components": [
+                "huks"
+              ]
+            }
+          },
+          {
+            "component": "huks",
+            "optional": "true",
+            "targets": [
+              "//base/security/frameworks/huks_lite:huks_sdk"
+            ],
+            "features": [],
+            "deps": {
+              "third_party": [
+                "mbedtls",
+                "openssl",
+                "bounds_checking_function"
+              ]
+            }
+          },
+          {
+            "component": "iam",
+            "optional": "true",
+            "targets": [
+              "//base/security/services/iam_lite:pms_lite"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "hilog_a",
+                "ipc",
+                "system_ability_manager"
+              ],
+              "third_party": [
+                "bounds_checking_function",
+                "cjson"
+              ]
+            }
+          },
+          {
+            "component": "app_verify",
+            "optional": "true",
+            "targets": [
+              "//base/security/frameworks/app_verify:verify"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "hilog_a",
+                "syspara"
+              ],
+              "third_party": [
+                "bounds_checking_function",
+                "cjson",
+                "mbedtls"
+              ]
+            }
+          },
+          {
+            "component": "crypto",
+            "optional": "true",
+            "targets": [
+              "//base/security/frameworks/crypto_lite/cipher:cipher_shared"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "hilog_a"
+              ],
+              "third_party": [
+                "bounds_checking_function",
+                "mbedtls"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "multimedia",
+        "optional": "true",
+        "components": [
+          {
+            "component": "media_service",
+            "optional": "true",
+            "targets": [
+              "//foundation/multimedia/services/media_lite:media_lite"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "hdf",
+                "hi3518ev300_adapter"
+              ],
+              "third_party": [
+                "bounds_checking_function"
+              ]
+            }
+          },
+          {
+            "component": "media_sample",
+            "optional": "true",
+            "targets": [
+              "//applications/sample/camera/media:media_sample"
+            ],
+            "features": [],
+            "deps": {}
+          },
+          {
+            "component": "camera",
+            "optional": "true",
+            "targets": [
+              "//foundation/multimedia/frameworks/camera_lite:camera"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "hilog_a",
+                "iam",
+                "hdf",
+                "graphic",
+                "hi3518ev300_adapter"
+              ],
+              "third_party": [
+                "bounds_checking_function"
+              ]
+            }
+          },
+          {
+            "component": "player",
+            "optional": "true",
+            "targets": [
+              "//foundation/multimedia/frameworks/player_lite:player"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "hilog_a",
+                "iam",
+                "hdf",
+                "graphic",
+                "hi3518ev300_adapter"
+              ],
+              "third_party": [
+                "bounds_checking_function",
+                "iniparser"
+              ]
+            }
+          },
+          {
+            "component": "audio_manager",
+            "optional": "true",
+            "targets": [
+              "//foundation/multimedia/frameworks/audio_lite:audio_capturer"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "hdf",
+                "graphic"
+              ],
+              "third_party": [
+                "bounds_checking_function"
+              ]
+            }
+          },
+          {
+            "component": "recoder",
+            "optional": "true",
+            "targets": [
+              "//foundation/multimedia/frameworks/recorder_lite:recorder"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "graphic",
+                "iam"
+              ],
+              "third_party": [
+                "bounds_checking_function"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "graphic",
+        "optional": "true",
+        "components": [
+          {
+            "component": "graphic",
+            "optional": "true",
+            "targets": [
+              "//foundation/graphic/lite/frameworks/surface:litesurface",
+              "//foundation/graphic/lite/utils:litegraphicutils",
+              "//foundation/graphic/lite/frameworks/ui:liteui",
+              "//foundation/graphic/lite/services/ims:liteims",
+              "//foundation/graphic/lite/services/wms:litewms"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "hdf",
+                "graphic",
+                "hilog_a"
+              ],
+              "third_party": [
+                "bounds_checking_function",
+                "cjson",
+                "libjpeg",
+                "libpng",
+                "freetype"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "communication",
+        "optional": "true",
+        "components": [
+          {
+            "component": "ipc",
+            "optional": "true",
+            "targets": [
+              "//foundation/communication/frameworks/ipc_lite:liteipc"
+            ],
+            "features": [],
+            "deps": {
+              "third_party": [
+                "bounds_checking_function",
+                "utils"
+              ]
+            }
+          },
+          {
+            "component": "soft_bus",
+            "optional": "true",
+            "targets": [
+              "//foundation/communication/services/softbus_lite:softbus"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "hichainsdk",
+                "iam",
+                "system_ability_manager"
+              ],
+              "third_party": [
+                "cjson",
+                "bounds_checking_function",
+                "mbedtls"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "appexecfwk",
+        "optional": "true",
+        "components": [
+          {
+            "component": "bundle_mgr",
+            "optional": "true",
+            "targets": [
+              "//foundation/appexecfwk/services/bundlemgr_lite:appexecfwk_services_lite",
+              "//foundation/appexecfwk/frameworks/bundle_lite:appexecfwk_kits_lite"
+            ],
+            "features": [
+              {"enable_ohos_appexecfwk_feature_ability": "false"}
+            ],
+            "deps": {
+              "components": [
+                "iam",
+                "app_verify",
+                "hilog_a",
+                "system_ability_manager",
+                "global_resource_manager",
+                "graphic",
+                "utils"
+              ],
+              "third_party": [
+                "cjson",
+                "zlib"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "vendor",
+        "optional": "false",
+        "components": [
+          {
+            "component": "hi3518ev300",
+            "optional": "false",
+            "targets": [
+              "//vendor/hisi/hi35xx/hi35xx_init/hi3518ev300:hi3518ev300_make_kernel",
+              "//vendor/hisi/hi35xx/hardware:hardware_media_sdk",
+              "//vendor/hisi/hi35xx/middleware:middleware_source_sdk"
+            ],
+            "features": [],
+            "deps": {}
+          },
+          {
+            "component": "hi3518ev300_adapter",
+            "optional": "false",
+            "targets": [
+              "//vendor/hisi/hi35xx/hi3518ev300/hi3518ev300_adapter/hals/multimedia:hdi_media"
+            ],
+            "features": [],
+            "deps": {}
+          },
+          {
+            "component": "hi3518ev300_uboot",
+            "optional":  "false",
+            "targets": [],
+            "features": [],
+            "deps": {}
+          },
+          {
+            "component": "oem_smartvision",
+            "optional": "false",
+            "targets": [],
+            "features": [],
+            "deps": {}
+          }
+        ]
+      },
+      {
+        "subsystem": "test",
+        "optional": "true",
+        "components": [
+          {
+            "component": "xts",
+            "optional": "true",
+            "targets": [
+              "//test/xts/acts",
+              "//test/xts/tools"
+            ],
+            "features": [],
+            "deps": {}
+          },
+          {
+            "component": "developer_test",
+            "optional": "true",
+            "targets": [
+              "//test/developertest:test"
+            ],
+            "features": [],
+            "deps": {}
+          }
+        ]
+      }
+    ]
+  }

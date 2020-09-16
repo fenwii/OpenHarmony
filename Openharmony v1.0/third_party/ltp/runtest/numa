@@ -1,0 +1,22 @@
+migrate_pages01 migrate_pages01
+migrate_pages02 migrate_pages02
+migrate_pages03 migrate_pages03
+
+move_pages01 move_pages01
+move_pages02 move_pages02
+move_pages03 move_pages03
+move_pages04 move_pages04
+move_pages05 move_pages05
+move_pages06 move_pages06
+move_pages07 move_pages07
+move_pages09 move_pages09
+move_pages10 move_pages10
+move_pages11 move_pages11
+move_pages12 move_pages12
+
+numa_testcases numa01.sh
+
+set_mempolicy01 set_mempolicy01
+set_mempolicy02 set_mempolicy02
+set_mempolicy03 set_mempolicy03
+set_mempolicy04 set_mempolicy04

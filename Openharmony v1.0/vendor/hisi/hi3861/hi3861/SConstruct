@@ -1,0 +1,556 @@
+#!/usr/bin/env python3
+# coding=utf-8
+
+'''
+* Copyright (c) 2020 HiSilicon (Shanghai) Technologies CO., LIMITED.
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+* Description: SCons build system entry.
+'''
+
+EnsureSConsVersion(3, 0, 1)
+EnsurePythonVersion(3, 7)
+
+import os
+import sys
+import datetime
+import atexit
+from distutils import dir_util
+sys.path.append(os.path.join(os.getcwd(), 'build'))
+from scripts import common_env
+from scripts import scons_utils
+from scripts import scons_app
+from scripts import scons_env_cfg
+from scripts import pkt_builder
+from scripts.packet_create import packet_bin
+from tools.nvtool.build_nv import make_nv_bin
+import shutil
+
+#Init compile parameters
+env_cfg = scons_env_cfg.SconsEnvCfg()
+
+#Accept APP parameter
+app_name = ARGUMENTS.get('app', 'demo')
+factory_mode = ARGUMENTS.get('factory_mode', 'no')
+app_builder = scons_app.AppTarget(app_name, factory_mode)
+env_cfg.set_app_builder(app_builder)
+
+#Compile message output control
+if common_env.log_output_flag == False:
+    current = datetime.datetime.now()
+    if not os.path.exists(os.path.dirname(env_cfg.log_path)) or not os.path.exists(env_cfg.log_path):
+        os.makedirs(env_cfg.log_path)
+    log_file = os.path.join(env_cfg.log_path,'scons_trace.log')
+    old_stdout = sys.stdout
+    file = open(log_file, 'w+')
+    file.write("Building at %s %s\n" % (current.strftime('%Y/%m/%d'), current.strftime('%H:%M:%S')))
+    sys.stdout = file
+
+#Init environment
+env = Environment(ENV={'PATH':os.environ['PATH']},
+                  TARGET_PREFIX=env_cfg.target_name,)
+
+env_cfg.set_tools(env)
+env_cfg.set_environs(env)
+
+print('----------------------------top-----------------')
+#libraries to be built
+libs = [env.SConscript(os.path.join(env_cfg.get_module_dir(module), 'SConscript'), {'env':env, 'env_cfg':env_cfg, 'module':module},
+    variant_dir=os.path.join(env_cfg.lib_path, env_cfg.get_module_dir(module)), duplicate=0) for module in env_cfg.get_build_modules()]
+#Get settings
+env['LIBPATH'] = env_cfg.get_lib_path()
+
+if scons_utils.scons_usr_bool_option('CONFIG_TARGET_CHIP_HI3861') == 'y':
+    if scons_utils.scons_usr_bool_option('CONFIG_DIAG_SUPPORT') == 'y':
+        if factory_mode == 'yes':
+            env.Append(LIBPATH=os.path.join('-Lbuild', 'libs', 'hi3861', 'debug', 'factory'))
+        elif scons_utils.scons_usr_bool_option('CONFIG_QUICK_SEND_MODE') == 'y':
+            env.Append(LIBPATH=os.path.join('-Lbuild', 'libs', 'hi3861', 'debug', 'no_mesh_quick_start'))
+        elif scons_utils.scons_usr_bool_option('CONFIG_MESH_SUPPORT') == 'y':
+            env.Append(LIBPATH=os.path.join('-Lbuild', 'libs', 'hi3861', 'debug', 'mesh'))
+        else:
+            env.Append(LIBPATH=os.path.join('-Lbuild', 'libs', 'hi3861', 'debug', 'no_mesh'))
+    else:
+        if factory_mode == 'yes':
+            env.Append(LIBPATH=os.path.join('-Lbuild', 'libs', 'hi3861', 'release', 'factory'))
+        elif scons_utils.scons_usr_bool_option('CONFIG_QUICK_SEND_MODE') == 'y':
+            env.Append(LIBPATH=os.path.join('-Lbuild', 'libs', 'hi3861', 'release', 'no_mesh_quick_start'))
+        elif scons_utils.scons_usr_bool_option('CONFIG_MESH_SUPPORT') == 'y':
+            env.Append(LIBPATH=os.path.join('-Lbuild', 'libs', 'hi3861', 'release', 'mesh'))
+        else:
+            env.Append(LIBPATH=os.path.join('-Lbuild', 'libs', 'hi3861', 'release', 'no_mesh'))
+else:
+    if scons_utils.scons_usr_bool_option('CONFIG_DIAG_SUPPORT') == 'y':
+        if factory_mode == 'yes':
+            env.Append(LIBPATH=os.path.join('-Lbuild', 'libs', 'hi3861l', 'debug', 'factory'))
+        elif scons_utils.scons_get_cfg_val('CONFIG_CHIP_PKT_48K') == 'y':
+            env.Append(LIBPATH=os.path.join('-Lbuild', 'libs', 'hi3861l', 'debug', 'no_mesh_pkt_48k'))
+        elif scons_utils.scons_usr_bool_option('CONFIG_MESH_SUPPORT') == 'y':
+            env.Append(LIBPATH=os.path.join('-Lbuild', 'libs', 'hi3861l', 'debug', 'mesh'))
+        else:
+            env.Append(LIBPATH=os.path.join('-Lbuild', 'libs', 'hi3861l', 'debug', 'no_mesh'))
+    else:
+        if factory_mode == 'yes':
+            env.Append(LIBPATH=os.path.join('-Lbuild', 'libs', 'hi3861l', 'release', 'factory'))
+        elif scons_utils.scons_get_cfg_val('CONFIG_CHIP_PKT_48K') == 'y':
+            env.Append(LIBPATH=os.path.join('-Lbuild', 'libs', 'hi3861l', 'release', 'no_mesh_pkt_48k'))
+        elif scons_utils.scons_usr_bool_option('CONFIG_MESH_SUPPORT') == 'y':
+            env.Append(LIBPATH=os.path.join('-Lbuild', 'libs', 'hi3861l', 'release', 'mesh'))
+        else:
+            env.Append(LIBPATH=os.path.join('-Lbuild', 'libs', 'hi3861l', 'release', 'no_mesh'))
+
+env.Append(LIBPATH=app_builder.get_app_lib_path())
+## wifiiot_app is the only one app for ohos
+if app_name != "wifiiot_app":
+    env['LIBS'] = list(map(lambda x:'-l%s'%x, env_cfg.get_libs()))
+else:
+    env['LIBS'] = list(map(lambda x:'-l%s'%x, env_cfg.get_libs())) + ['--whole-archive'] + list(map(lambda x:'-l%s'%x, env_cfg.get_ohos_libs())) + ['--no-whole-archive']
+env.Append(LIBS = app_builder.get_app_libs())
+env.Append(LIBS = '-lwifi_flash')
+env.Append(LIBS = '-lwifi')
+env.Append(LIBS = '-llitekernel_flash')
+env.Append(LIBS = '-lsystem')
+if scons_utils.scons_usr_bool_option('CONFIG_MESH_SUPPORT') == 'y':
+    if factory_mode != 'yes':
+        env.Append(LIBS = '-lmeshautolink')
+env['LIBS'] = sorted(env["LIBS"])
+env['LIBPATH'] = sorted(env["LIBPATH"])
+env['LINKFILE'] = env_cfg.link_file
+env['MAPFILE'] = env_cfg.map_file
+print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~libpath:',env['LIBPATH'])
+print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~libs:',env['LIBS'])
+
+#######################################################  LINK by Command  #######################################################
+
+# config by menuconfig
+signature = {
+    'RSA':{
+        0:0x0054d3c0, # factory startup addr:0x1E3000(HILINK_ADDR - 600K) = 0x14D000
+        'A':0x0040d3c0,
+        'B':0x004f13c0,
+    },
+    'ECC':{
+        0:0x0054d3c0, # factory startup addr:0x1E3000(HILINK_ADDR - 600K) = 0x14D000
+        'A':0x0040d3c0,
+        'B':0x004f13c0,
+    }
+}
+
+link_env = env.Clone()
+
+"""Build link script
+"""
+linker_builder = Builder(
+    action='$CC $LINK_SCRIPTS_FLAG -E $SOURCE -o $TARGET -P',
+    src_suffix='.ld.S'
+)
+
+"""Build elf file
+"""
+elf_builder = Builder(
+    action='$LINK $LINKFLAGS $LIBPATH -T$LINKFILE -Map=$MAPFILE -o $TARGET --start-group $LIBS --end-group',#--verbose
+    suffix='.out'
+)
+
+"""Build binary from .out file
+"""
+binary_builder = Builder(
+    action='$OBJCOPY -O binary $SOURCE $TARGET',
+    suffix='.bin',
+    src_suffix='.out'
+)
+
+"""Build asm file from binary
+"""
+asm_builder = Builder(
+    action='$OBJDUMP -d $SOURCE >$TARGET',
+    suffix='.asm',
+    src_suffix='.out'
+)
+
+"""Base image builder
+"""
+def baseimg_builder(target, source, env):
+    base_bin_target = str(target[0])
+    scons_utils.scons_bin_dd(str(source[0]), base_bin_target, seek=0, count=278)
+    env_cfg.base_bin_check(base_bin_target)
+    no_base_bin_target = str(target[1])
+    scons_utils.scons_bin_dd(str(source[0]), no_base_bin_target, skip=278)
+
+"""NV image builder
+"""
+def nvimg_builder(target, source, env):
+    if os.path.exists(env_cfg.nv_path) is False:
+        os.makedirs(env_cfg.nv_path)
+    make_nv_bin(env_cfg.nv_path, env_cfg.target_name, env_cfg.nv_cfg_name) #genrate nv first
+
+"""Combine NV image and kernel
+"""
+def nvkernel_builder(target, source, env):
+    factory_nv = str(source[0])
+    normal_nv = str(source[1])
+    no_base_bin_target = str(source[2])
+    nv_kernel_bin = str(target[0])
+    scons_utils.scons_bin_dd(factory_nv, nv_kernel_bin, seek=0, bs=4096, count=1)
+    scons_utils.scons_bin_dd(normal_nv, nv_kernel_bin, seek=2, bs=4096, count=1)
+    scons_utils.scons_bin_dd(no_base_bin_target, nv_kernel_bin, seek=4, bs=4096)
+
+factory_nv = os.path.join(env_cfg.nv_path, env_cfg.nv_factory_name)
+normal_nv = os.path.join(env_cfg.nv_path, env_cfg.nv_normal_name)
+#Build flashboot
+flash_boot_bin = env.SConscript(os.path.join("boot", "flashboot", 'SConscript'), {'env':env, 'env_cfg':env_cfg, 'module':'boot'}, duplicate=0)
+#Build loaderboot
+loader_boot_bin = env.SConscript(os.path.join("boot", "loaderboot", 'SConscript'), {'env':env, 'env_cfg':env_cfg, 'module':'loaderboot'}, duplicate=0)
+#ota object
+ota_flag = 1 if scons_utils.scons_usr_bool_option('CONFIG_COMPRESSION_OTA_SUPPORT') != 'y' else 0
+ota_build_object = pkt_builder.ImageBuild(env_cfg.target_name, ota_mode=ota_flag)
+def init_ota_build_object(ota_build_object):
+    ota_build_object.set_pkt_path(env_cfg.bin_path)
+    ota_build_object.set_src_path(boot_bin_path=str(flash_boot_bin[0]), normal_nv_path=normal_nv, factory_nv_path=factory_nv)
+    ota_build_object.set_chip_product_name(env.get("CHIP_TYPE"))
+
+def get_ota_object():
+    return ota_build_object
+
+def get_secure_boot():
+    if (scons_utils.scons_usr_bool_option('CONFIG_TARGET_SIG_SHA256') == 'y'):
+        return False
+    else:
+        return True;
+
+def get_hilink_enable():
+    if (scons_utils.scons_usr_bool_option('CONFIG_HILINK') == 'y'):
+        return True
+    else:
+        return False;
+
+def get_sign_dict():
+    sig = ''
+    if scons_utils.scons_usr_bool_option('CONFIG_TARGET_SIG_RSA_V15') == 'y':
+        sig = 'RSA'
+        get_ota_object().set_sign_alg(0x0)
+    elif scons_utils.scons_usr_bool_option('CONFIG_TARGET_SIG_RSA_PSS') == 'y':
+        sig = 'RSA'
+        get_ota_object().set_sign_alg(0x1)
+    elif scons_utils.scons_usr_bool_option('CONFIG_TARGET_SIG_ECC') == 'y':
+        sig = 'ECC'
+        get_ota_object().set_sign_alg(0x10)
+    elif scons_utils.scons_usr_bool_option('CONFIG_TARGET_SIG_SHA256') == 'y':
+        sig = 'ECC'
+        get_ota_object().set_sign_alg(0x3F)
+    if sig not in signature:
+        raise scons_utils.SconsBuildError("%s============== <%s> SIGNATURE SETTING NULL =============%s"%(scons_utils.colors['red'], sig, scons_utils.colors['end']))
+    return signature[sig]
+
+init_ota_build_object(ota_build_object)
+sign_dict = get_sign_dict()    #signature mode configuration
+
+def ota_builder(target, source, env):
+    """Build upg binary
+    """
+    get_ota_object().set_encrypt_flag(0x42)
+    if scons_utils.scons_usr_bool_option('CONFIG_FLASH_ENCRYPT_SUPPORT') == 'y':
+        get_ota_object().set_file_attr_encrypt(0x2)
+    else:
+        get_ota_object().set_file_attr_encrypt(0x1)
+    if scons_utils.scons_usr_bool_option('CONFIG_COMPRESSION_OTA_SUPPORT') == 'y':
+        get_ota_object().set_kernel_file_attr_ota(0x4)
+        get_ota_object().set_kernel_max_size(0) #(912+972)KB
+    else:
+        get_ota_object().set_kernel_file_attr_ota(env['SIGN'])
+        get_ota_object().set_kernel_max_size(env['SIGN']) #912 or 972KB
+        if scons_utils.scons_usr_bool_option('CONFIG_FLASH_ENCRYPT_SUPPORT') == 'y':
+            get_ota_object().set_encrypt_flag(0xFF)
+    get_ota_object().set_src_path(kernel_bin_path=str(source[1]))
+    get_ota_object().BuildUpgBin(str(target[0]))
+
+    return 0
+
+def factory_builder(target, source, env):
+    """Build factory binary
+    """
+    get_ota_object().set_encrypt_flag(0x42)
+    if scons_utils.scons_usr_bool_option('CONFIG_FLASH_ENCRYPT_SUPPORT') == 'y':
+        get_ota_object().set_file_attr_encrypt(0x2)
+    else:
+        get_ota_object().set_file_attr_encrypt(0x1)
+    get_ota_object().set_kernel_file_attr_ota('A') # same as kernel A.
+    get_ota_object().set_kernel_max_size(0x4) #0x4 means __factory_bin_max_size:600K
+    get_ota_object().set_src_path(kernel_bin_path=str(source[1]))
+    get_ota_object().BuildUpgBurnBin(str(target[0]))
+
+    factory_bin_path = os.path.join('build', 'libs', 'factory_bin')
+    if not os.path.exists(factory_bin_path):
+        os.makedirs(factory_bin_path)
+    shutil.rmtree(factory_bin_path)
+    shutil.copytree(env_cfg.bin_path, factory_bin_path, False) #copy factory bin output to build/libs temply.
+
+    return 0
+
+def burn_bin_builder(target, source, env):
+    """Build binary
+    """
+    get_ota_object().set_build_temp_path(build_temp_path = env_cfg.cache_path)
+    burn_bin = get_ota_object().BuildHiburnBin(str(target[0]), str(source[0]))
+    loader_bin = str(source[1])
+    efuse_bin = str(source[2]) if len(source) == 3 else None
+    boot_b = os.path.join("output", "bin", "%s_boot_signed_B.bin"%(env.get("CHIP_TYPE")))
+    boot_b_size = os.path.getsize(boot_b)
+    factory_bin_path = os.path.join('build', 'libs', 'factory_bin')
+    factory_bin = os.path.join(factory_bin_path, '%s_factory.bin'%env_cfg.target_name)
+    burn_for_erase_bin = os.path.join('build', 'basebin', 'burn_for_erase_4k.bin')
+    #证书安全存储示例
+    tee_cert1_file = os.path.join('build', 'basebin', 'tee_cert1.bin');
+    tee_cert2_file = os.path.join('build', 'basebin', 'tee_cert2.bin');
+    tee_key_file = os.path.join('build', 'basebin', 'tee_key.bin');
+    tee_cert_key_bin_max = 12*1024; #必须为4KB证书倍，需匹配分区表确定烧写地址和大小
+    tee_total_file_cnt = 3; #3个文件：2个证书，1个key。
+    burn_tee_cert = False
+    if ((os.path.exists(tee_cert1_file)) and (os.path.exists(tee_cert2_file)) and (os.path.exists(tee_key_file))):
+        burn_tee_cert = True
+
+    version_bin = bytearray(8)
+    boot_ver = get_ota_object().get_flashboot_file_ver()
+    kernel_ver = get_ota_object().get_kernel_file_ver()
+    boot_ver_bytes = boot_ver.to_bytes(4, byteorder = 'little', signed = True)
+    kernel_ver_bytes = kernel_ver.to_bytes(4, byteorder = 'little', signed = True)
+    version_bin[0:4] = boot_ver_bytes
+    version_bin[4:8] = kernel_ver_bytes
+    version_file = os.path.join("output", "bin", '%s_vercfg.bin'%env_cfg.target_name)
+    with open(version_file, 'wb+') as fp:
+        fp.write(version_bin)
+
+    burn_bin_ease_size = 0x200000;
+    #根据分区表适配烧写地址和大小
+    if (get_hilink_enable() == True):
+        burn_bin_ease_size = 0x200000 - 0x8000 - 0x1000 - 0x2000
+    if (burn_tee_cert == True):
+        burn_bin_ease_size = 0x200000 - 0x8000 - 0x1000 - 0x2000 - 0x5000
+
+    if os.path.exists(factory_bin):
+        cmd_list = ['%s|0|0|0'%loader_bin, '%s|0|0|3'%efuse_bin, '%s|0|%d|1'%(burn_bin, burn_bin_ease_size), '%s|%d|%d|6'%(factory_bin, 0x14D000, 0x96000)] if efuse_bin!=None else ['%s|0|0|0'%loader_bin, '%s|0|%d|1'%(burn_bin, burn_bin_ease_size), '%s|%d|%d|6'%(factory_bin, 0x14D000, 0x96000),]
+        shutil.copytree(factory_bin_path, os.path.join(env_cfg.bin_path, 'factory_bin'))
+    else:
+        cmd_list = ['%s|0|0|0'%loader_bin, '%s|0|0|3'%efuse_bin, '%s|0|%d|1'%(burn_bin, burn_bin_ease_size)] if efuse_bin!=None else ['%s|0|0|0'%loader_bin, '%s|0|%d|1'%(burn_bin, burn_bin_ease_size)]
+
+    if ((get_hilink_enable() == True) or (burn_tee_cert == True)):
+        cmd_list.append('%s|%d|%d|1'%(burn_for_erase_bin, 0x200000 - 0x8000 - 0x1000, 0x1000))
+
+    cmd_list.append('%s|%d|%d|1'%(boot_b, 0x200000 - boot_b_size, boot_b_size));
+
+    if (burn_tee_cert == True):
+        cert_key_bin = bytearray(tee_cert_key_bin_max)
+        tee_cert1_size = os.path.getsize(tee_cert1_file)
+        tee_cert2_size = os.path.getsize(tee_cert2_file)
+        tee_key_size = os.path.getsize(tee_key_file)
+        total_cert_key_size = tee_cert1_size + tee_cert2_size + tee_key_size
+        if (total_cert_key_size > tee_cert_key_bin_max - 4 - 4 - 4*tee_total_file_cnt):
+            print ("%s============== cert total len bigger than %d=============%s"%(scons_utils.colors['red'], total_cert_key_size,scons_utils.colors['end']))
+            return -1
+        else:
+            with open(tee_cert1_file, 'rb') as fp:
+                tee_cert1_bin = fp.read()
+            with open(tee_cert2_file, 'rb') as fp:
+                tee_cert2_bin = fp.read()
+            with open(tee_key_file, 'rb') as fp:
+                tee_key_bin = fp.read()
+
+            #填充头部结构
+            start_flag = 0xDEADBEEF
+            start_flag_bytes = start_flag.to_bytes(4, byteorder = 'little', signed = False)
+            cert_key_bin[0:4] = start_flag_bytes #填充魔术字
+            tee_total_file_cnt_bytes = tee_total_file_cnt.to_bytes(4, byteorder = 'little', signed = True)
+            cert_key_bin[4:8] = tee_total_file_cnt_bytes #填充总的文件数
+            #填充各文件的大小
+            cert_key_bin[8:12] = tee_cert1_size.to_bytes(4, byteorder = 'little', signed = True)
+            cert_key_bin[12:16] = tee_cert2_size.to_bytes(4, byteorder = 'little', signed = True)
+            cert_key_bin[16:20] = tee_key_size.to_bytes(4, byteorder = 'little', signed = True)
+            #填充各文件
+            cert_key_bin[20:20 + tee_cert1_size] = tee_cert1_bin
+            cert_key_bin[20 + tee_cert1_size:20 + tee_cert1_size + tee_cert2_size] = tee_cert2_bin
+            cert_key_bin[20 + tee_cert1_size + tee_cert2_size:20 + tee_cert1_size + tee_cert2_size + tee_key_size] = tee_key_bin
+            #写文件
+            cert_bin_file = os.path.join("output", "bin", '%s_tee_cert_key.bin'%env_cfg.target_name)
+            with open(cert_bin_file, 'wb+') as fp:
+                fp.write(cert_key_bin)
+            cmd_list.append('%s|%d|%d|1'%(cert_bin_file, 0x200000 - 0x8000 - 0x1000 - 0x2000 - 0x5000, tee_cert_key_bin_max))
+
+    if (get_secure_boot() == True): #only need write ver file in secure boot mode.
+        cmd_list.append('%s|0|0|7'%version_file)
+
+    packet_bin(str(target[1]), cmd_list)
+    if os.path.exists(factory_bin_path):
+        shutil.rmtree(factory_bin_path)
+    return 0
+
+def compress_ota_builder(target, source, env):
+    """Build compressed upgrade file
+    """
+    get_ota_object().set_encrypt_flag(0x42)
+    if scons_utils.scons_usr_bool_option('CONFIG_FLASH_ENCRYPT_SUPPORT') == 'y':
+        get_ota_object().set_file_attr_encrypt(0x2)
+        get_ota_object().set_encrypt_flag(0xFF)
+    else:
+        get_ota_object().set_file_attr_encrypt(0x1)
+    get_ota_object().set_kernel_file_attr_ota(0x4)
+    get_ota_object().set_build_temp_path(build_temp_path = env_cfg.cache_path)
+    compress_ota = get_ota_object().BuildCompressUpgBin(str(target[0]), str(source[0]))
+    return 0
+
+def boot_ota_builder(target, source, env):
+    """Build boot ota
+    """
+    if scons_utils.scons_usr_bool_option('CONFIG_FLASH_ENCRYPT_SUPPORT') == 'y':
+        get_ota_object().set_file_attr_encrypt(0x2)
+    else:
+        get_ota_object().set_file_attr_encrypt(0x1)
+    if scons_utils.scons_usr_bool_option('CONFIG_COMPRESSION_OTA_SUPPORT') == 'y':
+        get_ota_object().set_flashboot_file_attr_ota(0x4)
+    else:
+        get_ota_object().set_flashboot_file_attr_ota(0x3)
+    get_ota_object().set_encrypt_flag(0x42)
+    boot_ota = get_ota_object().BuildUpgBoot(str(target[0]))
+    return 0
+
+#Builders
+link_env.Append(BUILDERS={'LinkFile':linker_builder,
+    'Elf':elf_builder,
+    'Binary':binary_builder,
+    'Asm':asm_builder,
+    'BaseImg':Builder(action=baseimg_builder),
+    'NVKernel':Builder(action=nvkernel_builder),
+    'BootOta':Builder(action=boot_ota_builder),
+    'OtaImg':Builder(action=ota_builder),
+    'FactoryImg':Builder(action=factory_builder),
+    'BurnImg':Builder(action=burn_bin_builder),
+    'CompressOtaImg':Builder(action = compress_ota_builder),
+})
+
+def build_all(build_env, link_sys, flash_boot_bin, loader_boot_bin):
+    """Processing build
+    """
+
+    #kernel_ver
+    kernel_ver = scons_utils.scons_usr_int_option('CONFIG_TARGET_KERNEL_VER')
+    if (kernel_ver < 0 or kernel_ver > 48):
+        raise scons_utils.SconsBuildError("%s============== kernel_ver invalied, should be 0-48 =============%s"%(scons_utils.colors['red'], scons_utils.colors['end']))
+    else:
+        get_ota_object().set_kernel_file_ver(kernel_ver)
+
+    #boot_ver
+    boot_ver = scons_utils.scons_usr_int_option('CONFIG_TARGET_BOOT_VER')
+    if (boot_ver < 0 or boot_ver > 16):
+        raise scons_utils.SconsBuildError("%s============== boot_ver invalied, should be 0-16 =============%s"%(scons_utils.colors['red'], scons_utils.colors['end']))
+    else:
+        get_ota_object().set_flashboot_file_ver(boot_ver)
+
+    #images container, insert boot ota at first
+    imgs = [build_env.BootOta(target=os.path.join(env_cfg.bin_path, '%s_flash_boot_ota.bin'%env_cfg.target_name), source=flash_boot_bin)]
+    for sig_key in sign_dict:
+        if sig_key == 0 and factory_mode != 'yes':
+            continue
+        sign_build = build_env.Clone()
+        sign_build['SIGN'] = sig_key
+        name_suffix = '_%s'%sig_key
+        if sig_key == 0:
+            name_suffix = '_factory'
+            ota_file = os.path.join(env_cfg.bin_path, '%s%s.bin'%(env_cfg.target_name, name_suffix))
+        elif scons_utils.scons_usr_bool_option('CONFIG_COMPRESSION_OTA_SUPPORT') == 'y':
+            name_suffix = ''
+            ota_file = os.path.join(env_cfg.cache_path, '%s_ota_%s.bin'%(env_cfg.target_name, 'temp')) #tmp file
+        else:
+            ota_file = os.path.join(env_cfg.bin_path, '%s_ota%s.bin'%(env_cfg.target_name, name_suffix))
+
+        sign_build['LINKFILE'] = os.path.join(env_cfg.link_path, 'link%s.lds'%name_suffix)
+        sign_build['MAPFILE'] = '%s%s.map'%(sign_build['MAPFILE'][:-len('.map')], name_suffix)
+        sign_build.Append(LINK_SCRIPTS_FLAG = '-DFLASH_FIRM_START=%s'%sign_dict[sig_key])
+
+        link_risc = sign_build.LinkFile(source=os.path.join('build', 'link', 'link'),
+                                        target='$LINKFILE')
+        sign_build.Depends(link_risc, link_sys)
+        #start
+        target_out = sign_build.Elf(source = libs, target = os.path.join(env_cfg.bin_path, '%s%s.out'%(env_cfg.target_name, name_suffix)))
+        sign_build.Depends(target_out, [link_risc, libs])
+        target_out_bin = sign_build.Binary(source = target_out, target = os.path.join(env_cfg.cache_path, '%s%s'%(env_cfg.target_name, name_suffix)))
+        target_asm = sign_build.Asm(source = target_out, target=os.path.join(env_cfg.bin_path, '%s%s.asm'%(env_cfg.target_name, name_suffix)))
+
+        base_bin_target = os.path.join(env_cfg.cache_path, '%s_base%s.bin'%(env_cfg.target_name, name_suffix))
+        kernel_bin_target = os.path.join(env_cfg.cache_path, '%s_kernel%s.bin'%(env_cfg.target_name, name_suffix))
+
+        #Build kernel and ota
+        kernel = sign_build.BaseImg(source=target_out_bin, target=[base_bin_target, kernel_bin_target])
+        if factory_mode == 'yes':
+            ota_bin = sign_build.FactoryImg(source=kernel, target=ota_file)
+        else:
+            ota_bin = sign_build.OtaImg(source=kernel, target=ota_file)
+        imgs.append(ota_bin)
+        sign_build.AddPostAction(kernel, scons_utils.cleanup) #hook clean
+        if sig_key == 'A': #need signature
+            loader_bin = os.path.join("#", env_cfg.bin_path, "%s_loader_signed.bin"%(env.get("CHIP_TYPE")))
+            efuse_bin = os.path.join('build', 'basebin', 'efuse_cfg.bin')
+            burn_bin = os.path.join(env_cfg.bin_path, '%s_burn.bin'%env_cfg.target_name)
+            allinone_bin = os.path.join(env_cfg.bin_path, '%s_allinone.bin'%env_cfg.target_name)
+            burn_bins = sign_build.BurnImg(source=[ota_bin, loader_bin, efuse_bin] if os.path.exists(efuse_bin) else [ota_bin, loader_bin],
+                                           target=[burn_bin, allinone_bin])
+            imgs.append(burn_bins)
+        #mark binaries to be built everytime
+        if sig_key in ['A', 'B']:
+            sign_build.AlwaysBuild([link_risc, target_out, target_out_bin, target_asm, kernel, ota_bin, burn_bins])
+        if scons_utils.scons_usr_bool_option('CONFIG_COMPRESSION_OTA_SUPPORT') == 'y' and sig_key == 'A':
+            compress_ota_bin = os.path.join(env_cfg.bin_path, '%s_ota.bin'%env_cfg.target_name)
+            compress_ota_file = sign_build.CompressOtaImg(source = ota_bin, target = compress_ota_bin)
+            break
+        if sig_key == 0:
+            break
+    return imgs
+
+link_env.AddMethod(build_all, 'BUILD')
+#prepare link script
+link_sys = link_env.LinkFile(source=os.path.join('build', 'link', 'system_config'),
+                             target=os.path.join(env_cfg.link_path, 'system_config.ld'))
+link_env.Depends(link_sys, [flash_boot_bin, loader_boot_bin])
+link_env.AddPostAction(link_sys, nvimg_builder) #prepare nv image
+
+# START LINK
+target_img = link_env.BUILD(link_sys, flash_boot_bin, loader_boot_bin)
+link_env.AlwaysBuild([target_img, link_sys])
+Clean(target_img, env_cfg.clean_list)
+#######################################################  LINK  #######################################################
+
+#######################################################  BUILD CHECK  #######################################################
+
+def build_status():
+    bf = GetBuildFailures()
+    status = 0
+    failures_message = ''
+    if bf:
+        status = -1
+        failures_message = "\n".join(["Failed building %s" % scons_utils.bf_to_str(x) for x in bf if x is not None])
+    return (status, failures_message)
+
+def display_build_status():
+    if env.GetOption("clean"):
+        return
+    status, failures_message = build_status()
+    if status == 0:
+        scons_utils.show_burn_tips()
+    else:
+        scons_utils.show_alert("BUILD FAILED!!!!")
+        scons_utils.show_alert(failures_message)
+
+atexit.register(display_build_status)
+
+if common_env.log_output_flag == False:
+    file.close() #close log file handler
+    sys.stdout = old_stdout
+

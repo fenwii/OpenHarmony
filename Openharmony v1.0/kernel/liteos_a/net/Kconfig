@@ -1,0 +1,32 @@
+menu "Net"
+#config NET_LWIP
+#   bool "Enable Lwip"
+#   default y
+
+#   help
+#     extend kernel include runstop, dynload, scatter and cppsupport.
+#     It can support all or some.
+
+config NET_LWIP_SACK
+    bool "Enable Lwipsack"
+    default y
+
+    help
+      Answer Y to enable LiteOS support lwip.
+
+choice
+    depends on NET_LWIP_SACK
+    prompt "Lwipsack"
+    default y
+    help
+      Enable Lwipsack for 2.x
+
+config NET_LWIP_SACK_2_1
+    bool "Enable Lwipsack (2.1)"
+    depends on NET_LWIP_SACK
+
+endchoice
+endmenu
+
+
+

@@ -1,0 +1,43 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+declare_args() {
+    product = ""
+    # "debug" or "release"
+    ohos_build_type = "debug"
+    ohos_build_compiler_dir = ""
+}
+
+product_config = read_file("//build/lite/product/${product}.json", "json")
+
+# OHOS version
+ohos_version = product_config.ohos_version
+
+ohos_build_user = "jenkins"
+ohos_build_host = host_os
+ohos_build_time = exec_script("//build/lite/gn_scripts.py", ["-t"], "value")
+ohos_build_roothash = ""
+ohos_root_path = rebase_path("//")
+ohos_lite = true
+
+# Supported board: "hi3516dv300", "hi3518ev300", "hi3861v100"
+board_name = product_config.board
+
+# Supported compiler: gcc, clang
+ohos_build_compiler = product_config.compiler
+
+# Supported kernel: "liteos_a", "liteos_riscv"
+ohos_kernel_type = product_config.kernel
+
+ohos_vendor_adapter_dir = product_config.vendor_adapter_dir
+ohos_third_party_dir = product_config.third_party_dir

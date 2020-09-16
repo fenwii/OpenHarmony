@@ -1,0 +1,95 @@
+<!--
+Copyright (c) 2020 Huawei Device Co., Ltd.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+    <swiper index={{index}} vertical=true duration=1000 style="width:454px;height:454px;left:0px;top:0px;" loop=true onchange=showPage>
+      <stack style="left:0px;top:0px;width:454px;height:454px;">
+        <stack style="width:354px;height:80px;top:80px;left:80px;">
+          <input type="button" style="width:130px;height:60px;" value="返回首页" onclick=backMain>
+          </input>
+          <input type="button" style="left:150px;width:130px;height:60px;" value="返回上级" onclick=backSuperior>
+          </input>
+        </stack>
+        <text style="left:145px;top:160px;width:220px;height:40px;">
+          第{{index}}页，共2页
+        </text>
+        <text style="left:90px;top:200px;width:350px;height:40px;">
+          change触发页号改变
+        </text>
+        <text style="left:120px;top:240px;width:350px;height:40px;">
+          页面初始index为2
+        </text>
+        <text style="left:135px;top:280px;width:350px;height:40px;">
+          滑动方向垂直
+        </text>
+        <text style="left:120px;top:320px;width:350px;height:40px;">
+          滑动时间1000
+        </text>
+        <text style="left:145px;top:360px;width:350px;height:40px;">
+          loop为true
+        </text>
+      </stack>
+      <stack style="left:0px;top:0px;width:454px;height:454px;">
+        <stack style="width:354px;height:80px;top:80px;left:80px;">
+          <input type="button" style="width:130px;height:60px;" value="返回首页" onclick=backMain>
+          </input>
+          <input type="button" style="left:150px;width:130px;height:60px;" value="返回上级" onclick=backSuperior>
+          </input>
+        </stack>
+        <text style="left:145px;top:160px;width:220px;height:40px;">
+          第{{index}}页，共2页
+        </text>
+        <text style="left:90px;top:200px;width:350px;height:40px;">
+          change触发页号改变
+        </text>
+        <text style="left:120px;top:240px;width:350px;height:40px;">
+          页面初始index为2
+        </text>
+        <text style="left:135px;top:280px;width:350px;height:40px;">
+          滑动方向垂直
+        </text>
+        <text style="left:120px;top:320px;width:350px;height:40px;">
+          滑动时间1000
+        </text>
+        <text style="left:145px;top:360px;width:350px;height:40px;">
+          loop为true
+        </text>
+      </stack>
+      <stack style="left:0px;top:0px;width:454px;height:454px;">
+        <stack style="width:354px;height:80px;top:80px;left:80px;">
+          <input type="button" style="width:130px;height:60px;" value="返回首页" onclick=backMain>
+          </input>
+          <input type="button" style="left:150px;width:130px;height:60px;" value="返回上级" onclick=backSuperior>
+          </input>
+        </stack>
+        <text style="left:145px;top:160px;width:220px;height:40px;">
+          第{{index}}页，共2页
+        </text>
+        <text style="left:90px;top:200px;width:350px;height:40px;">
+          change触发页号改变
+        </text>
+        <text style="left:120px;top:240px;width:350px;height:40px;">
+          页面初始index为2
+        </text>
+        <text style="left:135px;top:280px;width:350px;height:40px;">
+          滑动方向垂直
+        </text>
+        <text style="left:120px;top:320px;width:350px;height:40px;">
+          滑动时间1000
+        </text>
+        <text style="left:145px;top:360px;width:350px;height:40px;">
+          loop为true
+        </text>
+      </stack>
+    </swiper>

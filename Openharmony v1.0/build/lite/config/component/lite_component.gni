@@ -1,0 +1,180 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+template("lite_library") {
+    assert(defined(invoker.target_type), "Library target_type is required.")
+    assert(defined(invoker.sources), "Library sources is required.")
+    target_type = invoker.target_type
+    shared_lib = (target_type == "shared_library")
+
+    if (shared_lib && ohos_kernel_type == "liteos_riscv") {
+        group(target_name) {
+            if(defined(invoker.sources)) {
+                assert(invoker.sources != "")
+            }
+            if(defined(invoker.public_configs)) {
+                assert(invoker.public_configs != "")
+            }
+            if(defined(invoker.public_deps)) {
+                assert(invoker.public_deps != "")
+            }
+            if(defined(invoker.output_name)) {
+                assert(invoker.output_name!= "")
+            }
+        }
+    } else {
+        target(target_type, target_name) {
+            forward_variables_from(invoker, "*")
+            cflags = []
+            cflags_cc = []
+            ldflags = []
+            if (defined(invoker.cflags)) {
+                cflags += invoker.cflags
+            }
+            if (defined(invoker.cflags_cc)) {
+                cflags_cc += invoker.cflags_cc
+                ldflags += ["-lstdc++"]
+            }
+            if (defined(invoker.ldflags)) {
+                ldflags += invoker.ldflags
+            }
+            shared_lib = (target_type == "shared_library")
+            if(shared_lib) {
+                cflags += [ "-fPIC" ]
+                cflags_cc += [ "-fPIC" ]
+            } else {
+                cflags += [ "-fPIE" ]
+                cflags_cc += [ "-fPIE" ]
+            }
+        }
+    }
+}
+
+# Defines a component
+#
+# The lite_subsystem template defines all the modules contained in a subsystem
+#
+# Parameters
+#
+#   component_features (required)
+#     [list of scopes] Defines all features in the component.
+template("lite_component") {
+    assert(defined(invoker.features), "Component features is required.")
+
+    forward_variables_from(invoker, "*")
+
+    if (!defined(invoker.target_type)) {
+        target_type = "group"
+    } else if (invoker.target_type == "static_library") {
+        target_type = "group"
+    } else {
+        target_type = invoker.target_type
+    }
+    assert(target_type != "")
+
+    target(target_type, target_name) {
+        deps = []
+        # add component deps
+        if(defined(invoker.deps)) {
+            deps += invoker.deps
+        }
+        # add component features
+        foreach(feature_label, features) {
+            deps += [ feature_label ]
+        }
+    }
+}
+
+template("build_ext_component")
+{
+    if(defined(invoker.version)) {
+        print(invoker.version)
+    }
+    action(target_name){
+        deps = []
+        if(defined(invoker.deps)) {
+            deps += invoker.deps
+        }
+        args = []
+        if(defined(invoker.exec_path)) {
+            args += [
+                "--path=${invoker.exec_path}"
+            ]
+        }
+        if(defined(invoker.enable)) {
+            args += [
+                "--enable=${invoker.enable}"
+            ]
+        }
+        if(defined(invoker.prebuilts)) {
+            args += [
+                "--prebuilts=${invoker.prebuilts}"
+            ]
+        }
+        if(defined(invoker.command)) {
+            args += [
+                "--command=${invoker.command}"
+            ]
+        }
+        script = "//build/lite/build_ext_components.py"
+        outputs = [ "$target_out_dir/${target_name}_build_ext_components.txt" ]
+    }
+}
+
+template("ohos_tools") {
+    target(invoker.target_type, target_name) {
+        forward_variables_from(invoker, "*")
+        output_dir = "$root_out_dir/tools/$target_name"
+        if (ohos_kernel_type == "liteos_a" || ohos_kernel_type == "linux") {
+             configs -= [ "//build/lite/config:ohos" ]
+        } else if (ohos_kernel_type == "liteos_riscv") {
+             configs -= [ "//build/lite/config:liteos" ]
+        }
+        configs -= [ "//build/lite/config:pie_executable_config" ]
+        configs -= [ "//build/lite/config:static_pie_config" ]
+        configs += [ "//build/lite/config:tools" ]
+    }
+}
+
+template("generate_notice_file") {
+    assert(defined(invoker.module_name), "module_name in required.")
+    assert(defined(invoker.module_source_dir_list), "module_source_dir_list in required.")
+    assert(target_name != "")
+    forward_variables_from(invoker,
+                            [
+                            "module_name",
+                            "module_source_dir_list",
+                            ])
+    gen_script = rebase_path("//build/lite/gen_module_notice_file.py")
+
+    foreach(module_source_dir, module_source_dir_list) {
+        arguments = []
+        arguments = [
+            "--root-out-dir",
+            rebase_path(root_out_dir),
+            "--module-source-dir",
+            rebase_path(module_source_dir),
+            "--module-relative-source-dir",
+            rebase_path(module_source_dir, "//"),
+            "--target-name",
+            module_name,
+        ]
+        ret_msg = ""
+        ret_msg = exec_script(gen_script, arguments, "list lines")
+        if (ret_msg != "") {
+            foreach(msg, ret_msg) {
+            print(msg)
+            }
+        }
+    }
+}

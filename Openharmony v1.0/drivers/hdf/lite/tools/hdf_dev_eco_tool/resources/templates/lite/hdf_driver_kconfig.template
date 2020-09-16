@@ -1,0 +1,6 @@
+config DRIVERS_HDF_${driver_upper_case}
+    bool "Enable HDF ${driver_lower_case} driver"
+    default n
+    depends on DRIVERS_HDF_${module_upper_case}
+    help
+        Answer Y to enable HDF ${driver_lower_case} driver.

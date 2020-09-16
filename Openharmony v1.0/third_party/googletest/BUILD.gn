@@ -1,0 +1,169 @@
+# Copyright (c) 2020, Huawei Device Co., Ltd. All rights reserved.
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice, this list of
+#    conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright notice, this list
+#    of conditions and the following disclaimer in the documentation and/or other materials
+#    provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its contributors may be used
+#    to endorse or promote products derived from this software without specific prior written
+#    permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+config("gtest_private_config") {
+  visibility = [ ":*" ]
+  include_dirs = [ "googletest" ]
+}
+
+config("gtest_config") {
+  include_dirs = [ "googletest/include" ]
+}
+
+static_library("gtest") {
+  testonly = true
+  public = [
+    "googletest/include/gtest/gtest.h",
+    "googletest/include/gtest/gtest-spi.h",
+  ]
+  sources = [
+    "googletest/include/gtest/gtest-death-test.h",
+    "googletest/include/gtest/gtest-message.h",
+    "googletest/include/gtest/gtest-param-test.h",
+    "googletest/include/gtest/gtest-printers.h",
+    "googletest/include/gtest/gtest-test-part.h",
+    "googletest/include/gtest/gtest-typed-test.h",
+    "googletest/include/gtest/gtest_pred_impl.h",
+    "googletest/include/gtest/gtest_prod.h",
+    "googletest/include/gtest/internal/custom/gtest-port.h",
+    "googletest/include/gtest/internal/custom/gtest-printers.h",
+    "googletest/include/gtest/internal/custom/gtest.h",
+    "googletest/include/gtest/internal/gtest-death-test-internal.h",
+    "googletest/include/gtest/internal/gtest-filepath.h",
+    "googletest/include/gtest/internal/gtest-internal.h",
+    "googletest/include/gtest/internal/gtest-linked_ptr.h",
+    "googletest/include/gtest/internal/gtest-param-util-generated.h",
+    "googletest/include/gtest/internal/gtest-param-util.h",
+    "googletest/include/gtest/internal/gtest-port-arch.h",
+    "googletest/include/gtest/internal/gtest-port.h",
+    "googletest/include/gtest/internal/gtest-string.h",
+    "googletest/include/gtest/internal/gtest-tuple.h",
+    "googletest/include/gtest/internal/gtest-type-util.h",
+    "googletest/include/gtest/hwext/gtest-ext.h",
+    "googletest/include/gtest/hwext/gtest-filter.h",
+    "googletest/include/gtest/hwext/gtest-tag.h",
+    "googletest/include/gtest/hwext/utils.h",
+    "googletest/src/gtest-all.cc",
+    "googletest/src/gtest-death-test.cc",
+    "googletest/src/gtest-filepath.cc",
+    "googletest/src/gtest-internal-inl.h",
+    "googletest/src/gtest-port.cc",
+    "googletest/src/gtest-printers.cc",
+    "googletest/src/gtest-test-part.cc",
+    "googletest/src/gtest-typed-test.cc",
+    "googletest/src/gtest.cc",
+    "googletest/src/hwext/gtest-ext.cc",
+    "googletest/src/hwext/gtest-filter.cc",
+    "googletest/src/hwext/gtest-tag.cc",
+    "googletest/src/hwext/gtest-utils.cc",
+  ]
+  sources -= [ "googletest/src/gtest-all.cc" ]
+  public_configs = [ ":gtest_config" ]
+  configs += [ ":gtest_private_config" ]
+  configs -= ["//build/config/coverage:default_coverage"]
+}
+
+static_library("gtest_main") {
+  testonly = true
+  sources = [
+    "googletest/src/gtest_main.cc",
+  ]
+  public_deps = [
+    ":gtest",
+  ]
+  configs -= ["//build/config/coverage:default_coverage"]
+}
+
+
+config("gmock_private_config") {
+  visibility = [ ":*" ]
+  include_dirs = [ "googlemock" ]
+}
+
+config("gmock_config") {
+  include_dirs = [ "googlemock/include" ]
+
+  cflags_cc = [
+    # The MOCK_METHODn() macros do not specify "override", which triggers this
+    # warning in users: "error: 'Method' overrides a member function but is not
+    # marked 'override' [-Werror,-Winconsistent-missing-override]". Suppress
+    # these warnings until https://github.com/google/googletest/issues/533 is
+    # fixed.
+    "-Wno-inconsistent-missing-override",
+  ]
+}
+
+static_library("gmock") {
+  testonly = true
+  public = [
+    "googlemock/include/gmock/gmock.h",
+  ]
+  sources = [
+    "googlemock/include/gmock/gmock-actions.h",
+    "googlemock/include/gmock/gmock-cardinalities.h",
+    "googlemock/include/gmock/gmock-generated-actions.h",
+    "googlemock/include/gmock/gmock-generated-function-mockers.h",
+    "googlemock/include/gmock/gmock-generated-matchers.h",
+    "googlemock/include/gmock/gmock-generated-nice-strict.h",
+    "googlemock/include/gmock/gmock-matchers.h",
+    "googlemock/include/gmock/gmock-more-actions.h",
+    "googlemock/include/gmock/gmock-more-matchers.h",
+    "googlemock/include/gmock/gmock-spec-builders.h",
+    "googlemock/include/gmock/internal/custom/gmock-generated-actions.h",
+    "googlemock/include/gmock/internal/custom/gmock-matchers.h",
+    "googlemock/include/gmock/internal/custom/gmock-port.h",
+    "googlemock/include/gmock/internal/gmock-generated-internal-utils.h",
+    "googlemock/include/gmock/internal/gmock-internal-utils.h",
+    "googlemock/include/gmock/internal/gmock-port.h",
+    "googlemock/src/gmock-all.cc",
+    "googlemock/src/gmock-cardinalities.cc",
+    "googlemock/src/gmock-internal-utils.cc",
+    "googlemock/src/gmock-matchers.cc",
+    "googlemock/src/gmock-spec-builders.cc",
+    "googlemock/src/gmock.cc",
+  ]
+  sources -= [ "googlemock/src/gmock-all.cc" ]
+  public_configs = [ ":gmock_config" ]
+  configs += [ ":gmock_private_config" ]
+  configs -= ["//build/config/coverage:default_coverage"]
+  deps = [
+    ":gtest",
+  ]
+}
+
+static_library("gmock_main") {
+  testonly = true
+  sources = [
+    "googlemock/src/gmock_main.cc",
+  ]
+  public_deps = [
+    ":gmock",
+    ":gtest",
+  ]
+  configs -= ["//build/config/coverage:default_coverage"]
+}
+

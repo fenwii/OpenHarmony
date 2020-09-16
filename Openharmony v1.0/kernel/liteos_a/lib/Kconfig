@@ -1,0 +1,15 @@
+menu "Lib"
+config LIB_LIBC
+    bool "Enable Libc"
+    default y
+    help
+      Answer Y to enable libc for full code.
+
+config LIB_ZLIB
+    bool "Enable Zlib"
+    default y
+    depends on LIB_LIBC
+    help
+      Answer Y to enable LiteOS support compress file library.
+endmenu
+

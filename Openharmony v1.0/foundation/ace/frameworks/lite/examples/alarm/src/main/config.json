@@ -1,0 +1,50 @@
+{
+    "app": {
+        "bundleName": "com.huawei.alarm",
+        "vendor": "huawei",
+        "version": {
+            "code": 1,
+            "name": "1.0"
+        },
+        "apiVersion": {
+            "compatible": 3,
+            "target": 3
+        }
+    },
+    "deviceConfig": {
+        "default": {
+        }
+    },
+    "module": {
+        "deviceType": [
+            "liteWearable",
+            "smartVision"
+        ],
+        "distro": {
+            "deliveryWithInstall": true,
+            "moduleName": "entry",
+            "moduleType": "entry"
+        },
+        "abilities": [
+            {
+                "name": "default",
+                "icon": "$media:icon",
+                "label": "alarm",
+                "type": "page",
+                "visible": true
+            }
+        ],
+        "js": [
+            {
+                "name": "default",
+                "pages": [
+                    "pages/index/index",
+                    "pages/editAlarm/edit_alarm",
+                    "pages/timeArrive/time_arrive",
+                    "pages/timeSelector/time_picker_page",
+                    "pages/weekSelector/week_select_page"
+                ]
+            }
+        ]
+    }
+}

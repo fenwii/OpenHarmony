@@ -1,0 +1,14 @@
+config DRIVERS_HDF_INPUT
+    bool "Enable HDF input driver"
+    default n
+    depends on DRIVERS_HDF
+    help
+      Answer Y to enable HDF input driver.
+
+config DRIVERS_HDF_TP_5P5_GT911
+    bool "Enable HDF tp 5P5 GT911 driver"
+    default n
+    depends on DRIVERS_HDF_INPUT
+    help
+      Answer Y to enable HDF TP 5P5 GT911 driver.
+

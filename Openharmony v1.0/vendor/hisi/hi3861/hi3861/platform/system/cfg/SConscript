@@ -1,0 +1,4 @@
+Import('env')
+
+objs = env.Object(Glob('*.c'))
+Return('objs')

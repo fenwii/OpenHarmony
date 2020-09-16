@@ -1,0 +1,13 @@
+root {
+    platfrom {
+        template watchdog_controller {
+            id = 0;
+            match_attr = "";
+            regBase = 0x12030000;
+            regStep = 0x1000;
+        }
+        controller_0x12030000 :: watchdog_controller {
+            match_attr = "hisilicon_hi35xx_watchdog_0";
+        }
+    }
+}

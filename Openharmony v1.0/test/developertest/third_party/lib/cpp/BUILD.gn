@@ -1,0 +1,84 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+config("gtest_private_config") {
+  visibility = [ ":*" ]
+  include_dirs = [ "//third_party/googletest/googletest" ]
+}
+
+config("gtest_config") {
+  include_dirs = [ "//third_party/googletest/googletest/include" ]
+}
+
+static_library("gtest") {
+  #testonly = true
+  public = [
+    "//third_party/googletest/googletest/include/gtest/gtest.h",
+    "//third_party/googletest/googletest/include/gtest/gtest-spi.h",
+  ]
+  sources = [
+    "//third_party/googletest/googletest/include/gtest/gtest-death-test.h",
+    "//third_party/googletest/googletest/include/gtest/gtest-message.h",
+    "//third_party/googletest/googletest/include/gtest/gtest-param-test.h",
+    "//third_party/googletest/googletest/include/gtest/gtest-printers.h",
+    "//third_party/googletest/googletest/include/gtest/gtest-test-part.h",
+    "//third_party/googletest/googletest/include/gtest/gtest-typed-test.h",
+    "//third_party/googletest/googletest/include/gtest/gtest_pred_impl.h",
+    "//third_party/googletest/googletest/include/gtest/gtest_prod.h",
+    "//third_party/googletest/googletest/include/gtest/internal/custom/gtest-port.h",
+    "//third_party/googletest/googletest/include/gtest/internal/custom/gtest-printers.h",
+    "//third_party/googletest/googletest/include/gtest/internal/custom/gtest.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-death-test-internal.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-filepath.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-internal.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-linked_ptr.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-param-util-generated.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-param-util.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-port-arch.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-port.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-string.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-tuple.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-type-util.h",
+    "//third_party/googletest/googletest/include/gtest/hwext/gtest-ext.h",
+    "//third_party/googletest/googletest/include/gtest/hwext/gtest-filter.h",
+    "//third_party/googletest/googletest/include/gtest/hwext/gtest-tag.h",
+    "//third_party/googletest/googletest/include/gtest/hwext/utils.h",
+    "//third_party/googletest/googletest/src/gtest-death-test.cc",
+    "//third_party/googletest/googletest/src/gtest-filepath.cc",
+    "//third_party/googletest/googletest/src/gtest-internal-inl.h",
+    "//third_party/googletest/googletest/src/gtest-port.cc",
+    "//third_party/googletest/googletest/src/gtest-printers.cc",
+    "//third_party/googletest/googletest/src/gtest-test-part.cc",
+    "//third_party/googletest/googletest/src/gtest-typed-test.cc",
+    "//third_party/googletest/googletest/src/gtest.cc",
+    "//third_party/googletest/googletest/src/hwext/gtest-ext.cc",
+    "//third_party/googletest/googletest/src/hwext/gtest-filter.cc",
+    "//third_party/googletest/googletest/src/hwext/gtest-tag.cc",
+    "//third_party/googletest/googletest/src/hwext/gtest-utils.cc",
+  ]
+  public_configs = [ ":gtest_config" ]
+  configs += [ ":gtest_private_config" ]
+  defines = [ "GTEST_HAS_CLONE=0" ]
+}
+
+static_library("gtest_main") {
+  #testonly = true
+  sources = [
+    "//third_party/googletest/googletest/src/gtest_main.cc",
+  ]
+  public_deps = [
+    ":gtest",
+  ]
+}
+
+

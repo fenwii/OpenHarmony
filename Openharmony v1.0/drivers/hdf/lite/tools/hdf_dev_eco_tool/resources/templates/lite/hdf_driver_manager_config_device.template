@@ -1,0 +1,10 @@
+            device_${driver_lower_case} :: device {
+                device0 :: deviceNode {
+                    policy = 1;
+                    priority = 100;
+                    preload = 0;
+                    permission = 0666;
+                    moduleName = "${driver_lower_case}";
+                    serviceName = "${driver_lower_camel_case}Service";
+                }
+            }

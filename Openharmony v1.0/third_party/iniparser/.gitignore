@@ -1,0 +1,11 @@
+### Ignore all files created by make
+#
+*.a
+*.o
+*.so
+*.so.*
+/example/iniexample
+/example/parse
+# Autogenerate source file
+/test/AllTests.c
+/test/testrun

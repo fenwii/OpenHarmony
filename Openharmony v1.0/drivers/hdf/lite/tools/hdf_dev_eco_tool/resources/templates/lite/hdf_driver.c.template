@@ -1,0 +1,40 @@
+#include "${driver_lower_case}_driver.h"
+#include "hdf_log.h"
+
+int32_t ${driver_upper_camel_case}DriverDispatch(struct HdfDeviceIoClient *client, int cmdId, struct HdfSBuf *data, struct HdfSBuf *reply)
+{
+    return 0;
+}
+
+int32_t ${driver_upper_camel_case}DriverBind(struct HdfDeviceObject *deviceObject)
+{
+    if (deviceObject == NULL) {
+        return -1;
+    }
+    static struct ${driver_upper_camel_case}DriverService service;
+    service.${driver_lower_camel_case}Service.Dispatch = ${driver_upper_camel_case}DriverDispatch;
+    deviceObject->service = (struct IDeviceIoService *)(&service);
+    return 0;
+}
+
+int32_t ${driver_upper_camel_case}DriverInit(struct HdfDeviceObject *deviceObject)
+{
+    HDF_LOGD("${driver_upper_camel_case}Driver enter init");
+    return 0;
+}
+
+void ${driver_upper_camel_case}DriverRelease(struct HdfDeviceObject *deviceObject)
+{
+    HDF_LOGD("${driver_upper_camel_case}Driver enter init");
+    return;
+}
+
+struct HdfDriverEntry ${driver_lower_camel_case}Driver = {
+    .moduleVersion = 0x0001,
+    .moduleName = "${driver_lower_case}",
+    .Bind = ${driver_upper_camel_case}DriverBind,
+    .Init = ${driver_upper_camel_case}DriverInit,
+    .Release = ${driver_upper_camel_case}DriverRelease,
+};
+
+HDF_INIT(${driver_lower_camel_case}Driver);

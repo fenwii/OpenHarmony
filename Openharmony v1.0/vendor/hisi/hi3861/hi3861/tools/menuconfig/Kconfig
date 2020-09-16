@@ -1,0 +1,201 @@
+    menu "Target Chip"
+        choice TARGET_CHIP
+            prompt "Hi3861"
+            default TARGET_CHIP_HI3861
+            config TARGET_CHIP_HI3861
+                bool "Hi3861"
+                help
+                    Set Target Chip as Hi3861.
+        endchoice
+    endmenu
+
+    menu "Security Settings"
+        choice TARGET_SIGNATURE_MOD
+            prompt "Signature Algorithm for bootloader and upgrade file"
+            default TARGET_SIG_SHA256
+            config TARGET_SIG_RSA_V15
+                bool "RSA_V15"
+                help
+                    RSA_V15 Signature Algorithm of bootloader and upgrade file.
+
+            config TARGET_SIG_RSA_PSS
+                bool "RSA_PSS"
+                help
+                    RSA_PSS Signature Algorithm of bootloader and upgrade file.
+
+            config TARGET_SIG_ECC
+                bool "ECC"
+                help
+                    ECC Signature Algorithm of bootloader and upgrade file.
+
+            config TARGET_SIG_SHA256
+                bool "SHA256"
+                help
+                    SHA256 Signature Algorithm of bootloader and upgrade file.
+        endchoice
+
+        config BOOT_ENCRYPT
+            depends on TARGET_SIG_RSA_PSS || TARGET_SIG_ECC || TARGET_SIG_RSA_V15
+            bool "Enable bootloader encryption"
+            help
+                Enable Bootloader encryption.
+        config TARGET_BOOT_VER
+            int "boot ver(value form 0 to 16)"
+            default 0
+            help
+                Set boot version.
+        config TARGET_KERNEL_VER
+            int "kernel ver(value form 0 to 48)"
+            default 0
+            help
+                Set kernel version.
+        config TEE_HUKS_SUPPORT
+            bool "TEE HUKS support"
+            default n
+            select FILE_SYSTEM_SUPPORT
+            help
+                Support TEE HUKS interface.
+        config TEE_HUKS_DEMO_SUPPORT
+            bool "TEE HUKS demo support"
+            default n
+            select FILE_SYSTEM_SUPPORT
+            select TEE_HUKS_SUPPORT
+            help
+                Support TEE HUKS DEMO interface.
+        config FLASH_ENCRYPT_SUPPORT
+            bool "FLASH ENCRYPT support(only apply in WIFI CHIP_PKT_32K)"
+            default n
+            help
+                Support encrypt code and data.
+    endmenu
+
+    menu "Factory Test Settings"
+        config FACTORY_TEST_SUPPORT
+            bool "factory test enable"
+            default n
+            help
+                enable factory test in flashboot.
+    endmenu
+
+    menu "BSP Settings"
+        config I2C_SUPPORT
+            bool "i2c driver support"
+            default n
+            help
+                i2c driver support.
+
+        config I2S_SUPPORT
+            bool "i2s driver support"
+            default n
+            help
+                i2s driver support.
+
+        config SPI_SUPPORT
+            bool "SPI driver support"
+            default n
+            help
+                spi driver support.
+
+        config DMA_SUPPORT
+            bool "DMA driver support"
+            default n
+            help
+                dma driver support.
+
+        config SDIO_SUPPORT
+            bool "SDIO driver support"
+            default n
+            help
+                sdio driver support.
+
+        config SPI_DMA_SUPPORT
+            bool "SPI support DMA"
+            default n
+            help
+                spi driver support DMA transfer.
+
+        config UART_DMA_SUPPORT
+            bool "UART support DMA"
+            default n
+            help
+                uart driver support DMA transfer.
+
+        config PWM_SUPPORT
+            bool "PWM driver support"
+            default n
+            help
+                pwm driver support.
+
+        config PWM_HOLD_AFTER_REBOOT
+            bool "PWM hold after reboot"
+            default n
+            help
+                pwm hold after reboot.
+
+        config AT_SUPPORT
+            bool "Enable AT command"
+            default y
+            help
+                enable at command.
+        config FILE_SYSTEM_SUPPORT
+            bool "Enable file system"
+            default n
+            help
+                enable file system.
+        config UART0_SUPPORT
+            bool "Enable uart0 IO mux config"
+            default y
+            help
+                Enable uart0 IO mux config.
+        config UART1_SUPPORT
+            bool "Enable uart1 IO mux config"
+            default y
+            help
+                Enable uart1 IO mux config.
+        config UART2_SUPPORT
+            bool "Enable uart2 IO mux config"
+            default n
+            help
+                Enable uart2 IO mux config.
+    endmenu
+
+    menu "WiFi Settings"
+        choice
+            prompt "Authentication Option of Radio Parameters"
+            default CE_SUPPORT
+
+            config CE_SUPPORT
+            bool "CE Authentication"
+
+            config FCC_SUPPORT
+            bool "FCC Authentication"
+
+            config MAX_POWER_SUPPORT
+            bool "Max Power"
+        endchoice
+    endmenu
+
+    menu "OTA Settings"
+        choice
+            prompt "OTA upgrade method"
+            default COMPRESSION_OTA_SUPPORT
+            config COMPRESSION_OTA_SUPPORT
+                bool "compression ota support"
+                help
+                    compression ota upgrade method.
+
+            config DUAL_PARTITION_OTA_SUPPORT
+                bool "dual-partition ota support"
+                help
+                    dual-patition upgrade method.
+        endchoice
+    endmenu
+
+    menu "Link Settings"
+        config HILINK
+            bool "HiLink support"
+            default n
+            help
+                Enable the option to compile hilink module.
+    endmenu
+

@@ -1,0 +1,467 @@
+<html version="1.0" lang="en">
+<!-- Copyright (c) 2020 Huawei Device Co., Ltd.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title><!--{title_name}--></title>
+    <style type="text/css">
+        body {
+            font-family: PingFangSC-Semibold, sans-serif;
+            font-size: 20px;
+            padding: 0;
+            margin: 0;
+            background-color: #F2F5F7;
+        }
+
+        div.logo {
+            background-image: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAeAB4AAD/4QAiRXhpZgAATU0AKgAAAAgAAQESAAMAAAABAAEAAAAAAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAdAFADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9+JjkfXFfI/j7/gop8TPhZ4M1bxJ4i/Zh+IGj6DodtJe319c+J9EWO3hQFmc4uCeg6AEk8AEkCvriVhs/zxXyd+0BpTft2ftMWvwniLS/DD4d3FvrPjyRG/da1eg+ZZ6RkcMikCWYcj5Qp2sor0stp051H7aKcUrtu+iXazWr2Xm0cmMnOMV7N2k9Ftq/n0W78j0T4fftT+I/ifovwb1jR/hb4kbQfijZS6hq17c3kELeDoxbrNAbiM/NL5xO1dmMdTyQK9qjO4dDg45r5t/aqa7h/bk/Zhjt7q6t7RtQ8QCeCKVo4ZgNOXaHQHawHbIOO1ef/C/9ni2/bl+M3xi8WePPEXjaOTwn4xuPCfhS10bxFeaVH4Yis44v9LgWB1H2iR33s8gfJUDG3CjT6hCdNV2+WNr6Xb1m4pb+Xlou++X1qUZeztd3t2Xwpt/1fU9t/Yj/AGl9U/ak8CeLtW1bSbHR5vDvjbWvDEMVrK8izw2N00McrbuQ7qMsBwD0r2gPsHQ9K+B/2XtN8PeBf2B/iLY/EDxl4q0jTP8AhZWs29/qmh3Mljq+tTC/AMUZtgZQ906kMkG1sSMFZRyHfADT9N+D37evw70/wD4Y+K/gDwv430fV7fWtH8XXdzJa6nJbRxzwXUEdxcTssqElXY7CFkUY+d89OKymPtqqpOyjzW00fKrvW+9ttH52uZUcfJQhz7ytfXXV227fM+9hJz07Zo87FfC/wZ/ZS0/9q747/H+38d+IvGl/4Z0nxzcR6doNprt1YWkM8ltDuumMLq8rKixpHG5MUeHIQs5I5e1+OXxC8Of8E2fD2gx+IvFF/wCIdS+Ij/Dhtfs5d+vPp4vpkLwSSN/x9tDF5KSM4IZ1berAOIWSubUKc05XinpZLmV1r1tbXT0uX/aPKuaUdLSt/wBuu3yv0P0SEnqCKcDmvg/4UfC7VPhZ+0j8PdQ+FXw5+N3g3Rbq9ex8a23ifVGvNL1OyeFtt04lvZyLmKUKwdApIZhyCVP3ZG22uDG4RUHG0rpq/S61as0m7d99rHVh8R7VO6tb+tNEYMlp4mKH/TtDU9iLKXI/OXH518kfBT9mL4z/AA88N31h4R+JE2l282oz3d/HNplhJcz3kjZllmeWJ5Hkc87ix4AA4AA+2GTcKrQ6RDBfSXCrtmlUCRh/Hjpn3HrV4PMJ4eMoxjF81t0ntfv6k4jCRqtNtq3Z23Pnq9+CvjTU/iD8GdV8T+I7TVPEHhGbVHkun09V+0tNAU/eCJkThdoGxV6c5OTXNax+zp48tPi9421T4d+MLzwzpvia6WXxJb2dnAVurzYFeSzM5YwzFfvP3bngBMfVU+mQ3F1DNIu6S3JMbf3cjBos9NhsvM8tdvnyGR/dj1P6VdPNKkNUls1aytrJy220b07GcsDGW7e97312tv8An3PkGw/ZM+w/syz+G7PULi3+y+NG1zQbjyGN9p9+Jg0EjNJIytt5DeYGJycnODXReGfgF8QP+GkvBXijxp4tGu+IdFh1CK1c2CRabHDLb7CsUUbKVcnJdmJLER4O1Qo+mBoFqLOSAwo0Mzl3RhuDMTkmm2/h61t7uOZIyskYIQli23IwcZJrWWcVWpJ297m1a195Wdn0v17kxy+Caavpb00d0eP/ALPvwo1rwB49+J19b6jpjv4l8StqMwmsXwrGGNMLiXp8vfnn8/O7D9mCOT9l3WvCuqXgmt7zxTd6rZS2ls0WoW1+940sMkD+ZtVlY8Eg/LuznOK+rLbS4bOWZ412tcP5jn1PrVU+GrOS2WHy8RrL54APR+uf1rGOYTjLmT1vF/8AgKsjSWDi429fx3PC/hp8MfjppXjHR7jxR8RIdW0mz3F7WHSbSBZmMbKv2llAdwCQf3TJ8wUkEZFeyfZPExP/AB/aD/4BTf8Ax2taLQoIZVdfO3KcjMzn9CauYrmxWJdafM4peisvuRrRo+zVrt+ruf/Z');
+            width: 80px;
+            height: 30px;
+        }
+        div.operate {
+            background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxzdmcgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTJweCIgdmlld0JveD0iMCAwIDE2IDEyIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPg0KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggNTMuMiAoNzI2NDMpIC0gaHR0cHM6Ly9za2V0Y2hhcHAuY29tIC0tPg0KICAgIDx0aXRsZT7lvaLnirYgY29weSAxNDwvdGl0bGU+DQogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+DQogICAgPGcgaWQ9Iumhtemdoi0xIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4NCiAgICAgICAgPGcgaWQ9IuS4u+mhtTIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNDc3LjAwMDAwMCwgLTk3NC4wMDAwMDApIiBmaWxsPSIjMjkzMDQwIj4NCiAgICAgICAgICAgIDxwYXRoIGQ9Ik0xNDg1LDk4NiBDMTQ4Mi4zMzMzMyw5ODYgMTQ3OS42NjY2Nyw5ODQgMTQ3Nyw5ODAgQzE0NzkuNzIyOTEsOTc2IDE0ODIuMzg5NTgsOTc0IDE0ODUsOTc0IEMxNDg3LjYxMDQyLDk3NCAxNDkwLjI3NzA5LDk3NiAxNDkzLDk4MCBDMTQ5MC4zMzMzMyw5ODQgMTQ4Ny42NjY2Nyw5ODYgMTQ4NSw5ODYgWiBNMTQ4NSw5ODQgQzE0ODcuMjA5MTQsOTg0IDE0ODksOTgyLjIwOTEzOSAxNDg5LDk4MCBDMTQ4OSw5NzcuNzkwODYxIDE0ODcuMjA5MTQsOTc2IDE0ODUsOTc2IEMxNDgyLjc5MDg2LDk3NiAxNDgxLDk3Ny43OTA4NjEgMTQ4MSw5ODAgQzE0ODEsOTgyLjIwOTEzOSAxNDgyLjc5MDg2LDk4NCAxNDg1LDk4NCBaIE0xNDg1LDk4MiBDMTQ4My44OTU0Myw5ODIgMTQ4Myw5ODEuMTA0NTY5IDE0ODMsOTgwIEMxNDgzLDk3OC44OTU0MzEgMTQ4My44OTU0Myw5NzggMTQ4NSw5NzggQzE0ODYuMTA0NTcsOTc4IDE0ODcsOTc4Ljg5NTQzMSAxNDg3LDk4MCBDMTQ4Nyw5ODEuMTA0NTY5IDE0ODYuMTA0NTcsOTgyIDE0ODUsOTgyIFoiIGlkPSLlvaLnirYtY29weS0xNCI+PC9wYXRoPg0KICAgICAgICA8L2c+DQogICAgPC9nPg0KPC9zdmc+');
+            width: 16px;
+            height: 12px;
+        }
+        span.title {
+            float: left;
+        }
+        span.return {
+            background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxzdmcgd2lkdGg9IjEycHgiIGhlaWdodD0iMTRweCIgdmlld0JveD0iMCAwIDEyIDE0IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPg0KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggNTMuMiAoNzI2NDMpIC0gaHR0cHM6Ly9za2V0Y2hhcHAuY29tIC0tPg0KICAgIDx0aXRsZT7liIbnu4Q8L3RpdGxlPg0KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPg0KICAgIDxnIGlkPSLpobXpnaItMSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+DQogICAgICAgIDxnIGlkPSLkuLvpobUyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDg4LjAwMDAwMCwgLTEwMzIuMDAwMDAwKSIgZmlsbC1ydWxlPSJub256ZXJvIj4NCiAgICAgICAgICAgIDxnIGlkPSLliIbnu4QiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQ4Ni4wMDAwMDAsIDEwMzEuMDAwMDAwKSI+DQogICAgICAgICAgICAgICAgPHJlY3QgaWQ9IuefqeW9oiIgeD0iMCIgeT0iMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2Ij48L3JlY3Q+DQogICAgICAgICAgICAgICAgPHBhdGggZD0iTTYsNSBMNiw3IEwyLDQgTDYsMSBMNiwzIEw4LDMgQzExLjMxMzcwODUsMyAxNCw1LjY4NjI5MTUgMTQsOSBDMTQsMTIuMzEzNzA4NSAxMS4zMTM3MDg1LDE1IDgsMTUgTDQsMTUgTDQsMTMgTDYsMTMgTDgsMTMgQzEwLjIwOTEzOSwxMyAxMiwxMS4yMDkxMzkgMTIsOSBDMTIsNi43OTA4NjEgMTAuMjA5MTM5LDUgOCw1IEw2LDUgWiIgaWQ9IuWQiOW5tuW9oueKtiIgZmlsbD0iIzI5MzA0MCI+PC9wYXRoPg0KICAgICAgICAgICAgPC9nPg0KICAgICAgICA8L2c+DQogICAgPC9nPg0KPC9zdmc+');
+            width: 12px;
+            height: 14px;
+            float: left;
+        }
+
+        table.logo {
+            width: 1920px;
+            height: 40px;
+            background-color: #FFFFFF;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        table.logo th {
+            text-align: left;
+            padding: 9px 0 1px 24px;
+        }
+
+        div.container {
+            width: 1160px;
+            background-color: #FFFFFF;
+            margin-top: 10px;
+            margin-right: auto;
+            margin-left: auto;
+            padding: 30px 20px 30px 20px;
+        }
+
+        table.exec-info {
+            width: 100%;
+            background-color: #FFFFFF;
+            padding: 0 0 5px 0;
+        }
+        table.exec-info th {
+            font-family: PingFangSC-Semibold, sans-serif;
+            color: #293040;
+            font-size: 20px;
+            height: 26px;
+            text-align: left;
+            padding: 0 0 20px 0;
+            word-break: break-all;
+        }
+        table.exec-info td.normal {
+            color: #5E6678;
+            font-size: 14px;
+            height: 20px;
+            text-align: left;
+            padding: 0 0 15px 0;
+            word-break: break-all;
+        }
+        table.exec-info td.first {
+            font-family: PingFangSC-Regular, sans-serif;
+            width: 156px;
+        }
+        table.exec-info td.second {
+            font-family: PingFangSC-Medium, sans-serif;
+            width: 424px;
+        }
+        table.exec-info td.third {
+            font-family: PingFangSC-Regular, sans-serif;
+            width: 152px;
+        }
+        table.exec-info td.fourth {
+            font-family: PingFangSC-Medium, sans-serif;
+            width: 428px;
+        }
+
+        table.summary {
+            width: 1160px;
+            height: 89px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #F9FAFC;
+        }
+        .color-normal {
+            color: #293040;
+        }
+        .color-passed {
+            color: #3DCCA6;
+        }
+        .color-failed {
+            color: #F95F5B;
+        }
+        .color-blocked {
+            color: #FFB400;
+        }
+        .color-ignored {
+            color: #8C8C8C;
+        }
+        .color-unavailable {
+            color: #8C8C8C;
+        }
+        table.summary th.normal {
+            font-family: PingFangSC-Semibold, sans-serif;
+            font-size: 24px;
+            height: 24px;
+            width: 110px;
+            text-align: center;
+            word-break: break-all;
+        }
+        table.summary td.normal {
+            font-family: PingFangSC-Regular, sans-serif;
+            color: #5E6678;
+            font-size: 14px;
+            height: 20px;
+            width: 110px;
+            text-align: center;
+        }
+        table.summary th.modules {
+            padding: 20px 35px 0 34px;
+        }
+        table.summary th.modules-done, table.summary th.total-tests, table.summary th.passed {
+            padding: 20px 35px 0 0;
+        }
+        table.summary th.failed, table.summary th.blocked, table.summary th.ignored {
+            padding: 20px 35px 0 0;
+        }
+        table.summary th.unavailable {
+            padding: 20px 34px 0 0;
+        }
+        table.summary td.modules {
+            padding: 5px 35px 20px 34px;
+        }
+        table.summary td.modules-done, table.summary td.total-tests, table.summary td.passed {
+            padding: 5px 35px 20px 0;
+        }
+        table.summary td.failed, table.summary td.blocked, table.summary td.ignored {
+            padding: 5px 35px 20px 0;
+        }
+        table.summary td.unavailable {
+            padding: 5px 34px 20px 0;
+        }
+
+        table.suites {
+            width: 1160px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 30px;
+        }
+        table.suites th.title {
+            font-family: PingFangSC-Semibold, sans-serif;
+            color: #293040;
+            font-size: 16px;
+            height: 22px;
+            text-align: left;
+        }
+        table.suites th.normal {
+            font-family: Roboto-Medium, sans-serif;
+            color: #293040;
+            font-size: 12px;
+            height: 36px;
+            border-bottom: 1px #E8F0FD solid;
+            text-align: left;
+        }
+        table.suites th.module {
+            width: 138px;
+            padding: 10px 0 0 20px;
+        }
+        table.suites th.test-suite {
+            width: 384px;
+            padding: 10px 0 0 0;
+        }
+        table.suites th.total {
+            width: 110px;
+            padding: 10px 0 0 0;
+        }
+        table.suites th.passed, table.suites th.failed, table.suites th.blocked {
+            width: 90px;
+            padding: 10px 0 0 0;
+        }
+        table.suites th.ignored, table.suites th.time {
+            width: 90px;
+            padding: 10px 0 0 0;
+        }
+        table.suites th.operate {
+            width: 58px;
+            padding: 10px 0 0 0;
+        }
+        table.suites tr.background-color{
+            background-color: #F9FAFC;
+        }
+        table.suites td.normal {
+            font-family: Roboto-Regular, sans-serif;
+            color: #293040;
+            font-size: 14px;
+            height: 36px;
+            text-align: left;
+            word-break: break-all;
+        }
+        table.suites td.module {
+            width: 138px;
+            padding: 0 0 0 20px;
+        }
+        table.suites td.test-suite {
+            width: 384px;
+            padding: 0 0 0 0;
+        }
+        table.suites td.total {
+            width: 110px;
+            padding: 0 0 0 0;
+        }
+        table.suites td.passed, table.suites td.failed, table.suites td.blocked {
+            width: 90px;
+            padding: 0 0 0 0;
+        }
+        table.suites td.ignored, table.suites td.time {
+            width: 90px;
+            padding: 0 0 0 0;
+        }
+        table.suites td.operate {
+            width: 58px;
+            padding: 0 0 0 0;
+        }
+
+        table.test-suite, table.failure-test {
+            width: 1160px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 30px;
+        }
+        table.test-suite th.title, table.failure-test th.title {
+            font-family: PingFangSC-Semibold, sans-serif;
+            color: #293040;
+            font-size: 14px;
+            height: 22px;
+            text-align: left;
+            wrap-option: no;
+            overflow: hidden;
+        }
+        table.test-suite th.normal, table.failure-test th.normal {
+            font-family: Roboto-Medium, sans-serif;
+            color: #293040;
+            font-size: 12px;
+            height: 36px;
+            border-bottom: 1px #E8F0FD solid;
+            text-align: left;
+        }
+        table.test-suite th.module {
+            width: 138px;
+            padding: 5px 0 0 20px;
+        }
+        table.test-suite th.test-suite {
+            width: 384px;
+            padding: 5px 0 0 0;
+        }
+        table.test-suite th.test {
+            width: 427px;
+            padding: 5px 0 0 0;
+        }
+        table.test-suite th.time {
+            width: 90px;
+            padding: 5px 0 0 0;
+        }
+        table.test-suite th.status {
+            width: 11px;
+            padding: 5px 0 0 0;
+        }
+        table.test-suite th.result {
+            width: 90px;
+            padding: 5px 0 0 0;
+        }
+        .circle-normal {
+            border-radius: 50%;
+            width: 6px;
+            height: 6px;
+            margin: 0;
+            padding: 0;
+        }
+        .circle-white {
+            background-color: #FFFFFF;
+        }
+        .circle-passed {
+            background-color: #3DCCA6;
+        }
+        .circle-failed {
+            background-color: #F95F5B;
+        }
+        .circle-blocked {
+            background-color: #FFB400;
+        }
+        .circle-ignored {
+            background-color: #8C8C8C;
+        }
+        .circle-unavailable {
+            background-color: #8C8C8C;
+        }
+        table.test-suite tr.background-color, table.failure-test tr.background-color {
+            background-color: #F9FAFC;
+        }
+        table.test-suite td.normal, table.failure-test td.normal {
+            font-family: Roboto-Regular, sans-serif;
+            color: #293040;
+            font-size: 14px;
+            height: 36px;
+            text-align: left;
+            word-break: break-all;
+        }
+        table.test-suite td.module {
+            width: 138px;
+            padding: 0 0 0 20px;
+        }
+        table.test-suite td.test-suite {
+            width: 384px;
+            padding: 0 0 0 0;
+        }
+        table.test-suite td.test {
+            width: 427px;
+            padding: 0 0 0 0;
+        }
+        table.test-suite td.time {
+            width: 90px;
+            padding: 0 0 0 0;
+        }
+        table.test-suite td.status {
+            width: 11px;
+            padding: 0 0 0 0;
+        }
+        table.test-suite td.result {
+            width: 90px;
+            padding: 0 0 0 0;
+        }
+
+        table.failure-test th.test {
+            width: 569px;
+            padding: 5px 0 0 20px;
+        }
+        table.failure-test th.status {
+            width: 11px;
+            padding: 5px 0 0 0;
+        }
+        table.failure-test th.result {
+            width: 80px;
+            padding: 5px 0 0 0;
+        }
+        table.failure-test th.details {
+            width: 480px;
+            padding: 5px 0 0 0;
+        }
+
+        table.failure-test td.test {
+            width: 569px;
+            padding: 0 0 0 20px;
+        }
+        table.failure-test td.status {
+            width: 11px;
+            padding: 0 0 0 0;
+        }
+        table.failure-test td.result {
+            width: 80px;
+            padding: 0 0 0 0;
+        }
+        table.failure-test td.details {
+            width: 480px;
+            padding: 0 0 0 0;
+        }
+
+        div.hidden {
+		    overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			width: 424px;
+		}
+    </style>
+</head>
+<body>
+
+<table class="logo">
+    <th>
+        <!--<div class="logo"></div>-->
+    </th>
+</table>
+
+<div class="container">
+    <table class="exec-info" id="summary">
+        <tr>
+            <th colspan="4">Test Summary</th>
+        </tr>
+        <tr>
+            <td class="normal first">Platform:</td>
+            <td class="normal second"><!--{exec_info.platform}--></td>
+            <td class="normal third">Test Type:</td>
+            <td class="normal fourth"><!--{exec_info.test_type}--></td>
+        </tr>
+        <tr>
+            <td class="normal first">Device Name:</td>
+            <td class="normal second"><!--{exec_info.device_name}--></td>
+            <td class="normal third">Host Info:</td>
+            <td class="normal fourth"><!--{exec_info.host_info}--></td>
+        </tr>
+        <tr>
+            <td class="normal first">Test Start/ End Time:</td>
+            <td class="normal second"><!--{exec_info.test_time}--></td>
+            <td class="normal third">Execution Time:</td>
+            <td class="normal fourth"><!--{exec_info.execute_time}--></td>
+        </tr>
+<!--{exec_info.product_params}-->
+    </table>
+
+    <table class="summary">
+        <tr>
+            <th class="normal modules color-normal"><!--{summary.modules}--></th>
+            <th class="normal modules-done color-passed"><!--{summary.modules_done}--></th>
+            <th class="normal total-tests color-normal"><!--{summary.total}--></th>
+            <th class="normal passed color-passed"><!--{summary.passed}--></th>
+            <th class="normal failed <!--{color_type.failed}-->"><!--{summary.failed}--></th>
+            <th class="normal blocked <!--{color_type.blocked}-->"><!--{summary.blocked}--></th>
+            <th class="normal ignored <!--{color_type.ignored}-->"><!--{summary.ignored}--></th>
+            <th class="normal unavailable <!--{color_type.unavailable}-->"><!--{summary.unavailable}--></th>
+        </tr>
+        <tr>
+            <td class="normal modules">Modules</td>
+            <td class="normal modules-done">Modules Done</td>
+            <td class="normal total-tests">Total Tests</td>
+            <td class="normal passed">Passed</td>
+            <td class="normal failed">Failed</td>
+            <td class="normal blocked">Blocked</td>
+            <td class="normal ignored">Ignored</td>
+            <td class="normal unavailable">Unavailable</td>
+        </tr>
+    </table>
+
+<!--{suites.context}-->
+<!--{cases.context}-->
+<!--{failures.context}-->
+</div>
+</body>
+</html>

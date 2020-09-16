@@ -1,0 +1,77 @@
+# ARM Architecture
+
+#
+# ARM has 32-bit(Aarch32) and 64-bit(Aarch64) implementations
+#
+config ARCH_ARM_AARCH32
+    bool
+    select ARCH_ARM
+    help
+      32-bit ARM architecture implementations, Except the M-profile.
+      It is not limited to ARMv7-A but also ARMv7-R, ARMv8-A 32-bit and etc.
+
+#
+# Architecture Versions
+#
+config ARCH_ARM_V7A
+    bool
+
+config ARCH_ARM_VER
+    string
+    default "armv7-a" if ARCH_ARM_V7A
+
+#
+# VFP Hardware
+#
+config ARCH_FPU_VFP_V3
+    bool
+    help
+      An optional extension to the Arm, Thumb, and ThumbEE instruction sets in the ARMv7-A and ARMv7-R profiles.
+      VFPv3U is a variant of VFPv3 that supports the trapping of floating-point exceptions to support code.
+
+config ARCH_FPU_VFP_V4
+    bool
+    help
+      An optional extension to the Arm, Thumb, and ThumbEE instruction sets in the ARMv7-A and ARMv7-R profiles.
+      VFPv4U is a variant of VFPv4 that supports the trapping of floating-point exceptions to support code.
+      VFPv4 and VFPv4U add both the Half-precision Extension and the fused multiply-add instructions to the features of VFPv3.
+
+config ARCH_FPU_VFP_D16
+    bool
+    depends on ARCH_ARM_AARCH32
+    help
+      VPU implemented with 16 doubleword registers (16 x 64-bit).
+
+config ARCH_FPU_VFP_D32
+    bool
+    depends on ARCH_ARM_AARCH32
+    help
+      VPU implemented with 32 doubleword registers (32 x 64-bit).
+
+config ARCH_FPU_VFP_NEON
+    bool
+    help
+      Advanced SIMD extension (NEON) support.
+
+config ARCH_FPU
+    string
+    default "vfpv3"       if ARCH_FPU_VFP_V3 && ARCH_FPU_VFP_D32
+    default "vfpv3-d16"   if ARCH_FPU_VFP_V3 && ARCH_FPU_VFP_D16
+    default "neon-vfpv4"  if ARCH_FPU_VFP_V4 && ARCH_FPU_VFP_D32 && ARCH_FPU_VFP_NEON
+    default "vfpv4"       if ARCH_FPU_VFP_V4 && ARCH_FPU_VFP_D32
+    default "vfpv4-d16"   if ARCH_FPU_VFP_V4 && ARCH_FPU_VFP_D16
+
+#
+# Supported Processor Cores
+#
+config ARCH_CORTEX_A7
+    bool
+    select ARCH_ARM_V7A
+    select ARCH_ARM_AARCH32
+    select ARCH_FPU_VFP_V4
+    select ARCH_FPU_VFP_D32
+    select ARCH_FPU_VFP_NEON
+
+config ARCH_CPU
+    string
+    default "cortex-a7" if ARCH_CORTEX_A7

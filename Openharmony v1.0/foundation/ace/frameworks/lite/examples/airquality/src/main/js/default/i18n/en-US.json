@@ -1,0 +1,22 @@
+{
+    "HangZhou":"HangZhou",
+    "ShangHai":"ShangHai",
+    "Good":"Good",
+    "Unhealth":"Unhealth",
+    "Normal":"Normal",
+    "airQuality":"Air Quality",
+    "History":"History",
+    "Close":"Close",
+    "updated":"Updated",
+    "dataSourceName":"From",
+    "sampledOn":"Sampled on",
+    "monitoringStation":"Monitoring Station",
+    "historicalData":"Historical Data",
+    "Monday":"Mo",
+    "Tuesday":"Tu",
+    "Wednesday":"We",
+    "Thursday":"Th",
+    "Friday":"Fr",
+    "Saturday":"Sa",
+    "Sunday":"Su"
+}

@@ -1,0 +1,31 @@
+ # Copyright (c) 2020 Huawei Device Co., Ltd.
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #     http://www.apache.org/licenses/LICENSE-2.0
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+
+import("//test/xts/tools/build/suite_lite.gni")
+
+hctest_suite("ActsSecurityDataTest") {
+    suite_name = "acts"
+    sources = [
+        "src/security_data_huks_gen_del_test.c",
+        "src/security_data_huks_sign_verify_test.c",
+        "src/security_data_huks_enc_test.c",
+        "src/security_data_huks_dec_test.c",
+        "src/security_data_huks_export_hash_random_test.c",
+    ]
+
+    include_dirs = [
+        "src",
+       "//base/security/interfaces/innerkits/huks_lite/",
+    ]
+    cflags = [ "-Wno-error" ]
+}

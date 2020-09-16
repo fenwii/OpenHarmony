@@ -1,0 +1,5 @@
+ifeq ($(LOSCFG_DRIVERS_HDF_${driver_upper_case}), y)
+    LOCAL_INCLUDE += ./${driver_lower_case}/include
+    LOCAL_INCLUDE += ./${driver_lower_case}/src
+    LOCAL_SRCS += $(wildcard ./${driver_lower_case}/src/*.c)
+endif

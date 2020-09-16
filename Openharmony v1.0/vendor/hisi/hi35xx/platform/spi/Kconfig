@@ -1,0 +1,6 @@
+config DRIVERS_HDF_PLATFORM_SPI
+    bool "Enable HDF platform spi driver"
+    default n
+    depends on DRIVERS_HDF_PLATFORM
+    help
+      Answer Y to enable HDF platform spi driver.

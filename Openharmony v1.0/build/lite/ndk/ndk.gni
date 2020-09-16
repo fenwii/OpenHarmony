@@ -1,0 +1,152 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Description: Native Development Kit Template
+
+declare_args() {
+    ohos_build_ndk = false
+    ohos_build_ndk_target_host = "linux-x86_64"
+    ohos_build_ndk_version = "1.0.0"
+}
+
+ndk_out_dir = "$root_out_dir/ndk"
+
+ndk_headers_out_dir = "$ndk_out_dir/sysroot/usr/include"
+ndk_libraries_out_dir = "$ndk_out_dir/sysroot/usr/lib"
+ndk_docs_out_dir = "$ndk_out_dir/docs"
+
+windows_system = "windows-x86_64"
+linux_system = "linux-x86_64"
+
+ndk_toolchain = "gcc"
+if (ohos_build_compiler == "clang") {
+    ndk_toolchain = "llvm"
+}
+ndk_windows_specific_out_dir = "${ndk_out_dir}/$ndk_toolchain"
+ndk_linux_specific_out_dir = "${ndk_out_dir}/$ndk_toolchain"
+
+ndk_windows_toolchains_out_dir = "${ndk_windows_specific_out_dir}"
+ndk_windows_tools_out_dir = "${ndk_out_dir}/$windows_system/tools"
+
+ndk_linux_toolchains_out_dir = "${ndk_linux_specific_out_dir}"
+ndk_linux_tools_out_dir = "${ndk_out_dir}/$linux_system/tools"
+
+template("copy_files") {
+    assert(defined(invoker.src) && defined(invoker.dest_dir),
+           "sources and dest_dir are neccessary")
+    if (defined(invoker.src_type)) {
+        src_type = invoker.src_type
+    } else {
+        src_type = "dir"
+    }
+    _deps = []
+    if (defined(invoker.deps)) {
+        _deps += invoker.deps
+    }
+    src = invoker.src
+    dst = invoker.dest_dir
+    action("$target_name$src") {
+        deps = _deps
+        script = "//build/lite/copy_files.py"
+        args = [
+            "--src_type",
+            src_type,
+            "--src",
+            rebase_path("$src"),
+            "--dest_dir",
+            rebase_path("$dst"),
+        ]
+        outputs = [ "$target_gen_dir/${target_name}_copy_files.log" ]
+    }
+}
+
+# Generate NDK library.
+template("ndk_lib") {
+    _deps = []
+    if (defined(invoker.deps)) {
+        _deps += invoker.deps
+    }
+
+    _head_files = []
+    if (defined(invoker.head_files)) {
+        _head_files = invoker.head_files
+    }
+    if (defined(invoker.lib_extension)) {
+        _extension = invoker.lib_extension
+    } else {
+        _extension = ".a"
+    }
+    assert(_extension != "")
+
+    group(target_name) {
+        deps = _deps
+    }
+
+    if (ohos_build_ndk) {
+        foreach(src_deps, _deps) {
+            lib_name = get_label_info(src_deps, "name")
+            copy_files("$target_name" + "_copy") {
+                deps = _deps
+                src_type = "file"
+                if (_extension == ".a") {
+                    src = "$root_out_dir/libs/lib$lib_name$_extension"
+                } else {
+                    src = "$root_out_dir/lib$lib_name$_extension"
+                }
+                dest_dir = "$ndk_libraries_out_dir"
+            }
+        }
+        foreach(src_dir, _head_files) {
+            copy_files(target_name) {
+                src = src_dir
+                dest_dir = "$ndk_headers_out_dir"
+            }
+        }
+    }
+}
+
+# Specify ndk toolchains
+#
+# Input variables:
+#   dest_dir: Copy destination where sources are copied to.
+#   src_dir: Copy Source directories.
+#   src_type: file or path
+#
+template("ndk_toolchains") {
+    assert(defined(invoker.src_dir) && defined(invoker.dest_dir),
+           "sources and dest_dir are neccessary")
+
+    if (ohos_build_ndk) {
+        group(target_name) {}
+        indexSrc = 0
+        indexDst = 0
+        foreach(src_dir, invoker.src_dir) {
+            indexDst = 0
+            foreach(dst, invoker.dest_dir) {
+                if (indexDst == indexSrc) {
+                    copy_files("$src_dir") {
+                        if (defined(invoker.src_type)) {
+                            src_type = invoker.src_type
+                        } else {
+                            src_type = "dir"
+                        }
+                        src = src_dir
+                        dest_dir = dst
+                    }
+                }
+                indexDst = indexDst + 1
+            }
+            indexSrc = indexSrc + 1
+        }
+    }
+}

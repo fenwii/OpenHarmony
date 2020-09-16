@@ -1,0 +1,16 @@
+# Copyright (c) Huawei Technologies Co., Ltd. 2020. All rights reserved.
+
+source_set("test_unity") {
+    sources = [
+        "unity.c",
+    ]
+    include_dirs = [
+        "//vendor/huawei/watchgt/devkit/hal/include",
+        "//utils/include",
+        "//foundation/distributedschedule/interfaces/innerkits/samgr_lite/samgr",
+        "//foundation/distributedschedule/interfaces/innerkits/samgr_lite/communication/mpc/transport",
+        "//foundation/distributedschedule/interfaces/innerkits/samgr_lite/communication/mpc",
+        "//test/lite/testservice/include",
+        "//third_party/cJSON/tests/unity/src",
+    ]
+}

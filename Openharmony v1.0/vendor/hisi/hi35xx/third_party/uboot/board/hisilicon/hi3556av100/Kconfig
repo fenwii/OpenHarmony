@@ -1,0 +1,15 @@
+if TARGET_HI3556AV100
+
+config SYS_BOARD
+	default "hi3556av100"
+
+config SYS_VENDOR
+	default "hisilicon"
+
+config SYS_SOC
+	default "hi3556av100"
+
+config SYS_CONFIG_NAME
+	default "hi3556av100"
+
+endif

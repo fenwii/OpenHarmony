@@ -1,0 +1,25 @@
+{
+    "description": "Config for kernel_lite posix mem api test cases",
+    "environment": [
+        {
+            "type": "device",
+            "label": "ipcamera"
+        }
+    ],
+    "kits": [
+        {
+            "type": "MountKit",
+            "server": "NfsServer",
+            "mount": [
+                {
+                    "source": "testcases/kernel",
+                    "target": "/test_root/kernel"
+                }
+            ]
+        }
+    ],
+    "driver": {
+        "type": "CppTestLite",
+        "execute": "/test_root/kernel/ActsMemApiTest.bin"
+    }
+}

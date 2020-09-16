@@ -1,0 +1,58 @@
+root {
+    platform {
+        i2c_config {
+            template i2c_controller {
+                bus = 0;
+                match_attr = "";
+                reg_pbase = 0x120b0000;
+                reg_size = 0xd1;
+                irq = 0;
+                freq = 400000;
+                clk = 50000000;
+            }
+
+            controller_0x120b0000 :: i2c_controller {
+                bus = 0;
+                match_attr = "hisilicon_hi35xx_i2c_0";
+            }
+
+            controller_0x120b1000 :: i2c_controller {
+                bus = 1;
+                match_attr = "hisilicon_hi35xx_i2c_1";
+                reg_pbase = 0x120b1000;
+            }
+
+            controller_0x120b2000 :: i2c_controller {
+                bus = 2;
+                match_attr = "hisilicon_hi35xx_i2c_2";
+                reg_pbase = 0x120b2000;
+            }
+
+            controller_0x120b3000 :: i2c_controller {
+                bus = 3;
+                match_attr = "hisilicon_hi35xx_i2c_3";
+                reg_pbase = 0x120b3000;
+            }
+            controller_0x120b4000 :: i2c_controller {
+                bus = 4;
+                match_attr = "hisilicon_hi35xx_i2c_4";
+                reg_pbase = 0x120b4000;
+            }
+            controller_0x120b5000 :: i2c_controller {
+                bus = 5;
+                match_attr = "hisilicon_hi35xx_i2c_5";
+                reg_pbase = 0x120b5000;
+            }
+            controller_0x120b6000 :: i2c_controller {
+                bus = 6;
+                match_attr = "hisilicon_hi35xx_i2c_6";
+                reg_pbase = 0x120b6000;
+            }
+            controller_0x120b7000 :: i2c_controller {
+                bus = 7;
+                match_attr = "hisilicon_hi35xx_i2c_7";
+                reg_pbase = 0x120b7000;
+            }
+        }
+    }
+}

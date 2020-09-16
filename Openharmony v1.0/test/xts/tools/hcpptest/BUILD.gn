@@ -1,0 +1,152 @@
+ # Copyright (c) 2020 Huawei Device Co., Ltd.
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #     http://www.apache.org/licenses/LICENSE-2.0
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+
+config("hcpptest_private_config") {
+  visibility = [ ":*" ]
+  include_dirs = [ "//third_party/googletest/googletest" ]
+  ldflags = [ "-lstdc++" ]
+}
+
+config("hcpptest_config") {
+  include_dirs = [ "//third_party/googletest/googletest/include" ]
+  ldflags = [ "-lstdc++",
+              "-Wl,-rpath=./lib" ]
+}
+
+static_library("hcpptest") {
+  #testonly = true
+  public = [
+    "//third_party/googletest/googletest/include/gtest/gtest.h",
+    "//third_party/googletest/googletest/include/gtest/gtest-spi.h",
+  ]
+  sources = [
+    "//third_party/googletest/googletest/include/gtest/gtest-death-test.h",
+    "//third_party/googletest/googletest/include/gtest/gtest-message.h",
+    "//third_party/googletest/googletest/include/gtest/gtest-param-test.h",
+    "//third_party/googletest/googletest/include/gtest/gtest-printers.h",
+    "//third_party/googletest/googletest/include/gtest/gtest-test-part.h",
+    "//third_party/googletest/googletest/include/gtest/gtest-typed-test.h",
+    "//third_party/googletest/googletest/include/gtest/gtest_pred_impl.h",
+    "//third_party/googletest/googletest/include/gtest/gtest_prod.h",
+    "//third_party/googletest/googletest/include/gtest/internal/custom/gtest-port.h",
+    "//third_party/googletest/googletest/include/gtest/internal/custom/gtest-printers.h",
+    "//third_party/googletest/googletest/include/gtest/internal/custom/gtest.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-death-test-internal.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-filepath.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-internal.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-linked_ptr.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-param-util-generated.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-param-util.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-port-arch.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-port.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-string.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-tuple.h",
+    "//third_party/googletest/googletest/include/gtest/internal/gtest-type-util.h",
+    "//third_party/googletest/googletest/include/gtest/hwext/gtest-ext.h",
+    "//third_party/googletest/googletest/include/gtest/hwext/gtest-filter.h",
+    "//third_party/googletest/googletest/include/gtest/hwext/gtest-tag.h",
+    "//third_party/googletest/googletest/include/gtest/hwext/utils.h",
+    "//third_party/googletest/googletest/src/gtest-death-test.cc",
+    "//third_party/googletest/googletest/src/gtest-filepath.cc",
+    "//third_party/googletest/googletest/src/gtest-internal-inl.h",
+    "//third_party/googletest/googletest/src/gtest-port.cc",
+    "//third_party/googletest/googletest/src/gtest-printers.cc",
+    "//third_party/googletest/googletest/src/gtest-test-part.cc",
+    "//third_party/googletest/googletest/src/gtest-typed-test.cc",
+    "//third_party/googletest/googletest/src/gtest.cc",
+    "//third_party/googletest/googletest/src/hwext/gtest-ext.cc",
+    "//third_party/googletest/googletest/src/hwext/gtest-filter.cc",
+    "//third_party/googletest/googletest/src/hwext/gtest-tag.cc",
+    "//third_party/googletest/googletest/src/hwext/gtest-utils.cc",
+  ]
+  public_configs = [ ":hcpptest_config" ]
+  configs += [ ":hcpptest_private_config" ]
+  defines = [ "GTEST_HAS_CLONE=0" ]
+}
+
+static_library("hcpptest_main") {
+  #testonly = true
+  sources = [
+    "//third_party/googletest/googletest/src/gtest_main.cc",
+  ]
+  public_deps = [
+    ":hcpptest",
+  ]
+  
+}
+
+
+config("gmock_private_config") {
+  visibility = [ ":*" ]
+  include_dirs = [ "//third_party/googletest/googlemock" ]
+}
+
+config("gmock_config") {
+  include_dirs = [ "//third_party/googletest/googlemock/include" ]
+
+  cflags_cc = [
+    # The MOCK_METHODn() macros do not specify "override", which triggers this
+    # warning in users: "error: 'Method' overrides a member function but is not
+    # marked 'override' [-Werror,-Winconsistent-missing-override]". Suppress
+    # these warnings until https://github.com/google/googletest/issues/533 is
+    # fixed.
+    "-Wno-inconsistent-missing-override",
+  ]
+}
+
+static_library("gmock") {
+  #testonly = true
+  public = [
+    "//third_party/googletest/googlemock/include/gmock/gmock.h",
+  ]
+  sources = [
+    "//third_party/googletest/googlemock/include/gmock/gmock-actions.h",
+    "//third_party/googletest/googlemock/include/gmock/gmock-cardinalities.h",
+    "//third_party/googletest/googlemock/include/gmock/gmock-generated-actions.h",
+    "//third_party/googletest/googlemock/include/gmock/gmock-generated-function-mockers.h",
+    "//third_party/googletest/googlemock/include/gmock/gmock-generated-matchers.h",
+    "//third_party/googletest/googlemock/include/gmock/gmock-generated-nice-strict.h",
+    "//third_party/googletest/googlemock/include/gmock/gmock-matchers.h",
+    "//third_party/googletest/googlemock/include/gmock/gmock-more-actions.h",
+    "//third_party/googletest/googlemock/include/gmock/gmock-more-matchers.h",
+    "//third_party/googletest/googlemock/include/gmock/gmock-spec-builders.h",
+    "//third_party/googletest/googlemock/include/gmock/internal/custom/gmock-generated-actions.h",
+    "//third_party/googletest/googlemock/include/gmock/internal/custom/gmock-matchers.h",
+    "//third_party/googletest/googlemock/include/gmock/internal/custom/gmock-port.h",
+    "//third_party/googletest/googlemock/include/gmock/internal/gmock-generated-internal-utils.h",
+    "//third_party/googletest/googlemock/include/gmock/internal/gmock-internal-utils.h",
+    "//third_party/googletest/googlemock/include/gmock/internal/gmock-port.h",
+    "//third_party/googletest/googlemock/src/gmock-cardinalities.cc",
+    "//third_party/googletest/googlemock/src/gmock-internal-utils.cc",
+    "//third_party/googletest/googlemock/src/gmock-matchers.cc",
+    "//third_party/googletest/googlemock/src/gmock-spec-builders.cc",
+    "//third_party/googletest/googlemock/src/gmock.cc",
+  ]
+  public_configs = [ ":gmock_config" ]
+  configs += [ ":gmock_private_config" ]
+  deps = [
+    ":hcpptest",
+  ]
+}
+
+static_library("gmock_main") {
+  #testonly = true
+  sources = [
+    "//third_party/googletest/googlemock/src/gmock_main.cc",
+  ]
+  public_deps = [
+    ":gmock",
+    ":hcpptest",
+  ]
+}
+

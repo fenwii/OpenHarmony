@@ -1,0 +1,13 @@
+config DRIVERS_HDF_LCD
+    bool "Enable HDF Lcd driver"
+    default n
+    depends on DRIVERS_HDF
+    help
+      Answer Y to enable HDF Lcd driver.
+
+config DRIVERS_HDF_LCD_ICN9700
+    bool "Enable HDF Lcd Icn9700 driver"
+    default n
+    depends on DRIVERS_HDF_LCD
+    help
+      Answer Y to enable HDF Lcd Icn9700 driver.

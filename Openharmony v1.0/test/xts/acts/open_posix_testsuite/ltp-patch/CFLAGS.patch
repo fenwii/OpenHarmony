@@ -1,0 +1,5 @@
+--- third_party/ltp/testcases/open_posix_testsuite/CFLAGS	2020-08-29 16:32:39.817825435 +0800
++++ test/xts/acts/open_posix_testsuite/ltp-patch/CFLAGS	2020-08-29 16:33:09.077825435 +0800
+@@ -1 +1 @@
+--std=c99 -D_POSIX_C_SOURCE=200809L -D_XOPEN_SOURCE=700 -W -Wall
++-std=c99 -D_POSIX_C_SOURCE=200809L -D_XOPEN_SOURCE=700

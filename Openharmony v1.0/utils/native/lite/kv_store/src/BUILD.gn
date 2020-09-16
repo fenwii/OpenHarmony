@@ -1,0 +1,43 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+if (ohos_kernel_type == "liteos_riscv") {
+    static_library("utils_kv_store") {
+        sources = [
+            "kvstore_common/kvstore_common.c",
+            "kvstore_impl_hal/kv_store.c",
+        ]
+        include_dirs = [
+            "//utils/native/lite/include",
+            "kvstore_common",
+        ]
+    }
+} else {
+    shared_library("utils_kv_store") {
+        cflags = ["-Wall"]
+        cflags_cc = cflags
+        sources = [
+            "kvstore_common/kvstore_common.c",
+            "kvstore_impl_posix/kv_store.c",
+        ]
+        include_dirs = [
+            "//utils/native/lite/include",
+            "kvstore_common",
+            "//third_party/bounds_checking_function/include",
+            "//utils/native/lite/kv_store/innerkits",
+        ]
+        public_deps = [
+            "//third_party/bounds_checking_function:libsec_shared",
+        ]
+    }
+}

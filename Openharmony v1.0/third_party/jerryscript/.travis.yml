@@ -1,0 +1,170 @@
+language: c
+
+# Default environment: Ubuntu Trusty 14.04.
+os: linux
+dist: trusty
+
+# Default job task: run tests as defined in the $OPT environment variable.
+# Jobs can redefine the 'script' stage in the matrix below.
+script: tools/run-tests.py $OPTS
+
+# All the job definitions in the matrix.
+matrix:
+  include:
+    - name: "Checks"
+      install: pip install --user pylint==1.6.5
+      script:
+        - tools/run-tests.py --check-signed-off=travis --check-doxygen --check-vera --check-license --check-magic-strings --check-pylint
+        - travis_wait 40 tools/run-tests.py --check-cppcheck
+      addons:
+        apt:
+          packages: [doxygen, cppcheck, vera++]
+
+    - name: "Linux/x86-64 Build, Correctness & Debugger Tests"
+      env:
+        - OPTS="--quiet --jerry-tests --jerry-test-suite --jerry-debugger"
+
+    - name: "Linux/x86 (cpointer-32bit) Build & Correctness Tests"
+      env:
+        - OPTS="--quiet --jerry-tests --jerry-test-suite --buildoptions=--compile-flag=-m32,--cpointer-32bit=on"
+      addons:
+        apt:
+          packages: [gcc-multilib]
+
+    - name: "Linux/ARM Build & Correctness Tests"
+      env:
+        - OPTS="--quiet --jerry-tests --jerry-test-suite --toolchain=cmake/toolchain_linux_armv7l.cmake --buildoptions=--linker-flag=-static"
+        - RUNTIME=qemu-arm-static
+        - TIMEOUT=300
+      addons:
+        apt:
+          packages: [gcc-arm-linux-gnueabihf, libc6-dev-armhf-cross, qemu-user-static]
+
+    - name: "OSX/x86-64 Build, Correctness & Unit Tests"
+      env:
+        - OPTS="--quiet --jerry-tests --jerry-test-suite --unittests"
+      os: osx
+      addons:
+        homebrew:
+          packages: [cmake, cppcheck, vera++]
+
+    - name: "Build Tests"
+      env:
+        - OPTS="--buildoption-test"
+      addons:
+        apt:
+          packages: [gcc-multilib]
+
+    - name: "Conformance Tests"
+      env:
+        - OPTS="--test262"
+
+    - name: "Unit Tests"
+      env:
+        - OPTS="--unittests"
+
+    - name: "ASAN Tests"
+      env:
+        # Skipping maximum stack usage related tests due to 'detect_stack_use_after_return=1' ASAN option.
+        # For more detailed description: https://github.com/google/sanitizers/wiki/AddressSanitizerUseAfterReturn#compatibility
+        - OPTS="--quiet --jerry-tests --jerry-test-suite --skip-list=parser-oom.js,parser-oom2.js,stack-limit.js,regression-test-issue-2190.js,regression-test-issue-2258-2963.js,regression-test-issue-2448.js,regression-test-issue-2905.js --buildoptions=--stack-limit=0,--compile-flag=-fsanitize=address,--compile-flag=-m32,--compile-flag=-fno-omit-frame-pointer,--compile-flag=-fno-common,--compile-flag=-O2,--debug,--system-allocator=on,--linker-flag=-fuse-ld=gold"
+        - ASAN_OPTIONS=detect_stack_use_after_return=1:check_initialization_order=true:strict_init_order=true
+        - TIMEOUT=600
+      compiler: gcc-5
+      addons:
+        apt:
+          sources: ubuntu-toolchain-r-test
+          packages: [gcc-5, gcc-5-multilib]
+
+    - name: "UBSAN Tests"
+      env:
+        - OPTS="--quiet --jerry-tests --jerry-test-suite --skip-list=parser-oom.js,parser-oom2.js --buildoptions=--compile-flag=-fsanitize=undefined,--compile-flag=-m32,--compile-flag=-fno-omit-frame-pointer,--compile-flag=-fno-common,--debug,--system-allocator=on,--linker-flag=-fuse-ld=gold"
+        - UBSAN_OPTIONS=print_stacktrace=1
+        - TIMEOUT=600
+      compiler: gcc-5
+      addons:
+        apt:
+          sources: ubuntu-toolchain-r-test
+          packages: [gcc-5, gcc-5-multilib]
+
+    - name: "Coverity Scan & SonarQube"
+      env:
+        # Declaration of the encrypted COVERITY_SCAN_TOKEN, created via the
+        # "travis encrypt" command using the project repo's public key.
+        - secure: "V7BdXv3FCVkFGEfKfWto6I+Sytou1zTCGyn49xurkBfKNsG/3vbkXfsbK1m6lCZxmY7W/1odpfjixpAPZgy2L4FgPZK6/UyVvC8pIFjDOubcEniN48haleSvm/ZFPLDifxDL2+VVFtK1oRYPtDBzzSoUCcfwovgk+Wy+tSBnhnyRLqO/WaI6PqFof7ECYMTRlJVjioZARVP4YmkBruIPmGDdR/3EvwowlxfuiFoPheix61ug4x3tpTBW2qWgvFjDyCZXFz4pJrBQPTAIbyKMxHcBykJjl9eR+dWAOsvE1Uw48tFOJxjKDfUttVQUPsyKFllmcCVS0fDYB5pzZOmRUPxJmox1jt8J1FY85Ri1PGY0THBPM2H7to4Yf2418Y3539epbN8p+79dwaM7e2OiJ2owukbWI7PoNqIz5DV5zxpIKsOQfeWuNLJOgsBePEIU7lz133Si/2d5W/7If46B1d+hZRBJfSYksgDqDU6G/voZkPf0K5bKe2O2BxiIW1DYk4yQ1ecZAkqGjZ8jG3zYGMG3mSF4VyuU4UGFG1Pg8fw7Ap5zuHxSVY1H9dtu4T6JQG3aj/x1omlzfw48DjgkwxVhf7Xvl3yfR7pzydYheLX3MZYtcVo7rWnglZFZoUjWDK1StbmzsvPftvwWtoDTWlzo4xeSXhahSJvJyc4U8Wc="
+      addons:
+        coverity_scan:
+          project:
+            name: "jerryscript-project/jerryscript"
+            description: "Ultra-lightweight JavaScript engine for the Internet of Things."
+          notification_email: rsipka.uszeged@partner.samsung.com
+          build_command: "tools/build.py --clean"
+          branch_pattern: master
+        sonarcloud:
+          organization: "jerryscript-project"
+      # Coverity Scan has already built the project by the time 'script' stage is reached.
+      script: tools/check-sonarqube.sh
+      cache:
+        directories:
+          - '${HOME}/.sonar/cache'
+
+    - name: "Mbed OS 5/K64F Build Test"
+      addons:
+        apt:
+          sources:
+            - sourceline: ppa:team-gcc-arm-embedded/ppa
+          packages: [gcc-arm-embedded]
+      language: python # NOTE: only way to ensure python>=2.7.10 on Trusty image
+      python: 3.6
+      install: make -f ./targets/mbedos5/Makefile.travis install
+      script: make -f ./targets/mbedos5/Makefile.travis script
+
+    - name: "Zephyr/Arduino 101 Build Test"
+      install: make -f ./targets/zephyr/Makefile.travis install-noapt
+      script: make -f ./targets/zephyr/Makefile.travis script
+      addons:
+        apt:
+          packages: [gperf, dfu-util, device-tree-compiler, python3-ply, python3-pip]
+
+    - name: "NuttX/STM32F4 Build Test"
+      install: make -f targets/nuttx-stm32f4/Makefile.travis install-noapt
+      script: make -f targets/nuttx-stm32f4/Makefile.travis script
+      addons:
+        apt:
+          packages: [gcc-arm-none-eabi, libnewlib-arm-none-eabi, gperf]
+
+    - name: "RIOT/STM32F4 Build Test"
+      install: make -f ./targets/riot-stm32f4/Makefile.travis install-noapt
+      script: make -f ./targets/riot-stm32f4/Makefile.travis script
+      compiler: clang-3.9
+      addons:
+        apt:
+          sources:
+            - sourceline: ppa:team-gcc-arm-embedded/ppa
+          packages: [clang-3.9, gcc-arm-embedded, gcc-multilib]
+
+    - name: "ESP8266 Build Test"
+      install: make -f ./targets/esp8266/Makefile.travis install-noapt
+      script: make -f ./targets/esp8266/Makefile.travis script
+      addons:
+        apt:
+          packages: [wget]
+
+  fast_finish: true
+
+# The channel name "chat.freenode.net#jerryscript"
+# is encrypted against Samsung/jerryscript
+# to prevent IRC spam of forks.
+#
+# travis encrypt -r "Samsung/jerryscript" "chat.freenode.net#jerryscript"
+notifications:
+  irc:
+    channels:
+      - secure: "4kML4uZywOPaT3r/bHCvZCeQWooyzZumESmKuHG2Y8/B29WtMBobsoRQZRfOmlUP5kshfjh0Itp5WFpdACiBCoorHch/8z3VT7fIbKF4UnxrAvNiFArqxXC0OWGIu93e7uyyXJCsQ/JiOXU7bD31Mh8LbnfS1z3wBAMXi+AwcaGiVVH4VTL6O8sR3ij5WmsqpECWhyWTgTP3MiLquZ+09Lv9mp5GGciEemq4p8VnaQt2BdyEBmUJJ1EAyMCJlKNObQudegOzYsY3CVON9C87dCuHf7DYstsxb8AzwRAKn8LHiaWhYaWLfvHqoXmc4w1ZgN0HZ5Qyx8KMkZkXKUiHxuCSoXDxNAHWTGQBsTDid5drZeqOFucOHEKJzkqaWSUKUF3pY/hq/h2kjAn230DlBNkJt+ikSxwy6Mm8GG8LnH5gRMl37zHDHrtyRsKR8GIst9B1B95LAOLA5t8U/ucGKXqLsohS8glXaM4jjh69it3GeHj6NhB8NbC/LsmRrhjKzV+VnjPI6gZvN+5tDiuxMbsMal+0DdWVNCst/aO3Jz0iaA5ahyo2ZwBb2efw3CekRLMKmHtnjqB0SWWXT3/t2+5zNoM6gBjo4RPOg7k5eTOXcfk8okWtQ5d3n8UtvZ5rSiDl3rssHwp1yHuuC8rGGov74DLvyDlpM6p/dmtu2o8="
+    on_success: always
+    on_failure: always
+    use_notice: true
+    template:
+      - "%{repository_name} (%{branch}@%{commit}): %{author} - %{commit_subject} [%{result}]"
+      - "Commit: %{compare_url}"
+      - "Build: %{build_url}"

@@ -1,0 +1,66 @@
+<!--
+Copyright (c) 2020 Huawei Device Co., Ltd.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+    <list class = "list">
+        <list-item style="height:60px;width:454px;">
+        </list-item>
+        <list-item class= "item-title">
+                <input type = "button" style="margin-left:85px;width:130px;height:60px;" onclick = "goHome" value = "首页"/>
+                <input type = "button" style="margin-left:20px;width:130px;height:60px;" onclick = "goPrevious" value = "上一页"/>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-types">
+            <text class = "whole-text">特有样式</text>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-special">
+            <div class = "special-div">
+                <div class = "special-left-div" style="margin-left:30px;width:160px;">
+                    <text class = "text" style="height:160px;width:160px;">color;font-size;letter-spacing</text>
+                </div>
+                <div class = "special-right-div">
+                    <text style = "width:200px;height:50px;margin-left:20px;margin-top:10px;color:red;font-size:38px;letter-spacing:20px;">show</text>
+                </div>
+            </div>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-special">
+           <div class = "special-div">
+                <div class = "special-left-div" style="margin-left:30px;width:160px;">
+                    <text class = "text" style="height:200px;width:160px;">text-align;text-overflow;font-family</text>
+                </div>
+                <div class = "special-right-div">
+                    <text style = "width:200px;height:50px;margin-left:20px;margin-top:10px;text-align:center;text-overflow:clip;text-family:HYQIHei-65S;background-color:red">show textabcde</text>
+                </div>
+           </div>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-special">
+           <div class = "special-div">
+                <div class = "special-left-div" style="margin-left:30px;width:160px;">
+                    <text class = "text" style="height:160px;width:160px;">text-align;text-overflow;</text>
+                </div>
+                <div class = "special-right-div">
+                    <text style = "width:200px;height:50px;margin-left:20px;margin-top:10px;text-align:right;text-overflow:ellipsis;text-family:HYQIHei-65S;background-color:red">show textabcde</text>
+                </div>
+           </div>
+        </list-item>
+        <list-item style="height:60px;width:454px;">
+        </list-item>
+    </list>

@@ -1,0 +1,208 @@
+/*
+ * Copyright (c) 2020 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+.container {
+    width: 960px;
+    height: 480px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    width: 960px;
+    height: 480px;
+}
+
+.header {
+    width: 400px;
+    height: 80px;
+    display: flex;
+}
+
+.back {
+    width: 36px;
+    height: 36px;
+    margin-left: 39px;
+    margin-top: 23px;
+}
+
+.title {
+    width: 296px;
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 21px;
+    color: #e6e6e6;
+}
+
+.musicName {
+    width: 171px;
+    height: 55px;
+    margin-left: 395px;
+    margin-top: 25px;
+    font-size: 38px;
+    color: #ffffff;
+    text-align: center;
+}
+
+.songer {
+    width: 114px;
+    height: 42px;
+    margin-left: 423px;
+    margin-top: 10px;
+    font-size: 30px;
+    color: #bfbfbf;
+    text-align: center;
+}
+
+.progress-Wrapper {
+    flex-direction: row;
+    width: 960px;
+    height: 40px;
+    margin-top: 80px;
+}
+
+.playTime {
+    width: 300px;
+    height: 40px;
+    text-align: right;
+    font-size: 30px;
+    color: #A2A2A2;
+}
+
+.allTime {
+    width: 300px;
+    height: 40px;
+    text-align: left;
+    font-size: 30px;
+    margin-left: 18px;
+    text-align: left;
+    color: #A2A2A2;
+}
+
+.progressBar {
+    width:324px;
+    height: 32px;
+    selected-color: #ffffff;
+    block-color: #ffffff;
+    color:#404040;
+    margin-left: 18px;
+    margin-top: 8px;
+}
+
+.controlBar {
+    flex-direction: row;
+    width: 960px;
+    height: 98px;
+    margin-top: 30px;
+}
+
+.modeBtn {
+    width: 36px;
+    height: 36px;
+    margin-left: 242px;
+    margin-top: 33px;
+}
+
+.previousBtn {
+    width: 56px;
+    height: 56px;
+    margin-left: 48px;
+    margin-top: 21px;
+}
+
+.nextBtn {
+    width: 56px;
+    height: 56px;
+    margin-left: 48px;
+    margin-top: 21px;
+}
+
+.playBtn {
+    width: 98px;
+    height: 98px;
+    margin-left: 49px;
+}
+
+.listBtn {
+    width: 36px;
+    height: 36px;
+    margin-left: 48px;
+    margin-top: 33px;
+}
+
+.list-Wrapper {
+    width: 480px;
+    height: 480px;
+    left: 480px;
+    background-color: #252525;
+    flex-direction: column;
+}
+
+.listText {
+    width: 150px;
+    height: 40px;
+    margin-left: 36px;
+    margin-top: 36px;
+    color: #ffffff;
+}
+
+.musicList {
+    width: 408px;
+    height: 365px;
+    margin-top: 36px;
+    margin-left: 36px;
+    background-color: #252525;
+}
+
+.listItem {
+    width: 408px;
+    height: 120px;
+    background-color: #252525;
+}
+
+.item-Wrapper {
+    width: 408px;
+    height: 112px;
+    background-color: #333333;
+    margin-top: 8px;
+    border-radius: 10px;
+    flex-direction: column;
+}
+
+.space-Wrapper {
+    width: 408px;
+    height: 120px;
+    background-color: #252525;
+}
+
+.itemName {
+    width: 400px;
+    height: 48px;
+    margin-top: 16px;
+    margin-left: 24px;
+    color: #ffffff;
+}
+
+.itemSonger {
+    width: 400px;
+    height: 48px;
+    margin-top: 3px;
+    margin-left: 24px;
+    color: #adadad;
+}
+
+
+
+

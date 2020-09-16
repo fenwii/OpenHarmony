@@ -1,0 +1,10 @@
+#ifndef _${driver_upper_case}_DRIVER_H
+#define _${driver_upper_case}_DRIVER_H
+
+#include "hdf_device_desc.h"
+
+struct ${driver_upper_camel_case}DriverService {
+    struct IDeviceIoService ${driver_lower_camel_case}Service;
+};
+
+#endif/*_${driver_upper_case}_DRIVER_H*/

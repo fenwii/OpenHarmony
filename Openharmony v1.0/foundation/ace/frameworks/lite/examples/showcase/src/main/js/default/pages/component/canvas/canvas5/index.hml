@@ -1,0 +1,34 @@
+<!--
+Copyright (c) 2020 Huawei Device Co., Ltd.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<div style="height:450;width:450;border-width:1;border-color:#ff0000;flex-direction:column" >
+    <stack style="width:454;height:80;margin-top:80;border-width:1;border-color:#0000ff">
+      <input type="button" style="left:85;width:130;height:60;" value="首页" onclick=backMain>
+      </input>
+      <input type="button" style="left:235;width:130;height:60;" value="上一页" onclick=backSuperior>
+      </input>
+    </stack>
+    <canvas ref="canvasObj" style="width:280;height:80;margin:20;background-color:#ffff00">
+    </canvas>
+    <text class="text" style="margin-left:40;width:360;">
+      {{text1}}
+    </text>
+    <text class="text" style="margin-left:40;width:360;">
+      {{text2}}
+    </text>
+    <text class="text" style="margin-left:40;width:360;">
+      {{text3}}
+    </text>
+</div>

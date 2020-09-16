@@ -1,0 +1,6 @@
+config DRIVERS_MEM
+    bool "Enable MEM"
+    default y
+    depends on DRIVERS && FS_VFS
+    help
+      Answer Y to enable LiteOS support mem.

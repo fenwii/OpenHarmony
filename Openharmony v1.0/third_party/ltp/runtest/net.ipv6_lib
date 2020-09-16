@@ -1,0 +1,7 @@
+#DESCRIPTION:IPV6 related tests
+in6_01 in6_01
+in6_02 in6_02
+getaddrinfo_01 getaddrinfo_01
+asapi_01 asapi_01
+asapi_02 asapi_02
+asapi_03 asapi_03

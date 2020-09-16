@@ -1,0 +1,54 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/lite/config/component/lite_component.gni")
+import("//build/lite/ndk/ndk.gni")
+
+config("cjson_config") {
+    include_dirs = [
+        ".",
+    ]
+}
+
+cjson_sources = [
+    "cJSON.c",
+    "cJSON_Utils.c",
+]
+
+lite_library("cjson_static") {
+    target_type = "static_library"
+    sources = cjson_sources
+    public_configs = [ ":cjson_config" ]
+}
+
+lite_library("cjson_shared") {
+    target_type = "shared_library"
+    sources = cjson_sources
+    public_configs = [ ":cjson_config" ]
+}
+
+ndk_lib("cjson_ndk") {
+    if (board_name != "hi3861v100") {
+        lib_extension = ".so"
+        deps = [
+            ":cjson_shared"
+        ]
+    } else {
+        deps = [
+            ":cjson_static"
+        ]
+    }
+    head_files = [
+        "//third_party/cJSON"
+    ]
+}

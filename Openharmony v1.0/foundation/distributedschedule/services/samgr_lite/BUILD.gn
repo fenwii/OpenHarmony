@@ -1,0 +1,57 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/lite/config/component/lite_component.gni")
+import("//build/lite/ndk/ndk.gni")
+
+lite_component("samgr") {
+    features = [
+        "samgr",
+        "communication/broadcast",
+    ]
+
+    if (ohos_kernel_type == "liteos_a" || ohos_kernel_type == "linux"){
+        features += [
+            "samgr_server:server",
+            "samgr_client:client",
+        ]
+    }
+}
+
+ndk_lib("samgr_lite_ndk") {
+    if(ohos_kernel_type == "liteos_riscv" || ohos_kernel_type == "liteos_m") {
+        lib_extension = ".a"
+    } else if (ohos_kernel_type == "liteos_a" || ohos_kernel_type == "linux") {
+        lib_extension = ".so"
+    }
+    deps = [
+        "samgr",
+        "communication/broadcast",
+    ]
+    head_files = [
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/samgr",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/communication/broadcast",
+    ]
+    if (ohos_kernel_type == "liteos_a" || ohos_kernel_type == "linux"){
+        deps += [
+            "samgr_server:server",
+        ]
+        head_files += ["//foundation/distributedschedule/interfaces/kits/samgr_lite/registry"]
+    }
+}
+
+generate_notice_file("samgr_notice_file") {
+    module_name = "samgr"
+    module_source_dir_list = [
+        "//third_party/bounds_checking_function"
+    ]
+}

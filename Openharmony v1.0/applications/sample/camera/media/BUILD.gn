@@ -1,0 +1,67 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/lite/config/component/lite_component.gni")
+
+copy("camera_config") {
+    if (board_name == "hi3516dv300") {
+        sources = ["cameradev_imx335.ini"]
+    } else if(board_name == "hi3518ev300" && ohos_build_compiler == "clang") {
+        sources = ["cameradev_jxf23.ini"]
+    } else {
+        sources = ["cameradev_imx307.ini"]
+    }
+    outputs = [ "$root_out_dir/data/cameradev.ini" ]
+}
+
+executable("camera_sample") {
+    sources = [
+        "camera_sample.cpp"
+    ]
+    cflags = ["-Wall"]
+    cflags_cc = cflags
+    include_dirs = []
+
+    ldflags = ["-lstdc++"]
+    ldflags += ["-lpthread"]
+    ldflags += ["-Wl,-rpath-link=$ohos_root_path/$root_out_dir"]
+
+    deps = [
+        "//foundation/multimedia/frameworks/camera_lite:camera",
+        "//foundation/multimedia/frameworks/recorder_lite:recorder",
+    ]
+    output_dir = "$root_out_dir/dev_tools"
+}
+
+executable("player_sample") {
+    sources = [
+        "player_sample.cpp"
+    ]
+    cflags = ["-Wall"]
+    cflags_cc = cflags
+    include_dirs = []
+    ldflags = ["-lstdc++"]
+    ldflags += ["-lpthread"]
+    ldflags += ["-Wl,-rpath-link=$ohos_root_path/$root_out_dir"]
+    deps = [
+        "//third_party/bounds_checking_function:libsec_shared",
+        "//foundation/multimedia/frameworks/player_lite:player",
+    ]
+    output_dir = "$root_out_dir/dev_tools"
+}
+
+lite_component("media_sample") {
+    features = [
+        ":camera_sample",
+        ":player_sample",
+    ]
+}

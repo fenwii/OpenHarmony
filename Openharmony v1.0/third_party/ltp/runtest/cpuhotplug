@@ -1,0 +1,9 @@
+## Run the CPUHOTPLUG tests here
+
+#cpuhotplug01 cpuhotplug01.sh -c 1 -l 1 -n 1 -f 1 -e 6
+cpuhotplug02 cpuhotplug02.sh -c 1 -l 1
+cpuhotplug03 cpuhotplug03.sh -c 1 -l 1
+cpuhotplug04 cpuhotplug04.sh -l 1
+cpuhotplug05 cpuhotplug05.sh -c 1 -l 1 -d /tmp
+cpuhotplug06 cpuhotplug06.sh -c 1 -l 1
+cpuhotplug07 cpuhotplug07.sh -c 1 -l 1 -d /usr/src/linux

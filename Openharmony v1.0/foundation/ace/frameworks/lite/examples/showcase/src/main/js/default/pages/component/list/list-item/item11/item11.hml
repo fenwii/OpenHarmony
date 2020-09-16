@@ -1,0 +1,40 @@
+<!--
+Copyright (c) 2020 Huawei Device Co., Ltd.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+    <div style="height:454px;width:454px;flex-direction:column;" >
+        <stack style="width:454px;height:80px;margin-top:80px;border-width:1px;border-color:#0000ff">
+          <input type="button" style="left:85px;width:130px;height:60px;" value="首页" onclick=backMain>
+          </input>
+          <input type="button" style="left:235px;width:130px;height:60px;" value="上一页" onclick=backSuperior>
+          </input>
+        </stack>
+        <list style="width:280px;height:120px;background-color:#00ff00;border-width:1px;border-color:#ffa500;margin-left:85">
+          <list-item style="width:270px;height:60px;border-width:5px;border-color:#ffa500;display:{{displayValue}}">
+            <text style="width:200px;height:40px;border-width:1px;border-color:#ffc0cb">
+              abcd
+            </text>
+          </list-item>
+          <list-item style="width:270px;height:60px;border-width:5px;border-color:#ff00ff">
+            <text style="width:200px;height:40px;border-width:1px;border-color:#ffc0cb">
+              efgh
+            </text>
+          </list-item>
+        </list>
+        <input type="button" style="width:140px;height:60px;margin-left:85px;" value="display" onclick=changeDisplay>
+        </input>
+        <text class="text">
+          {{text1}}
+        </text>
+    </div>

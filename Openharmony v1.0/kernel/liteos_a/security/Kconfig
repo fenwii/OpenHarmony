@@ -1,0 +1,30 @@
+config SECURITY
+    bool "Enable Security Module"
+    default y
+    help
+      This option will enable security module. This is a basic feature,
+      so you should say Y here.
+
+config SECURITY_CAPABILITY
+    bool "Enable Syscall Capability"
+    default y
+	depends on SECURITY
+    help
+      This option will enable capability control for syscalls. This is a basic feature,
+      so you should say Y here.
+
+config SECURITY_VID
+    bool "Enable visual ID"
+    default y
+	depends on SECURITY
+    help
+      This option will enable visual ID for timer. This is a basic feature,
+      so you should say Y here.
+
+config SECURITY_BOOT
+    bool "Enable security boot"
+    default n
+    depends on SECURITY
+    help
+      This option will enable security boot.
+

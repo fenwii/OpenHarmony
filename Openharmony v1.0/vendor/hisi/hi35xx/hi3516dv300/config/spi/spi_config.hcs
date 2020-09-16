@@ -1,0 +1,53 @@
+root {
+    platfrom {
+        spi_config {
+            template spi_controller {
+                serviceName = "";
+                match_attr = "";
+                transferMode = 0;
+                busNum = 0;
+                clkRate = 100000000;
+                bitsPerWord = 8;
+                mode = 19;
+                maxSpeedHz = 0;
+                minSpeedHz = 0;
+                speed = 2000000;
+                fifoSize = 256;
+                numCs = 1;
+                regBase = 0x120c0000;
+                REG_CRG_SPI = 0x120100e4;    /* CRG_REG_BASE(0x12010000) + 0x0e4 */
+                CRG_SPI_CKEN = 0;
+                CRG_SPI_RST = 0;
+                REG_MISC_CTRL_SPI = 0x12030024;    /* MISC_REG_BASE(0x12030000) + 0x24 */
+                MISC_CTRL_SPI_CS = 0;
+                MISC_CTRL_SPI_CS_SHIFT = 0;
+            }
+
+            controller_0x120c0000 :: spi_controller {
+                busNum = 0;
+                CRG_SPI_CKEN = 0x10000;    /* (0x1 << 16) 0:close clk, 1:open clk */
+                CRG_SPI_RST = 0x1;         /* (0x1 << 0) 0:cancel reset, 1:reset */
+                match_attr = "hisilicon_hi35xx_spi_0";
+            }
+
+            controller_0x120c1000 :: spi_controller {
+                busNum = 1;
+                CRG_SPI_CKEN = 0x20000;    /* (0x1 << 17) 0:close clk, 1:open clk */
+                CRG_SPI_RST = 0x2;         /* (0x1 << 1) 0:cancel reset, 1:reset */
+                match_attr = "hisilicon_hi35xx_spi_1";
+                regBase = 0x120c1000;
+            }
+
+            controller_0x120c2000 :: spi_controller {
+                busNum = 2;
+                numCs = 2;
+                CRG_SPI_CKEN = 0x40000;     /* (0x1 << 18) 0:close clk, 1:open clk */
+                CRG_SPI_RST = 0x4;          /* (0x1 << 2) 0:cancel reset, 1:reset */
+                MISC_CTRL_SPI_CS = 1;       /* (0x1 << MISC_CTRL_SPI_CS_SHIFT) 00:cs0, 01:cs1 */
+                MISC_CTRL_SPI_CS_SHIFT = 0; /* 0 */
+                match_attr = "hisilicon_hi35xx_spi_2";
+                regBase = 0x120c2000;
+            }
+        }
+    }
+}

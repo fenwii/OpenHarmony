@@ -1,0 +1,154 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/lite/config/component/lite_component.gni")
+import("//build/lite/ndk/ndk.gni")
+if (ohos_kernel_type == "liteos_a" || ohos_kernel_type == "linux") {
+    config("softbus_lite_config") {
+        include_dirs = [
+            "//foundation/communication/services/softbus_lite/discovery/coap/include",
+            "//foundation/communication/services/softbus_lite/os_adapter/include",
+            "//foundation/communication/interfaces/kits/softbus_lite/discovery",
+            "//third_party/cJSON",
+            "//third_party/bounds_checking_function/include",
+            "//foundation/communication/services/softbus_lite/discovery/discovery_service/include",
+            "//foundation/communication/services/softbus_lite/authmanager/include",
+            "//base/startup/interfaces/kits/syspara_lite",
+            "//foundation/communication/services/softbus_lite/trans_service/include/libdistbus",
+            "//foundation/communication/services/softbus_lite/trans_service/include/utils",
+            "//foundation/communication/services/softbus_lite/trans_service/source/libdistbus",
+            "//foundation/communication/services/softbus_lite/trans_service/source/utils",
+            "//kernel/liteos_a/lib/libsec/include",
+            "//foundation/communication/interfaces/kits/softbus_lite/transport",
+            "//base/security/interfaces/innerkits/hichainsdk_lite",
+            "//third_party/mbedtls/include",
+            "//base/security/frameworks/hichainsdk_lite/source/huks_adapter/",
+            "//base/security/interfaces/kits/iam_lite"
+        ]
+
+        defines = [
+            "_GNU_SOURCE",
+            "_SCANTY_MEMORY_"
+        ]
+
+        defines += ["SOFTBUS_DEBUG"]
+        include_dirs += [
+            "//kernel/liteos_a/kernel/include",
+            "//kernel/liteos_a/arch/arm/arm/include",
+            "//kernel/liteos_a/kernel/include",
+            "//kernel/liteos_a/kernel/common",
+            "//kernel/liteos_a/platform/board/hi3516dv300/include",
+            "//kernel/liteos_a/platform/include",
+            "//kernel/liteos_a/kernel/base/include",
+            "//kernel/liteos_a/kernel/include",
+        ]
+    }
+
+    softbus_lite_sources = [
+        "//foundation/communication/services/softbus_lite/discovery/coap/source/coap_discover.c",
+        "//foundation/communication/services/softbus_lite/discovery/coap/source/json_payload.c",
+        "//foundation/communication/services/softbus_lite/discovery/coap/source/nstackx_common.c",
+        "//foundation/communication/services/softbus_lite/discovery/coap/source/nstackx_device.c",
+        "//foundation/communication/services/softbus_lite/discovery/coap/source/coap_socket.c",
+        "//foundation/communication/services/softbus_lite/discovery/coap/source/coap_adapter.c",
+        "//foundation/communication/services/softbus_lite/os_adapter/source/L1/os_adapter.c",
+        "//foundation/communication/services/softbus_lite/discovery/discovery_service/source/discovery_service.c",
+        "//foundation/communication/services/softbus_lite/discovery/discovery_service/source/coap_service.c",
+        "//foundation/communication/services/softbus_lite/discovery/discovery_service/source/common_info_manager.c",
+        "//foundation/communication/services/softbus_lite/trans_service/source/libdistbus/tcp_session.c",
+        "//foundation/communication/services/softbus_lite/trans_service/source/libdistbus/tcp_session_manager.c",
+        "//foundation/communication/services/softbus_lite/trans_service/source/libdistbus/auth_conn_manager.c",
+        "//foundation/communication/services/softbus_lite/trans_service/source/libdistbus/trans_lock.c",
+        "//foundation/communication/services/softbus_lite/trans_service/source/utils/tcp_socket.c",
+        "//foundation/communication/services/softbus_lite/trans_service/source/utils/message.c",
+        "//foundation/communication/services/softbus_lite/trans_service/source/utils/aes_gcm.c",
+        "//foundation/communication/services/softbus_lite/authmanager/source/auth_conn.c",
+        "//foundation/communication/services/softbus_lite/authmanager/source/auth_interface.c",
+        "//foundation/communication/services/softbus_lite/authmanager/source/msg_get_deviceid.c",
+        "//foundation/communication/services/softbus_lite/authmanager/source/wifi_auth_manager.c",
+        "//foundation/communication/services/softbus_lite/authmanager/source/bus_manager.c",
+    ]
+
+    cflags = ["-Wall"]
+
+    lite_library("softbus_lite") {
+        target_type = "shared_library"
+        sources = softbus_lite_sources
+        public_configs = [ ":softbus_lite_config" ]
+        public_deps = [
+            "//third_party/cJSON:cjson_shared",
+            "//third_party/bounds_checking_function:libsec_shared",
+            "//base/security/frameworks/hichainsdk_lite/source:hichainsdk",
+            "//base/security/services/iam_lite/pms_client:pms_client"
+        ]
+    }
+
+    ndk_lib("softbus_ndk") {
+        lib_extension = ".so"
+        deps = [
+            ":softbus_lite"
+        ]
+        head_files = [
+            "//foundation/communication/interfaces/kits/softbus_lite/transport",
+            "//foundation/communication/interfaces/kits/softbus_lite/discovery"
+        ]
+    }
+} else {
+    ndk_lib("discovery_ndk") {
+        deps = [
+            "//foundation/communication/services/softbus_lite/discovery:discovery"
+        ]
+        head_files = [
+            "//foundation/communication/interfaces/kits/softbus_lite/discovery"
+        ]
+    }
+
+    ndk_lib("trans_service_ndk") {
+        deps = [
+            "//foundation/communication/services/softbus_lite/trans_service:trans_service"
+        ]
+        head_files = [
+            "//foundation/communication/interfaces/kits/softbus_lite/transport"
+        ]
+    }
+}
+
+
+group("softbus_lite_ndk") {
+    if (ohos_kernel_type == "liteos_riscv" || ohos_kernel_type == "liteos_m") {
+        deps = [
+            ":discovery_ndk",
+            ":trans_service_ndk",
+        ]
+    } else {
+        deps = [
+            ":softbus_ndk",
+        ]
+    }
+}
+
+
+
+lite_component("softbus") {
+    if (ohos_kernel_type == "liteos_riscv" || ohos_kernel_type == "liteos_m") {
+        features = [
+            "discovery",
+            "authmanager",
+            "trans_service",
+        ]
+    } else {
+        features = [
+            ":softbus_lite",
+        ]
+    }
+}

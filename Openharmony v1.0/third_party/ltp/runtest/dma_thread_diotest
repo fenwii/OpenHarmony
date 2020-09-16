@@ -1,0 +1,7 @@
+dma_thread_diotest1 dma_thread_diotest -a 512
+dma_thread_diotest2 dma_thread_diotest -a 1024
+dma_thread_diotest3 dma_thread_diotest -a 1536
+dma_thread_diotest4 dma_thread_diotest -a 2048
+dma_thread_diotest5 dma_thread_diotest -a 2560
+dma_thread_diotest6 dma_thread_diotest -a 3072
+dma_thread_diotest7 dma_thread_diotest -a 3584

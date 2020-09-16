@@ -1,0 +1,105 @@
+<!--
+Copyright (c) 2020 Huawei Device Co., Ltd.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+    <list class = "list">
+        <list-item style="width:454px;height:60px;">
+        </list-item>
+        <list-item class= "item-title">
+                <input type = "button" style="margin-left:85px;width:130px;height:60px;" onclick = "goHome" value = "首页"/>
+                <input type = "button" style="margin-left:20px;width:130px;height:60px;" onclick = "goPrevious" value = "上一页"/>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-types">
+            <text class = "whole-text">通用样式</text>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-three">
+            <div class = "three-div">
+                <div class = "three-left-div" style="margin-left:30px;width:170px;">
+                    <text class = "text">背景</text>
+                    <text class = "text">left为50</text>
+                    <text class = "text">top为50</text>
+                </div>
+                <stack class = "general-stack">
+                    <input type = "button" value = "点击" class = "general-item" style="width:100px;"/>
+                </stack>
+            </div>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-three">
+            <div class = "three-div">
+                <div class = "three-left-div" style="margin-left:30px;width:170px;">
+                    <text class = "text">margin</text>
+                    <text class = "text">height</text>
+                    <text class = "text">width</text>
+                </div>
+                <div class = "general-stack">
+                    <input type = "button" value = "点击" style = "margin:20px;width:100px;height:60"/>
+                </div>
+            </div>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-two">
+            <div class = "two-div">
+                <div class = "two-left-div" style="margin-left:30px;width:170px;">
+                    <text class = "text">border</text>
+                    <text class = "text">padding</text>
+                </div>
+                <input type = "button" value = "点击" style = "border-width:5px;border-color:#0000ff;border-radius:5px;padding:10px;height:40px;width:100px;"/>
+            </div>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-types">
+            <text class = "whole-text">特有样式</text>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-style" style="height:200px;">
+            <div class = "style-div" style="height:200px;">
+                <div class = "style-left-div" style="margin-left:30px;width:200px;height:200px;">
+                    <text class = "text">color为red</text>
+                    <text class = "text">font-size</text>
+                    <text class = "text">font-family</text>
+                </div>
+                <input type = "button" value = "show" class = "style-button" style="margin-left:10px;"/>
+            </div>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-types">
+            <text class = "whole-text">伪类支持</text>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-two">
+            <div style = "width:450px;height:200px;flex-direction:column">
+                <text style = "width:300px;height:60px;margin-left:50px;margin-top:30px">backgroundColor</text>
+                <input type = "button" value = "点击" class = "backColorBtn"/>
+            </div>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-two">
+            <div style = "width:450px;height:200px;flex-direction:column">
+                <text style = "width:300px;height:60px;margin-left:50px;margin-top:30px">backgroundImg</text>
+                <input type = "button" value = "点击" class = "backImgBtn"/>
+            </div>
+        </list-item>
+    </list>

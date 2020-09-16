@@ -1,0 +1,126 @@
+
+           v4l-test: Test environment for Video For Linux Two API
+
+Release History
+---------------
+23 Jul 2009  0.17 Test cases added for VIDIOC_ENUM_FRAMESIZES and
+                  VIDIOC_G_JPEGCOMP. New V4L2_PIX_FMT_* formats also
+                  used in test cases.
+ 6 Jul 2009  0.16 Iterate through all available inputs in VIDIOC_G_STD and
+                  VIDIOC_S_STD test cases
+25 May 2009  0.15 Test cases added for VIDIOC_G_EXT_CTRLS, VIDIOC_S_EXT_CTRLS
+                  and VIDIOC_TRY_EXT_CTRLS
+ 7 May 2009  0.14 Test cases added for VIDIOC_QUERYBUF;
+                  Debug functions separated
+29 Apr 2009  0.13 Added string content validation;
+                  Test cases added for VIDIOC_REQBUFS
+19 Apr 2009  0.12 Test cases added for VIDIOC_S_FMT;
+                  NULL parameter test suite split to read only, write only
+                  and write/read ioctl suite;
+                  More verbose debug output in VIDIOC_S_FREQUENCY and in some
+                  other test cases;
+                  More strict check added for strings in different test cases
+ 9 Apr 2009  0.11 Test cases added for VIDIOC_G_OUTPUT, VIDIOC_S_OUTPUT,
+                  VIDIOC_G_FMT, VIDIOC_G_SLICED_VBI_CAP, VIDIOC_QUERYMENU;
+                  Cleaned up ret and errno variable names;
+                  Separated the NULL parameter test cases to a spearated testsuite
+                  and reworked most of the NULL parameter test cases;
+                  Added camera enabling through /sys/devices/platform/eeepc/camera;
+                  Added results page to documentation;
+                  Follow kernel API changes in video_dummy.ko
+18 Mar 2009  0.10 Test cases added for VIDIOC_G_PARM;
+                  Duplicated test for V4L2_BUF_TYPE_VIDEO_CAPTURE removed in
+                  VIDIOC_ENUM_FMT test
+14 Mar 2009  0.9  Test cases added for VIDIOC_S_CROP;
+                  Test steps added for VIDIOC_S_CTRL
+22 Feb 2009  0.8  Test cases added for VIDIOC_G_CROP, VIDIOC_G_CTRL and VIDIOC_S_CTRL
+ 9 Feb 2009  0.7  Test cases added for VIDIOC_G_AUDIO, VIDIOC_G_AUDOUT,
+                  VIDIOC_S_AUDIO and VIDIOC_G_CROP;
+                  Added video_dummy kernel driver to verify the test
+                  environment;
+                  Some cleanup
+ 4 Feb 2009  0.6  Test cases added for VIDIOC_G_AUDIO, VIDIOC_G_AUDOUT,
+                  VIDIOC_G_MODULATOR, VIDIOC_G_PRIORITY, VIDIOC_S_PRIORITY
+                  and VIDIOC_S_FREQUENCY
+31 Jan 2009  0.5  Test cases added for VIDIOC_QUERYSTD, VIDIOC_G_FREQUENCY
+                  and VIDIOC_G_TUNER
+24 Jan 2009  0.4  Test cases for MAX_EM28XX_INPUT, MAX_EM28XX_TVNORMS removed;
+                  some typos fixed
+ 4 Jan 2008  0.3  Test cases for VIDIOC_ENUMOUTPUT, VIDIOC_ENUMAUDOUT,
+                  VIDIOC_QUERYCTRL added;
+                  New test cases for VIDIOC_ENUMAUDIO, VIDIOC_ENUM_FMT,
+                  VIDIOC_ENUM_STD
+22 Dec 2008  0.2  Test cases with NULL parameter added;
+                  Test cases for VIDIOC_CROPCAP added
+18 Dec 2008  0.1  First release
+
+Written by Márton Németh <nm127@freemail.hu>
+Released under GPL
+
+What is this?
+-------------
+v4l-test is a test environment for V4L2 drivers. The V4L2 drivers
+are running under Linux in kernel space. This test environment is running
+in userspace and tries what normal video application would do. It also
+tries some things which are supposed to test the error handling mechanisms
+of a V4L2 driver. These are the "invalid test cases".
+
+The V4L2 API only covers webcams and analog tuner cards, the digital broadcast
+is out of the scope of V4L2 API so it is also out of the scope of this test
+environment. See Linux DVB API at http://linuxtv.org/docs/dvbapi/dvbapi.html
+for digital broadcast and Chapter 6.3 "Relation of V4L2 to other Linux multimedia APIs"
+in V4L2 specification.
+
+How to build?
+-------------
+To build the test environment you will need a C compiler, "make" and the
+CUnit development files installed. Just type "make" and the test environment
+is ready.
+
+How to run?
+-----------
+You need to have a video device (i.e. webcam, tuner card, etc.) connected
+to your system and available under /dev/video0. If you don't have any
+hardware device available, you can still test the "Virtual Video Driver".
+To compile this you need to compile your kernel with CONFIG_VIDEO_VIVI=m
+under:
+
+  -> Device Drivers
+    -> Multimedia devices
+      -> Video For Linux
+        -> Video capture adapters
+         -> Virtual Video Driver
+
+At this point you can execute v4l-test.
+
+Video for Linux Two Specification
+---------------------------------
+The V4L2 API specification can be found at http://v4l2spec.bytesex.org/spec/ .
+Revision 0.42 of V4L2 is the base for this test environment.
+
+Code Coverage
+-------------
+The code coverage shows which lines of the code were executed and how many
+times. The measurement results gives you a feedback about the quality of
+the test cases.
+You can measure the code coverage of a kernel module with the gocv and lcov
+softwares. See http://ltp.sourceforge.net/coverage/gcov.php and
+http://ltp.sourceforge.net/coverage/lcov.php for details.
+
+Current status
+--------------
+Currently all test are running and evaluated automatically. This might
+change in future if we want to test for example plugging and unplugging
+a USB video device or ask the user if a received picture make sense or not.
+
+See doc/index.html about how much of the specification is covered by the
+different test cases.
+
+See also
+--------
+See also doc/index.html for further references and recommended readings.
+
+Feedbacks
+---------
+Any feedbacks, comments, ideas, etc. are welcome at the author's
+email address: Márton Németh <nm127@freemail.hu>.

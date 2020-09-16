@@ -1,0 +1,102 @@
+config DRIVERS_USB
+    bool "Enable USB"
+    default y
+    depends on DRIVERS && COMPAT_BSD
+    help
+      Answer Y to enable LiteOS support usb.
+
+config DRIVERS_USB_HOST_DRIVER
+    bool "Enable USB HCD"
+    default y
+    depends on DRIVERS_USB && DRIVERS
+    help
+      Answer Y to enable LiteOS to support usb host controller driver.
+
+choice
+    depends on DRIVERS_USB_HOST_DRIVER
+    prompt "USB HCD"
+    default y
+    help
+      Enable EHCI for USB 2.0.
+      Enable XHCI for USB 3.0
+
+config DRIVERS_USB_HOST_EHCI
+    bool "Enable EHCI HCD (USB 2.0)"
+    depends on DRIVERS_USB
+
+config DRIVERS_USB_HOST_XHCI
+    bool "Enable XHCI HCD (USB 3.0)"
+    depends on DRIVERS_USB
+
+endchoice
+
+choice
+    depends on PLATFORM_HI3556AV100 && DRIVERS_USB_HOST_XHCI
+    prompt ""
+    default DRIVERS_USB3_HOST_FOR_PORT1
+    help
+      This selects the usb3.0 port or usb2.0 port.
+
+config DRIVERS_USB3_HOST_FOR_PORT1
+    bool "Enable USB3.0 Host Controller For USB3.0 Port1"
+
+config DRIVERS_USB3_HOST_FOR_PORT2
+    bool "Enable USB3.0 Host Controller For USB2.0 Port2"
+
+endchoice
+
+config DRIVERS_USB_DEVICE_CLASS_DRIVERS
+    bool "Enable USB Device Class Drivers"
+    default y
+    depends on DRIVERS_USB && DRIVERS && DRIVERS_USB_HOST_DRIVER
+    help
+      Answer Y to enable LiteOS to support usb device class drivers.
+
+menu "USB Device Class Drivers"
+    depends on DRIVERS_USB_DEVICE_CLASS_DRIVERS
+config DRIVERS_USB_MASS_STORAGE
+    bool "Enable USB Mass Storage Support"
+    default y
+    depends on DRIVERS_USB_DEVICE_CLASS_DRIVERS && FS_VFS
+    help
+      Say Y here if you want to connect USB mass storage devices to your system's USB port.
+
+config DRIVERS_USB_RNDIS_HOST
+    bool "Enable USB Rndis Host Support"
+    default y
+    depends on DRIVERS_USB_DEVICE_CLASS_DRIVERS && NET_LWIP_SACK
+    help
+      Say Y here if you want to connect USB Rndis Host devices to your system's USB port.
+
+config DRIVERS_USB_4G_MODEM
+    bool "Enable USB 4G Modem Support"
+    default y
+    depends on DRIVERS_USB_DEVICE_CLASS_DRIVERS && NET_LWIP_SACK
+    help
+      Say Y here if you want to connect USB 4G devices to your system's USB port.
+
+config DRIVERS_USB_SERIAL
+    bool "Enable USB Serial Converter Support"
+    default y
+    depends on DRIVERS_USB_DEVICE_CLASS_DRIVERS
+    help
+      Say Y here if you want to connect USB serial devices to your system's USB port.
+
+config DRIVERS_USB_ETHERNET
+    bool "Enable USB Ethernet Support"
+    depends on NET_LWIP_SACK && DRIVERS_USB_DEVICE_CLASS_DRIVERS
+    help
+      Say Y here if you want to connect USB ethernet devices to your system's USB port.
+
+config DRIVERS_USB_WIRELESS
+    bool "Enable USB Wireless Device Support"
+    depends on NET_LWIP_SACK && DRIVERS_USB_DEVICE_CLASS_DRIVERS
+    help
+      Say Y here if you want to connect usb-wifi devices to your system's USB port.
+config DRIVERS_USB_HID_CLASS
+    bool "Enable USB HID Device Support"
+    depends on DRIVERS_USB_DEVICE_CLASS_DRIVERS && FS_VFS
+    help
+      Say Y here if you want to connect hid devices to your system's USB port.
+
+endmenu

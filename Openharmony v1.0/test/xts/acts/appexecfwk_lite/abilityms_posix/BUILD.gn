@@ -1,0 +1,70 @@
+ # Copyright (c) 2020 Huawei Device Co., Ltd.
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #     http://www.apache.org/licenses/LICENSE-2.0
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+
+import("//test/xts/tools/build/suite_lite.gni")
+import("//build/lite/config/subsystem/aafwk/config.gni")
+
+hcpptest_suite("ActsAbilityMgrTest") {
+    suite_name = "acts"
+    sources = [
+        "src/AbilityMgrTest.cpp"
+    ]
+    ldflags = [
+        "-lstdc++",
+    ]
+
+    deps = [
+        "//base/hiviewdfx/frameworks/hilog_lite/featured:hilog_shared",
+        "//foundation/aafwk/frameworks/ability_lite:aafwk_abilitykit_lite",
+        "//foundation/appexecfwk/frameworks/bundle_lite:bundle",
+        "//foundation/communication/frameworks/ipc_lite:liteipc_adapter",
+        "//foundation/distributedschedule/services/samgr_lite/samgr:samgr",
+        "//utils/native/lite/kv_store:kv_store",
+    ]
+    if (enable_ohos_appexecfwk_feature_ability == true) {
+        deps += [
+            "//foundation/graphic/lite/frameworks/ui:ui",
+            "//foundation/graphic/lite/utils:graphic_utils",
+            "//foundation/graphic/lite/frameworks/surface",
+        ]
+    }
+
+    include_dirs = [
+        "src",
+        "//third_party/googletest/googletest/include",
+        "//foundation/aafwk/interfaces/innerkits/abilitymgr_lite",
+        "//foundation/aafwk/interfaces/kits/ability_lite",
+        "//foundation/aafwk/interfaces/kits/want_lite",
+        "//foundation/aafwk/services/abilitymgr_lite/include",
+        "//foundation/aafwk/frameworks/abilitymgr_lite/include",
+        "//foundation/appexecfwk/interfaces/kits/bundle_lite/",
+        "//foundation/appexecfwk/utils/bundle_lite",
+        "//foundation/appexecfwk/interfaces/innerkits/bundlemgr_lite/",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/registry",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/samgr",
+        "//kernel/liteos_a/kernel/include",
+        "//kernel/liteos_a/kernel/common",
+        "//third_party/bounds_checking_function/include",
+        "//third_party/cJSON",
+        "//utils/native/lite/include",
+        "//kernel/liteos_a/lib/libsec/include",
+        "//foundation/appexecfwk/interfaces/innerkits/bundlemgr_lite",
+        "//foundation/graphic/lite/interfaces/kits/ui",
+        "//foundation/graphic/lite/interfaces/kits/utils",
+        "//foundation/graphic/lite/interfaces/kits/config",
+    ]
+    cflags = [ "-Wno-error" ]
+    defines = ["OHOS_APPEXECFWK_BMS_BUNDLEMANAGER",
+               "ABILITY_WINDOW_SUPPORT",
+    ]
+}

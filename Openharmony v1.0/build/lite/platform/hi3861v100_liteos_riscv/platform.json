@@ -1,0 +1,307 @@
+{
+    "subsystems": [
+      {
+        "subsystem": "applications",
+        "optional": "true",
+        "components": [
+          {
+            "component": "wifi_iot_sample_app",
+            "optional": "true",
+            "targets": [
+              "//applications/sample/wifi-iot/app"
+            ],
+            "features": [],
+            "deps": {}
+          }
+        ]
+      },
+      {
+        "subsystem": "startup",
+        "optional": "true",
+        "components": [
+          {
+            "component": "syspara",
+            "optional": "false",
+            "targets": [
+              "//base/startup/frameworks/syspara_lite/parameter:parameter"
+            ],
+            "features": [],
+            "deps": {
+              "third_party": [
+                "bounds_checking_function"
+              ],
+              "components": [ "oem_iotlink" ]
+            }
+          },
+          {
+            "component": "bootstrap",
+            "optional": "false",
+            "targets": [
+              "//base/startup/services/bootstrap_lite/source:bootstrap"
+            ],
+            "features": [],
+            "deps": {
+              "third_party": [],
+              "components": [
+                "system_ability_manager",
+                "utils"
+              ]
+            }
+          },
+          {
+            "component": "token",
+            "optional": "false",
+            "targets": [
+              "//base/startup/frameworks/syspara_lite/token:token"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "oem_iotlink"
+              ],
+              "third_party": []
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "iot_hardware",
+        "optional": "true",
+        "components": [
+          {
+            "component": "iot_controller",
+            "optional": "false",
+            "targets": [
+              "//base/iot_hardware/frameworks/wifiiot_lite:iothardware"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "oem_iotlink",
+                "utils"
+              ],
+              "third_party": []
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "hiviewdfx",
+        "optional": "true",
+        "components": [
+          {
+            "component": "dfx_common",
+            "optional": "false",
+            "targets": [
+              "//base/hiviewdfx/utils/lite:common_lite"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "utils"
+              ],
+              "third_party": [
+                "musl"
+              ]
+            }
+          },
+          {
+            "component": "hiview",
+            "optional": "false",
+            "targets": [
+              "//base/hiviewdfx/services/hiview_lite:hiview_lite"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "system_ability_manager"
+              ],
+              "third_party": []
+            }
+          },
+          {
+            "component": "hilog_m",
+            "optional": "false",
+            "targets": [
+              "//base/hiviewdfx/frameworks/hilog_lite/mini:hilog_lite",
+              "//base/hiviewdfx/utils/lite:common_lite"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "system_ability_manager"
+              ],
+              "third_party": []
+            }
+          },
+          {
+            "component": "hievent",
+            "optional": "true",
+            "targets": [
+              "//base/hiviewdfx/frameworks/hievent_lite:hievent_lite"
+            ],
+            "features": [
+              { "enable_hos_hiview_event": "fasle" }
+            ],
+            "deps": {
+              "components": [
+                "system_ability_manager"
+              ],
+              "third_party": []
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "distributedschedule",
+        "optional": "true",
+        "components": [
+          {
+            "component": "system_ability_manager",
+            "optional": "false",
+            "targets": [
+              "//foundation/distributedschedule/services/samgr_lite:samgr"
+            ],
+            "features": [],
+            "deps": {
+              "componets": [
+                "hilog_m",
+                "iam"
+              ],
+              "third_party": [
+                "bounds_checking_function"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "security",
+        "optional":  "true",
+        "components": [
+          {
+            "component": "hichainsdk",
+            "optional": "true",
+            "targets": [
+              "//base/security/frameworks/hichainsdk_lite:hichainsdk"
+            ],
+            "features": [],
+            "deps": {
+              "third_party": [
+                "cjson",
+                "bounds_checking_function"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "communication",
+        "optional": "true",
+        "components": [
+          {
+            "component": "soft_bus",
+            "optional": "true",
+            "targets": [
+              "//foundation/communication/services/softbus_lite:softbus"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "hichainsdk",
+                "iam",
+                "system_ability_manager",
+                "hi3861"
+              ],
+              "third_party": [
+                "cjson",
+                "bounds_checking_function",
+                "mbedtls"
+              ]
+            }
+          },
+          {
+            "component": "wlan",
+            "optional": "false",
+            "targets": [
+                "//foundation/communication/frameworks/wifi_lite:wifi"
+            ],
+            "features": [],
+            "deps": {
+              "components": [
+                "oem_iotlink",
+                "system_ability_manager"
+              ],
+              "third_party": []
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "utils",
+        "optional": "true",
+        "components": [
+          {
+            "component": "utils",
+            "optional": "false",
+            "targets": [
+              "//utils/native/lite/kv_store:kv_store",
+              "//utils/native/lite/file:file"
+            ],
+            "features": [],
+            "deps": {
+              "third_party": [
+                "bounds_checking_function",
+                "hi3861_adapter"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "subsystem": "vendor",
+        "optional": "true",
+        "components": [
+          {
+            "component": "hi3861",
+            "optional": "false",
+            "targets": [
+              "//vendor/hisi/hi3861/hi3861:wifiiot_sdk"
+            ],
+            "features": [],
+            "deps": {}
+          },
+          {
+            "component": "hi3861_adapter",
+            "optional": "false",
+            "targets": [],
+            "features": [],
+            "deps": {}
+          },
+          {
+            "component": "oem_iotlink",
+            "optional": "false",
+            "targets": [],
+            "features": [],
+            "deps": {}
+          }
+        ]
+      },
+      {
+        "subsystem": "test",
+        "optional": "true",
+        "components": [
+          {
+            "component": "xts",
+            "optional": "true",
+            "targets": [
+              "//test/xts/acts",
+              "//test/xts/tools"
+            ],
+            "features": [],
+            "deps": {}
+          }
+        ]
+      }
+    ]
+  }

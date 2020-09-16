@@ -1,0 +1,73 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#     http://www.apache.org/licenses/LICENSE-2.0
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/lite/config/component/lite_component.gni")
+config("freetype_config") {
+  defines = [
+    "FT2_BUILD_LIBRARY",
+  ]
+}
+shared_library("freetype") {
+    sources = [
+        "src\autofit\autofit.c",
+        "src\base\ftbase.c",
+        "src\base\ftbbox.c",
+        "src\base\ftbdf.c",
+        "src\base\ftbitmap.c",
+        "src\base\ftcid.c",
+        "src\base\ftfstype.c",
+        "src\base\ftgasp.c",
+        "src\base\ftglyph.c",
+        "src\base\ftgxval.c",
+        "src\base\ftinit.c",
+        "src\base\ftmm.c",
+        "src\base\ftotval.c",
+        "src\base\ftpatent.c",
+        "src\base\ftpfr.c",
+        "src\base\ftstroke.c",
+        "src\base\ftsynth.c",
+        "src\base\ftsystem.c",
+        "src\base\fttype1.c",
+        "src\base\ftwinfnt.c",
+        "src\base\ftdebug.c",
+        "src\bdf\bdf.c",
+        "src\cache\ftcache.c",
+        "src\cff\cff.c",
+        "src\cid\type1cid.c",
+        "src\gzip\ftgzip.c",
+        "src\lzw\ftlzw.c",
+        "src\pcf\pcf.c",
+        "src\pfr\pfr.c",
+        "src\psaux\psaux.c",
+        "src\pshinter\pshinter.c",
+        "src\psnames\psmodule.c",
+        "src\raster\raster.c",
+        "src\sfnt\sfnt.c",
+        "src\smooth\smooth.c",
+        "src\truetype\truetype.c",
+        "src\type1\type1.c",
+        "src\type42\type42.c",
+        "src\winfonts\winfnt.c",
+    ]
+    include_dirs = [
+        "include",
+        "src\base",
+    ]
+    configs += [
+    ":freetype_config",
+  ]
+}
+
+lite_component("freetype_shared") {
+    features = [
+        ":freetype",
+    ]
+}

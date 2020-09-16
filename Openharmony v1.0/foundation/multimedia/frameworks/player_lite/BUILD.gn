@@ -1,0 +1,78 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/lite/config/component/lite_component.gni")
+import("//build/lite/ndk/ndk.gni")
+shared_library("player") {
+    sources = [
+        "player.cpp",
+        "player_impl.cpp",
+        "buffersource/src/buffer_source.cpp",
+        "player_control/decoder/decoder.cpp",
+        "player_control/player/liteplayer.cpp",
+        "player_control/player/liteplayer_comm.cpp",
+        "player_control/player/liteplayer_state_machine.cpp",
+        "player_control/player/fsm/src/fsm_common.cpp",
+        "player_control/player/fsm/src/hi_fsm.cpp",
+        "player_control/player/fsm/src/hi_state.cpp",
+        "player_control/player/fsm/src/hi_state_machine.cpp",
+        "player_control/player/fsm/src/hi_state_machine_observer.cpp",
+        "player_control/player/fsm/src/message_looper.cpp",
+        "player_control/player/fsm/src/mmessage_pool.cpp",
+        "player_control/sink/player_audio_sink.cpp",
+        "player_control/sink/player_sink_manager.cpp",
+        "player_control/sink/player_sync.cpp",
+        "player_control/sink/player_video_sink.cpp",
+        "player_control/source/player_demux.cpp",
+        "player_control/source/player_source.cpp",
+    ]
+    cflags = ["-fPIC"]
+    cflags += ["-Wall"]
+    cflags_cc = cflags
+    include_dirs = [
+        "//base/security/interfaces/kits/iam_lite",
+        "buffersource/include",
+        "player_control/include",
+        "player_control/decoder",
+        "player_control/player",
+        "player_control/player/fsm/src",
+        "player_control/player/fsm/include",
+        "player_control/sink",
+        "player_control/source",
+        "//third_party/bounds_checking_function/include",
+        "//foundation/multimedia/hals/camera_lite",
+        "//drivers/hdf/lite/hdi/audio/include",
+        "//drivers/hdf/lite/hdi/codec/include",
+        "//drivers/hdf/lite/hdi/format/include",
+    ]
+    outdir = rebase_path("$root_out_dir")
+    public_configs = [":player_external_library_config"]
+    ldflags = ["-L$outdir"]
+    ldflags += ["-laudio_hw"]
+    ldflags += ["-lcodec"]
+    ldflags += ["-lformat_demuxer"]
+    ldflags += ["-lhdi_media"]
+    public_deps = [
+        "//base/hiviewdfx/frameworks/hilog_lite/featured:hilog_shared",
+        "//base/security/services/iam_lite/pms_client:pms_client",
+        "//third_party/bounds_checking_function:libsec_shared",
+        "//foundation/graphic/lite/frameworks/surface:surface",
+        "//foundation/multimedia/utils/lite:media_common",
+        "$ohos_vendor_adapter_dir/hals/multimedia:hdi_media",
+        "//third_party/iniparser:iniparser",
+    ]
+}
+
+config("player_external_library_config") {
+    include_dirs = ["//foundation/multimedia/interfaces/kits/player_lite"]
+    include_dirs += ["//foundation/multimedia/utils/lite/include"]
+}

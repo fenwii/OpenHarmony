@@ -1,0 +1,44 @@
+root {
+    platfrom {
+        spi_config {
+            template spi_controller {
+                match_attr = "";
+                transferMode = 0;
+                busNum = 0;
+                clkRate = 100000000;
+                bitsPerWord = 8;
+                mode = 19;
+                maxSpeedHz = 0;
+                minSpeedHz = 0;
+                speed = 2000000;
+                fifoSize = 256;
+                numCs = 1;
+                regBase = 0x12070000;
+                REG_CRG_SPI = 0x120101bc;    /* CRG_REG_BASE(0x12010000) + 0x01bc */
+                CRG_SPI_CKEN = 0;
+                CRG_SPI_RST = 0;
+                REG_MISC_CTRL_SPI = 0x12028000;    /* MISC_REG_BASE(0x12028000) + 0 */
+                MISC_CTRL_SPI_CS = 0;
+                MISC_CTRL_SPI_CS_SHIFT = 0;
+            }
+
+            spi_controller_0x12070000 :: spi_controller {
+                busNum = 0;
+                CRG_SPI_CKEN = 0x1000;    /* (0x1 << 12) 0:close clk, 1:open clk */
+                CRG_SPI_RST = 0x8000;     /* (0x1 << 15) 0:cancel reset, 1:reset */
+                match_attr = "hisilicon_hi35xx_spi_0";
+            }
+
+            spi_controller_0x12071000 :: spi_controller {
+                busNum = 1;
+                numCs = 2;
+                CRG_SPI_CKEN = 0x2000;      /* (0x1 << 13) 0:close clk, 1:open clk */
+                CRG_SPI_RST = 0x10000;      /* (0x1 << 16) 0:cancel reset, 1:reset */
+                MISC_CTRL_SPI_CS = 0x4;     /* (0x1 << MISC_CTRL_SPI_CS_SHIFT) 00:cs0, 01:cs1 */
+                MISC_CTRL_SPI_CS_SHIFT = 2; /* 2 */
+                match_attr = "hisilicon_hi35xx_spi_1";
+                regBase = 0x12071000;
+            }
+        }
+    }
+}

@@ -1,0 +1,14 @@
+config DRIVERS_HDF_PLATFORM
+    bool "Enable HDF platform driver"
+    default n
+    depends on DRIVERS_HDF
+    help
+      Answer Y to enable HDF platform driver.
+
+source "../../vendor/hisi/hi35xx/platform/i2c/Kconfig"
+source "../../vendor/hisi/hi35xx/platform/spi/Kconfig"
+source "../../vendor/hisi/hi35xx/platform/gpio/Kconfig"
+source "../../vendor/hisi/hi35xx/platform/watchdog/Kconfig"
+source "../../vendor/hisi/hi35xx/platform/sdio/Kconfig"
+source "../../vendor/hisi/hi35xx/platform/rtc/Kconfig"
+source "../../vendor/hisi/hi35xx/platform/hisi_sdk/Kconfig"

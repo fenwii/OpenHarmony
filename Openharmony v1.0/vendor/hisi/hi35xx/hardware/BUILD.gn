@@ -1,0 +1,9 @@
+# Copyright (c) Huawei Technologies Co., Ltd. 2020. All rights reserved.
+
+import("//build/lite/config/component/lite_component.gni")
+
+build_ext_component("hardware_media_sdk") {
+    exec_path = rebase_path(".", root_build_dir)
+    outdir = rebase_path("$root_out_dir")
+    command = "./build.sh ${outdir} ${board_name} ${ohos_kernel_type} ${ohos_build_compiler}"
+}

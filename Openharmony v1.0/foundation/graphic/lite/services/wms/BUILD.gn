@@ -1,0 +1,115 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#     http://www.apache.org/licenses/LICENSE-2.0
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/lite/config/component/lite_component.gni")
+
+generate_notice_file("wms_lite_notice_file") {
+    module_name = "wms_lite"
+    module_source_dir_list = [
+        "//third_party/bounds_checking_function",
+    ]
+}
+
+shared_library("wms_client") {
+    sources = [
+        "src/client/iwindows_manager.cpp",
+        "src/client/lite_proxy_surface.cpp",
+        "src/client/lite_proxy_window.cpp",
+        "src/client/lite_proxy_windows_manager.cpp",
+        "src/client/lite_win_requestor.cpp",
+        "src/client/lite_wm_requestor.cpp",
+        "src/client/lite_wms_client.cpp",
+    ]
+    include_dirs = [
+        "./include",
+        "//third_party/bounds_checking_function/include",
+        "//foundation/graphic/lite/interfaces",
+        "//foundation/graphic/lite/interfaces/kits/utils",
+        "//foundation/graphic/lite/interfaces/kits/surface",
+        "//foundation/graphic/lite/interfaces/kits/config",
+        "//foundation/graphic/lite/interfaces/innerkits/ui",
+        "//foundation/graphic/lite/interfaces/innerkits/wms",
+        "//foundation/graphic/lite/services/ims/include",
+        "//foundation/graphic/lite/frameworks/ui/src/adapter/OHOS",
+        "//foundation/graphic/lite/frameworks/surface/include",
+        "//foundation/graphic/lite/hals/include",
+        "//kernel/liteos_a/kernel/include/",
+        "//kernel/liteos_a/kernel/common",
+        "//utils/native/lite/include",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/registry",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/samgr",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/communication/broadcast",
+    ]
+    deps = [
+        "//foundation/graphic/lite/utils:litegraphicutils",
+        "//third_party/bounds_checking_function:libsec_shared",
+        "//foundation/communication/frameworks/ipc_lite:liteipc_adapter",
+        "//foundation/graphic/lite/frameworks/surface:litesurface",
+        "//foundation/distributedschedule/services/samgr_lite/samgr:samgr",
+    ]
+    ldflags = ["-lstdc++"]
+    cflags = ["-Wall"]
+    cflags_cc = cflags
+}
+
+executable("wms_server") {
+    sources = [
+        "src/server/lite_win.cpp",
+        "src/server/lite_wm.cpp",
+        "src/server/lite_wms.cpp",
+        "src/server/samgr_wms.cpp",
+        "src/server/wms.cpp",
+    ]
+    include_dirs = [
+        "./include",
+        "//third_party/bounds_checking_function/include",
+        "//foundation/graphic/lite/interfaces/innerkits/wms",
+        "//foundation/graphic/lite/frameworks/surface/include",
+        "//foundation/graphic/lite/interfaces/kits/utils",
+        "//foundation/graphic/lite/interfaces/kits/surface",
+        "//foundation/graphic/lite/utils/include",
+        "//foundation/graphic/lite/interfaces/kits/config",
+        "//foundation/graphic/lite/hals/include",
+        "//kernel/liteos_a/kernel/include/",
+        "//kernel/liteos_a/kernel/common",
+        "//utils/native/lite/include",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/registry",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/samgr",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/communication/broadcast",
+        "//foundation/graphic/lite/services/ims/include",
+        "//drivers/hdf/lite/hdi/input/include",
+    ]
+    ldflags = [
+        "-lstdc++",
+        "-Wl,-rpath-link=$ohos_root_path/$root_out_dir",
+    ]
+    deps = [
+        "//base/hiviewdfx/frameworks/hilog_lite/featured:hilog_shared",
+        "//foundation/distributedschedule/services/samgr_lite/samgr:samgr",
+    ]
+    public_deps = [
+        "//foundation/graphic/lite/utils:litegraphicutils",
+        "//foundation/graphic/lite/hals:graphic_hals",
+        "//third_party/bounds_checking_function:libsec_shared",
+        "//foundation/graphic/lite/frameworks/surface:litesurface",
+        "//foundation/graphic/lite/services/ims:ims",
+        "//vendor/huawei/hdf/input/hdi:hdi_input",
+    ]
+    cflags = ["-Wall"]
+    cflags_cc = cflags
+}
+
+lite_component("litewms") {
+    features = [
+        ":wms_server",
+        ":wms_client",
+    ]
+}

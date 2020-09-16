@@ -1,0 +1,17 @@
+import("//build/lite/config/component/lite_component.gni")
+
+copy("hdi_media") {
+    deps = [
+        "//third_party/bounds_checking_function:libsec_shared",
+        "//third_party/iniparser:iniparser"
+    ]
+    if (board_name == "hi3516dv300" && ohos_kernel_type == "liteos_a") {
+        if (ohos_build_compiler == "clang") {
+            deps += ["//vendor/hisi/hi35xx/hi35xx_init/hi3516dv300:hi3516dv300_image"]
+        }
+    }
+    sources = [
+        "libs/${board_name}/${ohos_build_type}/libhdi_media.so",
+    ]
+    outputs = [ "$root_out_dir/libhdi_media.so" ]
+}

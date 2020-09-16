@@ -1,0 +1,120 @@
+menu "Kernel"
+config KERNEL_SMP
+    bool "Enable Kernel SMP"
+    default n
+    help
+      This option will enable smp support of LiteOS.
+
+config KERNEL_SMP_CORE_NUM
+    int "Muti-processing Core Numbers"
+    default 2
+    depends on KERNEL_SMP
+    help
+      This represents the number of muti-processing cores.
+
+config KERNEL_SMP_LOCKDEP
+    bool "Enable Spinlock Lockdep Check"
+    default n
+    depends on KERNEL_SMP
+    help
+      This option will enable spinlock lockdep check.
+
+config KERNEL_SMP_TASK_SYNC
+    bool "Enable Synchronized Task Operations"
+    default n
+    depends on KERNEL_SMP
+    help
+      This option will enable task synchronized operate task across cores.
+
+config KERNEL_SCHED_STATISTICS
+    bool "Enable Scheduler statistics"
+    default n
+    depends on KERNEL_SMP
+    help
+      This option will enable schedulder statistics.
+
+config KERNEL_EXTKERNEL
+    bool "Enable Extend Kernel"
+    default y
+    help
+      This option will enable extend Kernel of LiteOS.  Extend kernel include
+      cppsupport, cpup, and dynload. You can select one or some
+      of them.
+
+config KERNEL_CPPSUPPORT
+    bool "C++ Support"
+    default y
+    depends on KERNEL_EXTKERNEL
+    help
+      If you wish to build LiteOS with support for C++.
+
+config KERNEL_CPUP
+    bool "Enable Cpup"
+    default y
+    depends on KERNEL_EXTKERNEL
+    help
+      If you wish to build LiteOS with support for cpup.
+
+config CPUP_INCLUDE_IRQ
+    bool "Enable Cpup include irq"
+    default y
+    depends on KERNEL_CPUP
+    help
+      If you wish to include irq usage for cpup.
+
+config KERNEL_DYNLOAD
+    bool "Enable Dynamic Load Feature"
+    default y
+    depends on KERNEL_EXTKERNEL
+    help
+      If you wish to build LiteOS with support for dynamic load.
+
+config ASLR
+    bool "Enable Address Space Layout Randomization"
+    default n
+    depends on KERNEL_DYNLOAD && HW_RANDOM_ENABLE
+    help
+      If you wish to enable ASLR for user aspace.
+
+config KERNEL_VDSO
+    bool "Enable VDSO Feature"
+    default n
+    depends on KERNEL_EXTKERNEL
+    help
+      If you wish to speed up some system calls.
+
+config KERNEL_TICKLESS
+    bool "Enable Tickless Feature"
+    default y
+    depends on KERNEL_EXTKERNEL
+    help
+      If you wish to build LiteOS with support for tickless.
+
+config KERNEL_TRACE
+    bool "Enable Trace Feature"
+    default n
+    depends on KERNEL_EXTKERNEL
+    help
+      If you wish to record LiteOS's task and interrupt switch trace.
+
+config KERNEL_LITEIPC
+    bool "Enable liteipc"
+    default y
+    depends on KERNEL_EXTKERNEL
+    help
+      Answer Y to enable LiteOS support liteipc.
+
+config KERNEL_PIPE
+    bool "Enable pipes"
+    default y
+    depends on KERNEL_EXTKERNEL
+    help
+      Answer Y to enable LiteOS support pipes.
+
+config BASE_CORE_HILOG
+    bool "Enable Hilog"
+    default y
+    help
+      If you wish to include hilog.
+
+endmenu

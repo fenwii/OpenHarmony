@@ -1,0 +1,152 @@
+{
+  "ohos_version": "OpenHarmony 1.0",
+  "board": "hi3516dv300",
+  "kernel": "liteos_a",
+  "compiler": "clang",
+  "subsystem": [
+    {
+      "name": "aafwk",
+      "component": [
+        { "name": "abilitykit_lite", "dir": "//foundation/aafwk/frameworks/ability_lite:aafwk_abilitykit_lite", "features":[ "enable_ohos_appexecfwk_feature_ability = true" ] },
+        { "name": "abilityMain_lite", "dir": "//foundation/aafwk/frameworks/ability_lite:aafwk_abilityMain_lite", "features":[] },
+        { "name": "abilityManager_lite", "dir": "//foundation/aafwk/frameworks/abilitymgr_lite:aafwk_abilityManager_lite", "features":[] },
+        { "name": "aafwk_services_lite", "dir": "//foundation/aafwk/services/abilitymgr_lite:aafwk_services_lite", "features":[] }
+      ]
+    },
+    {
+      "name": "applications",
+      "component": [
+        { "name": "camera", "dir": "//applications/sample/camera/app:camera_app", "features":[] },
+        { "name": "communication", "dir": "//applications/sample/camera/communication:sample", "features":[] },
+        { "name": "hap", "dir": "//applications/sample/camera/hap:copy_hap", "features":[] }
+      ]
+    },
+    {
+      "name": "hiviewdfx",
+      "component": [
+        { "name": "hilog_lite", "dir": "//base/hiviewdfx/frameworks/hilog_lite/featured:hilog_static", "features":[] },
+        { "name": "hilog_lite", "dir": "//base/hiviewdfx/frameworks/hilog_lite/featured:hilog_shared", "features":[] },
+        { "name": "hilogcat_lite", "dir": "//base/hiviewdfx/services/hilogcat_lite/hilogcat:hilogcat_static", "features":[] },
+        { "name": "hilogcat_lite", "dir": "//base/hiviewdfx/services/hilogcat_lite/apphilogcat:apphilogcat_static", "features":[] }
+      ]
+    },
+    {
+      "name": "distributedschedule",
+      "component": [
+        { "name": "samgr_lite", "dir": "//foundation/distributedschedule/services/samgr_lite:samgr", "features":[] },
+        { "name": "safwk_lite", "dir": "//foundation/distributedschedule/services/safwk_lite:safwk_lite", "features":[] },
+        { "name": "dtbschedmgr_lite", "dir": "//foundation/distributedschedule/services/dtbschedmgr_lite:dtbschedmgr", "features":[] }
+      ]
+    },
+    {
+      "name": "security",
+      "component": [
+        { "name": "hichainsdk_lite", "dir": "//base/security/frameworks/hichainsdk_lite:hichainsdk", "features":[] },
+        { "name": "iam_lite", "dir": "//base/security/services/iam_lite:pms_lite", "features":[] },
+        { "name": "app_verify", "dir": "//base/security/frameworks/app_verify:verify", "features":[] }
+      ]
+    },
+    {
+      "name": "multimedia",
+      "component": [
+        { "name": "media_sample", "dir": "//applications/sample/camera/media:media_sample", "features":[] },
+        { "name": "media_lite", "dir": "//foundation/multimedia/services/media_lite:media_lite", "features":[] }
+      ]
+    },
+    {
+      "name": "graphic",
+      "component": [
+        { "name": "surface", "dir": "//foundation/graphic/lite/frameworks/surface:litesurface", "features":[] },
+        { "name": "utils", "dir": "//foundation/graphic/lite/utils:litegraphicutils", "features":[] },
+        { "name": "ui", "dir": "//foundation/graphic/lite/frameworks/ui:liteui", "features":[] },
+        { "name": "ims", "dir": "//foundation/graphic/lite/services/ims:liteims", "features":[] },
+        { "name": "wms", "dir": "//foundation/graphic/lite/services/wms:litewms", "features":[] }
+      ]
+    },
+    {
+      "name": "startup",
+      "component": [
+        { "name": "bootstrap_lite", "dir": "//base/startup/services/bootstrap_lite/source:bootstrap", "features":[] },
+        { "name": "parameter", "dir": "//base/startup/frameworks/syspara_lite/parameter:parameter", "features":[] },
+        { "name": "token", "dir": "//base/startup/frameworks/syspara_lite/token:token", "features":[] },
+        { "name": "init_lite", "dir": "//base/startup/services/init_lite:init_lite", "features":[] },
+        { "name": "appspawn_lite", "dir": "//base/startup/services/appspawn_lite:appspawn_lite", "features":[] },
+        { "name": "init_config", "dir": "//vendor/huawei/camera/init_configs:init_config", "features":[] }
+      ]
+    },
+    {
+      "name": "kernel",
+      "component": [
+        { "name": "liteos_a", "dir": "//kernel/liteos_a:kernel", "features":[] }
+      ]
+    },
+    {
+      "name": "communication",
+      "component": [
+        { "name": "ipc_lite", "dir": "//foundation/communication/frameworks/ipc_lite:liteipc", "features":[] },
+        { "name": "softbus_lite", "dir": "//foundation/communication/services/softbus_lite:softbus", "features":[] },
+        { "name": "wpa_supplicant", "dir": "//third_party/wpa_supplicant/wpa_supplicant-2.9:wpa_supplicant", "features":[] }
+      ]
+    },
+    {
+      "name": "ace",
+      "component": [
+        { "name": "jsfwk", "dir": "//foundation/ace/frameworks/lite:jsfwk", "features":[] }
+      ]
+    },
+    {
+      "name": "hdf",
+      "component": [
+        { "name": "posix", "dir": "//drivers/hdf/lite/posix:hdf_posix", "features":[] },
+        { "name": "manager", "dir": "//drivers/hdf/lite/manager:hdf_manager", "features":[] },
+        { "name": "wifi", "dir": "//vendor/huawei/hdf/wifi:wifi_firmware", "features":[] },
+        { "name": "display", "dir": "//vendor/huawei/hdf/display/hdi:hdi_display", "features":[] },
+        { "name": "input", "dir": "//vendor/huawei/hdf/input/hdi:hdi_input", "features":[] }
+      ]
+    },
+    {
+      "name": "appexecfwk",
+      "component": [
+        { "name": "bundle_lite", "dir": "//foundation/appexecfwk/frameworks/bundle_lite:appexecfwk_kits_lite", "features":[] },
+        { "name": "bundlemgr_lite", "dir": "//foundation/appexecfwk/services/bundlemgr_lite:appexecfwk_services_lite", "features":[] }
+      ]
+    },
+    {
+      "name": "vendor",
+      "component": [
+        { "name": "hi35xx_init", "dir": "//vendor/hisi/hi35xx/hi35xx_init/hi3516dv300:hi3516dv300_image", "features":[] },
+        { "name": "hardware", "dir": "//vendor/hisi/hi35xx/hardware:hardware_media_sdk", "features":[] },
+        { "name": "middleware", "dir": "//vendor/hisi/hi35xx/middleware:middleware_source_sdk", "features":[] }
+      ]
+    },
+    {
+      "name": "test",
+      "component": [
+        { "name": "xts_act", "dir": "//test/xts/acts", "features":[] },
+        { "name": "xts_tools", "dir": "//test/xts/tools", "features":[] },
+        { "name": "test", "dir": "//test/developertest:test", "features":[] }
+      ]
+    },
+    {
+      "name": "utils",
+      "component": [
+        { "name": "kv_store", "dir": "//utils/native/lite/kv_store:kv_store", "features":[] }
+      ]
+    }
+  ],
+  "vendor_adapter_dir": "//vendor/hisi/hi35xx/hi3516dv300/hi3516dv300_adapter",
+  "third_party_dir": "//third_party",
+  "ohos_product_type":"",
+  "ohos_manufacture":"",
+  "ohos_brand":"",
+  "ohos_market_name":"",
+  "ohos_product_series":"",
+  "ohos_product_model":"",
+  "ohos_software_model":"",
+  "ohos_hardware_model":"",
+  "ohos_hardware_profile":"",
+  "ohos_serial":"",
+  "ohos_bootloader_version":"",
+  "ohos_secure_patch_level":"",
+  "ohos_abi_list":""
+}

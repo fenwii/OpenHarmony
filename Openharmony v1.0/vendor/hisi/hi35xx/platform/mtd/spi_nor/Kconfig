@@ -1,0 +1,23 @@
+config DRIVERS_MTD_SPI_NOR
+    bool "Enable MTD spi_nor flash"
+    default y
+    depends on DRIVERS_MTD
+    help
+      Answer Y to support spi_nor flash.
+choice
+    depends on  DRIVERS_MTD_SPI_NOR
+    prompt "SpiNorFlash Chips"
+    default DRIVERS_MTD_SPI_NOR_HISFC350
+
+config DRIVERS_MTD_SPI_NOR_HISFC350
+    depends on PLATFORM_HI3516A || PLATFORM_HI3731
+    bool "Enable hisfc350"
+    help
+      Answer Y to support hisfc350.
+
+config DRIVERS_MTD_SPI_NOR_HIFMC100
+    depends on PLATFORM_HI3518EV200 || PLATFORM_HI3519 || PLATFORM_HI3519V101 || PLATFORM_HI3559  || PLATFORM_HI3516CV300 || PLATFORM_HI3559AV100ES || PLATFORM_HI3559AV100 || PLATFORM_HI3516CV500 || PLATFORM_HI3516DV300 || PLATFORM_HI3516EV200 || PLATFORM_HI3516EV300 || PLATFORM_HI3518EV300 || PLATFORM_HI3556V200 || PLATFORM_HI3559V200
+    bool "Enable hifmc100"
+    help
+      Answer Y to support hifmc100.
+endchoice

@@ -1,0 +1,12 @@
+#DESCRIPTION:IPV6 related tests
+ping601 ping01.sh -6
+ping602 ping02.sh -6
+sendfile601 sendfile01.sh -6
+tcpdump601 tcpdump01.sh -6
+tracepath601 tracepath01.sh -6
+traceroute601 traceroute01.sh -6
+dhcpd6 dhcpd_tests.sh -6
+dnsmasq6 dnsmasq_tests.sh -6
+ipneigh6_ip ipneigh01.sh -6 -c ip
+ip6tables iptables01.sh -6
+nft6 nft01.sh -6

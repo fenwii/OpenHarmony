@@ -1,0 +1,65 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/lite/config/component/lite_component.gni")
+
+lite_library("ipc_auth_target") {
+    target_type = "shared_library"
+    sources = [
+        "//base/security/services/iam_lite/ipc_auth/src/ipc_auth_lite.c",
+        "//base/security/services/iam_lite/ipc_auth/src/ipc_auth_impl.c",
+    ]
+    include_dirs = [
+        "//base/security/interfaces/innerkits/iam_lite",
+        "//base/security/services/iam_lite/ipc_auth/include",
+        "//base/security/services/iam_lite/pms_base/include",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/registry",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/samgr",
+        "//utils/native/lite/include",
+        "//third_party/bounds_checking_function/include/",
+    ]
+
+    deps = [
+        "//third_party/bounds_checking_function:libsec_shared",
+        "//base/hiviewdfx/frameworks/hilog_lite/featured:hilog_shared",
+        "//foundation/communication/frameworks/ipc_lite:liteipc",
+        "//foundation/distributedschedule/services/samgr_lite/samgr:samgr",
+        "//base/security/services/iam_lite/pms_base:pms_base",
+    ]
+
+    defines = []
+
+    if (ohos_kernel_type == "liteos_a") {
+        include_dirs += [
+            "//kernel/liteos_a/kernel/include",
+            "//kernel/liteos_a/kernel/common",
+            "//foundation/aafwk/interfaces/kits/want_lite",
+            "//foundation/appexecfwk/interfaces/kits/bundle_lite",
+            "//foundation/appexecfwk/interfaces/innerkits/bundlemgr_lite",
+        ]
+
+        deps += [
+            "//foundation/appexecfwk/frameworks/bundle_lite:bundle",
+        ]
+
+        defines += [
+            "OHOS_APPEXECFWK_BMS_BUNDLEMANAGER",
+            "OHOS_APPFWK_ENABLE",
+            "OHOS_LITEOS_UIDS"
+        ]
+    }
+
+    cflags = [
+        "-Wall"
+    ]
+}

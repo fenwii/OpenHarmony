@@ -1,0 +1,45 @@
+#Copyright (c) 2020 Huawei Device Co., Ltd.
+#Licensed under the Apache License, Version 2.0 (the "License");
+#you may not use this file except in compliance with the License.
+#You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#Unless required by applicable law or agreed to in writing, software
+#distributed under the License is distributed on an "AS IS" BASIS,
+#WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#See the License for the specific language governing permissions and
+#limitations under the License.
+
+source_set("components") {
+    configs += [
+        "//foundation/ace/lite/jsfwk:ace_config",
+    ]
+    sources = [
+        "analog_clock_component.cpp",
+        "canvas_component.cpp",
+        "chart_component.cpp",
+        "clock_hand_component.cpp",
+        "component.cpp",
+        "component_utils.cpp",
+        "div_component.cpp",
+        "image_animator_component.cpp",
+        "image_component.cpp",
+        "input_component.cpp",
+        "list_adapter.cpp",
+        "list_component.cpp",
+        "marquee_component.cpp",
+        "picker_view_component.cpp",
+        "progress_component.cpp",
+        "slider_component.cpp",
+        "swiper_component.cpp",
+        "switch_component.cpp",
+        "tab_bar_component.cpp",
+        "tab_content_component.cpp",
+        "tabs_component.cpp",
+        "text_component.cpp",
+        "scroll_layer.cpp",
+    ]
+    include_dirs = [
+    ]
+}

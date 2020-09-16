@@ -1,0 +1,42 @@
+# Copyright (c) Huawei Technologies Co., Ltd. 2020. All rights reserved.
+
+import("//build/lite/config/component/lite_component.gni")
+
+config("libpng_config") {
+    include_dirs = [
+        "//third_party/libpng",
+    ]
+}
+
+libpng_source = [
+    "//third_party/libpng/png.c",
+    "//third_party/libpng/pngerror.c",
+    "//third_party/libpng/pngget.c",
+    "//third_party/libpng/pngmem.c",
+    "//third_party/libpng/pngpread.c",
+    "//third_party/libpng/pngread.c",
+    "//third_party/libpng/pngrio.c",
+    "//third_party/libpng/pngrtran.c",
+    "//third_party/libpng/pngrutil.c",
+    "//third_party/libpng/pngset.c",
+    "//third_party/libpng/pngtrans.c",
+    "//third_party/libpng/pngwio.c",
+    "//third_party/libpng/pngwrite.c",
+    "//third_party/libpng/pngwtran.c",
+    "//third_party/libpng/pngwutil.c",
+    "//third_party/libpng/arm/arm_init.c",
+    "//third_party/libpng/arm/filter_neon_intrinsics.c",
+    "//third_party/libpng/arm/palette_neon_intrinsics.c",
+]
+
+lite_library("libpng") {
+    target_type = "shared_library"
+    sources = libpng_source
+
+    public_configs = [
+       ":libpng_config",
+    ]
+    deps = [
+        "//third_party/zlib:zlib_shared",
+    ]
+}

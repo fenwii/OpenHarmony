@@ -1,0 +1,15 @@
+{
+    "supported_boards": {
+        "hi3516dv300": {
+            "board_parent_path": "vendor/hisi/hi35xx",
+            "dot_config_path": "kernel/liteos_a/tools/build/config",
+            "dot_configs": ["hi3516dv300_clang_release.config", "debug/hi3516dv300_clang.config"]
+        },
+        "hi3518ev300": {
+            "board_parent_path": "vendor/hisi/hi35xx",
+            "dot_config_path": "kernel/liteos_a/tools/build/config",
+            "dot_configs": ["hi3518ev300_clang_release.config", "debug/hi3518ev300_clang.config"]
+        }
+    },
+    "drivers_path_relative_to_vendor": "hdf"
+}

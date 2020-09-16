@@ -1,0 +1,63 @@
+End User License Agreement
+
+THIS END USER LICENSE AGREEMENT (“AGREEMENT”) IS A LEGAL AGREEMENT BETWEEN YOU (EITHER A SINGLE INDIVIDUAL, OR SINGLE LEGAL ENTITY) AND HISILICON (SHANGHAI) TECHNOLOGIES CO., LTD. ("HISILICON") FOR THE USE OF THE SOFTWARE ACCOMPANYING THIS AGREEMENT. HISILICON IS ONLY WILLING TO LICENSE THE SOFTWARE TO YOU ON CONDITION THAT YOU ACCEPT ALL OF THE TERMS IN THIS AGREEMENT. BY CLICKING “I AGREE” OR BY INSTALLING OR OTHERWISE USING OR COPYING THE SOFTWARE YOU INDICATE THAT YOU AGREE TO BE BOUND BY ALL OF THE TERMS OF THIS AGREEMENT. IF YOU DO NOT AGREE TO THE TERMS OF THIS AGREEMENT, HISILICON IS UNWILLING TO LICENSE THE SOFTWARE TO YOU AND YOU MAY NOT INSTALL, USE OR COPY THE SOFTWARE, AND YOU SHALL PROMPTLY DESTROY, DELETE, OR RETURN THE SOFTWARE TO YOUR SUPPLIER.
+
+“SOFTWARE” means the software in object code provided under the terms of this Agreement.
+
+Shenzhen Longgang District is the signing place of this Agreement.
+
+1. GRANT OF LICENSE
+In consideration of your agreement to abide by the following terms, and subject to the terms and conditions of this Agreement, HISILICON hereby grants YOU, a non-transferable, non-exclusive, royalty-free, revocable, worldwide copyright license (without the right to sublicense) to use and copy the SOFTWARE solely for the purpose of designing or developing applications for use in conjunction with Hisilicon chip.
+.
+
+All rights to the SOFTWARE and all intellectual property rights contained therein shall remain the sole and exclusive property of HISILICON. The SOFTWARE is licensed not sold. Except as expressly licensed in Clause 1, in no event shall the license granted in this Clause 1 be construed as granting YOU expressly or by implication, estoppels or otherwise, licenses to any intellectual property rights, including but not limited to patent rights, copyrights, trademark or trade secret in the SOFTWARE.
+
+No right is granted to YOU under this Agreement to manufacture, have manufactured, or sell, supply or distribute any products which have taken into use or which embody any of the SOFTWARE or any of the intellectual property rights embodied therein.
+
+2. RESTRICTIONS
+This Agreement does not prevent YOU from using the SOFTWARE for internal benchmarking purposes.
+
+However, YOU shall treat any and all benchmarking data relating to the SOFTWARE, and any other results of your use or testing of the SOFTWARE which are indicative of its performance, efficacy, reliability or quality, as confidential information and YOU shall not disclose such information to any third party without the express written permission of HISILICON.
+
+YOU shall reproduce and not remove or obscure any notice incorporated by HISILICON in the SOFTWARE to protect HISILICON’s intellectual property rights embodied therein.
+
+YOU shall not decompile, disassemble, or reverse engineer the SOFTWARE.
+
+YOU shall not distribute the SOFTWARE under an open source license as listed by the Open Source Initiative (a non-profit corporation whose website is www.opensource.org), or other license which requires the source code or object code of the SOFTWARE to be licensed or otherwise shared with any third party.
+
+3. FEEDBACK
+YOU may choose to provide suggestions, comments, feedback, ideas, modifications or know-how (whether in oral or written form) relating to the use of the SOFTWARE ("Feedback") to HISILICON under the terms of this Agreement. YOU hereby grants to HISILICON and its affiliates, under all of you and your affiliates’ (as applicable) intellectual property rights, a perpetual, irrevocable, royalty free, non-exclusive, worldwide license to (i) use, copy and modify the Feedback; (ii) sell, supply, or otherwise distribute the Feedback; (iii) design, have designed, manufacture, have manufactured, use, import, sell, and otherwise distribute and dispose of products that incorporate the Feedback; and (iv) sublicense (together with the rights to further sublicense) the rights granted in this paragraph to any third party.
+
+4. NO WARRANTY
+YOU AGREE THAT THE SOFTWARE IS PROVIDED BY HISILICON ON AN "AS IS" BASIS. HISILICON MAKES NO WARRANTY, EXPRESSED OR IMPLIED OR STATUTORY, WITH RESPECT TO ANY OF THE SOFTWARE, INCLUDING WITHOUT LIMITATION, ANY IMPLIED WARRANTIES OF MERCHANTABILITY, SATISFACTORY QUALITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.
+
+YOU EXPRESSLY ASSUME ALL LIABILITIES AND RISKS, FOR USE OR OPERATION OF THE SOFTWARE, INCLUDING WITHOUT LIMITATION, SOFTWARE APPLICATIONS DESIGNED OR INTENDED FOR MISSION CRITICAL APPLICATIONS, SUCH AS PACEMAKERS, WEAPONRY, AIRCRAFT NAVIGATION, FACTORY CONTROL SYSTEMS, ETC. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME THE ENTIRE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
+
+5. NO LIABILITY
+PLEASE READ THE INSTRUCTIONS COMPLETELY, AND PLEASE NOTE THAT YOU SHOULD USE THE SOFTWARE AT YOUR OWN RISK.
+
+IN NO EVENT SHALL HISILICON BE LIABLE FOR ANY DIRECT OR INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES (INCLUDING WITHOUT LIMITATION, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE OF OR INABILITY TO USE THE SOFTWARE, HOWEVER CAUSED AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE), STRICT LIABILITY OR OTHER LEGAL THEORY, EVEN IF HISILICON HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. EVEN IF THE SOFTWARE HAS ANY MATERIAL, VERIFIABLE, AND REPRODUCIBLE PROGRAM ERRORS, HISILICON SHALL HAVE NO LIABILITY TO MODIFY SUCH ERRORS.
+
+NOTWITHSTANDING ANYTHING TO THE CONTRARY CONTAINED IN THIS AGREEMENT, THE MAXIMUM LIABILITY OF HISILICON TO YOU IN AGGREGATE FOR ALL CLAIMS MADE AGAINST HISILICON IN CONTRACT TORT OR OTHERWISE UNDER OR IN CONNECTION WITH THE SUBJECT MATTER OF THIS AGREEMENT SHALL NOT EXCEED THE TOTAL OF SUMS RECEIVED BY HISILICON FROM YOU FOR THIS AGREEMENT. THE EXISTENCE OF MORE THAN ONE CLAIM WILL NOT ENLARGE OR EXTEND THE LIMIT.
+
+6. CONFIDENTIALITY
+YOU acknowledge and agree that the SOFTWARE and any benchmarking data and related information provided under this Agreement contain trade secrets and confidential material of HISILICON and YOU agree to maintain all such information in confidence and apply security measures no less stringent than the measures which YOU apply to protect your own like information, but not less than a reasonable degree of care, to prevent their unauthorized disclosure and use. The period of confidentiality shall be indefinite. YOU agree not to use any such information other than in normal use of the SOFTWARE under the license granted in this Agreement.
+
+7. TERM AND TERMINATION
+This Agreement shall remain in force until terminated. HISILICON may terminate this Agreement at any time with or without any cause. Upon termination of this Agreement, YOU shall immediately stop using the SOFTWARE and confidential information and destroy all copies of the SOFTWARE and confidential information in your possession, together with all documentation and related materials. The provisions of clauses 3, 4, 5, 6, 7 and 8 shall survive termination of this Agreement.
+
+8. GENERAL
+Any provision of this Agreement which is prohibited or unenforceable in any jurisdiction shall be ineffective to the extent of such prohibition or unenforceability without affecting, impairing or invalidating the remaining provisions hereof.
+
+The failure by HISILICON to enforce any of the provisions of this Agreement, unless waived in writing, shall not constitute a waiver of HISILICON's rights to enforce such provision or any other provision of this Agreement in the future.
+At HISILICON’s request, YOU agree to check your computers for installations of the SOFTWARE and any other information requested by HISILICON relating to SOFTWARE installation and to provide this information to HISILICON. YOU agree that employees or auditors nominated by HISILICON may also perform such checking and reporting on behalf of HISILICON by prior appointment during your normal business hours on seven (7) days’ notice. HISILICON shall bear the auditors’ costs for that audit unless it reveals unlicensed usage in which case YOU shall promptly reimburse HISILICON for all reasonable costs and expenses, including professional fees, relating to such audit.
+
+The SOFTWARE provided under this Agreement is subject to U.S. export control laws, including the U.S. Export Administration Act and its associated regulations, and may be subject to export or import regulations in other countries. YOU agree to comply fully with all laws and regulations of the United States and other countries ("Export Laws") to assure that the SOFTWARE, is not (1) exported, directly or indirectly, in violation of Export Laws, either to any countries that are subject to U.S.A. export restrictions or to any end user who has been prohibited from participating in the U.S.A. export transactions by any federal agency of the U.S.A. government; or (2) intended to be used for any purpose prohibited by Export Laws, including, without limitation, nuclear, chemical, or biological weapons proliferation.
+
+This Agreement shall be governed by and construed in accordance with the laws of People’s Republic of China, without reference to the principles of conflicts of laws. Any dispute arising out of or relating to this Agreement shall be submitted to Shenzhen Longgang District People’s court and the parties waive all objections to that jurisdiction and venue.
+
+Some open-source software components may be used in the Software. If the applicable licenses of these open-source software components conflict with the content in this Agreement, the licenses of the open-source software components will prevail.
+
+---------------------------------------------------------------------
+Copyright (C) 2020 Hisilicon (Shanghai) Technologies Co., Ltd. All rights reserved.
+

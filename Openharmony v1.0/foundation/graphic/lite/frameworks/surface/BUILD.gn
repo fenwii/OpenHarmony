@@ -1,0 +1,73 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#     http://www.apache.org/licenses/LICENSE-2.0
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/lite/config/component/lite_component.gni")
+
+generate_notice_file("surface_lite_notice_file") {
+    module_name = "surface_lite"
+    module_source_dir_list = [
+        "//third_party/bounds_checking_function",
+    ]
+}
+
+shared_library("surface") {
+    sources = [
+         "src/buffer_manager.cpp",
+         "src/buffer_queue_consumer.cpp",
+         "src/buffer_queue_producer.cpp",
+         "src/buffer_queue.cpp",
+         "src/surface_buffer_impl.cpp",
+         "src/surface_impl.cpp",
+         "src/surface.cpp"
+    ]
+    public_configs = [":surface_external_library_config"]
+    include_dirs = [
+        "//kernel/liteos_a/kernel/include/",
+        "//kernel/liteos_a/kernel/common",
+        "//third_party/bounds_checking_function/include",
+        "//drivers/hdf/lite/hdi/display/include",
+        "//foundation/graphic/lite/interfaces/kits/utils",
+        "//foundation/graphic/lite/interfaces/kits/config",
+    ]
+    cflags = ["-fPIC"]
+    cflags += ["-Wall"]
+    public_deps = [
+        "//base/hiviewdfx/frameworks/hilog_lite/featured:hilog_shared",
+        "//vendor/huawei/hdf/display/hdi:display_gralloc"
+    ]
+    if (ohos_kernel_type == "liteos_a") {
+        sources += ["src/buffer_client_producer.cpp"]
+        cflags += ["-D _SURFACE_LITEOS_A_"]
+        public_deps += ["//foundation/communication/frameworks/ipc_lite:liteipc_adapter"]
+    }
+    else if(ohos_kernel_type == "linux") {
+        cflags += ["-D _SURFACE_LINUX_"]
+    }
+    cflags_cc = cflags
+    ldflags = ["-ldisplay_gralloc"]
+    deps = [
+        "//third_party/bounds_checking_function:libsec_shared"
+    ]
+}
+
+config("surface_external_library_config") {
+    include_dirs = [
+        "//foundation/graphic/lite/interfaces/kits/surface",
+        "include",
+        "//drivers/hdf/lite/hdi/display/include"
+    ]
+}
+
+lite_component("litesurface") {
+    features = [
+        ":surface",
+    ]
+}

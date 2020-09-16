@@ -1,0 +1,76 @@
+# Osd command
+ifeq ($(CONFIG_OSD_ENABLE),y)
+# for dec
+ifneq ($(CONFIG_PRODUCTNAME),"hi3516ev300")
+ifneq ($(CONFIG_PRODUCTNAME),"hi3516ev200")
+ifneq ($(CONFIG_PRODUCTNAME),"hi3518ev300")
+ifneq ($(CONFIG_PRODUCTNAME),"hi3516dv200")
+obj-y += cmd_dec.o
+endif
+endif
+endif
+endif
+ifeq ($(CONFIG_PRODUCTNAME),"hi3559av100")
+EXTRA_CFLAGS += -DRGB_OUTPUT_ENABLE
+endif
+ifeq ($(CONFIG_PRODUCTNAME),"hi3569v100")
+EXTRA_CFLAGS += -DRGB_OUTPUT_ENABLE
+endif
+# for vo
+ifeq ($(CONFIG_PRODUCTNAME),"hi3559av100")
+ccflags-y    += -DCONFIG_HI_HDMI_SUPPORT
+obj-y += cmd_vo_hi3559av100.o
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3569v100")
+ccflags-y    += -DCONFIG_HI_HDMI_SUPPORT
+obj-y += cmd_vo_hi3569v100.o
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3519av100")
+obj-y += cmd_vo_hi3519av100.o
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3516dv300")
+obj-y += cmd_vo_hi3516cv500.o
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3516av300")
+obj-y += cmd_vo_hi3516cv500.o
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3516ev200")
+obj-y += cmd_vo_hi3516ev200.o
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3516ev300")
+obj-y += cmd_vo_hi3516ev200.o
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3518ev300")
+obj-y += cmd_vo_hi3516ev200.o
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3516dv200")
+obj-y += cmd_vo_hi3516ev200.o
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3559v200")
+obj-y += cmd_vo_hi3516cv500.o
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3562v100")
+obj-y += cmd_vo_hi3516cv500.o
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3566v100")
+obj-y += cmd_vo_hi3516cv500.o
+else ifeq ($(CONFIG_PRODUCTNAME),"hi3556v200")
+obj-y += cmd_vo_hi3516cv500.o
+else ifeq ($(CONFIG_PRODUCTNAME),$(filter $(CONFIG_PRODUCTNAME), "hi3531dv200" "hi3535av100" "hi3521dv200" "hi3520dv500"))
+ifeq ($(CONFIG_PRODUCTNAME),$(filter $(CONFIG_PRODUCTNAME), "hi3531dv200" "hi3535av100"))
+VO_ARCH_NAME = $(CONFIG_PRODUCTNAME)
+VO_SUB_ARCH_NAME = $(CONFIG_PRODUCTNAME)
+else ifeq ($(CONFIG_PRODUCTNAME),$(filter $(CONFIG_PRODUCTNAME), "hi3521dv200" "hi3520dv500"))
+VO_ARCH_NAME = hi3521dv200
+VO_SUB_ARCH_NAME = $(CONFIG_PRODUCTNAME)
+endif
+cflags-y     += -I$(srctree)/product/hiosd/vo/include
+cflags-y     += -I$(srctree)/product/hiosd/include
+cflags-y     += -I$(srctree)/product/hiosd/hdmi/hdmi_2_0
+cflags-y     += -I$(srctree)/product/hiosd/vo/arch/$(VO_ARCH_NAME)/include
+cflags-y     += -I$(srctree)/product/hiosd/vo/arch/$(VO_ARCH_NAME)/include/$(VO_SUB_ARCH_NAME)
+ccflags-y    += -DCONFIG_HI_HDMI_SUPPORT
+ccflags-y    += $(cflags-y)
+obj-y += cmd_vo.o
+endif
+
+ifeq ($(CONFIG_PRODUCTNAME), "hi3531dv200")
+ccflags-y += -DCHIP_HI3531DV200
+else ifeq ($(CONFIG_PRODUCTNAME), "hi3535av100")
+ccflags-y += -DCHIP_HI3535AV100
+else ifeq ($(CONFIG_PRODUCTNAME), "hi3521dv200")
+ccflags-y += -DCHIP_HI3521DV200
+else ifeq ($(CONFIG_PRODUCTNAME), "hi3520dv500")
+ccflags-y += -DCHIP_HI3520DV500
+endif
+
+endif

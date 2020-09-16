@@ -1,0 +1,101 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/lite/ndk/ndk.gni")
+
+group("native_api") {
+    deps = []
+    if (ohos_kernel_type == "liteos_a") {
+        deps += [ ":platform_notes" ]
+        deps += [ ":driver_framework_notes" ]
+        deps += [ ":driver_config_notes" ]
+        deps += [ ":hdi_display_notes" ]
+        deps += [ ":hdi_input_notes" ]
+        deps += [ ":hdi_audio_notes" ]
+        deps += [ ":network_wifi_notes" ]
+        deps += [ ":osal_notes" ]
+    }
+}
+
+ndk_lib("platform_notes") {
+    deps = [ ]
+    head_files = [
+        "//drivers/hdf/frameworks/include/platform"
+    ]
+}
+
+ndk_lib("driver_framework_notes") {
+    deps = [ ]
+    head_files = [
+        "//drivers/hdf/frameworks/include/core",
+        "//drivers/hdf/frameworks/ability/sbuf/include"
+    ]
+}
+
+ndk_lib("driver_config_notes") {
+    deps = [ ]
+    head_files = [
+        "//drivers/hdf/frameworks/include/config"
+    ]
+}
+
+ndk_lib("hdi_display_notes") {
+    deps = [ ]
+    head_files = [
+        "display/include"
+    ]
+}
+
+ndk_lib("hdi_input_notes") {
+    deps = [ ]
+    head_files = [
+        "input/include"
+    ]
+}
+
+ndk_lib("hdi_audio_notes") {
+    deps = [ ]
+    head_files = [
+        "audio/include"
+    ]
+}
+
+ndk_lib("network_wifi_notes") {
+    deps = [ ]
+    head_files = [
+        "//drivers/hdf/frameworks/include/wifi",
+        "//drivers/hdf/frameworks/include/net"
+    ]
+}
+
+ndk_lib("osal_notes") {
+    deps = [ ]
+    head_files = [
+        "//drivers/hdf/frameworks/include/osal",
+        "//drivers/hdf/frameworks/include/utils"
+    ]
+}
+
+ndk_lib("hdi_codec_notes") {
+    deps = [ ]
+    head_files = [
+        "codec/include/"
+    ]
+}
+
+ndk_lib("hdi_format_notes") {
+    deps = [ ]
+    head_files = [
+        "format/include"
+    ]
+}

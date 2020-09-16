@@ -1,0 +1,58 @@
+config DRIVERS_MMC
+    depends on DRIVERS
+    bool "Enable MMC"
+    default y
+    depends on DRIVERS && FS_VFS
+    help
+      Answer Y to enable LiteOS support MMC driver.
+
+config DRIVERS_SD_DETECT_BY_SW
+    depends on DRIVERS_MMC && (PLATFORM_HI3516EV200 || PLATFORM_HI3518EV300)
+    bool "Use software detection instead of hardware interrupt"
+    default n
+    help
+      Answer Y to enable software detection for the MMC/SD card.
+      if you choose Y, host driver will disable the insert/remove interrupt and use the sd protocol to detect the card.
+
+
+
+config DRIVERS_SD
+    depends on DRIVERS_MMC && (PLATFORM_HI3518EV200 || PLATFORM_HI3516EV200 || PLATFORM_HI3516EV300 || PLATFORM_HI3518EV300 || PLATFORM_HI3516DV300)
+    bool "Enable MMC0 support SD card type"
+
+config DRIVERS_EMMC
+    depends on DRIVERS_MMC && (PLATFORM_HI3518EV200 || PLATFORM_HI3516EV200 || PLATFORM_HI3516EV300 || PLATFORM_HI3518EV300 || PLATFORM_HI3516DV300 || PLATFORM_HI3556V200)
+    bool "Enable MMC0 support eMMC type"
+
+
+
+choice
+    depends on DRIVERS_EMMC && DRIVERS_MMC && FS_VFS
+    prompt "EMMC chip mode"
+    default DRIVERS_EMMC_HS200
+    help
+      select EMMC chip mode hs200.
+      select EMMC chip mode hs400.
+
+config DRIVERS_EMMC_HS200
+    depends on DRIVERS_EMMC
+    bool "Enable EMMC HS200 support"
+    help
+       If you connect the SDIO0 to EMMC chip, figure out which mode of chip and select the mode HS200
+
+config DRIVERS_EMMC_HS400
+    depends on DRIVERS_EMMC && (PLATFORM_HI3518EV200 || PLATFORM_HI3516EV300)
+    bool "Enable EMMC HS400 support"
+    help
+       If you connect the SDIO0 to EMMC chip figure out which mode of chip and select the mode HS400
+
+endchoice
+
+config DRIVERS_MMC_SPEEDUP
+    depends on DRIVERS_MMC && (PLATFORM_HI3519 || PLATFORM_HI3519V101 || PLATFORM_HI3559)
+    bool "Enable MMC support speedup"
+    default n
+    help
+      Answer Y to enable LiteOS support speedup.
+
+

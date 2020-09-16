@@ -1,0 +1,82 @@
+# Copyright (c) 2013-2019, Huawei Technologies Co., Ltd. All rights reserved.
+# Copyright (c) 2020, Huawei Device Co., Ltd. All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice, this list of
+#    conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright notice, this list
+#    of conditions and the following disclaimer in the documentation and/or other materials
+#    provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its contributors may be used
+#    to endorse or promote products derived from this software without specific prior written
+#    permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+static_library("base") {
+
+    sources = [
+        "ipc/los_mux.c",
+        "ipc/los_sem_debug.c",
+        "ipc/los_queue_debug.c",
+        "ipc/los_ipcdebug.c",
+        "ipc/los_mux_debug.c",
+        "ipc/los_sem.c",
+        "ipc/los_event.c",
+        "ipc/los_queue.c",
+        "core/los_swtmr.c",
+        "core/los_task.c",
+        "core/los_timeslice.c",
+        "core/los_sortlink.c",
+        "core/los_bitmap.c",
+        "core/los_process.c",
+        "core/los_sys.c",
+        "core/los_tick.c",
+        "mem/bestfit/los_memory.c",
+        "mem/bestfit/los_multipledlinkhead.c",
+        "mem/membox/los_membox.c",
+        "mem/common/los_memstat.c",
+        "om/los_err.c",
+        "misc/task_shellcmd.c",
+        "misc/los_stackinfo.c",
+        "misc/sysinfo_shellcmd.c",
+        "misc/los_misc.c",
+        "misc/swtmr_shellcmd.c",
+        "misc/mempt_shellcmd.c",
+        "misc/vm_shellcmd.c",
+        "mp/los_stat.c",
+        "mp/los_lockdep.c",
+        "mp/los_mp.c",
+        "mp/los_percpu.c",
+        "sched/sched_sq/los_priqueue.c",
+        "sched/sched_sq/los_sched.c",
+        "vm/filemap.c",
+        "vm/pmm.c",
+        "vm/vm.c",
+        "vm/vmm.c",
+    ]
+
+    include_dirs = [
+        "include",
+        "../extended/include",
+        "../extended/vdso/include",
+        "../extended/dynload/include",
+        "../include",
+        "mem",
+    ]
+
+}

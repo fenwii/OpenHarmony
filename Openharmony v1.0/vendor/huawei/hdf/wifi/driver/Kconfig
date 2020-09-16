@@ -1,0 +1,13 @@
+config DRIVERS_HDF_WIFI
+    bool "Enable HDF WiFi Host driver"
+    default n
+    depends on DRIVERS_HDF
+    help
+      Answer Y to enable HDF WiFi Host driver.
+
+config DRIVERS_HI3881
+    bool "Enable Hi3881 Host driver"
+    default n
+    depends on DRIVERS_HDF_WIFI
+    help
+      Answer Y to enable Hi3881 Host driver.

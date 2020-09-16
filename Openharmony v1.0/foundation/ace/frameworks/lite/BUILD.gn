@@ -1,0 +1,229 @@
+#Copyright (c) 2020 Huawei Device Co., Ltd.
+#Licensed under the Apache License, Version 2.0 (the "License");
+#you may not use this file except in compliance with the License.
+#You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#Unless required by applicable law or agreed to in writing, software
+#distributed under the License is distributed on an "AS IS" BASIS,
+#WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#See the License for the specific language governing permissions and
+#limitations under the License.
+
+import("//build/lite/config/component/lite_component.gni")
+import("//build/lite/config/subsystem/aafwk/config.gni")
+
+declare_args() {
+  LOSCFG_TEST_JS_BUILD = false
+}
+
+lite_component("jsfwk") {
+  features = [ ":ace_lite" ]
+}
+
+config("ace_lite_config") {
+  include_dirs = [
+    "//foundation/graphic/lite/interfaces/innerkits/ui",
+    "//foundation/graphic/lite/interfaces/innerkits/ui/dock",
+    "//foundation/graphic/lite/interfaces/innerkits/ui/common",
+    "//foundation/graphic/lite/interfaces/kits",
+    "//foundation/graphic/lite/interfaces/kits/config",
+    "//foundation/graphic/lite/interfaces/kits/surface",
+    "//foundation/graphic/lite/interfaces/kits/ui",
+    "//foundation/graphic/lite/interfaces/kits/ui/animator",
+    "//foundation/graphic/lite/interfaces/kits/ui/common",
+    "//foundation/graphic/lite/interfaces/kits/ui/components",
+    "//foundation/graphic/lite/interfaces/kits/ui/dfx",
+    "//foundation/graphic/lite/interfaces/kits/ui/events",
+    "//foundation/graphic/lite/interfaces/kits/ui/font",
+    "//foundation/graphic/lite/interfaces/kits/ui/layout",
+    "//foundation/graphic/lite/interfaces/kits/ui/themes",
+    "//foundation/graphic/lite/interfaces/kits/utils",
+    "//utils/native/lite/include",
+    "//foundation/aafwk/interfaces/kits/ability_lite",
+    "//foundation/aafwk/interfaces/kits/want_lite",
+    "//foundation/aafwk/interfaces/innerkits/abilitymgr_lite",
+    "//foundation/appexecfwk/interfaces/kits/bundle_lite",
+    "//foundation/appexecfwk/utils/bundle_lite",
+    "//foundation/ace/lite/tools/simulator/config",
+  ]
+
+  include_dirs += ["//third_party/bounds_checking_function/include",
+    "//foundation/ace/interfaces/innerkits/builtin/async",
+    "//foundation/ace/interfaces/innerkits/builtin/base",
+    "//foundation/ace/interfaces/innerkits/builtin/jsi",
+    "include/context",
+    "include/base",
+    "include/modules",
+    "include/resource",
+    "src/core",
+    "src/core/animation",
+    "src/core/base",
+    "src/core/components",
+    "src/core/context",
+    "src/core/directive",
+    "src/core/router",
+    "src/core/jsi",
+    "src/core/modules",
+    "src/core/router",
+    "src/core/stylemgr",
+    "src/core/wrapper",
+    "targets",
+    "//kernel/liteos_a/kernel/include/",
+    "//kernel/liteos_a/kernel/common",
+    "//third_party/jerryscript/jerry-core/include",
+    "//third_party/jerryscript/jerry-ext/include/jerryscript-ext",
+    "///third_party/jerryscript/jerry-port/default/include",
+    "//third_party/cJSON",
+    "//utils/native/lite/timer_task/include/",
+    "//third_party/freetype/include",
+  ]
+  if (ohos_kernel_type == "liteos_a" || ohos_kernel_type == "liteos_m" ||
+      ohos_kernel_type == "liteos_riscv") {
+    include_dirs += [ "targets/liteos_a" ]
+  } else if (ohos_kernel_type == "linux") {
+    include_dirs += [
+        "targets/linux",
+    ]
+  }
+
+  ldflags = ["-lstdc++"]
+  ldflags += ["-lpthread"]
+  ldflags += ["-Wl,-rpath-link=$ohos_root_path/$root_out_dir"]
+}
+
+shared_library("ace_lite") {
+  configs -= [ "//build/lite/config:language_cpp" ]
+  cflags = [
+    "-Wall",
+    "-Wno-format",
+    "-Wno-format-extra-args",
+  ]
+  cflags_cc = [ "-std=c++14" ]
+  cflags_cc += cflags
+  configs += [":ace_lite_config"]
+
+  sources = [
+    "src/core/animation/transition_impl.cpp",
+    "src/core/async/js_async_work.cpp",
+    "src/core/async/message_queue_utils.cpp",
+    "src/core/base/ace_log.cpp",
+    "src/core/base/ace_mem_base.cpp",
+    "src/core/base/js_fwk_common.cpp",
+    "src/core/base/key_parser.cpp",
+    "src/core/base/time_util.cpp",
+    "src/core/base/js_debugger_config.cpp",
+    "src/core/base/memory_heap.cpp",
+    "src/core/components/video_view.cpp",
+    "src/core/components/analog_clock_component.cpp",
+    "src/core/components/camera_component.cpp",
+    "src/core/components/canvas_component.cpp",
+    "src/core/components/chart_component.cpp",
+    "src/core/components/clock_hand_component.cpp",
+    "src/core/components/component.cpp",
+    "src/core/components/component_utils.cpp",
+    "src/core/components/div_component.cpp",
+    "src/core/components/event_listener.cpp",
+    "src/core/components/image_animator_component.cpp",
+    "src/core/components/image_component.cpp",
+    "src/core/components/input_component.cpp",
+    "src/core/components/list_adapter.cpp",
+    "src/core/components/list_component.cpp",
+    "src/core/components/marquee_component.cpp",
+    "src/core/components/panel_view.cpp",
+    "src/core/components/picker_view_component.cpp",
+    "src/core/components/progress_component.cpp",
+    "src/core/components/scroll_layer.cpp",
+    "src/core/components/slider_component.cpp",
+    "src/core/components/swiper_component.cpp",
+    "src/core/components/switch_component.cpp",
+    "src/core/components/tab_bar_component.cpp",
+    "src/core/components/tab_content_component.cpp",
+    "src/core/components/tabs_component.cpp",
+    "src/core/components/text_component.cpp",
+    "src/core/components/video_component.cpp",
+    "src/core/context/ace_ability.cpp",
+    "src/core/context/ace_event_error_code.cpp",
+    "src/core/context/fatal_handler.cpp",
+    "src/core/context/js_ability.cpp",
+    "src/core/context/js_ability_impl.cpp",
+    "src/core/context/js_app_context.cpp",
+    "src/core/context/js_app_environment.cpp",
+    "src/core/context/js_framework_raw.cpp",
+    "src/core/context/js_profiler.cpp",
+    "src/core/context/js_timer_list.cpp",
+    "src/core/directive/descriptor_utils.cpp",
+    "src/core/directive/directive_watcher_callback.cpp",
+    "src/core/jsi/jsi.cpp",
+    #"src/core/modules/presets/jstest_module.cpp",
+    "src/core/modules/presets/timer_module.cpp",
+    "src/core/modules/app_module.cpp",
+    "src/core/modules/module_manager.cpp",
+    "src/core/modules/presets/cjson_parser.cpp",
+    "src/core/modules/presets/console_log_impl.cpp",
+    "src/core/modules/presets/console_module.cpp",
+    "src/core/modules/presets/localization_module.cpp",
+    #"src/core/modules/presets/feature_ability_module.cpp",
+    "src/core/modules/presets/preset_module.cpp",
+    "src/core/modules/presets/profiler_module.cpp",
+    "src/core/modules/presets/render_module.cpp",
+    "src/core/modules/presets/require_module.cpp",
+    "src/core/modules/presets/version_module.cpp",
+    "src/core/modules/router_module.cpp",
+    "src/core/modules/dfx_module.cpp",
+    "src/core/modules/sample_module.cpp",
+    "src/core/resource/video_play_image_res.cpp",
+    "src/core/resource/video_muted_image_res.cpp",
+    "src/core/router/js_page_state.cpp",
+    "src/core/router/js_page_state_machine.cpp",
+    "src/core/router/js_router.cpp",
+    "src/core/stylemgr/app_style.cpp",
+    "src/core/stylemgr/app_style_item.cpp",
+    "src/core/stylemgr/app_style_list.cpp",
+    "src/core/stylemgr/app_style_manager.cpp",
+    "src/core/stylemgr/app_style_sheet.cpp",
+    "src/core/wrapper/js.cpp",
+    "targets/platform_adapter.cpp",
+  ]
+
+  public_deps = [
+    "//third_party/cJSON:cjson_shared",
+    "//third_party/bounds_checking_function:libsec_shared",
+    "//third_party/jerryscript/jerry-core:jerry-core_shared",
+    "//third_party/jerryscript/jerry-ext:jerry-ext_shared",
+    "//third_party/jerryscript/jerry-libm:jerry-libm_shared",
+    "//third_party/jerryscript/jerry-port/default:jerry-port-default_shared",
+    "//base/security/frameworks/crypto_lite/js/builtin:ace_kit_cipher",
+    "//utils/native/lite/js/builtin:ace_utils_kits",
+    "//utils/native/lite/timer_task:ace_kit_timer",
+    "//foundation/multimedia/frameworks/camera_lite:camera",
+    "//foundation/multimedia/frameworks/player_lite:player",
+    "//foundation/multimedia/interfaces/kits/player_lite/js/builtin:audio_api",
+    "//foundation/graphic/lite/frameworks/surface:surface",
+  ]
+
+  defines = []
+
+  if (ohos_build_type == "debug") {
+    defines += [
+      "JS_PROFILER=1"
+    ]
+  } else {
+    defines += [
+      "JS_PROFILER=0"
+    ]
+  }
+
+  if (LOSCFG_TEST_JS_BUILD) {
+    defines += [
+      "JSFWK_TEST"
+    ]
+  }
+
+  if (enable_ohos_appexecfwk_feature_ability == true) {
+      defines += [
+          "ABILITY_WINDOW_SUPPORT"
+      ]
+  }
+}

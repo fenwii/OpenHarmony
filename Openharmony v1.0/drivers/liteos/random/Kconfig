@@ -1,0 +1,12 @@
+config DRIVERS_RANDOM
+    bool "Enable random"
+    default y
+    depends on DRIVERS && FS_VFS && COMPAT_BSD
+    help
+        Answer Y to support random.
+config HW_RANDOM_ENABLE
+    depends on DRIVERS_RANDOM && (PLATFORM_HI3518EV300 || PLATFORM_HI3516CV300 || PLATFORM_HI3516DV300 || PLATFORM_HI3556V200)
+    bool "Select hw random"
+    default y
+    help
+    Answer Y to select hw random.

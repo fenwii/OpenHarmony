@@ -1,0 +1,14 @@
+#include "device_info/device_info.hcs"
+#include "i2c/i2c_config.hcs"
+#include "gpio/gpio_config.hcs"
+#include "uart/uart_config.hcs"
+#include "watchdog/watchdog_config.hcs"
+#include "usb/usb_config.hcs"
+#include "sdio/sdio_config.hcs"
+#include "rtc/rtc_config.hcs"
+#include "spi/spi_config.hcs"
+#include "wifi/wifi_config.hcs"
+
+root {
+    module = "hisilicon,hi35xx_chip";
+}

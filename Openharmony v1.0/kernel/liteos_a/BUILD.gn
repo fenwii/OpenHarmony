@@ -1,0 +1,68 @@
+# Copyright (c) 2013-2019, Huawei Technologies Co., Ltd. All rights reserved.
+# Copyright (c) 2020, Huawei Device Co., Ltd. All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice, this list of
+#    conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright notice, this list
+#    of conditions and the following disclaimer in the documentation and/or other materials
+#    provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its contributors may be used
+#    to endorse or promote products derived from this software without specific prior written
+#    permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+import("//build/lite/config/subsystem/lite_subsystem.gni")
+
+declare_args() {
+    enable_ohos_kernel_liteos_a_ext_build = true
+    LOSCFG_TEST_APPS = false
+}
+
+lite_subsystem("kernel") {
+    subsystem_components = []
+
+    if (enable_ohos_kernel_liteos_a_ext_build == false) {
+        subsystem_components += [
+            "//kernel/liteos_a/kernel",
+            "//kernel/liteos_a/net",
+            "//kernel/liteos_a/lib",
+            "//kernel/liteos_a/compat",
+            "//kernel/liteos_a/fs",
+            "//kernel/liteos_a/arch:platform_cpu",
+        ]
+        if (LOSCFG_SHELL) {
+            subsystem_components += [ "//kernel/liteos_a/shell" ]
+        }
+    } else {
+        deps = [":make"]
+    }
+}
+
+action("make") {
+    script = "//build/lite/build_ext_components.py"
+    outputs = [ "$target_gen_dir/liteos_a_build_log.txt" ]
+    exec_path = rebase_path(rebase_path(".", root_build_dir))
+    outdir = rebase_path(get_path_info(".", "out_dir"))
+    command = "make clean OUTDIR=$outdir && make rootfs VERSION=\"${ohos_version}\" -j 16 OUTDIR=$outdir"
+    args = [
+        "--path=$exec_path",
+        "--prebuilts=sh build.sh ${board_name} ${ohos_build_compiler} ${ohos_build_type}",
+        "--command=${command}"
+    ]
+}

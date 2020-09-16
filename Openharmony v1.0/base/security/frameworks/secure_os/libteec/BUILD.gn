@@ -1,0 +1,50 @@
+#
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+import("//build/lite/config/component/lite_component.gni")
+
+source_set("libteec_src") {
+    sources = [
+        "src/tee_client_api.c",
+        "src/tee_client_app_load.c",
+    ]
+
+    if (ohos_kernel_type == "liteos_a") {
+        defines = ["TEE_LITEOS_A"]
+    }
+
+    include_dirs = [
+        "include",
+        "//base/security/services/secure_os/teecd/include",
+        "//base/security/interfaces/innerkits/secure_os/libteec",
+        "//third_party/bounds_checking_function/include",
+    ]
+    cflags = [ "-fPIC" ]
+}
+
+lite_component("libteec_vendor") {
+    target_type = "shared_library"
+    output_dir = "$root_out_dir/vendor/lib"
+
+    features = [
+        ":libteec_src"
+    ]
+
+    deps = [
+        "//base/security/services/secure_os/teecd:teecd_public_src",
+        "//third_party/bounds_checking_function:libsec_shared",
+    ]
+    cflags = [ "-fPIC" ]
+}

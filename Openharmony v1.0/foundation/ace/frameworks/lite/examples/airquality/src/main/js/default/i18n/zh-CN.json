@@ -1,0 +1,21 @@
+{
+    "HangZhou":"杭州",
+    "ShangHai":"上海",
+    "Good":"良好",
+    "Unhealth":"差",
+    "Normal":"一般",
+    "airQuality":"空气质量监测",
+    "History":"历史",
+    "Close":"关闭",
+    "updated":"更新于",
+    "dataSourceName":"数据源",
+    "sampledOn":"采样时间",
+    "historicalData":"历史数据",
+    "Monday":"周一",
+    "Tuesday":"周二",
+    "Wednesday":"周三",
+    "Thursday":"周四",
+    "Friday":"周五",
+    "Saturday":"周六",
+    "Sunday":"周日"
+}

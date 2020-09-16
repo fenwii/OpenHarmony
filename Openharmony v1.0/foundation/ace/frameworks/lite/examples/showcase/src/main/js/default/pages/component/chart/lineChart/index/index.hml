@@ -1,0 +1,49 @@
+<!--
+Copyright (c) 2020 Huawei Device Co., Ltd.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+    <list style="left:0px;top:0px;flex-direction:column;width:454px;height:454px;">
+      <list-item style="height:40px;width:454px;">
+      </list-item>
+      <list-item style="width:454px;height:80px;">
+          <input type="button" style="margin-left:85px;width:130px;height:60px;" value="返回首页" onclick=backMain>
+          </input>
+          <input type="button" style="margin-left:20px;width:130px;height:60px;" value="返回上级" onclick=backSuperior>
+          </input>
+      </list-item>
+      <list-item class="separatorContainerStyle">
+      </list-item>
+      <list-item class="titleContainerStyle">
+          <text class="titleTextStyle">
+              line-chart
+          </text>
+      </list-item>
+      <list-item class="separatorContainerStyle">
+      </list-item>
+      <list-item class="buttonContainerStyle">
+          <input type="button" class="buttonStyle" value="属性" onclick="changePage1"/>
+      </list-item>
+      <list-item class="separatorContainerStyle">
+      </list-item>
+      <list-item class="buttonContainerStyle">
+          <input type="button" class="buttonStyle" value="样式" onclick="changePage2"/>
+      </list-item>
+      <list-item class="separatorContainerStyle">
+      </list-item>
+      <list-item class="buttonContainerStyle">
+          <input type="button" class="buttonStyle" value="事件" onclick="changePage3"/>
+      </list-item>
+      <list-item style="height:40px;width:454px;">
+      </list-item>
+    </list>

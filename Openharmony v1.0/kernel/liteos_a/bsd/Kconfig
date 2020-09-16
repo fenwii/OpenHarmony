@@ -1,0 +1,6 @@
+config  COMPAT_BSD
+    bool "Enable FreeBSD"
+    default y
+
+    help
+      Answer Y to enable LiteOS support FreeBSD.

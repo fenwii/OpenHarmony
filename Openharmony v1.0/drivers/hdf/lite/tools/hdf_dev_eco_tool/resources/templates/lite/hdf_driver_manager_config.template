@@ -1,0 +1,38 @@
+root {
+    device_info {
+        match_attr = "hdf_manager";
+        template host {
+            hostName = "";
+            priority = 100;
+            template device {
+                template deviceNode {
+                    policy = 0;
+                    priority = 100;
+                    preload = 0;
+                    permission = 0666;
+                    moduleName = "";
+                    serviceName = "";
+                    deviceMatchAttr = "";
+                }
+            }
+        }
+        platform :: host {
+            hostName = "platform_host";
+        }
+        display :: host {
+            hostName = "display_host";
+        }
+        network :: host {
+            hostName = "network_host";
+        }
+        storage :: host {
+            hostName = "storage_host";
+        }
+        media :: host {
+            hostName = "media_host";
+        }
+        common :: host {
+            hostName = "common_host";
+        }
+    }
+}

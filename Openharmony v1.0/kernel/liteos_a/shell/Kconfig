@@ -1,0 +1,32 @@
+config SHELL
+    bool "Enable Shell"
+    default y
+    depends on DEBUG_VERSION
+    help
+      Answer Y to enable LiteOS support shell cmd.
+
+menu "Functionality of Shell"
+    depends on SHELL
+
+config SHELL_LK
+    bool "Enable Shell lk"
+    default y
+    depends on DEBUG_VERSION && SHELL
+    help
+      Answer Y to enable LiteOS support shell lk.
+
+config SHELL_DMESG
+    bool "Enable Shell dmesg"
+    default n
+    depends on DEBUG_VERSION && SHELL && SHELL_CMD_DEBUG
+    help
+      Answer Y to enable LiteOS support shell dmesg.
+
+config SHELL_EXCINFO
+    bool "Enable Shell excInfo"
+    default n
+    depends on DEBUG_VERSION && SHELL
+    help
+      Answer Y to enable LiteOS support shell excInfo.
+
+endmenu

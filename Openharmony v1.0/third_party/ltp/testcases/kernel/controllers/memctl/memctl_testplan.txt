@@ -1,0 +1,24 @@
+The memory controller testplan includes a complete set of testcases that
+test the memory controller in different scenarios.
+
+**These testcases test the memory controller under single level.**
+
+TESTCASE DESCRIPTION:
+====================
+
+Test 01: TASK MIGRATION TEST(1)
+-------------------------------
+In this test we create two groups(a & b) and run initially two tasks in one
+group(a). group b has no task in it. The tasks do anonymous memory allocation
+using malloc and after that just keep reading the pages they allocate. So
+the memory usage for group a is non zero and group b is zero. After some time
+one of the tasks from group a is migrated to group b and the memory usage of
+group b is checked. If memory usage of group b is still zero the test passes
+otherwise it fails.
+
+Test 02: TASK MIGRATION TEST(2)
+-------------------------------
+This test is an extension of the above test 1. After migration the task does
+memory allocation again and so this time the memory should be claimed from
+group b. The test checks if memory is claimed from group b and reports pass
+or failure accordingly.

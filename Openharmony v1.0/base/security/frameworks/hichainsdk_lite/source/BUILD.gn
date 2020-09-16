@@ -1,0 +1,108 @@
+#
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+hichian_sources = [
+    "auth_info/add_auth_info.c",
+    "auth_info/add_auth_info_client.c",
+    "auth_info/auth_info.c",
+    "auth_info/exchange_auth_info.c",
+    "auth_info/exchange_auth_info_client.c",
+    "auth_info/remove_auth_info_client.c",
+    "hichain.c",
+    "huks_adapter/huks_adapter.c",
+    "json/commonutil.c",
+    "json/jsonutil.c",
+    "key_agreement/key_agreement.c",
+    "key_agreement/key_agreement_client.c",
+    "key_agreement/key_agreement_server.c",
+    "key_agreement/pake_client.c",
+    "key_agreement/pake_server.c",
+    "key_agreement/sec_clone_server.c",
+    "key_agreement/sts_client.c",
+    "key_agreement/sts_server.c",
+    "log/log.c",
+    "schedule/build_object.c",
+    "schedule/distribution.c",
+    "struct/add_auth_info_data.c",
+    "struct/add_auth_info_request.c",
+    "struct/add_auth_info_response.c",
+    "struct/auth_ack_request.c",
+    "struct/auth_ack_response.c",
+    "struct/auth_start_request.c",
+    "struct/auth_start_response.c",
+    "struct/exchange_auth_data.c",
+    "struct/exchange_request.c",
+    "struct/exchange_response.c",
+    "struct/import_add_auth_data.c",
+    "struct/inform_message.c",
+    "struct/key_agreement_version.c",
+    "struct/key_agreement_version.h",
+    "struct/pake_client_confirm.c",
+    "struct/pake_request.c",
+    "struct/pake_response.c",
+    "struct/pake_server_confirm.c",
+    "struct/parsedata.c",
+    "struct/rmv_auth_info_data.c",
+    "struct/rmv_auth_info_request.c",
+    "struct/rmv_auth_info_response.c",
+    "struct/sec_clone_data.c",
+]
+
+config("hichain_config") {
+    include_dirs = [
+        "//third_party/bounds_checking_function/include",
+        "//base/security/interfaces/innerkits/hichainsdk_lite",
+        "//third_party/cJSON",
+        "base",
+        "huks_adapter",
+        "json",
+        "key_agreement",
+        "log",
+        "schedule",
+        "struct",
+        "auth_info"
+    ]
+
+    defines = [
+        "_SCANTY_MEMORY_",
+        "_CUT_STS_CLIENT_",
+        "_CUT_REMOVE_",
+        "_CUT_ADD_",
+        "_CUT_LOG_"
+    ]
+
+}
+
+if (ohos_kernel_type == "liteos_riscv") {
+    static_library("hichainsdk") {
+        sources = hichian_sources
+        public_configs = [ ":hichain_config" ]
+    }
+} else {
+    shared_library("hichainsdk") {
+        sources = hichian_sources
+        public_configs = [ ":hichain_config" ]
+        deps = [
+            "//base/security/frameworks/huks_lite/source:huks",
+            "//third_party/cJSON:cjson_shared",
+            "//third_party/bounds_checking_function:libsec_shared"
+        ]
+        cflags = [
+            "-flto",
+            "-Wall",
+            "-fvisibility=hidden"
+        ]
+    }
+}

@@ -1,0 +1,16 @@
+root {
+    platfrom {
+        sdio_config {
+            template sdio_controller {
+                match_attr = "";
+                funcNum = 1;
+                vendorId = 0x296;
+                deviceId = 0x5347;
+            }
+
+            controller_0x5347 :: sdio_controller {
+                match_attr = "hisilicon_hi35xx_sdio_1";
+            }
+        }
+    }
+}

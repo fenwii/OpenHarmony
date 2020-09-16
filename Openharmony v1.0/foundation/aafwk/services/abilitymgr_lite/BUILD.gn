@@ -1,0 +1,132 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/lite/config/component/lite_component.gni")
+import("//build/lite/config/subsystem/aafwk/config.gni")
+
+lite_library("abilityms") {
+    target_type = "shared_library"
+
+    cflags = [
+        "-Wall",
+        "-Wno-format",
+        "-Wno-format-extra-args",
+    ]
+    cflags_cc = cflags
+
+    ldflags = [
+        "-lstdc++",
+        "-lpthread",
+        "-ldl",
+    ]
+
+    sources = [
+        "src/task/ability_activate_task.cpp",
+        "src/task/ability_background_task.cpp",
+        "src/task/ability_inactivate_task.cpp",
+        "src/task/ability_attach_task.cpp",
+        "src/task/ability_stop_task.cpp",
+        "src/task/ability_start_task.cpp",
+        "src/task/ability_terminate_task.cpp",
+        "src/task/ability_dump_task.cpp",
+        "src/task/app_terminate_task.cpp",
+        "src/task/app_restart_task.cpp",
+        "src/util/abilityms_status.cpp",
+        "src/util/abilityms_helper.cpp",
+        "src/client/app_spawn_client.cpp",
+        "src/client/ability_thread_client.cpp",
+        "src/client/bundlems_client.cpp",
+        "src/client/ability_dump_client.cpp",
+        "src/client/wms_client.cpp",
+        "src/ability_mgr_context.cpp",
+        "src/ability_mgr_service.cpp",
+        "src/ability_mission_stack.cpp",
+        "src/ability_worker.cpp",
+        "src/app_record.cpp",
+        "src/ability_mgr_handler.cpp",
+        "src/ability_mgr_feature.cpp",
+        "src/ability_inner_feature.cpp",
+        "src/ability_stack_manager.cpp",
+        "src/ability_mission_record.cpp",
+        "src/page_ability_record.cpp",
+        "src/app_manager.cpp",
+        "src/task/ability_connect_done_task.cpp",
+        "src/task/ability_connect_task.cpp",
+        "src/task/ability_disconnect_done_task.cpp",
+        "src/task/ability_disconnect_task.cpp",
+        "src/ability_connect_mission.cpp",
+        "src/task/ability_terminate_service_task.cpp",
+    ]
+
+    include_dirs = [
+        "//foundation/aafwk/interfaces/kits/ability_lite",
+        "//foundation/aafwk/interfaces/kits/want_lite",
+        "//foundation/aafwk/frameworks/want_lite/include",
+        "//foundation/aafwk/interfaces/innerkits/abilitymgr_lite",
+        "//foundation/appexecfwk/interfaces/kits/bundle_lite",
+        "//foundation/appexecfwk/utils/bundle_lite",
+        "//foundation/appexecfwk/interfaces/innerkits/bundlemgr_lite",
+        "//foundation/appexecfwk/frameworks/bundle_lite/include",
+        "//foundation/communication/interfaces/kits/ipc_lite",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/registry",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/samgr",
+        "//foundation/graphic/lite/interfaces/kits/config",
+        "//foundation/graphic/lite/interfaces/kits/utils",
+        "//foundation/graphic/lite/interfaces/innerkits/wms/common",
+        "//base/startup/services/appspawn_lite/include",
+        "//base/security/interfaces/kits/iam_lite",
+        "//base/security/services/iam_lite/pms/include",
+        "//kernel/liteos_a/kernel/include",
+        "//kernel/liteos_a/kernel/common",
+        "//third_party/bounds_checking_function/include",
+        "//utils/native/lite/include",
+        "//utils/native/lite/memory",
+        "include",
+        "include/task",
+        "//third_party/cJSON",
+    ]
+
+    deps = [
+        "//foundation/appexecfwk/frameworks/bundle_lite:bundle",
+        "//foundation/distributedschedule/services/samgr_lite/samgr:samgr",
+        "//foundation/communication/frameworks/ipc_lite:liteipc_adapter",
+        "//base/hiviewdfx/frameworks/hilog_lite/featured:hilog_shared",
+    ]
+
+    defines = [
+        "OHOS_APPEXECFWK_BMS_BUNDLEMANAGER",
+    ]
+
+    if (enable_ohos_appexecfwk_feature_ability == true) {
+        deps += [
+            "//foundation/graphic/lite/frameworks/surface",
+        ]
+        defines += [
+            "ABILITY_WINDOW_SUPPORT"
+        ]
+    }
+}
+
+generate_notice_file("abilityms_notice_file") {
+    module_name = "abilityms"
+    module_source_dir_list = [
+        "//third_party/bounds_checking_function",
+        "//third_party/cJSON"
+    ]
+}
+
+lite_component("aafwk_services_lite") {
+    features = [
+        ":abilityms",
+        "tools:aa",
+    ]
+}

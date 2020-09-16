@@ -1,0 +1,25 @@
+{
+    "description": "Config for uikit uiprogress test cases",
+    "environment": [
+        {
+            "type": "device",
+            "label": "ipcamera"
+        }
+    ],
+    "kits": [
+        {
+            "type": "MountKit",
+            "server": "NfsServer",
+            "mount": [
+                {
+                    "source": "testcases/uikit",
+                    "target": "/test_root/uikit"
+                }
+            ]
+        }
+    ],
+    "driver": {
+        "type": "CppTestLite",
+        "execute": "/test_root/uikit/ActsUIProgressTest.bin"
+    }
+}

@@ -1,0 +1,68 @@
+<!--
+Copyright (c) 2020 Huawei Device Co., Ltd.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+    <swiper style="width:454px;height:454px;left:0px;top:0px;" vertical=false onswipe=textChange4 onclick=textChange3 onlongpress=textChange2 onchange=showPage>
+      <stack style="left:0px;top:0px;width:454px;height:454px;">
+        <stack style="width:454px;height:80px;top:80px;">
+          <input type="button" style="left:85px;width:130px;height:60px;" value="返回首页" onclick=backMain>
+          </input>
+          <input type="button" style="left:235px;width:130px;height:60px;" value="返回上级" onclick=backSuperior>
+          </input>
+        </stack>
+        <text style="left:140px;top:180px;width:220px;height:50px;">
+          第{{index}}页，共3页
+        </text>
+        <text style="left:100px;top:250px;width:270px;height:60px;">
+          长按空白文字改变
+        </text>
+        <text style="left:100px;top:310px;width:290px;height:60px;">
+          {{text2}}
+        </text>
+      </stack>
+      <stack style="left:0px;top:0px;width:454px;height:454px;">
+        <stack style="width:454px;height:80px;top:80px;">
+          <input type="button" style="left:85px;width:130px;height:60px;" value="返回首页" onclick=backMain>
+          </input>
+          <input type="button" style="left:235px;width:130px;height:60px;" value="返回上级" onclick=backSuperior>
+          </input>
+        </stack>
+        <text style="left:140px;top:180px;width:220px;height:50px;">
+          第{{index}}页，共3页
+        </text>
+        <text style="left:100px;top:250px;width:270px;height:60px;">
+          点击空白文字改变
+        </text>
+        <text style="left:140px;top:310px;width:250px;height:60px;">
+          {{text3}}
+        </text>
+      </stack>
+      <stack style="left:0px;top:0px;width:454px;height:454px;">
+        <stack style="width:454px;height:80px;top:80px;">
+          <input type="button" style="left:85px;width:130px;height:60px;" value="返回首页" onclick=backMain>
+          </input>
+          <input type="button" style="left:235px;width:130px;height:60px;" value="返回上级" onclick=backSuperior>
+          </input>
+        </stack>
+        <text style="left:140px;top:180px;width:220px;height:50px;">
+          第{{index}}页，共3页
+        </text>
+        <text style="left:40px;top:250px;width:360px;height:60px;">
+          滑动空白处触发swipe事件
+        </text>
+        <text style="left:120px;top:310px;width:280px;height:60px;">
+          {{text4}}
+        </text>
+      </stack>
+    </swiper>

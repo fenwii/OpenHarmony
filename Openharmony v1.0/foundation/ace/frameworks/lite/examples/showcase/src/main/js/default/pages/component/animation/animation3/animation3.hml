@@ -1,0 +1,38 @@
+<!--
+Copyright (c) 2020 Huawei Device Co., Ltd.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+    <stack class="stack" >
+        <stack style="width:454px;height:60px;top:60px;">
+          <input type="button" style="left:85px;width:130px;height:50px;" value="首页" onclick=backMain>
+          </input>
+          <input type="button" style="left:235px;width:130px;height:50px;" value="上一页" onclick=backSuperior>
+          </input>
+        </stack>
+        <div class="divBlock divAnimationStyle1" style="animation-name:animationChange;top:120px;">
+          <text style="width:200px;height:80px;font-size:30px;">
+            duration:3000ms
+          </text>
+        </div>
+        <div class="divBlock divAnimationStyle2" style="animation-name:animationChange;top:200px;">
+          <text style="width:200px;height:80px;font-size:30px;">
+            duration:5000ms
+          </text>
+        </div>
+        <div class="divBlock divAnimationStyle3" style="animation-name:animationChange;top:280px;">
+          <text style="width:200px;height:80px;font-size:30px;">
+            duration:10000ms;
+          </text>
+        </div>
+    </stack>

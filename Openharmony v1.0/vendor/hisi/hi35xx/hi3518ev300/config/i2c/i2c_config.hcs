@@ -1,0 +1,32 @@
+root {
+    platfrom {
+        i2c_config {
+            template i2c_controller {
+                bus = 0;
+                match_attr = "";
+                reg_pbase = 0x12060000;
+                reg_size = 0xd1;
+                irq = 0;
+                freq = 400000;
+                clk = 50000000;
+            }
+
+            controller_0x12060000 :: i2c_controller {
+                bus = 0;
+                match_attr = "hisilicon_hi35xx_i2c_0";
+            }
+
+            controller_0x12061000 :: i2c_controller {
+                bus = 1;
+                match_attr = "hisilicon_hi35xx_i2c_1";
+                reg_pbase = 0x12061000;
+            }
+
+            controller_0x12062000 :: i2c_controller {
+                bus = 2;
+                match_attr = "hisilicon_hi35xx_i2c_2";
+                reg_pbase = 0x12062000;
+            }
+        }
+    }
+}

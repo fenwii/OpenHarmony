@@ -1,0 +1,66 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/config/variable.gni")
+
+if (target_os == "") {
+    target_os = "ohos"
+}
+if (target_cpu == "") {
+    target_cpu = "cortex-a7"
+}
+
+host_toolchains = [
+    "//build/toolchain:host_linux_x86_64_gcc"
+]
+
+if(target_os == "ohos") {
+    if(ohos_kernel_type == "liteos_a") {
+        if(ohos_build_compiler == "gcc") {
+            set_default_toolchain("//build/toolchain:linux_x86_64_ohos_gcc")
+        } else {
+            set_default_toolchain("//build/toolchain:linux_x86_64_clang")
+        }
+        default_target_configs = [ "//build/config:ohos" ]
+    } else if (ohos_kernel_type == "liteos_riscv") {
+        set_default_toolchain("//build/config:liteos")
+    } else if (ohos_kernel_type == "linux" && board_name == "hi3518ev300") {
+        set_default_toolchain("//build/toolchain:linux_x86_64_himix100_gcc")
+        default_target_configs = [ "//build/config:ohos" ]
+    } else if (ohos_kernel_type == "linux" && board_name == "hi3516dv300") {
+        set_default_toolchain("//build/lite/toolchain:linux_x86_64_himix200_gcc")
+        default_target_configs = [ "//build/config:ohos" ]
+    }
+} else if (target_os == "linux") {
+    set_default_toolchain("//build/toolchain:host_linux_x86_64_gcc")
+}
+
+default_shared_library_configs = default_target_configs + [ "//build/config:shared_library_config" ]
+default_static_library_configs = default_target_configs + [ "//build/config:static_pie_config" ]
+default_executable_configs = default_static_library_configs + [ "//build/config:pie_executable_config" ]
+
+set_defaults("executable") {
+    configs = default_executable_configs
+}
+
+set_defaults("static_library") {
+    configs = default_static_library_configs
+}
+
+set_defaults("shared_library") {
+    configs = default_shared_library_configs
+}
+
+set_defaults("source_set") {
+    configs = default_target_configs
+}

@@ -1,0 +1,59 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/toolchain/${ohos_build_compiler}.gni")
+
+if(ohos_build_compiler == "gcc") {
+    gcc_toolchain("linux_x86_64_ohos_gcc") {
+        cc = "$ohos_build_compiler_dir/arm-linux-ohoseabi-gcc"
+        cxx = "$ohos_build_compiler_dir/arm-linux-ohoseabi-g++"
+        ar = "$ohos_build_compiler_dir/arm-linux-ohoseabi-ar"
+        ld = cc
+        if (ohos_build_type == "release") {
+            strip = "$ohos_build_compiler_dir/arm-linux-ohoseabi-strip --strip-unneeded"
+        }
+    }
+
+    gcc_toolchain("host_linux_x86_64_gcc") {
+        cc = "gcc"
+        cxx = "g++"
+        ar = "ar"
+        ld = cxx
+        strip = "strip"
+    }
+}
+
+if (ohos_build_compiler == "clang") {
+    clang_toolchain("linux_x86_64_clang") {
+        cc = "$ohos_build_compiler_dir/clang"
+        cxx = "$ohos_build_compiler_dir/clang++"
+        ar = "$ohos_build_compiler_dir/llvm-ar"
+        as = "$ohos_build_compiler_dir/llvm-as"
+        ld = cc
+        if (ohos_build_type == "release") {
+            strip = "$ohos_build_compiler_dir/llvm-objcopy --strip-all"
+        }
+    }
+
+    clang_toolchain("win_x86_64_clang") {
+        cc = "$ohos_build_compiler_dir/clang"
+        cxx = "$ohos_build_compiler_dir/clang++"
+        ar = "$ohos_build_compiler_dir/llvm-ar"
+        as = "$ohos_build_compiler_dir/llvm-as"
+        ld = cc
+        if (ohos_build_type == "release") {
+            strip = "$ohos_build_compiler_dir/llvm-objcopy --strip-all"
+        }
+    }
+}
+

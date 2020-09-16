@@ -1,0 +1,221 @@
+#include "base_datatype_def.txt"
+
+typedef struct
+{
+    hi_u32 init_cfg_country_code;
+    hi_u32 init_cfg_ampdu_tx_max_num;
+    hi_u32 init_cfg_rx_ack_limit;
+    hi_u32 init_cfg_int_unit_ctrl;
+    hi_u32 init_cfg_powermgmt_switch;
+    hi_u32 init_cfg_sta_dtim_setting;
+    hi_u32 init_cfg_loglevel;
+    hi_u32 init_cfg_phy_scaling_value_11b;
+    hi_u32 init_cfg_phy_u1_scaling_value_11g;
+    hi_u32 init_cfg_phy_u2_scaling_value_11g;
+    hi_u32 init_cfg_phy_u1_scaling_value_11n_2d4g;
+    hi_u32 init_cfg_phy_u2_scaling_value_11n_2d4g;
+    hi_u32 init_cfg_phy_u1_scaling_value_11n40m_2d4g;
+    hi_u32 init_cfg_phy_u2_scaling_value_11n40m_2d4g;
+    hi_u32 init_cfg_phy_u0_scaling_value_11n_5g;
+    hi_u32 init_cfg_phy_u3_scaling_value_11n40m_5g;
+    hi_u32 init_cfg_rts_clk_freq;
+    hi_u32 init_cfg_clk_type;
+    hi_s32 init_cfg_rf_line_txrx_gain_db_2g_band1;
+    hi_s32 init_cfg_rf_line_txrx_gain_db_2g_band2;
+    hi_s32 init_cfg_rf_line_txrx_gain_db_2g_band3;
+    hi_u32 init_cfg_rf_txpwr_cali_ref_2g_val_band1;
+    hi_u32 init_cfg_rf_txpwr_cali_ref_2g_val_band2;
+    hi_u32 init_cfg_rf_txpwr_cali_ref_2g_val_band3;
+    hi_u32 init_cfg_tx_ratio_level_0;
+    hi_u32 init_cfg_tx_pwr_comp_val_level_0;
+    hi_u32 init_cfg_tx_ratio_level_1;
+    hi_u32 init_cfg_tx_pwr_comp_val_level_1;
+    hi_u32 init_cfg_tx_ratio_level_2;
+    hi_u32 init_cfg_tx_pwr_comp_val_level_2;
+    hi_u32 init_cfg_more_pwr;
+    hi_u32 init_cfg_random_mac_addr_scan;
+    hi_u32 init_cfg_band_edge_limit_2g_11g_txpwr;
+    hi_u32 init_cfg_band_edge_limit_2g_11n_ht20_txpwr;
+    hi_u32 init_cfg_band_edge_limit_2g_11n_ht40_txpwr;
+    hi_u32 init_cfg_band_edge_limit_2g_11g_dbb_scaling;
+    hi_u32 init_cfg_band_edge_limit_2g_11n_ht20_dbb_scaling;
+    hi_u32 init_cfg_band_edge_limit_2g_11n_ht40_dbb_scaling;
+    hi_u32 init_cfg_cali_tone_amp_grade;
+}wal_cfg_params;
+
+
+typedef struct
+{
+    hi_u32 init_cfg_dyn_cali_dscr_interval;
+
+    hi_u32 init_cfg_nvram_pa2gccka0;
+    hi_u32 init_cfg_nvram_pa2ga0;
+    hi_u32 init_cfg_nvram_pa2gcwa0;
+
+    hi_u32 init_cfg_dpn24g_ch1_core0;
+    hi_u32 init_cfg_dpn24g_ch2_core0;
+    hi_u32 init_cfg_dpn24g_ch3_core0;
+    hi_u32 init_cfg_dpn24g_ch4_core0;
+    hi_u32 init_cfg_dpn24g_ch5_core0;
+    hi_u32 init_cfg_dpn24g_ch6_core0;
+    hi_u32 init_cfg_dpn24g_ch7_core0;
+    hi_u32 init_cfg_dpn24g_ch8_core0;
+    hi_u32 init_cfg_dpn24g_ch9_core0;
+    hi_u32 init_cfg_dpn24g_ch10_core0;
+    hi_u32 init_cfg_dpn24g_ch11_core0;
+    hi_u32 init_cfg_dpn24g_ch12_core0;
+    hi_u32 init_cfg_dpn24g_ch13_core0;
+
+    hi_u32 init_cfg_dsss2ofdm_dbb_pwr_bo_val;
+
+    hi_u32 init_cfg_cali_data_mask;
+    hi_u32 init_cfg_cali_mask;
+}wal_cfg_calibration;
+
+typedef struct
+{
+    hi_u32 init_cfg_rf_rx_insertion_loss_2g_b1;
+    hi_u32 init_cfg_rf_rx_insertion_loss_2g_b2;
+    hi_u32 init_cfg_rf_rx_insertion_loss_2g_b3;
+    hi_u32 init_cfg_rf_line_rf_pwr_ref_rssi_db_2g_c0_mult4;
+}wal_cfg_rf_rx_insertion;
+
+typedef struct
+{
+    hi_u32 init_cfg_sar_txpwr_ctrl_2g;
+}wal_cfg_sar_txpwr;
+
+typedef struct {
+    hi_u32 init_cfg_nvram_max_txpwr_base_2p4g;
+
+    hi_u32 init_cfg_nvram_params0;
+    hi_u32 init_cfg_nvram_params1;
+    hi_u32 init_cfg_nvram_params2;
+    hi_u32 init_cfg_nvram_params3;
+}wal_cfg_base_delta_power;
+
+typedef struct
+{
+    hi_u32 init_cfg_side_band_txpwr_limit_24g_ch1;
+    hi_u32 init_cfg_side_band_txpwr_limit_24g_ch2;
+    hi_u32 init_cfg_side_band_txpwr_limit_24g_ch3;
+    hi_u32 init_cfg_side_band_txpwr_limit_24g_ch4;
+    hi_u32 init_cfg_side_band_txpwr_limit_24g_ch5;
+    hi_u32 init_cfg_side_band_txpwr_limit_24g_ch6;
+    hi_u32 init_cfg_side_band_txpwr_limit_24g_ch7;
+    hi_u32 init_cfg_side_band_txpwr_limit_24g_ch8;
+    hi_u32 init_cfg_side_band_txpwr_limit_24g_ch9;
+    hi_u32 init_cfg_side_band_txpwr_limit_24g_ch10;
+    hi_u32 init_cfg_side_band_txpwr_limit_24g_ch11;
+    hi_u32 init_cfg_side_band_txpwr_limit_24g_ch12;
+    hi_u32 init_cfg_side_band_txpwr_limit_24g_ch13;
+}wal_cfg_band_txpwr;
+
+typedef struct
+{
+    hi_u32 init_cfg_rf_pa_vdd_reg_100_mode_1and2;
+    hi_u32 init_cfg_rf_pa_vdd_reg_101_mode_1and2;
+    hi_u32 init_cfg_rf_pa_vdd_reg_102_mode_1and2;
+    hi_u32 init_cfg_rf_pa_vdd_reg_103_mode_1and2;
+    hi_u32 init_cfg_rf_pa_vdd_reg_104_mode_1and2;
+    hi_u32 init_cfg_rf_pa_vdd_reg_105_mode_1and2;
+    hi_u32 init_cfg_rf_pa_vdd_reg_106_mode_1and2;
+    hi_u32 init_cfg_rf_pa_vdd_reg_107_mode_1and2;
+    hi_u32 init_cfg_rf_pa_vdd_reg_108_mode_1and2;
+    hi_u32 init_cfg_rf_pa_vdd_reg_109_mode_1and2;
+    hi_u32 init_cfg_rf_pa_vdd_reg_110_mode_1and2;
+    hi_u32 init_cfg_rf_pa_vdd_reg_111_mode_1and2;
+    hi_u32 init_cfg_rf_pa_vdd_reg_112_mode_1and2;
+    hi_u32 init_cfg_rf_pa_vdd_reg_113_mode_1and2;
+    hi_u32 init_cfg_rf_pa_vdd_reg_114_mode_1and2;
+    hi_u32 init_cfg_rf_pa_vdd_reg_115_mode_1and2;
+    hi_u32 init_cfg_rf_pa_vdd_reg_100_mode_3and4;
+    hi_u32 init_cfg_rf_pa_vdd_reg_101_mode_3and4;
+    hi_u32 init_cfg_rf_pa_vdd_reg_102_mode_3and4;
+    hi_u32 init_cfg_rf_pa_vdd_reg_103_mode_3and4;
+    hi_u32 init_cfg_rf_pa_vdd_reg_104_mode_3and4;
+    hi_u32 init_cfg_rf_pa_vdd_reg_105_mode_3and4;
+    hi_u32 init_cfg_rf_pa_vdd_reg_106_mode_3and4;
+    hi_u32 init_cfg_rf_pa_vdd_reg_107_mode_3and4;
+    hi_u32 init_cfg_rf_pa_vdd_reg_108_mode_3and4;
+    hi_u32 init_cfg_rf_pa_vdd_reg_109_mode_3and4;
+    hi_u32 init_cfg_rf_pa_vdd_reg_110_mode_3and4;
+    hi_u32 init_cfg_rf_pa_vdd_reg_111_mode_3and4;
+    hi_u32 init_cfg_rf_pa_vdd_reg_112_mode_3and4;
+    hi_u32 init_cfg_rf_pa_vdd_reg_113_mode_3and4;
+    hi_u32 init_cfg_rf_pa_vdd_reg_114_mode_3and4;
+    hi_u32 init_cfg_rf_pa_vdd_reg_115_mode_3and4;
+}wal_cfg_rf_reg1;
+
+typedef struct
+{
+    hi_u32 init_cfg_rf_pa_vdd_reg_100_mode_5and6;
+    hi_u32 init_cfg_rf_pa_vdd_reg_101_mode_5and6;
+    hi_u32 init_cfg_rf_pa_vdd_reg_102_mode_5and6;
+    hi_u32 init_cfg_rf_pa_vdd_reg_103_mode_5and6;
+    hi_u32 init_cfg_rf_pa_vdd_reg_104_mode_5and6;
+    hi_u32 init_cfg_rf_pa_vdd_reg_105_mode_5and6;
+    hi_u32 init_cfg_rf_pa_vdd_reg_106_mode_5and6;
+    hi_u32 init_cfg_rf_pa_vdd_reg_107_mode_5and6;
+    hi_u32 init_cfg_rf_pa_vdd_reg_108_mode_5and6;
+    hi_u32 init_cfg_rf_pa_vdd_reg_109_mode_5and6;
+    hi_u32 init_cfg_rf_pa_vdd_reg_110_mode_5and6;
+    hi_u32 init_cfg_rf_pa_vdd_reg_111_mode_5and6;
+    hi_u32 init_cfg_rf_pa_vdd_reg_112_mode_5and6;
+    hi_u32 init_cfg_rf_pa_vdd_reg_113_mode_5and6;
+    hi_u32 init_cfg_rf_pa_vdd_reg_114_mode_5and6;
+    hi_u32 init_cfg_rf_pa_vdd_reg_115_mode_5and6;
+    hi_u32 init_cfg_rf_pa_vdd_reg_100_mode_7and8;
+    hi_u32 init_cfg_rf_pa_vdd_reg_101_mode_7and8;
+    hi_u32 init_cfg_rf_pa_vdd_reg_102_mode_7and8;
+    hi_u32 init_cfg_rf_pa_vdd_reg_103_mode_7and8;
+    hi_u32 init_cfg_rf_pa_vdd_reg_104_mode_7and8;
+    hi_u32 init_cfg_rf_pa_vdd_reg_105_mode_7and8;
+    hi_u32 init_cfg_rf_pa_vdd_reg_106_mode_7and8;
+    hi_u32 init_cfg_rf_pa_vdd_reg_107_mode_7and8;
+    hi_u32 init_cfg_rf_pa_vdd_reg_108_mode_7and8;
+    hi_u32 init_cfg_rf_pa_vdd_reg_109_mode_7and8;
+    hi_u32 init_cfg_rf_pa_vdd_reg_110_mode_7and8;
+    hi_u32 init_cfg_rf_pa_vdd_reg_111_mode_7and8;
+    hi_u32 init_cfg_rf_pa_vdd_reg_112_mode_7and8;
+    hi_u32 init_cfg_rf_pa_vdd_reg_113_mode_7and8;
+    hi_u32 init_cfg_rf_pa_vdd_reg_114_mode_7and8;
+    hi_u32 init_cfg_rf_pa_vdd_reg_115_mode_7and8;
+}wal_cfg_rf_reg2;
+
+typedef struct {
+    hi_u8 mac[6];
+} wal_cfg_mac_addr;
+
+typedef struct
+{
+    hi_u32 init_cfg_dpd_cali_ch_core0;
+    hi_u32 init_cfg_dpd_use_cail_ch_idx0_core0;
+    hi_u32 init_cfg_dpd_use_cail_ch_idx1_core0;
+    hi_u32 init_cfg_dpd_amp_t0_t3;
+    hi_u32 init_cfg_dpd_amp_t4_t7;
+    hi_u32 init_cfg_dpd_comp_tpc_temp;
+}wal_cfg_dpd_calibration;
+
+typedef struct {
+    UINT8 ver;
+    UINT8 flag;
+    UINT8 dtsn;
+    UINT8 dodagVerNum;
+    UINT8 pathSeq;
+    UINT8 daoSeq;
+    UINT8 dcoSeq;
+    UINT8 pad;
+} rplStore;
+
+typedef struct {
+    hi_u32 rst_times;
+    hi_u32 enable_save;
+} hi_sys_reset_times;
+
+typedef struct {
+    hi_u8 uart_port_at;
+    hi_u8 uart_port_debug;
+    hi_u8 uart_port_sigma;
+    hi_u8 uart_port_reserved;
+} hi_nv_uart_port_alloc;

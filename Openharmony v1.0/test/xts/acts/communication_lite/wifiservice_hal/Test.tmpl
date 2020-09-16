@@ -1,0 +1,19 @@
+{
+    "description": "Config for $module test cases",
+    "environment": [
+        {
+            "type": "device",
+            "label": "wifiiot"
+        }
+    ],
+    "kits": [
+        {
+            "type": "DeployKit",
+            "timeout": "20000",
+            "burn_file": "$subsystem/$module.bin"
+        }
+    ],
+    "driver": {
+        "type": "CTestLite"
+    }
+}

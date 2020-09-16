@@ -1,0 +1,34 @@
+Index: mtd-utils-2.1.1/jffsX-utils/mkfs.jffs2.c
+===================================================================
+--- mtd-utils-2.1.1.orig/jffsX-utils/mkfs.jffs2.c
++++ mtd-utils-2.1.1/jffsX-utils/mkfs.jffs2.c
+@@ -434,7 +434,7 @@ static int interpret_table_entry(struct
+ 		return 1;
+ 	}
+ 
+-	if (!strcmp(name, "/")) {
++	if (strncmp(name, "/", 1)) {
+ 		errmsg_die("Device table entries require absolute paths");
+ 	}
+ 
+@@ -478,7 +478,11 @@ static int interpret_table_entry(struct
+ 		 * try and find our parent now) */
+ 		tmp = xstrdup(name);
+ 		dir = dirname(tmp);
+-		parent = find_filesystem_entry(root, dir, S_IFDIR);
++		if (!strcmp(dir, "/")) {
++			parent = root;
++		} else {
++			parent = find_filesystem_entry(root, dir, S_IFDIR);
++		}
+ 		free(tmp);
+ 		if (parent == NULL) {
+ 			errmsg ("skipping device_table entry '%s': no parent directory!", name);
+@@ -492,6 +496,7 @@ static int interpret_table_entry(struct
+ 				add_host_filesystem_entry(name, hostpath, uid, gid, mode, 0, parent);
+ 				break;
+ 			case 'f':
++            case 'l':
+ 				add_host_filesystem_entry(name, hostpath, uid, gid, mode, 0, parent);
+ 				break;
+ 			case 'p':

@@ -1,0 +1,88 @@
+
+root {
+    module = "WiFi";
+    wifi_config {
+        match_attr = "hdf_wifi_driver";
+        moduleConfig {
+            featureMap = 0xFFFF;
+            msgName = "WalService";
+            Station {
+                name = "sta";
+                mode = true;
+
+           }
+
+            HostAp {
+                name = "ap";
+                mode = 0; /* 0-- notsupported; 1--softap-host; 2--soft AP DMAC HOST; 3-IOT 1:DMAC OFFLOAD: IPC */
+                vapResNum = 1; /*virtual ap*/
+                userResNum = 8; /*max users support each ap*/
+           }
+
+            P2P {
+                name = "p2p";
+                mode = false;
+            }
+
+            Mac80211 {
+                mode = true;
+            }
+
+            Phy {
+                mode = true;
+            }
+        }
+
+        deviceList {
+            template Chip {
+                chipName = "";
+                chipId = 0;
+                featureMap = 0xFFFF;
+                powerType = 0; /* 0:bootloader  1:hostctl */
+                irqNo = 0;
+                bus {
+                    busType = 0; /* 0-sdio 1-usb 2-spi etc. */
+                    funcNum = [1,2];
+                    vendorId = 0;
+                    deviceId = 0;
+                    timeout = 1000;
+                    blockSize = 512;
+               }
+            }
+        }
+
+        hisi :& deviceList {
+            C1 :: Chip {
+                chipName = "hisi"; /* hi3881 */
+                chipId = 0;
+                featureMap = 0xFFFF;
+                powerType = 0;
+                irqNo = 0;
+                bus {
+                    busType = 0; /* 0-sdio 1-usb 2-spi etc. */
+                    funcNum = [1];
+                    vendorId = 0x0296;
+                    deviceId = 0x5347;
+                    timeout = 1000;
+                    blockSize = 512;
+                }
+            }
+        }
+
+        board {
+            boardName = "3516DV300";
+            busType = 0;
+            busIdx = 2;
+            reset   = [11,3]; /* GPIO11_3*/
+            gpioArgs = [12,8,12];
+            busRegs {
+                cclk_out = [0x112F0008, 0x0601];
+                ccmd     = [0x112F000C, 0x0501];
+                cdata0   = [0x112F0010, 0x0501];
+                cdata1   = [0x112F0014, 0x0501];
+                cdata2   = [0x112F0018, 0x0501];
+                cdata3   = [0x112F001C, 0x0501];
+           }
+        }
+    }
+}

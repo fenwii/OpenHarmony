@@ -1,0 +1,61 @@
+<!--
+Copyright (c) 2020 Huawei Device Co., Ltd.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+    <list class = "list">
+        <list-item style="width:454px;height:60px;">
+        </list-item>
+        <list-item class= "item-title">
+                <input type = "button" style="margin-left:85px;width:130px;height:60px;" onclick = "goHome" value = "首页"/>
+                <input type = "button" style="margin-left:20px;width:130px;height:60px;" onclick = "goPrevious" value = "上一页"/>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-types">
+            <text class = "whole-text">通用属性</text>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class ="item-attribute">
+            <input type="button" class = "text" style="margin-left:30px;" onclick=changeStatus value="show"></input>
+            <progress type = "horizontal" show="{{status}}" percent = "{{show}}" class = "horizontal-progress" />
+        </list-item>
+        <list-item class ="item-attribute">
+            <input type="button" class = "text" style="margin-left:30px;" onclick=changeStatusIf value="if"></input>
+            <progress type = "horizontal" if="{{ifStatus}}" percent = "{{show}}" class = "horizontal-progress" />
+        </list-item>
+        <list-item class ="item-attribute">
+            <div class = "attribute-div">
+                <text style = "width:100px;height:50px;margin-left:30px;">for</text>
+                <div style = "width:200px;height:100px;flex-direction: column;">
+                    <progress for="{{listData}}" type = "horizontal" percent = "{{show}}" style = "width:100px;height:50px;stroke-width:5" />
+                </div>
+            </div>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-types">
+            <text class = "whole-text">特有属性</text>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class ="item-attribute">
+            <div class = "attribute-div">
+                <text class = "left-text" style="margin-left:30px;">percent</text>
+                <progress type = "horizontal" percent = "{{show}}" class = "horizontal-progress" />
+            </div>
+        </list-item>
+        <list-item style="width:454px;height:60px;">
+        </list-item>
+    </list>

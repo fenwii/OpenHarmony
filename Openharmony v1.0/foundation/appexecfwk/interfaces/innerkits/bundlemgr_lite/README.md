@@ -1,0 +1,2 @@
+## Introduction
+`bundle_manager.h` is devoted to support some interface functions to other outside process. By using these functions, other modules in the system can obtain some application infomation, install and uninstall application.

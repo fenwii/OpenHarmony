@@ -1,0 +1,95 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/lite/config/component/lite_component.gni")
+import("//build/lite/ndk/ndk.gni")
+
+generate_notice_file("bundle_notice_file") {
+    module_name = "bundle"
+    module_source_dir_list = [
+        "//third_party/bounds_checking_function",
+        "//third_party/cJSON",
+    ]
+}
+
+lite_component("appexecfwk_kits_lite") {
+    features = [
+        ":bundle",
+    ]
+}
+
+lite_library("bundle") {
+    target_type = "shared_library"
+    sources = [
+        "src/element_name.cpp",
+        "src/ability_info.cpp",
+        "src/bundle_info.cpp",
+        "src/module_info.cpp",
+        "src/bundle_callback.cpp",
+        "src/bundle_manager.cpp",
+        "src/bundle_self_callback.cpp",
+        "src/bundle_callback_utils.cpp",
+        "src/token_generate.cpp",
+        "src/ability_info_utils.cpp",
+        "src/bundle_info_utils.cpp",
+        "src/convert_utils.cpp",
+        "src/module_info_utils.cpp",
+    ]
+
+    deps = [
+        "//base/security/services/iam_lite/pms_client:pms_client",
+        "//foundation/aafwk/frameworks/want_lite:want",
+        "//base/hiviewdfx/frameworks/hilog_lite/featured:hilog_shared",
+    ]
+
+    cflags = [
+        "-fPIC",
+        "-Wall",
+        "-Wno-format"
+    ]
+    cflags_cc = cflags
+
+    include_dirs = [
+        "include",
+        "//base/security/interfaces/kits/iam_lite",
+        "//base/security/services/iam_lite/pms/include",
+        "//foundation/aafwk/frameworks/want_lite/include",
+        "//foundation/aafwk/interfaces/kits/want_lite",
+        "//foundation/aafwk/interfaces/innerkits/abilitymgr_lite",
+        "//foundation/appexecfwk/interfaces/innerkits/bundlemgr_lite",
+        "//foundation/appexecfwk/interfaces/kits/bundle_lite",
+        "//foundation/appexecfwk/utils/bundle_lite",
+        "//foundation/communication/interfaces/kits/ipc_lite",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/samgr",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/registry",
+        "//kernel/liteos_a/kernel/include",
+        "//kernel/liteos_a/kernel/common",
+        "//third_party/bounds_checking_function/include",
+        "//utils/native/lite/include",
+        "//utils/native/lite/memory",
+        "//third_party/cJSON",
+    ]
+
+    defines = [
+        "OHOS_APPEXECFWK_BMS_BUNDLEMANAGER",
+    ]
+}
+
+ndk_lib("bundle_notes") {
+    lib_extension = ".so"
+    deps = [
+        ":bundle"
+    ]
+    head_files = [
+        "//foundation/appexecfwk/interfaces/kits/bundle_lite",
+    ]
+}

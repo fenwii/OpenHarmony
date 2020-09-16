@@ -1,0 +1,73 @@
+Index: mtd-utils-2.1.1/jffsX-utils/mkfs.jffs2.c
+===================================================================
+--- mtd-utils-2.1.1.orig/jffsX-utils/mkfs.jffs2.c
++++ mtd-utils-2.1.1/jffsX-utils/mkfs.jffs2.c
+@@ -66,7 +66,9 @@
+ #include <time.h>
+ #include <getopt.h>
+ #ifndef WITHOUT_XATTR
++#ifndef __CYGWIN__
+ #include <sys/xattr.h>
++#endif
+ #include <sys/acl.h>
+ #endif
+ #include <byteswap.h>
+@@ -376,7 +378,7 @@ static struct filesystem_entry *recursiv
+    the following macros use it if available or use a hacky workaround...
+  */
+ 
+-#ifdef __GNUC__
++#if defined __GNUC__ && !defined __CYGWIN__
+ #if __STDC_VERSION__ >= 199901L
+ #define SCANF_PREFIX "m"
+ #else
+@@ -1145,6 +1147,8 @@ static void write_xattr_entry(struct fil
+ 	if (!enable_xattr)
+ 		return;
+ 
++#ifndef __CYGWIN__
++
+ 	list_sz = llistxattr(e->hostname, xlist, XATTR_BUFFER_SIZE);
+ 	if (list_sz < 0) {
+ 		if (verbose)
+@@ -1206,6 +1210,7 @@ static void write_xattr_entry(struct fil
+ 		full_write(out_fd, &ref, sizeof(ref));
+ 		padword();
+ 	}
++#endif
+ }
+ 
+ #else /* WITHOUT_XATTR */
+Index: mtd-utils-2.1.1/nor-utils/rfddump.c
+===================================================================
+--- mtd-utils-2.1.1.orig/nor-utils/rfddump.c
++++ mtd-utils-2.1.1/nor-utils/rfddump.c
+@@ -24,7 +24,11 @@
+ #include <getopt.h>
+ 
+ #include <mtd/mtd-user.h>
++#ifdef __CYGWIN__
++#include <asm/types.h>
++#else
+ #include <linux/types.h>
++#endif
+ #include <mtd_swab.h>
+ 
+ #include "common.h"
+Index: mtd-utils-2.1.1/nor-utils/rfdformat.c
+===================================================================
+--- mtd-utils-2.1.1.orig/nor-utils/rfdformat.c
++++ mtd-utils-2.1.1/nor-utils/rfdformat.c
+@@ -26,8 +26,11 @@
+ #include <getopt.h>
+ 
+ #include <mtd/mtd-user.h>
++#ifdef __CYGWIN__
++#include <asm/types.h>
++#else
+ #include <linux/types.h>
+-
++#endif
+ #include "common.h"
+ 
+ static void display_help(int status)

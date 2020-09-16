@@ -1,0 +1,69 @@
+Index: mtd-utils-2.1.1/ubifs-utils/mkfs.ubifs/mkfs.ubifs.c
+===================================================================
+--- mtd-utils-2.1.1.orig/ubifs-utils/mkfs.ubifs/mkfs.ubifs.c
++++ mtd-utils-2.1.1/ubifs-utils/mkfs.ubifs/mkfs.ubifs.c
+@@ -1503,16 +1503,26 @@ static int add_inode(struct stat *st, in
+ 
+ 	if (c->default_compr != UBIFS_COMPR_NONE)
+ 		use_flags |= UBIFS_COMPR_FL;
++#ifdef FS_COMPR_FL
+ 	if (flags & FS_COMPR_FL)
+ 		use_flags |= UBIFS_COMPR_FL;
++#endif
++#ifdef FS_SYNC_FL
+ 	if (flags & FS_SYNC_FL)
+ 		use_flags |= UBIFS_SYNC_FL;
++#endif
++#ifdef FS_IMMUTABLE_FL
+ 	if (flags & FS_IMMUTABLE_FL)
+ 		use_flags |= UBIFS_IMMUTABLE_FL;
++#endif
++#ifdef FS_APPEND_FL
+ 	if (flags & FS_APPEND_FL)
+ 		use_flags |= UBIFS_APPEND_FL;
++#endif
++#ifdef FS_DIRSYNC_FL
+ 	if (flags & FS_DIRSYNC_FL && S_ISDIR(st->st_mode))
+ 		use_flags |= UBIFS_DIRSYNC_FL;
++#endif
+ 	if (fctx)
+ 		use_flags |= UBIFS_CRYPT_FL;
+ 	memset(ino, 0, UBIFS_INO_NODE_SZ);
+@@ -1600,8 +1610,10 @@ static int add_dir_inode(const char *pat
+ 		fd = dirfd(dir);
+ 		if (fd == -1)
+ 			return sys_err_msg("dirfd failed");
++#ifdef FS_IOC_GETFLAGS
+ 		if (ioctl(fd, FS_IOC_GETFLAGS, &flags) == -1)
+ 			flags = 0;
++#endif
+ 	}
+ 
+ 	return add_inode(st, inum, NULL, 0, flags, path_name, fctx);
+@@ -1811,6 +1823,7 @@ static int add_file(const char *path_nam
+ 		dn->ch.node_type = UBIFS_DATA_NODE;
+ 		key_write(&key, &dn->key);
+ 		out_len = NODE_BUFFER_SIZE - UBIFS_DATA_NODE_SZ;
++#ifdef FS_COMPR_FL
+ 		if (c->default_compr == UBIFS_COMPR_NONE &&
+ 		    !c->encrypted && (flags & FS_COMPR_FL))
+ #ifdef WITHOUT_LZO
+@@ -1819,6 +1832,7 @@ static int add_file(const char *path_nam
+ 			use_compr = UBIFS_COMPR_LZO;
+ #endif
+ 		else
++#endif
+ 			use_compr = c->default_compr;
+ 		compr_type = compress_data(buf, bytes_read, &dn->data,
+ 					   &out_len, use_compr);
+@@ -1876,8 +1890,10 @@ static int add_non_dir(const char *path_
+ 		if (fd == -1)
+ 			return sys_err_msg("failed to open file '%s'",
+ 					   path_name);
++#ifdef FS_IOC_GETFLAGS
+ 		if (ioctl(fd, FS_IOC_GETFLAGS, &flags) == -1)
+ 			flags = 0;
++#endif
+ 		if (close(fd) == -1)
+ 			return sys_err_msg("failed to close file '%s'",
+ 					   path_name);

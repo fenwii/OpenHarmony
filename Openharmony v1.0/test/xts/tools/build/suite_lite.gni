@@ -1,0 +1,344 @@
+ # Copyright (c) 2020 Huawei Device Co., Ltd.
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #     http://www.apache.org/licenses/LICENSE-2.0
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+
+import("//test/xts/tools/build/common.gni")
+import("//build/lite/config/component/lite_component.gni")
+
+declare_args() {
+  ohos_xts_test_args = ""
+}
+
+template("testsuite_base") {
+  assert(defined(invoker.project_type),
+         "project_type is required in target ${target_name}")
+  assert(defined(invoker.suite_name),
+         "suite_name is required in target ${target_name}")
+
+  _project_type = invoker.project_type
+  _suite_name = invoker.suite_name
+  _module_target_name = "module_${target_name}"
+  _deps = []
+  if (_project_type == "hctest") {
+    _module_name = "${target_name}"
+    if (defined(invoker.output_name)) {
+      _module_name = "${invoker.output_name}"
+    }
+    _output_file = rebase_path("${root_out_dir}/libs/libmodule_${_module_name}.a")
+    _archive_filename = "lib${_module_name}.a"
+    target("static_library", "${_module_target_name}") {
+      forward_variables_from(invoker, "*")
+    }
+  } else if (_project_type == "hcpptest") {
+    _module_name = "${target_name}"
+    if (defined(invoker.output_name)) {
+      _module_name = "${invoker.output_name}"
+    }
+    _extension=""
+    if (defined(invoker.output_extension)) {
+      _extension = ".${invoker.output_extension}"
+    }
+    _output_file = rebase_path("${root_out_dir}/bin/${_module_target_name}${_extension}")
+    _archive_filename = "${_module_name}${_extension}"
+    target("executable", "${_module_target_name}") {
+      forward_variables_from(invoker, "*")
+
+    }
+  } else if (_project_type == "hctest_prebuilt") {
+    _output_file = rebase_path("${root_out_dir}/libs/lib${_module_target_name}.a")
+    _archive_filename = "lib${_module_target_name}.a"
+    _deps += ["//test/xts/tools/hctest:hctest"]
+    copy(_module_target_name) {
+      sources = invoker.sources
+      outputs = [ "${root_out_dir}/libs/lib${_module_target_name}.a" ]
+    }
+  }
+
+  _project_dir = rebase_path(".")
+
+  _deps += [ ":${_module_target_name}" ]
+  if (defined(invoker.deps)) {
+    _deps += invoker.deps
+  }
+  _subsystem_name = ""
+  if (defined(invoker.subsystem_name)) {
+    _subsystem_name = invoker.subsystem_name
+  }else{
+    _local_path = rebase_path(".")
+    _args1 = [
+      "--method_name", "get_subsystem_name",
+      "--arguments",   "path=${_local_path}"
+    ]
+    _subsystem_name = exec_script(rebase_path("$BUILD_DIR_PREFIX/utils.py"), _args1, "trim string")
+  }
+  target("testsuite_common", target_name){
+    suite_name = _suite_name
+    project_type = _project_type
+    subsystem_name = _subsystem_name
+    output_file = _output_file
+    project_dir = _project_dir
+    archive_filename = _archive_filename
+    deps = _deps
+  }
+
+}
+
+template("hctest_suite") {
+  _include_dirs = [
+    "//test/xts/tools/hctest/include",
+    "//third_party/unity/src",
+    "//kernel/liteos_m/components/cmsis",
+    "//foundation/distributedschedule/interfaces/kits/samgr_lite/samgr"
+  ]
+
+  _deps = ["//test/xts/tools/hctest:hctest"]
+  _defines = [ "UNITY_INCLUDE_CONFIG_H" ]
+  target("testsuite_base", "${target_name}") {
+    forward_variables_from(invoker, "*")
+    project_type = "hctest"
+    if (defined(include_dirs)){
+      include_dirs += _include_dirs
+    }else{
+      include_dirs = _include_dirs
+    }
+    if (defined(deps)){
+      deps += _deps
+    }else{
+      deps = _deps
+    }
+    if (defined(defines)){
+      defines += _defines
+    }else{
+      defines = _defines
+    }
+  }
+}
+
+template("ctest_prebuilt_suite") {
+  assert(defined(invoker.sources),
+         "sources is required in target ${target_name}")
+  target("testsuite_base", "${target_name}") {
+    forward_variables_from(invoker, "*")
+    project_type = "hctest_prebuilt"
+  }
+}
+
+template("hcpptest_suite") {
+  target("testsuite_base", "${target_name}") {
+    forward_variables_from(invoker, "*")
+    project_type = "hcpptest"
+    output_extension = "bin"
+    _include_dirs = [
+      "//third_party/googletest/googletest/include",
+      "//third_party/googletest/googletest/src"
+    ]
+    if (defined(include_dirs)) {
+      include_dirs += _include_dirs
+    } else {
+      include_dirs = _include_dirs
+    }
+    _deps = ["//test/xts/tools/hcpptest:hcpptest_main"]
+    if (defined(deps)) {
+      deps += _deps
+    } else {
+      deps = _deps
+    }
+  }
+}
+
+template("pythontest_suite") {
+  assert(defined(invoker.script),
+         "script is required in target ${target_name}")
+  assert(defined(invoker.suite_name),
+         "suite_name is required in target ${target_name}")
+  _suite_name = invoker.suite_name
+  _project_dir = rebase_path(".")
+
+  _subsystem_name = ""
+  if (defined(invoker.subsystem_name)) {
+    _subsystem_name = invoker.subsystem_name
+  }else{
+    _local_path = rebase_path(".")
+    _args1 = [
+      "--method_name", "get_subsystem_name",
+      "--arguments",   "path=${_local_path}"
+    ]
+    _subsystem_name = exec_script(rebase_path("$BUILD_DIR_PREFIX/utils.py"), _args1, "trim string")
+  }
+  _deps = []
+  if (defined(invoker.deps)) {
+    _deps = invoker.deps + _deps
+  }
+  _outputs_dir = ""
+  if (defined(invoker.outputs_dir)) {
+    _outputs_dir = invoker.outputs_dir
+  }
+  _output_file = rebase_path("${invoker.script}")
+
+  _archive_filename = "${target_name}"
+
+  target("testsuite_common", "${target_name}") {
+    suite_name = _suite_name
+    project_type = "pythontest"
+    subsystem_name = _subsystem_name
+    output_file = _output_file
+    project_dir = _project_dir
+    archive_filename = _archive_filename
+    deps = _deps
+    outputs_dir = _outputs_dir
+  }
+}
+
+template("test_suite") {
+  assert(defined(invoker.deps),
+         "deps is required in target ${target_name}")
+  _output = "${SUITE_OUTPUT_PREFIX}${target_name}.zip"
+  _suite_path = rebase_path("${SUITE_OUTPUT_PREFIX}${target_name}")
+  _prebuilts_files = ","
+  if (defined(invoker.prebuilts_files)) {
+    _prebuilts_files = invoker.prebuilts_files
+  }
+  _gen_args = [
+    "archive_suite",
+    "--suite_path", _suite_path,
+    "--testcases_name", SUITE_TESTCASES_NAME,
+    "--prebuilts_resource", _prebuilts_files,
+    "--build_enabled",  "true",
+  ]
+
+  _deps = [ "//test/xdevice" ]
+  if (defined(invoker.deps)) {
+    _deps += invoker.deps
+  }
+  action(target_name) {
+    script = rebase_path("$BUILD_DIR_PREFIX/suite.py")
+    deps = _deps
+    args = _gen_args
+    outputs = [_output]
+  }
+
+  if (defined(invoker.version)) {
+       _version = invoker.version
+       _out_dir = rebase_path("${_suite_path}/testcases")
+       _args1 = [
+          "--method_name", "record_test_component_info",
+          "--arguments",   "out_dir=${_out_dir}#version=${_version}"
+       ]
+       exec_script(rebase_path("$BUILD_DIR_PREFIX/utils.py"), _args1)
+  }
+}
+
+template("executable_suite") {
+  assert(defined(invoker.suite_name),
+         "suite_name is required in target ${target_name}")
+  _suite_name = invoker.suite_name
+  _local_path = rebase_path(".")
+  _args1 = [
+    "--method_name", "get_subsystem_name",
+    "--arguments",   "path=${_local_path}"
+  ]
+  _subsystem_name = exec_script(rebase_path("$BUILD_DIR_PREFIX/utils.py"), _args1, "trim string")
+
+  _extension=""
+    if (defined(invoker.output_extension)) {
+      _extension = ".${invoker.output_extension}"
+    }
+  _outputs_dir=""
+    if (defined(invoker.outputs_dir)) {
+      _outputs_dir = "${invoker.outputs_dir}"
+  }
+
+  _module_target_name = "module_${target_name}"
+  _source_file = rebase_path("${root_out_dir}/bin/${target_name}${_extension}")
+  _origi_target = target_name
+  target("executable", "${_module_target_name}"){
+      forward_variables_from(invoker, "*")
+      output_name = _origi_target
+  }
+  _output_file = rebase_path("${SUITE_OUTPUT_PREFIX}${_suite_name}/${SUITE_TESTCASES_NAME}/${_subsystem_name}/${_outputs_dir}")
+
+  _args2 = [
+      "--method_name", "copy_file",
+      "--arguments",   "output=${_output_file}#sources=${_source_file}"
+  ]
+  action(target_name) {
+    script = rebase_path("$BUILD_DIR_PREFIX/utils.py")
+    deps = [":${_module_target_name}"]
+    args = _args2
+    outputs = ["${SUITE_OUTPUT_PREFIX}${_suite_name}/${SUITE_TESTCASES_NAME}/${_subsystem_name}/${target_name}${_extension}"]
+  }
+
+}
+
+template("open_source_suite") {
+   assert(defined(invoker.suite_name),
+      "suite_name is required in target ${target_name}")
+   assert(defined(invoker.exec_command_path),
+       "exec_script_path is required in target ${target_name}")
+   _suite_name = invoker.suite_name
+   _exec_command_path = invoker.exec_command_path
+   _exec_sub_dir = invoker.exec_sub_dir
+
+   _prebuild_command = invoker.prebuild_command
+
+   _output_files = ""
+   if (defined(invoker.build_args)) {
+      foreach(target_file, invoker.build_args) {
+         _output_files = _output_files + rebase_path("${_exec_command_path}/${_exec_sub_dir}/${target_file}") + ","
+      }
+   } else {
+         _output_files = rebase_path("${_exec_command_path}")
+   }
+
+   _pre_build_deps = []
+   if (defined(invoker.deps)) {
+       _pre_build_deps += invoker.deps
+   }
+   target("build_ext_component", "prebuild_${target_name}") {
+      exec_path = rebase_path("${_exec_command_path}")
+      command = _prebuild_command
+      deps = _pre_build_deps
+   }
+
+   _subsystem_name = ""
+   if (defined(invoker.subsystem_name)) {
+     _subsystem_name = invoker.subsystem_name
+   }else{
+     _local_path = rebase_path(".")
+     _args1 = [
+       "--method_name", "get_subsystem_name",
+       "--arguments",   "path=${_local_path}"
+     ]
+     _subsystem_name = exec_script(rebase_path("$BUILD_DIR_PREFIX/utils.py"), _args1, "trim string")
+   }
+
+   _archive_filename = "${target_name}"
+   _project_dir = rebase_path(".")
+
+   _build_deps = [":prebuild_${target_name}"]
+
+   _outputs_dir = ""
+   if (defined(invoker.outputs_dir)) {
+      _outputs_dir = invoker.outputs_dir
+   }
+
+   target("testsuite_common", "${target_name}") {
+      suite_name = _suite_name
+      subsystem_name = _subsystem_name
+      project_type = "open_source_test"
+      project_dir = _project_dir
+      output_file = _output_files
+      archive_filename = _archive_filename
+      outputs_dir = _outputs_dir
+      deps = _build_deps
+    }
+}

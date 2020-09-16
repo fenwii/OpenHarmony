@@ -1,0 +1,82 @@
+# Copyright (c) Huawei Technologies Co., Ltd. 2020. All rights reserved.
+
+import("//build/lite/config/component/lite_component.gni")
+import("//build/lite/config/subsystem/lite_subsystem.gni")
+
+lite_component("liteos_a_drivers") {
+    features = [ ]
+
+    if (LOSCFG_DRIVERS_HIEDMAC) {
+        features += [
+            "platform/hiedmac:drivers_hiedmac",
+        ]
+    }
+
+    if (LOSCFG_DRIVERS_HIETH_SF) {
+        features += [
+            "hieth-sf:drivers_hieth-sf",
+        ]
+    }
+
+    if (LOSCFG_DRIVERS_MEM) {
+        features += [
+            "mem:drivers_mem",
+        ]
+    }
+
+    if (LOSCFG_DRIVERS_MMC) {
+        features += [
+            "storage/mmc:drivers_mmc",
+        ]
+    }
+
+    if (LOSCFG_DRIVERS_MTD) {
+        features += [
+            "storage/mtd/common:drivers_mtd_common",
+        ]
+
+        if (LOSCFG_DRIVERS_MTD_NAND) {
+            features += [
+                "storage/mtd/nand:drivers_mtd_nand",
+            ]
+        }
+
+        if (LOSCFG_DRIVERS_MTD_SPI_NOR) {
+            features += [
+                "storage/mtd/spi_nor:drivers_mtd_spinor",
+            ]
+        }
+    }
+
+    if (LOSCFG_DRIVERS_RANDOM) {
+        features += [
+            "platform/random:drivers_random",
+        ]
+    }
+
+    if (LOSCFG_DRIVERS_PIPE) {
+        features += [
+            "platform/pipe:drivers_pipe",
+        ]
+    }
+
+    if (LOSCFG_DRIVERS_VIDEO) {
+        features += [
+            "video:drivers_video",
+        ]
+    }
+
+    if (LOSCFG_DRIVERS_HIEVENT) {
+        features += [
+            "hievent:drivers_hievent",
+        ]
+    }
+}
+
+lite_subsystem("board") {
+    subsystem_components = [
+        ":liteos_a_drivers",
+        "//kernel/liteos_a/platform:platform_bsp",
+    ]
+}
+

@@ -1,0 +1,83 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/lite/config/component/lite_component.gni")
+
+if (ohos_kernel_type == "liteos_a" || ohos_kernel_type == "linux") {
+    lite_library("dmslite") {
+        target_type = "shared_library"
+
+        cflags = ["-Wall"]
+        cflags_cc = cflags
+
+        defines = [
+            "_GNU_SOURCE",
+            "OHOS_APPEXECFWK_BMS_BUNDLEMANAGER",
+        ]
+
+        sources = [
+            "source/distributed_schedule_service.c",
+            "source/dmslite.c",
+            "source/dmslite_famgr.c",
+            "source/dmslite_msg_parser.c",
+            "source/dmslite_tlv_common.c",
+            "source/dmslite_session.c",
+            "source/dmslite_check_remote_permission.c"
+        ]
+
+        include_dirs = [
+            "include",
+            "//foundation/distributedschedule/interfaces/innerkits/samgr_lite",
+            "//foundation/distributedschedule/interfaces/kits/samgr_lite/samgr",
+            "//foundation/aafwk/interfaces/innerkits/abilitymgr_lite",
+            "//foundation/distributedschedule/interfaces/kits/samgr_lite/registry",
+            "//foundation/communication/interfaces/kits/softbus_lite/transport",
+            "//foundation/communication/interfaces/kits/softbus_lite/discovery",
+            "//foundation/aafwk/interfaces/kits/ability_lite",
+            "//foundation/aafwk/interfaces/kits/want_lite",
+            "//foundation/appexecfwk/interfaces/kits/bundle_lite",
+            "//foundation/appexecfwk/interfaces/innerkits/bundlemgr_lite",
+            "//kernel/liteos_a/kernel/include",
+            "//kernel/liteos_a/kernel/common",
+            "//third_party/bounds_checking_function/include",
+            "//third_party/cJSON",
+            "//utils/native/lite/include",
+        ]
+
+        deps = [
+        ]
+
+        public_deps = [
+            "//base/hiviewdfx/frameworks/hilog_lite/featured:hilog_shared",
+            "//base/security/frameworks/huks_lite/source:huks",
+            "//foundation/distributedschedule/services/samgr_lite/samgr:samgr",
+            "//foundation/communication/services/softbus_lite:softbus_lite",
+            "//third_party/bounds_checking_function:libsec_shared",
+            "//foundation/aafwk/frameworks/abilitymgr_lite:aafwk_abilityManager_lite",
+        ]
+    }
+
+    lite_component("dtbschedmgr") {
+        features = [
+            ":dmslite",
+        ]
+    }
+
+    generate_notice_file("dtbschedmgr_notice_file") {
+        module_name = "dtbschedmgr"
+        module_source_dir_list = [
+            "//third_party/bounds_checking_function",
+            "//third_party/cJSON",
+        ]
+    }
+}

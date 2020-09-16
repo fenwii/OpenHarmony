@@ -1,0 +1,58 @@
+#include "base_datatype_def.txt"
+
+typedef struct {
+    hi_s32 init_cfg_rf_high_temp_threshold;
+    hi_s32 init_cfg_rf_low_temp_threshold;
+    hi_s32 init_cfg_rf_ppm_compesation;
+} rf_cfg_xtal_compesation;
+
+typedef struct {
+    hi_u32  addr:24;
+    hi_u32  id:7;
+    hi_u32  dir:1;
+    hi_u32  size:24;
+    hi_u32  reserve:8;
+    hi_u32  addition;
+} hi_flash_partition_info;
+typedef struct {
+    hi_flash_partition_info table[12];
+} hi_flash_partition_table;
+
+typedef struct {
+    hi_u32 addr_start;
+    hi_u16 mode;
+    hi_u8 file_type;
+    hi_u8 refresh_nv;
+    hi_u8 reset_cnt;
+    hi_u8 cnt_max;
+    hi_u16 reserved1;
+    hi_u32 addr_write;
+    hi_u32 reserved2;
+} hi_nv_ftm_startup_cfg;
+
+typedef struct {
+    hi_u8 root_salt[32];
+    hi_u8 iv_nv[16];
+    hi_u8 iv_content[16];
+    hi_u8 work_text[32];
+    hi_u8 content_sh256[32];
+} hi_flash_crypto_content;
+
+typedef struct {
+    hi_u32 flash_crypt_cnt;
+} hi_flash_crypto_cnt;
+
+typedef struct {
+    hi_u32 factory_mode;
+    hi_u32 factory_addr_start;
+    hi_u32 factory_size;
+    hi_u32 factory_valid;
+}hi_nv_ftm_factory_mode;
+
+typedef struct {
+    hi_u32 file_addr;
+    hi_u8 file_type;
+    hi_u8 boot_version;
+    hi_u8 is_upg_process;
+    hi_u8 trans_finish_flag;
+} hi_nv_ftm_upg_wait_mode;

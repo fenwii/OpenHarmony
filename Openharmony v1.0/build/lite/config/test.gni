@@ -1,0 +1,102 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# liteos c test template
+
+test_common_include_dirs = [
+    "//third_party/googletest/googletest/include",
+]
+
+test_liteos_include_dirs = [
+    "//utils/native/lite/include",
+    "//drivers/liteos/platform/board/hisi/common",
+    "//kernel/liteos_a/kernel/include",
+    "//third_party/bounds_checking_function/include",
+]
+
+template("unittest") {
+    executable(target_name) {
+        output_dir = "${root_out_dir}/test/unittest"
+        forward_variables_from(invoker,"*")
+        if (!defined(include_dirs)) { 
+            include_dirs = []
+        }
+        include_dirs += test_common_include_dirs
+        if (ohos_kernel_type == "liteos_a") {
+            include_dirs += test_liteos_include_dirs
+        }
+        if (!defined(deps)) {
+          deps = []
+        }
+        if (ohos_kernel_type == "liteos_a") {
+            deps += [
+                "//test/developertest/third_party/lib/cpp:gtest_main",
+            ]
+        }
+        if (!defined(configs)) {
+            configs = []
+        }
+        cflags = [ "-Wno-error" ]
+        ldflags = []
+        if(defined(invoker.ldflags)) {
+            ldflags += invoker.ldflags
+        }
+        if (ohos_build_compiler != "clang") {
+            ldflags += [ "-lstdc++" ]
+        }
+    }
+}
+
+template("moduletest") {
+    executable(target_name) {
+        output_dir = "${root_out_dir}/test/moduletest"
+        forward_variables_from(invoker, "*")
+        if (!defined(include_dirs)) {
+            include_dirs = []
+        }
+        include_dirs += test_common_include_dirs
+        if (ohos_kernel_type == "liteos_a") {
+            include_dirs += test_liteos_include_dirs
+        }
+        if (!defined(deps)) {
+          deps = []
+        }
+        if (ohos_kernel_type == "liteos_a") {
+            deps += [
+                "//test/developertest/third_party/lib/cpp:gtest_main",
+            ]
+        }
+        if (!defined(configs)) {
+            configs = []
+        }
+        cflags = [ "-Wno-error" ]
+        ldflags = []
+        if(defined(invoker.ldflags)) {
+            ldflags += invoker.ldflags
+        }
+        if (ohos_build_compiler != "clang") {
+            ldflags += [ "-lstdc++" ]
+        }
+    }
+}
+
+template("subsystem_test") {
+    assert(defined(invoker.test_components), "Test Components is required.")
+    group(target_name) {
+        deps = []
+        if(defined(invoker.test_components)) {
+            deps += invoker.test_components
+        }
+    }
+}

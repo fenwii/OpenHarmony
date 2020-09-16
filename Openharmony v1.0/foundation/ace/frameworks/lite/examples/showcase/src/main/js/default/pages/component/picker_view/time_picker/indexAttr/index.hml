@@ -1,0 +1,87 @@
+<!--
+Copyright (c) 2020 Huawei Device Co., Ltd.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+  <stack style="left:0px;right:0px;width:454px;height:454px;">
+    <list style="left:0px;right:0px;width:454px;height:454px;flex-direction:column">
+      <list-item style="width:454px;height:60px;">
+      </list-item>
+      <list-item style="width:454px;height:100px;">
+          <input type="button" style="margin-left:85px;width:130px;height:60px;" value="返回首页" onclick=backMain>
+          </input>
+          <input type="button" style="margin-left:20px;width:130px;height:60px;" value="返回上级" onclick=backSuperior>
+          </input>
+      </list-item>
+      <list-item class="separatorContainerStyle">
+      </list-item>
+      <list-item class="titleContainerStyle">
+          <text class="titleTextStyle">
+              通用属性
+          </text>
+      </list-item>
+      <list-item class="separatorContainerStyle">
+      </list-item>
+      <list-item style="width:454px;height:100px;">
+        <stack style="width:200px;height:80px;margin-left:30px;">
+        <text style="width:50px;height:40px;top:20px;">
+          for
+        </text>
+        </stack>
+        <input type="button" style="width:140px;height:60px;margin-right:30px;" value="点击进入" onclick=change2For>
+        </input>
+      </list-item>
+      <list-item class="separatorContainerStyle">
+      </list-item>
+      <list-item style="width:454px;height:100px;">
+        <stack style="width:200px;height:80px;margin-left:30px;">
+        <text style="width:50px;height:40px;top:20px;">
+          if
+        </text>
+        </stack>
+        <input type="button" style="width:140px;height:60px;margin-right:30px;" value="点击进入" onclick=change2If>
+        </input>
+      </list-item>
+      <list-item class="separatorContainerStyle">
+      </list-item>
+      <list-item style="width:454px;height:100px;">
+        <stack style="width:200px;height:80px;margin-left:30px;">
+        <text style="width:100px;height:40px;top:20px;">
+          show
+        </text>
+        </stack>
+        <input type="button" style="width:140px;height:60px;margin-right:30px;" value="点击进入" onclick=changePage1>
+        </input>
+      </list-item>
+      <list-item class="separatorContainerStyle">
+      </list-item>
+      <list-item class="titleContainerStyle">
+          <text class="titleTextStyle">
+              特有属性
+          </text>
+      </list-item>
+      <list-item class="separatorContainerStyle">
+      </list-item>
+      <list-item style="width:454px;height:100px;">
+        <stack style="width:200px;height:80px;margin-left:30px;">
+        <text style="width:150px;height:40px;top:20px;">
+          selected
+        </text>
+        </stack>
+        <input type="button" style="width:140px;height:60px;margin-right:30px;" value="点击进入" onclick=changePage2>
+        </input>
+      </list-item>
+      <list-item style="width:454px;height:100px;">
+      </list-item>
+    </list>
+  </stack>

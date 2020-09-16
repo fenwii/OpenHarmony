@@ -1,0 +1,13 @@
+--- mtd-utils-2.0.0/tests/mtd-tests/flash_speed.c.orig	2016-11-17 06:46:31.000000000 -0500
++++ mtd-utils-2.0.0/tests/mtd-tests/flash_speed.c	2017-08-28 14:14:25.151726017 -0400
+@@ -39,6 +39,10 @@
+ 
+ #include "common.h"
+ 
++#ifndef CLOCK_MONOTONIC_RAW
++#define CLOCK_MONOTONIC_RAW		4
++#endif
++
+ static struct mtd_dev_info mtd;
+ static unsigned char *iobuf;
+ static unsigned char *bbt;

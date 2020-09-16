@@ -1,0 +1,38 @@
+UINT32	32		0
+UINT16	16		0
+UINT8	8               0
+
+INT32	32		1
+INT16	16		1
+INT8	8		1
+
+enum	    32		0
+HSO_ENUM    32		0
+
+u32         32		0
+u16         16		0
+u8          8      0
+
+s32    32   1
+s16    16	1
+s8     8	1
+BOOL   8	0
+
+HI_U8A     8   0
+HI_U16A    16  0
+HI_CHARTA  8   1  1
+
+hi_u32		32	 0
+hi_u16		16	 0
+hi_u8		8	 0
+hi_s32		32	 1
+hi_s16		16	 1
+hi_s8		8	 1
+hi_bool		8	 0
+hi_char     8    1  1
+char        8    1  1
+
+long	    32	 1
+hi_pvoid    32	 0
+hi_pbyte    32	 0
+

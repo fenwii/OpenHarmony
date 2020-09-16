@@ -1,0 +1,24 @@
+<assertions>
+  <assertion id="1" tag="ref:XSH6:6549:6551">
+   The clock_getcpuclockid() function shall return the clock ID of the CPU-time
+   clock of the process specified by pid. If the process described by pid
+   exists and the calling process has permission, the clock ID of this clock
+   shall be returned in clock_id.
+  </assertion>
+  <assertion id="2" tag="ref:XSH6:6552:6553">
+   If pid is zero, the clock_getcpuclockid() function shall return the clock ID
+   of the CPU-time clock of the process making the call, in clock_id.
+  </assertion>
+  <assertion id="3" tag="ref:XSH6:6557:6557">
+   clock_getcpuclockid() returns 0 on success.
+  </assertion>
+  <assertion id="5" tag="ref:XSH6:6560:6562 XSH6:6554:6555">
+   The clock_getcpuclockid() function shall fail and return EPERM if the
+   requesting process does not have permission to access the CPU-time clock for
+   the process.
+  </assertion>
+  <assertion id="6" tag="ref:XSH6:6563:6564">
+   The clock_getcpuclockid() function may fail and return ESRCH if no process
+   can be found corresponding to the process specified by pid.
+  </assertion>
+</assertions>

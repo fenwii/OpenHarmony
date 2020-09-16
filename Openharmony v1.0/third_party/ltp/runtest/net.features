@@ -1,0 +1,80 @@
+#
+# Stress tests for various network features
+#
+bbr01 bbr01.sh
+bbr01_ipv6 bbr01.sh -6
+
+bbr02 bbr02.sh
+bbr02_ipv6 bbr02.sh -6
+
+bind_noport01 bind_noport01.sh
+bind_noport01_ipv6 bind_noport01.sh -6
+
+busy_poll01 busy_poll01.sh
+busy_poll01_ipv6 busy_poll01.sh -6
+
+busy_poll02 busy_poll02.sh
+busy_poll02_ipv6 busy_poll02.sh -6
+
+busy_poll03 busy_poll03.sh
+busy_poll03_ipv6 busy_poll03.sh -6
+
+dccp01 dccp01.sh
+dccp01_ipv6 dccp01.sh -6
+
+sctp01 sctp01.sh
+sctp01_ipv6 sctp01.sh -6
+
+tcp_fastopen tcp_fastopen_run.sh
+tcp_fastopen6 tcp_fastopen_run.sh -6
+
+vxlan01 vxlan01.sh
+vxlan02 vxlan02.sh
+vxlan02_ipv6 vxlan02.sh -6
+
+vxlan_multi_03 vxlan03.sh -d multi
+vxlan_uni_03 vxlan03.sh -d uni
+
+vxlan_ipv6_multi_03 vxlan03.sh -6 -d multi
+vxlan_ipv6_uni_03 vxlan03.sh -6 -d uni
+
+vxlan_uni_04 vxlan04.sh -d uni
+vxlan_ipv6_uni_04 vxlan04.sh -6 -d uni
+
+vlan01 vlan01.sh
+vlan02 vlan02.sh
+vlan03 vlan03.sh
+
+macvlan01 macvlan01.sh
+macvtap01 macvtap01.sh
+
+macsec01 macsec01.sh
+macsec02 macsec02.sh
+macsec03 macsec03.sh
+
+ipvlan01 ipvlan01.sh
+
+gre_ipv4_01 gre01.sh
+gre_ipv6_01 gre01.sh -6
+
+gre_ipv4_02 gre02.sh
+gre_ipv6_02 gre02.sh -6
+
+dctcp_ipv4_01 dctcp01.sh
+dctcp_ipv6_01 dctcp01.sh -6
+
+geneve01 geneve01.sh
+geneve01_ipv6 geneve01.sh -6
+geneve02 geneve02.sh
+geneve02_ipv6 geneve02.sh -6
+
+sit01 sit01.sh
+
+mpls01 mpls01.sh
+mpls02 mpls02.sh
+mpls02_ipv6 mpls02.sh -6
+mpls03 mpls03.sh
+mpls03_ipv6 mpls03.sh -6
+mpls04 mpls04.sh
+
+fanout01 fanout01

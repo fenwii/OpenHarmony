@@ -1,0 +1,1328 @@
+diff -Nur u-boot-v2019.07/lib/crc32.c u-boot-v2019.07_ok/lib/crc32.c
+--- u-boot-v2019.07/lib/crc32.c	2020-05-30 23:14:30.908000000 +0800
++++ u-boot-v2019.07_ok/lib/crc32.c	2020-05-30 12:06:17.000000000 +0800
+@@ -8,259 +8,139 @@
+  * For conditions of distribution and use, see copyright notice in zlib.h
+  */
+ 
+-#ifdef USE_HOSTCC
+-#include <arpa/inet.h>
+-#else
+-#include <common.h>
+-#include <efi_loader.h>
+-#endif
+-#include <compiler.h>
+-#include <u-boot/crc.h>
++#define ZEXPORT /* empty */
++#define cpu_to_le32(x)      (x)
++#define le32_to_cpu(x)      (x)
++#define tole(x)  cpu_to_le32(x)
++typedef unsigned char   uint8_t;
++typedef unsigned short  uint16_t;
++typedef unsigned int    uint32_t;
++typedef unsigned int    uint;
++typedef unsigned char   bytef;
++typedef unsigned int    size_t;
++typedef unsigned int    uintptr_t;
+ 
+-#if defined(CONFIG_HW_WATCHDOG) || defined(CONFIG_WATCHDOG)
+-#include <watchdog.h>
+-#endif
+-#include "u-boot/zlib.h"
+-
+-#ifdef USE_HOSTCC
+-#define __efi_runtime
+-#define __efi_runtime_data
+-#endif
+-
+-#define tole(x) cpu_to_le32(x)
+-
+-#ifdef CONFIG_DYNAMIC_CRC_TABLE
+-
+-static int __efi_runtime_data crc_table_empty = 1;
+-static uint32_t __efi_runtime_data crc_table[256];
+-static void __efi_runtime make_crc_table OF((void));
+-
+-/*
+-  Generate a table for a byte-wise 32-bit CRC calculation on the polynomial:
+-  x^32+x^26+x^23+x^22+x^16+x^12+x^11+x^10+x^8+x^7+x^5+x^4+x^2+x+1.
+-
+-  Polynomials over GF(2) are represented in binary, one bit per coefficient,
+-  with the lowest powers in the most significant bit.  Then adding polynomials
+-  is just exclusive-or, and multiplying a polynomial by x is a right shift by
+-  one.  If we call the above polynomial p, and represent a byte as the
+-  polynomial q, also with the lowest power in the most significant bit (so the
+-  byte 0xb1 is the polynomial x^7+x^3+x+1), then the CRC is (q*x^32) mod p,
+-  where a mod b means the remainder after dividing a by b.
+-
+-  This calculation is done using the shift-register method of multiplying and
+-  taking the remainder.  The register is initialized to zero, and for each
+-  incoming bit, x^32 is added mod p to the register if the bit is a one (where
+-  x^32 mod p is p+x^32 = x^26+...+1), and the register is multiplied mod p by
+-  x (which is shifting right by one and adding x^32 mod p if the bit shifted
+-  out is a one).  We start with the highest power (least significant bit) of
+-  q and repeat for all eight bits of q.
+-
+-  The table is simply the CRC of all possible eight bit values.  This is all
+-  the information needed to generate CRC's on data a byte at a time for all
+-  combinations of CRC register values and incoming bytes.
+-*/
+-static void __efi_runtime make_crc_table(void)
+-{
+-  uint32_t c;
+-  int n, k;
+-  uLong poly;		/* polynomial exclusive-or pattern */
+-  /* terms of polynomial defining this crc (except x^32): */
+-  static Byte __efi_runtime_data p[] = {
+-		0, 1, 2, 4, 5, 7, 8, 10, 11, 12, 16, 22, 23, 26};
+-
+-  /* make exclusive-or pattern from polynomial (0xedb88320L) */
+-  poly = 0L;
+-  for (n = 0; n < sizeof(p)/sizeof(Byte); n++)
+-    poly |= 1L << (31 - p[n]);
+-
+-  for (n = 0; n < 256; n++)
+-  {
+-    c = (uLong)n;
+-    for (k = 0; k < 8; k++)
+-      c = c & 1 ? poly ^ (c >> 1) : c >> 1;
+-    crc_table[n] = tole(c);
+-  }
+-  crc_table_empty = 0;
+-}
+-#else
+ /* ========================================================================
+  * Table of CRC-32's of all single-byte values (made by make_crc_table)
+  */
+-
+-static const uint32_t __efi_runtime_data crc_table[256] = {
+-tole(0x00000000L), tole(0x77073096L), tole(0xee0e612cL), tole(0x990951baL),
+-tole(0x076dc419L), tole(0x706af48fL), tole(0xe963a535L), tole(0x9e6495a3L),
+-tole(0x0edb8832L), tole(0x79dcb8a4L), tole(0xe0d5e91eL), tole(0x97d2d988L),
+-tole(0x09b64c2bL), tole(0x7eb17cbdL), tole(0xe7b82d07L), tole(0x90bf1d91L),
+-tole(0x1db71064L), tole(0x6ab020f2L), tole(0xf3b97148L), tole(0x84be41deL),
+-tole(0x1adad47dL), tole(0x6ddde4ebL), tole(0xf4d4b551L), tole(0x83d385c7L),
+-tole(0x136c9856L), tole(0x646ba8c0L), tole(0xfd62f97aL), tole(0x8a65c9ecL),
+-tole(0x14015c4fL), tole(0x63066cd9L), tole(0xfa0f3d63L), tole(0x8d080df5L),
+-tole(0x3b6e20c8L), tole(0x4c69105eL), tole(0xd56041e4L), tole(0xa2677172L),
+-tole(0x3c03e4d1L), tole(0x4b04d447L), tole(0xd20d85fdL), tole(0xa50ab56bL),
+-tole(0x35b5a8faL), tole(0x42b2986cL), tole(0xdbbbc9d6L), tole(0xacbcf940L),
+-tole(0x32d86ce3L), tole(0x45df5c75L), tole(0xdcd60dcfL), tole(0xabd13d59L),
+-tole(0x26d930acL), tole(0x51de003aL), tole(0xc8d75180L), tole(0xbfd06116L),
+-tole(0x21b4f4b5L), tole(0x56b3c423L), tole(0xcfba9599L), tole(0xb8bda50fL),
+-tole(0x2802b89eL), tole(0x5f058808L), tole(0xc60cd9b2L), tole(0xb10be924L),
+-tole(0x2f6f7c87L), tole(0x58684c11L), tole(0xc1611dabL), tole(0xb6662d3dL),
+-tole(0x76dc4190L), tole(0x01db7106L), tole(0x98d220bcL), tole(0xefd5102aL),
+-tole(0x71b18589L), tole(0x06b6b51fL), tole(0x9fbfe4a5L), tole(0xe8b8d433L),
+-tole(0x7807c9a2L), tole(0x0f00f934L), tole(0x9609a88eL), tole(0xe10e9818L),
+-tole(0x7f6a0dbbL), tole(0x086d3d2dL), tole(0x91646c97L), tole(0xe6635c01L),
+-tole(0x6b6b51f4L), tole(0x1c6c6162L), tole(0x856530d8L), tole(0xf262004eL),
+-tole(0x6c0695edL), tole(0x1b01a57bL), tole(0x8208f4c1L), tole(0xf50fc457L),
+-tole(0x65b0d9c6L), tole(0x12b7e950L), tole(0x8bbeb8eaL), tole(0xfcb9887cL),
+-tole(0x62dd1ddfL), tole(0x15da2d49L), tole(0x8cd37cf3L), tole(0xfbd44c65L),
+-tole(0x4db26158L), tole(0x3ab551ceL), tole(0xa3bc0074L), tole(0xd4bb30e2L),
+-tole(0x4adfa541L), tole(0x3dd895d7L), tole(0xa4d1c46dL), tole(0xd3d6f4fbL),
+-tole(0x4369e96aL), tole(0x346ed9fcL), tole(0xad678846L), tole(0xda60b8d0L),
+-tole(0x44042d73L), tole(0x33031de5L), tole(0xaa0a4c5fL), tole(0xdd0d7cc9L),
+-tole(0x5005713cL), tole(0x270241aaL), tole(0xbe0b1010L), tole(0xc90c2086L),
+-tole(0x5768b525L), tole(0x206f85b3L), tole(0xb966d409L), tole(0xce61e49fL),
+-tole(0x5edef90eL), tole(0x29d9c998L), tole(0xb0d09822L), tole(0xc7d7a8b4L),
+-tole(0x59b33d17L), tole(0x2eb40d81L), tole(0xb7bd5c3bL), tole(0xc0ba6cadL),
+-tole(0xedb88320L), tole(0x9abfb3b6L), tole(0x03b6e20cL), tole(0x74b1d29aL),
+-tole(0xead54739L), tole(0x9dd277afL), tole(0x04db2615L), tole(0x73dc1683L),
+-tole(0xe3630b12L), tole(0x94643b84L), tole(0x0d6d6a3eL), tole(0x7a6a5aa8L),
+-tole(0xe40ecf0bL), tole(0x9309ff9dL), tole(0x0a00ae27L), tole(0x7d079eb1L),
+-tole(0xf00f9344L), tole(0x8708a3d2L), tole(0x1e01f268L), tole(0x6906c2feL),
+-tole(0xf762575dL), tole(0x806567cbL), tole(0x196c3671L), tole(0x6e6b06e7L),
+-tole(0xfed41b76L), tole(0x89d32be0L), tole(0x10da7a5aL), tole(0x67dd4accL),
+-tole(0xf9b9df6fL), tole(0x8ebeeff9L), tole(0x17b7be43L), tole(0x60b08ed5L),
+-tole(0xd6d6a3e8L), tole(0xa1d1937eL), tole(0x38d8c2c4L), tole(0x4fdff252L),
+-tole(0xd1bb67f1L), tole(0xa6bc5767L), tole(0x3fb506ddL), tole(0x48b2364bL),
+-tole(0xd80d2bdaL), tole(0xaf0a1b4cL), tole(0x36034af6L), tole(0x41047a60L),
+-tole(0xdf60efc3L), tole(0xa867df55L), tole(0x316e8eefL), tole(0x4669be79L),
+-tole(0xcb61b38cL), tole(0xbc66831aL), tole(0x256fd2a0L), tole(0x5268e236L),
+-tole(0xcc0c7795L), tole(0xbb0b4703L), tole(0x220216b9L), tole(0x5505262fL),
+-tole(0xc5ba3bbeL), tole(0xb2bd0b28L), tole(0x2bb45a92L), tole(0x5cb36a04L),
+-tole(0xc2d7ffa7L), tole(0xb5d0cf31L), tole(0x2cd99e8bL), tole(0x5bdeae1dL),
+-tole(0x9b64c2b0L), tole(0xec63f226L), tole(0x756aa39cL), tole(0x026d930aL),
+-tole(0x9c0906a9L), tole(0xeb0e363fL), tole(0x72076785L), tole(0x05005713L),
+-tole(0x95bf4a82L), tole(0xe2b87a14L), tole(0x7bb12baeL), tole(0x0cb61b38L),
+-tole(0x92d28e9bL), tole(0xe5d5be0dL), tole(0x7cdcefb7L), tole(0x0bdbdf21L),
+-tole(0x86d3d2d4L), tole(0xf1d4e242L), tole(0x68ddb3f8L), tole(0x1fda836eL),
+-tole(0x81be16cdL), tole(0xf6b9265bL), tole(0x6fb077e1L), tole(0x18b74777L),
+-tole(0x88085ae6L), tole(0xff0f6a70L), tole(0x66063bcaL), tole(0x11010b5cL),
+-tole(0x8f659effL), tole(0xf862ae69L), tole(0x616bffd3L), tole(0x166ccf45L),
+-tole(0xa00ae278L), tole(0xd70dd2eeL), tole(0x4e048354L), tole(0x3903b3c2L),
+-tole(0xa7672661L), tole(0xd06016f7L), tole(0x4969474dL), tole(0x3e6e77dbL),
+-tole(0xaed16a4aL), tole(0xd9d65adcL), tole(0x40df0b66L), tole(0x37d83bf0L),
+-tole(0xa9bcae53L), tole(0xdebb9ec5L), tole(0x47b2cf7fL), tole(0x30b5ffe9L),
+-tole(0xbdbdf21cL), tole(0xcabac28aL), tole(0x53b39330L), tole(0x24b4a3a6L),
+-tole(0xbad03605L), tole(0xcdd70693L), tole(0x54de5729L), tole(0x23d967bfL),
+-tole(0xb3667a2eL), tole(0xc4614ab8L), tole(0x5d681b02L), tole(0x2a6f2b94L),
+-tole(0xb40bbe37L), tole(0xc30c8ea1L), tole(0x5a05df1bL), tole(0x2d02ef8dL)
++const unsigned int g_crc_table[256] = { /* 256:数组大小 */
++    tole(0x00000000L), tole(0x77073096L), tole(0xee0e612cL), tole(0x990951baL),
++    tole(0x076dc419L), tole(0x706af48fL), tole(0xe963a535L), tole(0x9e6495a3L),
++    tole(0x0edb8832L), tole(0x79dcb8a4L), tole(0xe0d5e91eL), tole(0x97d2d988L),
++    tole(0x09b64c2bL), tole(0x7eb17cbdL), tole(0xe7b82d07L), tole(0x90bf1d91L),
++    tole(0x1db71064L), tole(0x6ab020f2L), tole(0xf3b97148L), tole(0x84be41deL),
++    tole(0x1adad47dL), tole(0x6ddde4ebL), tole(0xf4d4b551L), tole(0x83d385c7L),
++    tole(0x136c9856L), tole(0x646ba8c0L), tole(0xfd62f97aL), tole(0x8a65c9ecL),
++    tole(0x14015c4fL), tole(0x63066cd9L), tole(0xfa0f3d63L), tole(0x8d080df5L),
++    tole(0x3b6e20c8L), tole(0x4c69105eL), tole(0xd56041e4L), tole(0xa2677172L),
++    tole(0x3c03e4d1L), tole(0x4b04d447L), tole(0xd20d85fdL), tole(0xa50ab56bL),
++    tole(0x35b5a8faL), tole(0x42b2986cL), tole(0xdbbbc9d6L), tole(0xacbcf940L),
++    tole(0x32d86ce3L), tole(0x45df5c75L), tole(0xdcd60dcfL), tole(0xabd13d59L),
++    tole(0x26d930acL), tole(0x51de003aL), tole(0xc8d75180L), tole(0xbfd06116L),
++    tole(0x21b4f4b5L), tole(0x56b3c423L), tole(0xcfba9599L), tole(0xb8bda50fL),
++    tole(0x2802b89eL), tole(0x5f058808L), tole(0xc60cd9b2L), tole(0xb10be924L),
++    tole(0x2f6f7c87L), tole(0x58684c11L), tole(0xc1611dabL), tole(0xb6662d3dL),
++    tole(0x76dc4190L), tole(0x01db7106L), tole(0x98d220bcL), tole(0xefd5102aL),
++    tole(0x71b18589L), tole(0x06b6b51fL), tole(0x9fbfe4a5L), tole(0xe8b8d433L),
++    tole(0x7807c9a2L), tole(0x0f00f934L), tole(0x9609a88eL), tole(0xe10e9818L),
++    tole(0x7f6a0dbbL), tole(0x086d3d2dL), tole(0x91646c97L), tole(0xe6635c01L),
++    tole(0x6b6b51f4L), tole(0x1c6c6162L), tole(0x856530d8L), tole(0xf262004eL),
++    tole(0x6c0695edL), tole(0x1b01a57bL), tole(0x8208f4c1L), tole(0xf50fc457L),
++    tole(0x65b0d9c6L), tole(0x12b7e950L), tole(0x8bbeb8eaL), tole(0xfcb9887cL),
++    tole(0x62dd1ddfL), tole(0x15da2d49L), tole(0x8cd37cf3L), tole(0xfbd44c65L),
++    tole(0x4db26158L), tole(0x3ab551ceL), tole(0xa3bc0074L), tole(0xd4bb30e2L),
++    tole(0x4adfa541L), tole(0x3dd895d7L), tole(0xa4d1c46dL), tole(0xd3d6f4fbL),
++    tole(0x4369e96aL), tole(0x346ed9fcL), tole(0xad678846L), tole(0xda60b8d0L),
++    tole(0x44042d73L), tole(0x33031de5L), tole(0xaa0a4c5fL), tole(0xdd0d7cc9L),
++    tole(0x5005713cL), tole(0x270241aaL), tole(0xbe0b1010L), tole(0xc90c2086L),
++    tole(0x5768b525L), tole(0x206f85b3L), tole(0xb966d409L), tole(0xce61e49fL),
++    tole(0x5edef90eL), tole(0x29d9c998L), tole(0xb0d09822L), tole(0xc7d7a8b4L),
++    tole(0x59b33d17L), tole(0x2eb40d81L), tole(0xb7bd5c3bL), tole(0xc0ba6cadL),
++    tole(0xedb88320L), tole(0x9abfb3b6L), tole(0x03b6e20cL), tole(0x74b1d29aL),
++    tole(0xead54739L), tole(0x9dd277afL), tole(0x04db2615L), tole(0x73dc1683L),
++    tole(0xe3630b12L), tole(0x94643b84L), tole(0x0d6d6a3eL), tole(0x7a6a5aa8L),
++    tole(0xe40ecf0bL), tole(0x9309ff9dL), tole(0x0a00ae27L), tole(0x7d079eb1L),
++    tole(0xf00f9344L), tole(0x8708a3d2L), tole(0x1e01f268L), tole(0x6906c2feL),
++    tole(0xf762575dL), tole(0x806567cbL), tole(0x196c3671L), tole(0x6e6b06e7L),
++    tole(0xfed41b76L), tole(0x89d32be0L), tole(0x10da7a5aL), tole(0x67dd4accL),
++    tole(0xf9b9df6fL), tole(0x8ebeeff9L), tole(0x17b7be43L), tole(0x60b08ed5L),
++    tole(0xd6d6a3e8L), tole(0xa1d1937eL), tole(0x38d8c2c4L), tole(0x4fdff252L),
++    tole(0xd1bb67f1L), tole(0xa6bc5767L), tole(0x3fb506ddL), tole(0x48b2364bL),
++    tole(0xd80d2bdaL), tole(0xaf0a1b4cL), tole(0x36034af6L), tole(0x41047a60L),
++    tole(0xdf60efc3L), tole(0xa867df55L), tole(0x316e8eefL), tole(0x4669be79L),
++    tole(0xcb61b38cL), tole(0xbc66831aL), tole(0x256fd2a0L), tole(0x5268e236L),
++    tole(0xcc0c7795L), tole(0xbb0b4703L), tole(0x220216b9L), tole(0x5505262fL),
++    tole(0xc5ba3bbeL), tole(0xb2bd0b28L), tole(0x2bb45a92L), tole(0x5cb36a04L),
++    tole(0xc2d7ffa7L), tole(0xb5d0cf31L), tole(0x2cd99e8bL), tole(0x5bdeae1dL),
++    tole(0x9b64c2b0L), tole(0xec63f226L), tole(0x756aa39cL), tole(0x026d930aL),
++    tole(0x9c0906a9L), tole(0xeb0e363fL), tole(0x72076785L), tole(0x05005713L),
++    tole(0x95bf4a82L), tole(0xe2b87a14L), tole(0x7bb12baeL), tole(0x0cb61b38L),
++    tole(0x92d28e9bL), tole(0xe5d5be0dL), tole(0x7cdcefb7L), tole(0x0bdbdf21L),
++    tole(0x86d3d2d4L), tole(0xf1d4e242L), tole(0x68ddb3f8L), tole(0x1fda836eL),
++    tole(0x81be16cdL), tole(0xf6b9265bL), tole(0x6fb077e1L), tole(0x18b74777L),
++    tole(0x88085ae6L), tole(0xff0f6a70L), tole(0x66063bcaL), tole(0x11010b5cL),
++    tole(0x8f659effL), tole(0xf862ae69L), tole(0x616bffd3L), tole(0x166ccf45L),
++    tole(0xa00ae278L), tole(0xd70dd2eeL), tole(0x4e048354L), tole(0x3903b3c2L),
++    tole(0xa7672661L), tole(0xd06016f7L), tole(0x4969474dL), tole(0x3e6e77dbL),
++    tole(0xaed16a4aL), tole(0xd9d65adcL), tole(0x40df0b66L), tole(0x37d83bf0L),
++    tole(0xa9bcae53L), tole(0xdebb9ec5L), tole(0x47b2cf7fL), tole(0x30b5ffe9L),
++    tole(0xbdbdf21cL), tole(0xcabac28aL), tole(0x53b39330L), tole(0x24b4a3a6L),
++    tole(0xbad03605L), tole(0xcdd70693L), tole(0x54de5729L), tole(0x23d967bfL),
++    tole(0xb3667a2eL), tole(0xc4614ab8L), tole(0x5d681b02L), tole(0x2a6f2b94L),
++    tole(0xb40bbe37L), tole(0xc30c8ea1L), tole(0x5a05df1bL), tole(0x2d02ef8dL)
+ };
+-#endif
+-
+-#if 0
+-/* =========================================================================
+- * This function can be used by asm versions of crc32()
+- */
+-const uint32_t * ZEXPORT get_crc_table()
+-{
+-#ifdef CONFIG_DYNAMIC_CRC_TABLE
+-  if (crc_table_empty) make_crc_table();
+-#endif
+-  return (const uint32_t *)crc_table;
+-}
+-#endif
+ 
+ /* ========================================================================= */
+-# if __BYTE_ORDER == __LITTLE_ENDIAN
+-#  define DO_CRC(x) crc = tab[(crc ^ (x)) & 255] ^ (crc >> 8)
+-# else
+-#  define DO_CRC(x) crc = tab[((crc >> 24) ^ (x)) & 255] ^ (crc << 8)
+-# endif
+-
++#define do_crc(x) (crc = tab[(crc ^ (x)) & 255] ^ (crc >> 8))   /* 255 8 */
+ /* ========================================================================= */
+-
+ /* No ones complement version. JFFS2 (and other things ?)
+  * don't use ones compliment in their CRC calculations.
+  */
+-uint32_t __efi_runtime crc32_no_comp(uint32_t crc, const Bytef *buf, uInt len)
++unsigned int  crc32_no_comp(unsigned int crc, const bytef *buf, uint len)
+ {
+-    const uint32_t *tab = crc_table;
+-    const uint32_t *b =(const uint32_t *)buf;
++    const unsigned int *tab = g_crc_table;
++    const unsigned int *b = (const unsigned int *)buf;
+     size_t rem_len;
+-#ifdef CONFIG_DYNAMIC_CRC_TABLE
+-    if (crc_table_empty)
+-      make_crc_table();
+-#endif
+-    crc = cpu_to_le32(crc);
++
+     /* Align it */
+-    if (((long)b) & 3 && len) {
+-	 uint8_t *p = (uint8_t *)b;
+-	 do {
+-	      DO_CRC(*p++);
+-	 } while ((--len) && ((long)p)&3);
+-	 b = (uint32_t *)p;
++    if ((((uintptr_t)b) & 3) && len) { /* 3 */
++        uint8_t *p = (uint8_t *)b;
++        do {
++            do_crc(*p++);
++        } while ((--len) && (((uintptr_t)p) & 3)); /* 3 */
++        b = (unsigned int *)p;
+     }
+ 
+-    rem_len = len & 3;
+-    len = len >> 2;
++    rem_len = len & 3;   /* 3 */
++    len = len >> 2;      /* 2 */
+     for (--b; len; --len) {
+-	 /* load data 32 bits wide, xor data 32 bits wide. */
+-	 crc ^= *++b; /* use pre increment for speed */
+-	 DO_CRC(0);
+-	 DO_CRC(0);
+-	 DO_CRC(0);
+-	 DO_CRC(0);
++        /* load data 32 bits wide, xor data 32 bits wide. */
++        crc ^= *++b; /* use pre increment for speed */
++        do_crc(0);
++        do_crc(0);
++        do_crc(0);
++        do_crc(0);
+     }
+     len = rem_len;
+     /* And the last few bytes */
+     if (len) {
+-	 uint8_t *p = (uint8_t *)(b + 1) - 1;
+-	 do {
+-	      DO_CRC(*++p); /* use pre increment for speed */
+-	 } while (--len);
++        uint8_t *p = (uint8_t *)(b + 1) - 1;
++        do {
++            do_crc(*++p); /* use pre increment for speed */
++        } while (--len);
+     }
+ 
+     return le32_to_cpu(crc);
+ }
+-#undef DO_CRC
+-
+-uint32_t __efi_runtime crc32(uint32_t crc, const Bytef *p, uInt len)
+-{
+-     return crc32_no_comp(crc ^ 0xffffffffL, p, len) ^ 0xffffffffL;
+-}
++#undef do_crc
+ 
+-/*
+- * Calculate the crc32 checksum triggering the watchdog every 'chunk_sz' bytes
+- * of input.
+- */
+-uint32_t crc32_wd(uint32_t crc, const unsigned char *buf, uInt len,
+-		  uInt chunk_sz)
++unsigned int hi_crc32 (unsigned int crc, const bytef *p, uint len)
+ {
+-#if defined(CONFIG_HW_WATCHDOG) || defined(CONFIG_WATCHDOG)
+-	const unsigned char *end, *curr;
+-	int chunk;
+-
+-	curr = buf;
+-	end = buf + len;
+-	while (curr < end) {
+-		chunk = end - curr;
+-		if (chunk > chunk_sz)
+-			chunk = chunk_sz;
+-		crc = crc32 (crc, curr, chunk);
+-		curr += chunk;
+-		WATCHDOG_RESET ();
+-	}
+-#else
+-	crc = crc32 (crc, buf, len);
+-#endif
++    if (!p || !len) {
++        return 0;
++    }
+ 
+-	return crc;
++    return crc32_no_comp(crc ^ 0xffffffffL, p, len) ^ 0xffffffffL;
+ }
+ 
+-void crc32_wd_buf(const unsigned char *input, unsigned int ilen,
+-		unsigned char *output, unsigned int chunk_sz)
+-{
+-	uint32_t crc;
+ 
+-	crc = crc32_wd(0, input, ilen, chunk_sz);
+-	crc = htonl(crc);
+-	memcpy(output, &crc, sizeof(crc));
+-}
+Binary files u-boot-v2019.07/lib/crc32.o and u-boot-v2019.07_ok/lib/crc32.o differ
+diff -Nur u-boot-v2019.07/lib/lzma/LzmaDec.c u-boot-v2019.07_ok/lib/lzma/LzmaDec.c
+--- u-boot-v2019.07/lib/lzma/LzmaDec.c	2020-05-30 23:14:30.920000000 +0800
++++ u-boot-v2019.07_ok/lib/lzma/LzmaDec.c	2020-05-30 12:06:17.000000000 +0800
+@@ -1,13 +1,9 @@
+ /* LzmaDec.c -- LZMA Decoder
+ 2009-09-20 : Igor Pavlov : Public domain */
++#include <hi_boot_rom.h>
+ 
+-#include <config.h>
+-#include <common.h>
+-#include <watchdog.h>
+ #include "LzmaDec.h"
+ 
+-#include <linux/string.h>
+-
+ #define kNumTopBits 24
+ #define kTopValue ((UInt32)1 << kNumTopBits)
+ 
+@@ -47,9 +43,10 @@
+   i -= 0x40; }
+ #endif
+ 
+-#define NORMALIZE_CHECK if (range < kTopValue) { if (buf >= bufLimit) return DUMMY_ERROR; range <<= 8; code = (code << 8) | (*buf++); }
++#define NORMALIZE_CHECK if (range < kTopValue) { if (buf >= bufLimit) return DUMMY_ERROR;}
++#define NORMALIZE_CHECK_MODIFY if (range < kTopValue) { if (buf >= bufLimit) return DUMMY_ERROR; range <<= 8; code = (code << 8) | (*buf++); }
+ 
+-#define IF_BIT_0_CHECK(p) ttt = *(p); NORMALIZE_CHECK; bound = (range >> kNumBitModelTotalBits) * ttt; if (code < bound)
++#define IF_BIT_0_CHECK(p) ttt = *(p); NORMALIZE_CHECK_MODIFY; bound = (range >> kNumBitModelTotalBits) * ttt; if (code < bound)
+ #define UPDATE_0_CHECK range = bound;
+ #define UPDATE_1_CHECK range -= bound; code -= bound;
+ #define GET_BIT2_CHECK(p, i, A0, A1) IF_BIT_0_CHECK(p) \
+@@ -131,7 +128,7 @@
+     = kMatchSpecLenStart + 2 : State Init Marker
+ */
+ 
+-static int MY_FAST_CALL LzmaDec_DecodeReal(CLzmaDec *p, SizeT limit, const Byte *bufLimit)
++unsigned int MY_FAST_CALL LzmaDec_DecodeReal(CLzmaDec* p, SizeT limit, const Byte* bufLimit)
+ {
+   CLzmaProb *probs = p->probs;
+ 
+@@ -153,7 +150,7 @@
+   UInt32 range = p->range;
+   UInt32 code = p->code;
+ 
+-  WATCHDOG_RESET();
++    hi_watchdog_feed();
+ 
+   do
+   {
+@@ -177,9 +174,10 @@
+         state -= (state < 4) ? state : 3;
+         symbol = 1;
+ 
+-        WATCHDOG_RESET();
++                hi_watchdog_feed();
+ 
+-        do { GET_BIT(prob + symbol, symbol) } while (symbol < 0x100);
++                do { GET_BIT(prob + symbol, symbol) }
++                while (symbol < 0x100);
+       }
+       else
+       {
+@@ -188,7 +186,7 @@
+         state -= (state < 10) ? 3 : 6;
+         symbol = 1;
+ 
+-        WATCHDOG_RESET();
++                hi_watchdog_feed();
+ 
+         do
+         {
+@@ -270,14 +268,14 @@
+         prob = probs + RepLenCoder;
+       }
+       {
+-        unsigned limit, offset;
++                unsigned int inner_limit, offset;
+         CLzmaProb *probLen = prob + LenChoice;
+         IF_BIT_0(probLen)
+         {
+           UPDATE_0(probLen);
+           probLen = prob + LenLow + (posState << kLenNumLowBits);
+           offset = 0;
+-          limit = (1 << kLenNumLowBits);
++                    inner_limit = (1 << kLenNumLowBits);
+         }
+         else
+         {
+@@ -288,17 +286,17 @@
+             UPDATE_0(probLen);
+             probLen = prob + LenMid + (posState << kLenNumMidBits);
+             offset = kLenNumLowSymbols;
+-            limit = (1 << kLenNumMidBits);
++                        inner_limit = (1 << kLenNumMidBits);
+           }
+           else
+           {
+             UPDATE_1(probLen);
+             probLen = prob + LenHigh;
+             offset = kLenNumLowSymbols + kLenNumMidSymbols;
+-            limit = (1 << kLenNumHighBits);
++                        inner_limit = (1 << kLenNumHighBits);
+           }
+         }
+-        TREE_DECODE(probLen, limit, len);
++                TREE_DECODE(probLen, inner_limit, len);
+         len += offset;
+       }
+ 
+@@ -312,16 +310,17 @@
+         {
+           unsigned posSlot = (unsigned)distance;
+           int numDirectBits = (int)(((distance >> 1) - 1));
++                    unsigned int numDirectBitsTemp = (unsigned int)numDirectBits;
+           distance = (2 | (distance & 1));
+           if (posSlot < kEndPosModelIndex)
+           {
+-            distance <<= numDirectBits;
++                        distance <<= numDirectBitsTemp;
+             prob = probs + SpecPos + distance - posSlot - 1;
+             {
+               UInt32 mask = 1;
+               unsigned i = 1;
+ 
+-              WATCHDOG_RESET();
++                            hi_watchdog_feed();
+ 
+               do
+               {
+@@ -335,7 +334,7 @@
+           {
+             numDirectBits -= kNumAlignBits;
+ 
+-            WATCHDOG_RESET();
++                        hi_watchdog_feed();
+ 
+             do
+             {
+@@ -409,7 +408,7 @@
+           const Byte *lim = dest + curLen;
+           dicPos += curLen;
+ 
+-          WATCHDOG_RESET();
++                    hi_watchdog_feed();
+ 
+           do
+             *(dest) = (Byte)*(dest + src);
+@@ -418,7 +417,7 @@
+         else
+         {
+ 
+-          WATCHDOG_RESET();
++                    hi_watchdog_feed();
+ 
+           do
+           {
+@@ -433,7 +432,7 @@
+   }
+   while (dicPos < limit && buf < bufLimit);
+ 
+-  WATCHDOG_RESET();
++    hi_watchdog_feed();
+ 
+   NORMALIZE;
+   p->buf = buf;
+@@ -451,7 +450,7 @@
+   return SZ_OK;
+ }
+ 
+-static void MY_FAST_CALL LzmaDec_WriteRem(CLzmaDec *p, SizeT limit)
++void MY_FAST_CALL LzmaDec_WriteRem(CLzmaDec* p, SizeT limit)
+ {
+   if (p->remainLen != 0 && p->remainLen < kMatchSpecLenStart)
+   {
+@@ -477,7 +476,7 @@
+   }
+ }
+ 
+-static int MY_FAST_CALL LzmaDec_DecodeReal2(CLzmaDec *p, SizeT limit, const Byte *bufLimit)
++unsigned  int MY_FAST_CALL LzmaDec_DecodeReal2(CLzmaDec* p, SizeT limit, const Byte* bufLimit)
+ {
+   do
+   {
+@@ -510,7 +509,7 @@
+   DUMMY_REP
+ } ELzmaDummy;
+ 
+-static ELzmaDummy LzmaDec_TryDummy(const CLzmaDec *p, const Byte *buf, SizeT inSize)
++ ELzmaDummy LzmaDec_TryDummy(const CLzmaDec* p, const Byte* buf, SizeT inSize)
+ {
+   UInt32 range = p->range;
+   UInt32 code = p->code;
+@@ -541,7 +540,8 @@
+       if (state < kNumLitStates)
+       {
+         unsigned symbol = 1;
+-        do { GET_BIT_CHECK(prob + symbol, symbol) } while (symbol < 0x100);
++                do { GET_BIT_CHECK(prob + symbol, symbol) }
++                while (symbol < 0x100);
+       }
+       else
+       {
+@@ -668,14 +668,14 @@
+ 
+           if (posSlot < kEndPosModelIndex)
+           {
+-            prob = probs + SpecPos + ((2 | (posSlot & 1)) << numDirectBits) - posSlot - 1;
++                        prob = probs + SpecPos + ((2 | (posSlot & 1)) << (unsigned int)numDirectBits) - posSlot - 1;
+           }
+           else
+           {
+             numDirectBits -= kNumAlignBits;
+             do
+             {
+-              NORMALIZE_CHECK
++                            NORMALIZE_CHECK_MODIFY
+               range >>= 1;
+               code -= range & (((code - range) >> 31) - 1);
+               /* if (code >= range) code -= range; */
+@@ -701,7 +701,7 @@
+ }
+ 
+ 
+-static void LzmaDec_InitRc(CLzmaDec *p, const Byte *data)
++ void LzmaDec_InitRc(CLzmaDec* p, const Byte* data)
+ {
+   p->code = ((UInt32)data[1] << 24) | ((UInt32)data[2] << 16) | ((UInt32)data[3] << 8) | ((UInt32)data[4]);
+   p->range = 0xFFFFFFFF;
+@@ -730,7 +730,7 @@
+   LzmaDec_InitDicAndState(p, True, True);
+ }
+ 
+-static void LzmaDec_InitStateReal(CLzmaDec *p)
++ void LzmaDec_InitStateReal(CLzmaDec* p)
+ {
+   UInt32 numProbs = Literal + ((UInt32)LZMA_LIT_SIZE << (p->prop.lc + p->prop.lp));
+   UInt32 i;
+@@ -804,63 +804,79 @@
+           int dummyRes = LzmaDec_TryDummy(p, src, inSize);
+           if (dummyRes == DUMMY_ERROR)
+           {
+-            memcpy(p->tempBuf, src, inSize);
+-            p->tempBufSize = (unsigned)inSize;
+-            (*srcLen) += inSize;
+-            *status = LZMA_STATUS_NEEDS_MORE_INPUT;
+-            return SZ_OK;
+-          }
+-          if (checkEndMarkNow && dummyRes != DUMMY_MATCH)
+-          {
+-            *status = LZMA_STATUS_NOT_FINISHED;
+-            return SZ_ERROR_DATA;
+-          }
+-          bufLimit = src;
++                    unsigned int cs = (uintptr_t)p->tempBuf ^ inSize ^ (uintptr_t)src ^ inSize;
++                    (hi_void)memcpy_s(p->tempBuf,inSize ,src, inSize, cs);
++                    p->tempBufSize = (unsigned)inSize;
++                    (*srcLen) += inSize;
++                    *status = LZMA_STATUS_NEEDS_MORE_INPUT;
++                    return SZ_OK;
++                }
++
++                if (checkEndMarkNow && dummyRes != DUMMY_MATCH)
++                {
++                    *status = LZMA_STATUS_NOT_FINISHED;
++                    return SZ_ERROR_DATA;
++                }
++
++                bufLimit = src;
++            }
++            else
++            { bufLimit = src + inSize - LZMA_REQUIRED_INPUT_MAX; }
++
++            p->buf = src;
++
++            if (LzmaDec_DecodeReal2(p, dicLimit, bufLimit) != 0)
++            { return SZ_ERROR_DATA; }
++
++            processed = (SizeT)(p->buf - src);
++            (*srcLen) += processed;
++            src += processed;
++            inSize -= processed;
+         }
+         else
+-          bufLimit = src + inSize - LZMA_REQUIRED_INPUT_MAX;
+-        p->buf = src;
+-        if (LzmaDec_DecodeReal2(p, dicLimit, bufLimit) != 0)
+-          return SZ_ERROR_DATA;
+-        processed = (SizeT)(p->buf - src);
+-        (*srcLen) += processed;
+-        src += processed;
+-        inSize -= processed;
+-      }
+-      else
+-      {
+-        unsigned rem = p->tempBufSize, lookAhead = 0;
+-        while (rem < LZMA_REQUIRED_INPUT_MAX && lookAhead < inSize)
+-          p->tempBuf[rem++] = src[lookAhead++];
+-        p->tempBufSize = rem;
+-        if (rem < LZMA_REQUIRED_INPUT_MAX || checkEndMarkNow)
+         {
+-          int dummyRes = LzmaDec_TryDummy(p, p->tempBuf, rem);
+-          if (dummyRes == DUMMY_ERROR)
+-          {
++            unsigned rem = p->tempBufSize, lookAhead = 0;
++
++            while (rem < LZMA_REQUIRED_INPUT_MAX && lookAhead < inSize)
++            { p->tempBuf[rem++] = src[lookAhead++]; }
++
++            p->tempBufSize = rem;
++
++            if (rem < LZMA_REQUIRED_INPUT_MAX || checkEndMarkNow)
++            {
++                int dummyRes = LzmaDec_TryDummy(p, p->tempBuf, rem);
++
++                if (dummyRes == DUMMY_ERROR)
++                {
++                    (*srcLen) += lookAhead;
++                    *status = LZMA_STATUS_NEEDS_MORE_INPUT;
++                    return SZ_OK;
++                }
++
++                if (checkEndMarkNow && dummyRes != DUMMY_MATCH)
++                {
++                    *status = LZMA_STATUS_NOT_FINISHED;
++                    return SZ_ERROR_DATA;
++                }
++            }
++
++            p->buf = p->tempBuf;
++
++            if (LzmaDec_DecodeReal2(p, dicLimit, p->buf) != 0)
++            { return SZ_ERROR_DATA; }
++
++            lookAhead -= (rem - (unsigned)(p->buf - p->tempBuf));
+             (*srcLen) += lookAhead;
+-            *status = LZMA_STATUS_NEEDS_MORE_INPUT;
+-            return SZ_OK;
+-          }
+-          if (checkEndMarkNow && dummyRes != DUMMY_MATCH)
+-          {
+-            *status = LZMA_STATUS_NOT_FINISHED;
+-            return SZ_ERROR_DATA;
+-          }
++            src += lookAhead;
++            inSize -= lookAhead;
++            p->tempBufSize = 0;
+         }
+-        p->buf = p->tempBuf;
+-        if (LzmaDec_DecodeReal2(p, dicLimit, p->buf) != 0)
+-          return SZ_ERROR_DATA;
+-        lookAhead -= (rem - (unsigned)(p->buf - p->tempBuf));
+-        (*srcLen) += lookAhead;
+-        src += lookAhead;
+-        inSize -= lookAhead;
+-        p->tempBufSize = 0;
+-      }
+-  }
+-  if (p->code == 0)
+-    *status = LZMA_STATUS_FINISHED_WITH_MARK;
+-  return (p->code == 0) ? SZ_OK : SZ_ERROR_DATA;
++    }
++
++    if (p->code == 0)
++    { *status = LZMA_STATUS_FINISHED_WITH_MARK; }
++
++    return (p->code == 0) ? (SRes)SZ_OK : (SRes)SZ_ERROR_DATA;
+ }
+ 
+ SRes LzmaDec_DecodeToBuf(CLzmaDec *p, Byte *dest, SizeT *destLen, const Byte *src, SizeT *srcLen, ELzmaFinishMode finishMode, ELzmaStatus *status)
+@@ -887,20 +903,23 @@
+       curFinishMode = finishMode;
+     }
+ 
+-    res = LzmaDec_DecodeToDic(p, outSizeCur, src, &inSizeCur, curFinishMode, status);
+-    src += inSizeCur;
+-    inSize -= inSizeCur;
+-    *srcLen += inSizeCur;
+-    outSizeCur = p->dicPos - dicPos;
+-    memcpy(dest, p->dic + dicPos, outSizeCur);
+-    dest += outSizeCur;
+-    outSize -= outSizeCur;
+-    *destLen += outSizeCur;
+-    if (res != 0)
+-      return res;
+-    if (outSizeCur == 0 || outSize == 0)
+-      return SZ_OK;
+-  }
++        res = LzmaDec_DecodeToDic(p, outSizeCur, src, &inSizeCur, curFinishMode, status);
++        src += inSizeCur;
++        inSize -= inSizeCur;
++        *srcLen += inSizeCur;
++        outSizeCur = p->dicPos - dicPos;
++        unsigned int cs = (uintptr_t)dest ^ outSizeCur ^ (uintptr_t)(p->dic + dicPos) ^ outSizeCur;
++        (hi_void)memcpy_s(dest,outSizeCur,p->dic + dicPos, outSizeCur, cs);
++        dest += outSizeCur;
++        outSize -= outSizeCur;
++        *destLen += outSizeCur;
++
++        if (res != 0)
++        { return res; }
++
++        if (outSizeCur == 0 || outSize == 0)
++        { return SZ_OK; }
++    }
+ }
+ 
+ void LzmaDec_FreeProbs(CLzmaDec *p, ISzAlloc *alloc)
+@@ -909,7 +928,7 @@
+   p->probs = 0;
+ }
+ 
+-static void LzmaDec_FreeDict(CLzmaDec *p, ISzAlloc *alloc)
++ void LzmaDec_FreeDict(CLzmaDec* p, ISzAlloc* alloc)
+ {
+   alloc->Free(alloc, p->dic);
+   p->dic = 0;
+@@ -947,7 +966,7 @@
+   return SZ_OK;
+ }
+ 
+-static SRes LzmaDec_AllocateProbs2(CLzmaDec *p, const CLzmaProps *propNew, ISzAlloc *alloc)
++ SRes LzmaDec_AllocateProbs2(CLzmaDec* p, const CLzmaProps* propNew, ISzAlloc* alloc)
+ {
+   UInt32 numProbs = LzmaProps_GetNumProbs(propNew);
+   if (p->probs == 0 || numProbs != p->numProbs)
+Binary files u-boot-v2019.07/lib/lzma/LzmaDec.o and u-boot-v2019.07_ok/lib/lzma/LzmaDec.o differ
+diff -Nur u-boot-v2019.07/lib/lzma/LzmaTools.c u-boot-v2019.07_ok/lib/lzma/LzmaTools.c
+--- u-boot-v2019.07/lib/lzma/LzmaTools.c	2020-05-30 23:14:30.920000000 +0800
++++ u-boot-v2019.07_ok/lib/lzma/LzmaTools.c	2020-05-30 12:06:17.000000000 +0800
+@@ -17,31 +17,29 @@
+  *
+  */
+ 
+-#include <config.h>
+-#include <common.h>
+-#include <watchdog.h>
++#include <hi_boot_rom.h>
+ 
+-#ifdef CONFIG_LZMA
+ 
+ #define LZMA_PROPERTIES_OFFSET 0
+ #define LZMA_SIZE_OFFSET       LZMA_PROPS_SIZE
+ #define LZMA_DATA_OFFSET       LZMA_SIZE_OFFSET+sizeof(uint64_t)
+ 
+-#include "LzmaTools.h"
+ #include "LzmaDec.h"
++#include "LzmaTools.h"
++
++#define IN_BUF_SIZE     (0x1000)
++#define OUT_BUF_SIZE    (0x1000)
++
+ 
+-#include <linux/string.h>
+-#include <malloc.h>
++SRes Decode2(CLzmaDec* state, Byte* in_buf, LZMA_STREAM_S* in_stream, Byte* out_buf, LZMA_STREAM_S* out_stream,
++             unsigned int uncompress_len, unsigned int compress_len, ELzmaStatus* status);
+ 
+-static void *SzAlloc(void *p, size_t size) { return malloc(size); }
+-static void SzFree(void *p, void *address) { free(address); }
+ 
+-int lzmaBuffToBuffDecompress (unsigned char *outStream, SizeT *uncompressedSize,
+-                  unsigned char *inStream,  SizeT  length)
++int lzmaBuffToBuffDecompress (unsigned char* outStream, SizeT* uncompressedSize,
++                              unsigned char* inStream,  SizeT length, ISzAlloc* alloc)
+ {
+     int res = SZ_ERROR_DATA;
+     int i;
+-    ISzAlloc g_Alloc;
+ 
+     SizeT outSizeFull = 0xFFFFFFFF; /* 4GBytes limit */
+     SizeT outProcessed;
+@@ -50,34 +48,37 @@
+     ELzmaStatus state;
+     SizeT compressedSize = (SizeT)(length - LZMA_PROPS_SIZE);
+ 
+-    debug ("LZMA: Image address............... 0x%p\n", inStream);
+-    debug ("LZMA: Properties address.......... 0x%p\n", inStream + LZMA_PROPERTIES_OFFSET);
+-    debug ("LZMA: Uncompressed size address... 0x%p\n", inStream + LZMA_SIZE_OFFSET);
+-    debug ("LZMA: Compressed data address..... 0x%p\n", inStream + LZMA_DATA_OFFSET);
+-    debug ("LZMA: Destination address......... 0x%p\n", outStream);
+-
+-    memset(&state, 0, sizeof(state));
++    (hi_void)memset_s(&state,sizeof(state), 0, sizeof(state), (uintptr_t)(&state) ^ sizeof(state) ^ 0 ^ sizeof(state));
+ 
+     outSize = 0;
+     outSizeHigh = 0;
+     /* Read the uncompressed size */
+-    for (i = 0; i < 8; i++) {
++    for (i = 0; i < 8; i++)
++    {
+         unsigned char b = inStream[LZMA_SIZE_OFFSET + i];
+-            if (i < 4) {
+-                outSize     += (UInt32)(b) << (i * 8);
+-        } else {
+-                outSizeHigh += (UInt32)(b) << ((i - 4) * 8);
++
++        if (i < 4)
++        {
++            outSize     += (UInt32)(b) << ((unsigned int)i * 8);
++        }
++        else
++        {
++            outSizeHigh += (UInt32)(b) << (((unsigned int)i - 4) * 8);
+         }
+     }
+ 
+     outSizeFull = (SizeT)outSize;
+-    if (sizeof(SizeT) >= 8) {
++
++    if (sizeof(SizeT) >= 8)
++    {
+         /*
+          * SizeT is a 64 bit uint => We can manage files larger than 4GB!
+          *
+          */
+-            outSizeFull |= (((SizeT)outSizeHigh << 16) << 16);
+-    } else if (outSizeHigh != 0 || (UInt32)(SizeT)outSize != outSize) {
++        outSizeFull |= (((SizeT)outSizeHigh << 16) << 16);
++    }
++    else if (outSizeHigh != 0 || (UInt32)(SizeT)outSize != outSize)
++    {
+         /*
+          * SizeT is a 32 bit uint => We cannot manage files larger than
+          * 4GB!  Assume however that all 0xf values is "unknown size" and
+@@ -85,39 +86,185 @@
+          *
+          */
+         if (outSizeHigh != (SizeT)-1 || outSize != (SizeT)-1) {
+-            debug ("LZMA: 64bit support not enabled.\n");
++            boot_msg0 ("LZMA: 64bit support not enabled.\n");
+             return SZ_ERROR_DATA;
+         }
+     }
+ 
+-    debug("LZMA: Uncompresed size............ 0x%zx\n", outSizeFull);
+-    debug("LZMA: Compresed size.............. 0x%zx\n", compressedSize);
+-
+-    g_Alloc.Alloc = SzAlloc;
+-    g_Alloc.Free = SzFree;
++    boot_msg1("Uncompresed size: ", outSizeFull);
++    boot_msg1("Compresed size: ", compressedSize);
+ 
+     /* Short-circuit early if we know the buffer can't hold the results. */
+-    if (outSizeFull != (SizeT)-1 && *uncompressedSize < outSizeFull)
+-        return SZ_ERROR_OUTPUT_EOF;
++    if (outSizeFull != (SizeT) - 1 && *uncompressedSize < outSizeFull)
++    { return SZ_ERROR_OUTPUT_EOF; }
+ 
+     /* Decompress */
+-    outProcessed = min(outSizeFull, *uncompressedSize);
+-
+-    WATCHDOG_RESET();
++    outProcessed = (outSizeFull > *uncompressedSize) ? (*uncompressedSize) : outSizeFull;
+ 
++    hi_watchdog_feed();
+     res = LzmaDecode(
+-        outStream, &outProcessed,
+-        inStream + LZMA_DATA_OFFSET, &compressedSize,
+-        inStream, LZMA_PROPS_SIZE, LZMA_FINISH_END, &state, &g_Alloc);
++              outStream, &outProcessed,
++              inStream + LZMA_DATA_OFFSET, &compressedSize,
++              inStream, LZMA_PROPS_SIZE, LZMA_FINISH_END, &state, alloc);
+     *uncompressedSize = outProcessed;
+ 
+-    debug("LZMA: Uncompressed ............... 0x%zx\n", outProcessed);
+-
+-    if (res != SZ_OK)  {
++    if (res != SZ_OK)
++    {
+         return res;
+     }
+ 
+     return res;
+ }
+ 
+-#endif
++
++unsigned int LzmaDecode2(const Byte* prop_data, unsigned int prop_size, ELzmaStatus* status, ISzAlloc* alloc,
++                LZMA_STREAM_S* in_stream, LZMA_STREAM_S* out_stream, unsigned int uncompress_len, unsigned int compress_len)
++{
++    CLzmaDec p;
++    SRes res;
++    Byte* in_buf = HI_NULL;
++    Byte* out_buf = HI_NULL;
++    unsigned int dic_size = compress_len;
++
++    LzmaDec_Construct(&p);
++
++    res = LzmaDec_AllocateProbs(&p, prop_data, prop_size, alloc);
++
++    if (0 != res)
++    {
++        return SZ_ERROR_MEM;
++    }
++
++    LzmaDec_Init(&p);
++
++    in_buf = IAlloc_Alloc(alloc, IN_BUF_SIZE);
++
++    if (HI_NULL == in_buf)
++    {
++        return SZ_ERROR_MEM;
++    }
++
++    out_buf = IAlloc_Alloc(alloc, OUT_BUF_SIZE);
++
++    if (HI_NULL == out_buf)
++    {
++        IAlloc_Free(alloc, in_buf);
++        in_buf = HI_NULL;
++        return SZ_ERROR_MEM;
++    }
++
++    (hi_void)memset_s(in_buf, IN_BUF_SIZE, 0, IN_BUF_SIZE, (uintptr_t)in_buf ^ IN_BUF_SIZE ^ 0 ^ IN_BUF_SIZE);
++    (hi_void)memset_s(out_buf, OUT_BUF_SIZE, 0, OUT_BUF_SIZE, (uintptr_t)out_buf ^ OUT_BUF_SIZE ^ 0 ^ OUT_BUF_SIZE);
++
++    if (p.prop.dicSize <= compress_len)
++    {
++        dic_size = p.prop.dicSize;
++    }
++
++    p.dic = IAlloc_Alloc(alloc, dic_size);
++
++    if (HI_NULL == p.dic)
++    {
++        IAlloc_Free(alloc, in_buf);
++        in_buf = HI_NULL;
++
++        IAlloc_Free(alloc, out_buf);
++        out_buf = HI_NULL;
++
++        return SZ_ERROR_MEM;
++    }
++
++    p.dicBufSize = dic_size;
++
++    res = Decode2(&p, in_buf, in_stream, out_buf, out_stream, uncompress_len, compress_len, status);
++
++    if ((res == SZ_OK) && (*status == LZMA_STATUS_NEEDS_MORE_INPUT))
++    {
++        res = SZ_ERROR_INPUT_EOF;
++    }
++
++    IAlloc_Free(alloc, in_buf);
++    in_buf = HI_NULL;
++
++    IAlloc_Free(alloc, out_buf);
++    out_buf = HI_NULL;
++
++    IAlloc_Free(alloc, p.dic);
++    p.dic = HI_NULL;
++
++    LzmaDec_FreeProbs(&p, alloc);
++
++    return res;
++}
++
++
++SRes Decode2(CLzmaDec* state, Byte* in_buf, LZMA_STREAM_S* in_stream, Byte* out_buf, LZMA_STREAM_S* out_stream,
++             unsigned int uncompress_len, unsigned int compress_len, ELzmaStatus* status)
++{
++    int there_is_size = (compress_len != (unsigned int) - 1);
++    size_t in_pos = 0, in_size = 0, out_pos = 0;
++    unsigned int in_offset = in_stream->offset;
++    unsigned int out_offset = out_stream->offset;
++
++    LzmaDec_Init(state);
++
++    for (;;)
++    {
++        if (in_pos == in_size)
++        {
++            in_size = (uncompress_len > IN_BUF_SIZE) ? IN_BUF_SIZE : uncompress_len;
++            RINOK(in_stream->func(in_offset, in_buf, in_size));
++            RINOK(in_stream->func(in_offset, in_buf, 1));       /* Make sure the readings are correct. */
++            uncompress_len -= in_size;
++            in_pos = 0;
++        }
++
++        {
++            SRes res;
++            size_t in_processed = in_size - in_pos;
++            size_t out_processed = OUT_BUF_SIZE - out_pos;
++
++            ELzmaFinishMode finish_mode = LZMA_FINISH_ANY;
++
++            if (there_is_size && out_processed > compress_len)
++            {
++                out_processed = (size_t)compress_len;
++                finish_mode = LZMA_FINISH_END;
++            }
++
++            res = LzmaDec_DecodeToBuf(state, out_buf + out_pos, &out_processed,
++                                      in_buf + in_pos, &in_processed, finish_mode, status);
++
++            in_pos += in_processed;
++            out_pos += out_processed;
++            compress_len -= out_processed;
++
++            /* Misjudgment is required. */
++            if (out_stream->func(out_offset, out_buf, out_processed) != out_processed)
++            {
++                return SZ_ERROR_WRITE;
++            }
++
++            in_offset += in_processed;
++            out_offset += out_processed;
++
++            out_pos = 0;
++
++            if (res != SZ_OK || (there_is_size && compress_len == 0))
++            {
++                return res;
++            }
++
++            if (in_processed == 0 && out_processed == 0)
++            {
++                if (there_is_size || *status != LZMA_STATUS_FINISHED_WITH_MARK)
++                {
++                    return SZ_ERROR_DATA;
++                }
++
++                return res;
++            }
++        }
++    }
++}
++
+diff -Nur u-boot-v2019.07/lib/lzma/LzmaTools.h u-boot-v2019.07_ok/lib/lzma/LzmaTools.h
+--- u-boot-v2019.07/lib/lzma/LzmaTools.h	2020-05-30 23:14:30.920000000 +0800
++++ u-boot-v2019.07_ok/lib/lzma/LzmaTools.h	2020-05-30 12:06:17.000000000 +0800
+@@ -11,8 +11,22 @@
+ #ifndef __LZMA_TOOL_H__
+ #define __LZMA_TOOL_H__
+ 
+-#include <lzma/LzmaTypes.h>
+ 
+-extern int lzmaBuffToBuffDecompress (unsigned char *outStream, SizeT *uncompressedSize,
+-			      unsigned char *inStream,  SizeT  length);
++/* The return value of the function is the actual read/write length. Note that the return value is not success/fail */
++typedef unsigned int (*LZMA_STREAM_FCT)(unsigned int offset, unsigned char* buffer, unsigned int size);
++
++typedef struct
++{
++    unsigned int offset;
++    LZMA_STREAM_FCT func;
++} LZMA_STREAM_S;
++
++extern int lzmaBuffToBuffDecompress (unsigned char* outStream, unsigned int* uncompressedSize,
++                                     unsigned char* inStream, unsigned int length, ISzAlloc* alloc);
++
++extern unsigned int LzmaDecode2(const Byte* prop_data, unsigned int prop_size, ELzmaStatus* status,
++	                                   ISzAlloc* alloc, LZMA_STREAM_S* in_stream, LZMA_STREAM_S* out_stream,
++	                                   unsigned int uncompress_len, unsigned int compress_len);
++
+ #endif
++
+Binary files u-boot-v2019.07/lib/lzma/LzmaTools.o and u-boot-v2019.07_ok/lib/lzma/LzmaTools.o differ
+diff -Nur u-boot-v2019.07/lib/lzma/Types.h u-boot-v2019.07_ok/lib/lzma/Types.h
+--- u-boot-v2019.07/lib/lzma/Types.h	2020-05-30 23:14:30.920000000 +0800
++++ u-boot-v2019.07_ok/lib/lzma/Types.h	2020-05-30 12:06:17.000000000 +0800
+@@ -4,12 +4,6 @@
+ #ifndef __7Z_TYPES_H
+ #define __7Z_TYPES_H
+ 
+-#include <stddef.h>
+-
+-#ifdef _WIN32
+-#include <windows.h>
+-#endif
+-
+ #define SZ_OK 0
+ 
+ #define SZ_ERROR_DATA 1
+@@ -28,16 +22,13 @@
+ #define SZ_ERROR_ARCHIVE 16
+ #define SZ_ERROR_NO_ARCHIVE 17
+ 
+-typedef int SRes;
++typedef unsigned int SRes;
++typedef int          ptrdiff_t;
+ 
+-#ifdef _WIN32
+-typedef DWORD WRes;
+-#else
+ typedef int WRes;
+-#endif
+ 
+ #ifndef RINOK
+-#define RINOK(x) { int __result__ = (x); if (__result__ != 0) return __result__; }
++#define RINOK(x) {unsigned int __result__ = (x); if (__result__ != 0) return __result__; }
+ #endif
+ 
+ typedef unsigned char Byte;
+@@ -74,6 +65,10 @@
+ 
+ #endif
+ 
++#ifdef USE_FOTA
++typedef unsigned int size_t;
++#endif
++
+ #ifdef _LZMA_NO_SYSTEM_SIZE_T
+ typedef UInt32 SizeT;
+ #else
+@@ -118,19 +113,19 @@
+ 
+ typedef struct
+ {
+-  SRes (*Read)(void *p, void *buf, size_t *size);
++    SRes (*Read)(void* p, void* buf, size_t* size);
+     /* if (input(*size) != 0 && output(*size) == 0) means end_of_stream.
+        (output(*size) < input(*size)) is allowed */
+ } ISeqInStream;
+ 
+ /* it can return SZ_ERROR_INPUT_EOF */
+-SRes SeqInStream_Read(ISeqInStream *stream, void *buf, size_t size);
+-SRes SeqInStream_Read2(ISeqInStream *stream, void *buf, size_t size, SRes errorType);
++SRes SeqInStream_Read(ISeqInStream* stream, void* buf, size_t size);
++SRes SeqInStream_Read2(ISeqInStream* stream, void* buf, size_t size, SRes errorType);
+ SRes SeqInStream_ReadByte(ISeqInStream *stream, Byte *buf);
+ 
+ typedef struct
+ {
+-  size_t (*Write)(void *p, const void *buf, size_t size);
++    size_t (*Write)(void* p, const void* buf, size_t size);
+     /* Returns: result - the number of actually written bytes.
+        (result < size) means error */
+ } ISeqOutStream;
+@@ -144,30 +139,30 @@
+ 
+ typedef struct
+ {
+-  SRes (*Read)(void *p, void *buf, size_t *size);  /* same as ISeqInStream::Read */
++    SRes (*Read)(void* p, void* buf, size_t* size);  /* same as ISeqInStream::Read */
+   SRes (*Seek)(void *p, Int64 *pos, ESzSeek origin);
+ } ISeekInStream;
+ 
+ typedef struct
+ {
+-  SRes (*Look)(void *p, const void **buf, size_t *size);
++    SRes (*Look)(void* p, const void** buf, size_t* size);
+     /* if (input(*size) != 0 && output(*size) == 0) means end_of_stream.
+        (output(*size) > input(*size)) is not allowed
+        (output(*size) < input(*size)) is allowed */
+-  SRes (*Skip)(void *p, size_t offset);
++    SRes (*Skip)(void* p, size_t offset);
+     /* offset must be <= output(*size) of Look */
+ 
+-  SRes (*Read)(void *p, void *buf, size_t *size);
++    SRes (*Read)(void* p, void* buf, size_t* size);
+     /* reads directly (without buffer). It's same as ISeqInStream::Read */
+   SRes (*Seek)(void *p, Int64 *pos, ESzSeek origin);
+ } ILookInStream;
+ 
+-SRes LookInStream_LookRead(ILookInStream *stream, void *buf, size_t *size);
++SRes LookInStream_LookRead(ILookInStream* stream, void* buf, size_t* size);
+ SRes LookInStream_SeekTo(ILookInStream *stream, UInt64 offset);
+ 
+ /* reads via ILookInStream::Read */
+-SRes LookInStream_Read2(ILookInStream *stream, void *buf, size_t size, SRes errorType);
+-SRes LookInStream_Read(ILookInStream *stream, void *buf, size_t size);
++SRes LookInStream_Read2(ILookInStream* stream, void* buf, size_t size, SRes errorType);
++SRes LookInStream_Read(ILookInStream* stream, void* buf, size_t size);
+ 
+ #define LookToRead_BUF_SIZE (1 << 14)
+ 
+@@ -175,8 +170,8 @@
+ {
+   ILookInStream s;
+   ISeekInStream *realStream;
+-  size_t pos;
+-  size_t size;
++    size_t pos;
++    size_t size;
+   Byte buf[LookToRead_BUF_SIZE];
+ } CLookToRead;
+ 
+@@ -208,27 +203,16 @@
+ 
+ typedef struct
+ {
+-  void *(*Alloc)(void *p, size_t size);
++    void* (*Alloc)(void* p, size_t size);
+   void (*Free)(void *p, void *address); /* address can be 0 */
+ } ISzAlloc;
+ 
+ #define IAlloc_Alloc(p, size) (p)->Alloc((p), size)
+ #define IAlloc_Free(p, a) (p)->Free((p), a)
+ 
+-#ifdef _WIN32
+-
+-#define CHAR_PATH_SEPARATOR '\\'
+-#define WCHAR_PATH_SEPARATOR L'\\'
+-#define STRING_PATH_SEPARATOR "\\"
+-#define WSTRING_PATH_SEPARATOR L"\\"
+-
+-#else
+-
+ #define CHAR_PATH_SEPARATOR '/'
+ #define WCHAR_PATH_SEPARATOR L'/'
+ #define STRING_PATH_SEPARATOR "/"
+ #define WSTRING_PATH_SEPARATOR L"/"
+ 
+ #endif
+-
+-#endif
+diff -Nur u-boot-v2019.07/lib/SConscript u-boot-v2019.07_ok/lib/SConscript
+--- u-boot-v2019.07/lib/SConscript	1970-01-01 08:00:00.000000000 +0800
++++ u-boot-v2019.07_ok/lib/SConscript	2020-05-30 23:05:15.608442200 +0800
+@@ -0,0 +1,9 @@
++import os
++Import('env')
++
++env = env.Clone()
++
++src = [os.path.join('crc32.c'), os.path.join('lzma', 'LzmaDec.c'), os.path.join('lzma', 'LzmaTools.c')]
++objs = env.Object(src)
++objs.sort()
++Return('objs')
+\ No newline at end of file
+diff -Nur u-boot-v2019.07/SConscript u-boot-v2019.07_ok/SConscript
+--- u-boot-v2019.07/SConscript	1970-01-01 08:00:00.000000000 +0800
++++ u-boot-v2019.07_ok/SConscript	2020-05-29 16:04:52.676000000 +0800
+@@ -0,0 +1,34 @@
++#!/usr/bin/env python3
++# coding=utf-8
++
++import os
++from scripts import common_env
++from scripts.mk_prim_xml_step1 import create_file_id_dic
++Import('env')
++Import('env_cfg')
++Import('module')
++
++module_path = env_cfg.get_module_dir(module)
++obj_path = env_cfg.obj_path
++module_libs = env_cfg.get_module_libs(module)
++libs = []
++
++env = env.Clone()
++env_cfg.append_environs(env, module)
++common_env.print_log_env(env, env_cfg.get_module_dir(module))
++
++file_id_dict = None
++file = os.path.join(env_cfg.root, module_path, 'file_id.cfg')
++if not os.path.exists(file):
++    file_id_dict = None
++else:
++    file_id_dict = create_file_id_dic(file)
++
++for lib in module_libs:
++    print('lib_name:',lib)
++    src_path = module_libs[lib]
++    objs = []
++    for src in src_path:
++        objs += env.SConscript(os.path.join(src, 'SConscript'), {'env':env, 'id_dict':file_id_dict}, variant_dir = os.path.join('#', obj_path, module_path, src), duplicate = 0)
++    libs += env.Library(lib,sorted(objs))
++Return('libs')

@@ -1,0 +1,61 @@
+ # Copyright (c) 2020 Huawei Device Co., Ltd.
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #     http://www.apache.org/licenses/LICENSE-2.0
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+
+import("//test/xts/tools/build/suite_lite.gni")
+
+hcpptest_suite("ActsMediaCameraTest") {
+    suite_name = "acts"
+    sources = [
+        "src/ActsMediaCameraTest.cpp",
+    ]
+
+    include_dirs = [
+        "src",
+        "//kernel/liteos_a/kernel/include",
+        "//kernel/liteos_a/kernel/common",
+        "//foundation/multimedia/services/media_lite/camera/src",
+        "//foundation/multimedia/services/media_lite/audio_capture/include",
+        "//foundation/multimedia/services/media_lite/common/include",
+        "//foundation/multimedia/services/media_lite/recorder/include",
+        "//third_party/bounds_checking_function/include",
+        "//third_party/bounds_checking_function/include",
+    ]
+    outdir = rebase_path("$root_out_dir")
+    ldflags = ["-L$outdir"]
+    ldflags += ["-Wl,-rpath-link,$outdir"]
+    ldflags += ["-Wl,-L$outdir"]
+    ldflags += ["-lc"]
+    ldflags += ["-lm"]
+    ldflags += ["-lpthread"]
+    ldflags += ["-ldl"]
+    ldflags += ["-lstdc++"]
+    ldflags += ["-lformat_muxer"]
+    ldflags += ["-live"]
+    ldflags += ["-lmp4"]
+    ldflags += ["-lrecorder_pro"]
+    ldflags += ["-lfileformat"]
+    ldflags += ["-ldtcf"]
+    ldflags += ["-lhitimer"]
+    ldflags += ["-lmedia_common"]
+    ldflags += ["-laudio_capturer"]
+    ldflags += ["-luproc"]
+    ldflags += ["-lcodec"]
+    ldflags += ["-laudio_hw"]
+    deps = [
+        "//third_party/bounds_checking_function:libsec_shared",
+        "//foundation/multimedia/services/media_lite:recorder",
+        "//foundation/multimedia/services/media_lite:camera",
+        "//foundation/multimedia/services/media_lite:audio_capturer",
+    ]
+    cflags = [ "-Wno-error" ]
+}

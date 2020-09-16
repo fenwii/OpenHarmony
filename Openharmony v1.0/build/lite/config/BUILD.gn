@@ -1,0 +1,215 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+config("cpu_arch") {
+    cflags = []
+    if (target_cpu == "cortex-a7") {
+        cflags += [
+            "-march=armv7-a",
+            "-mfloat-abi=softfp"
+        ]
+    } else if (target_cpu == "riscv32") {
+        cflags += [
+            "-mabi=ilp32",
+            "-march=rv32imc"
+        ]
+    }
+    asmflags = cflags
+    cflags_cc = cflags
+    ldflags = cflags
+}
+
+config("language_c") {
+    cflags_c = [
+        "-std=c99"
+    ]
+}
+
+config("language_cpp") {
+    cflags_cc = [
+        "-std=c++11"
+    ]
+}
+
+config("kernel_macros") {
+    if (ohos_kernel_type == "liteos_a") {
+        defines = [
+            "__LITEOS__",
+            "__LITEOS_A__",
+        ]
+    } else if (ohos_kernel_type == "liteos_m") {
+        defines = [
+            "__LITEOS__",
+            "__LITEOS_M__"
+        ]
+    } else if (ohos_kernel_type == "liteos_riscv") {
+        defines = [
+            "__LITEOS__",
+            "__LITEOS_RISCV__"
+        ]
+    } else if (ohos_kernel_type == "linux") {
+        defines = [ "__LINUX__" ]
+    }
+}
+
+config("werror") {
+    cflags = [
+        "-Werror"
+    ]
+    cflags_cc = cflags
+}
+
+config("common") {
+    defines = [ "_XOPEN_SOURCE=700" ]
+    cflags = [
+        "-nostdlib",
+        "-fno-common",
+        "-fno-builtin",
+        "-fno-strict-aliasing",
+    ]
+    cflags_cc = cflags
+    ldflags = [
+        "-lc"
+    ]
+    cflags += [ "-fsigned-char" ]
+}
+
+config("security") {
+    defines = [
+        "_FORTIFY_SOURCE=2"
+    ]
+
+    cflags = [
+        "-fstack-protector-all"
+    ]
+    cflags_cc = cflags
+
+    ldflags = [
+        "-Wl,-z,now",
+        "-Wl,-z,relro",
+        "-Wl,-z,noexecstack"
+    ]
+}
+
+config("exceptions") {
+  cflags_cc = [ "-fexceptions" ]
+  cflags_objcc = cflags_cc
+}
+
+config("no_exceptions") {
+  cflags_cc = [ "-fno-exceptions" ]
+  cflags_objcc = cflags_cc
+  ldflags = cflags_cc
+}
+
+config("stack_protector") {
+    cflags = [ "-fstack-protector-all" ]
+    cflags_cc = cflags
+}
+
+config("static_pie_config") {
+    cflags = [ "-fPIE" ]
+    cflags_cc = cflags
+}
+
+config("shared_library_config") {
+    cflags = [ "-fPIC" ]
+    cflags_cc = cflags
+}
+
+config("pie_executable_config") {
+    ldflags = [ "-pie" ]
+}
+
+config("clang") {
+    include_dirs = [
+        "${ohos_build_compiler_dir}/include/c++/v1",
+        "//prebuilts/lite/sysroot/usr/include/arm-liteos",
+    ]
+
+    cflags = [
+        "--target=arm-liteos",
+        "--sysroot=${ohos_root_path}prebuilts/lite/sysroot"
+    ]
+    cflags_cc = cflags
+    ldflags = cflags
+
+    ldflags += [
+        "-L${ohos_build_compiler_dir}/lib/arm-liteos/c++",
+        "-L${ohos_root_path}prebuilts/lite/sysroot/usr/lib/arm-liteos",
+        "-L${ohos_build_compiler_dir}/lib/clang/9.0.0/lib/arm-liteos",
+        "-L${ohos_build_compiler_dir}/lib/arm-liteos/c++",
+        "-lclang_rt.builtins",
+        "-lc++",
+        "-lc++abi"
+    ]
+}
+
+config("release") {
+    defines = [
+        "OHOS_RELEASE",
+    ]
+    cflags = [
+        "-Oz",
+        "-flto"
+    ]
+    cflags_cc = cflags
+}
+
+config("debug") {
+    defines = [
+        "OHOS_DEBUG",
+    ]
+    cflags = [
+        "-Oz",
+        "-flto"
+    ]
+    cflags_cc = cflags
+}
+
+config("default_link_path") {
+    out_dir = rebase_path(root_build_dir)
+    ldflags = [
+        "-L${out_dir}",
+        "-Wl,-rpath-link=${out_dir}"
+    ]
+}
+
+config("liteos_a") {
+    configs = [
+        ":common",
+        ":werror",
+        "kernel/liteos/cortex_a:default",
+        ":clang",
+        ":cpu_arch",
+        ":security",
+        ":exceptions",
+        ":default_link_path"
+    ]
+
+    if (ohos_build_type == "release") {
+        configs += [ ":release" ]
+    } else if (ohos_build_type == "debug") {
+        configs += [ ":debug" ]
+    }
+}
+
+config("liteos_riscv") {
+    configs = [
+        ":common",
+        ":werror",
+        "kernel/liteos/cortex_m:riscv32",
+        ":cpu_arch",
+        ":default_link_path"
+    ]
+}

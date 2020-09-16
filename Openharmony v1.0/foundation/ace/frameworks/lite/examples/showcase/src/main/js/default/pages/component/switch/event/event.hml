@@ -1,0 +1,106 @@
+<!--
+Copyright (c) 2020 Huawei Device Co., Ltd.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+  <stack style="left:0px;right:0px;width:454px;height:454px;">
+    <list style="left:0px;right:0px;width:454px;height:454px;flex-direction:column">
+      <list-item style="width:454px;height:60px;">
+      </list-item>
+      <list-item style="width:454px;height:80px;">
+          <input type="button" style="margin-left:85px;width:130px;height:60px;" value="返回首页" onclick=backMain>
+          </input>
+          <input type="button" style="margin-left:20px;width:130px;height:60px;" value="返回上级" onclick=backSuperior>
+          </input>
+      </list-item>
+      <list-item class="separatorContainerStyle">
+      </list-item>
+      <list-item style="width:454px;height:50px;">
+          <text style="width:454px;height:50px;margin-left:170px;margin-top:0px;">
+            通用事件
+          </text>
+      </list-item>
+      <list-item class="separatorContainerStyle">
+      </list-item>
+      <list-item style="width:454px;height:227px;">
+        <text style="width:180px;height:50px;margin-left:30px;">
+          点击事件
+        </text>
+        <stack style="width:250px;height:250px;margin-right:20px;">
+          <switch style="width:64px;height:64px;left:80px;top:75px;" onclick=click>
+          </switch>
+          <text style="width:200px;height:50px;left:20px;top:150px;">
+            {{clickValue}}
+          </text>
+        </stack>
+      </list-item>
+      <list-item class="separatorContainerStyle">
+      </list-item>
+      <list-item style="width:454px;height:227px;">
+        <text style="width:180px;height:50px;margin-left:30px;">
+          长按事件
+        </text>
+        <stack style="width:250px;height:250px;margin-right:20px;">
+          <switch style="width:64px;height:64px;left:80px;top:75px;" onlongpress=longpress>
+          </switch>
+          <text style="width:200px;height:50px;left:20px;top:150px;">
+            {{longpressValue}}
+          </text>
+        </stack>
+      </list-item>
+      <list-item class="separatorContainerStyle">
+      </list-item>
+      <list-item style="width:454px;height:227px;">
+        <text style="width:180px;height:50px;margin-left:30px;">
+          swipe事件
+        </text>
+        <stack style="width:250px;height:250px;margin-right:20px;">
+          <switch style="width:64px;height:64px;left:80px;top:75px;" onswipe=swipeEvent>
+          </switch>
+          <text style="width:200px;height:100px;left:20px;top:150px;text-overflow:ellipsis;">
+            {{swipeValue}}
+          </text>
+        </stack>
+      </list-item>
+      <list-item class="separatorContainerStyle">
+      </list-item>
+      <list-item style="width:454px;height:50px;">
+          <text style="width:454px;height:50px;margin-left:170px;margin-top:0px;">
+            特有事件
+          </text>
+      </list-item>
+      <list-item class="separatorContainerStyle">
+      </list-item>
+      <list-item style="width:454px;height:227px;">
+        <stack style="width:190px;height:227px;margin-left:30px;">
+        <text style="width:190px;height:50px;top:95px;">
+          change事件
+        </text>
+        </stack>
+        <stack style="width:350px;height:227px;margin-right:30px;">
+          <text style="width:350px;height:40px;top:30px;">
+            点击状态改变
+          </text>
+          <text style="width:350px;height:40px;top:80px;left:60px;">
+            {{checkedValue}}
+          </text>
+          <switch checked={{checkedValue}} style="width:64px;height:64px;top:130px;left:65px;" onchange=change>
+          </switch>
+        </stack>
+      </list-item>
+      <list-item class="separatorContainerStyle">
+      </list-item>
+      <list-item style="width:454px;height:60px;">
+      </list-item>
+    </list>
+  </stack>

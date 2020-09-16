@@ -1,0 +1,10 @@
+if ARCH_HI35XX
+
+config HI35XX_COMMON
+    bool "Hi35xx common options"
+    select DM
+
+config SYS_VENDOR
+    default "hisilicon"
+
+endif

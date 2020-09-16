@@ -1,0 +1,90 @@
+{
+  "ohos_version": "OpenHarmony 1.0",
+  "board": "hi3861v100",
+  "kernel": "liteos_riscv",
+  "compiler": "gcc",
+  "subsystem": [
+    {
+      "name": "applications",
+      "component": [
+        { "name": "wifi-iot", "dir": "//applications/sample/wifi-iot/app", "features":[] }
+      ]
+    },
+    {
+      "name": "iot_hardware",
+      "component": [
+        { "name": "wifi-iot", "dir": "//base/iot_hardware/frameworks/wifiiot_lite:iothardware", "features":[] }
+      ]
+    },
+    {
+      "name": "hiviewdfx",
+      "component": [
+        { "name": "common_lite", "dir": "//base/hiviewdfx/utils/lite:common_lite", "features":[] },
+        { "name": "hiview_lite", "dir": "//base/hiviewdfx/services/hiview_lite:hiview_lite", "features":[] },
+        { "name": "hilog_lite", "dir": "//base/hiviewdfx/frameworks/hilog_lite/mini:hilog_lite", "features":[] }
+      ]
+    },
+    {
+      "name": "distributedschedule",
+      "component": [
+        { "name": "samgr_lite", "dir": "//foundation/distributedschedule/services/samgr_lite:samgr", "features":[] }
+      ]
+    },
+    {
+      "name": "security",
+      "component": [
+        { "name": "hichainsdk_lite", "dir": "//base/security/frameworks/hichainsdk_lite:hichainsdk", "features":[] }
+      ]
+    },
+    {
+      "name": "startup",
+      "component": [
+        { "name": "bootstrap_lite", "dir": "//base/startup/services/bootstrap_lite/source:bootstrap", "features":[] },
+        { "name": "parameter", "dir": "//base/startup/frameworks/syspara_lite/parameter:parameter", "features":[] },
+        { "name": "token", "dir": "//base/startup/frameworks/syspara_lite/token:token", "features":[] }
+      ]
+    },
+    {
+      "name": "communication",
+      "component": [
+        { "name": "wifi_lite", "dir": "//foundation/communication/frameworks/wifi_lite:wifi", "features":[] },
+        { "name": "softbus_lite", "dir": "//foundation/communication/services/softbus_lite:softbus", "features":[] }
+      ]
+    },
+    {
+      "name": "utils",
+      "component": [
+        { "name": "kv_store", "dir": "//utils/native/lite/kv_store:kv_store", "features":[] },
+        { "name": "file", "dir": "//utils/native/lite/file:file", "features":[] }
+      ]
+    },
+    {
+      "name": "vendor",
+      "component": [
+        { "name": "hi3861_sdk", "dir": "//vendor/hisi/hi3861/hi3861:wifiiot_sdk", "features":[] }
+      ]
+    },
+    {
+      "name": "test",
+      "component": [
+        { "name": "xts_act", "dir": "//test/xts/acts", "features":[] },
+        { "name": "xts_tools", "dir": "//test/xts/tools", "features":[] }
+      ]
+    }
+  ],
+  "vendor_adapter_dir": "//vendor/hisi/hi3861/hi3861_adapter",
+  "third_party_dir": "//vendor/hisi/hi3861/hi3861/third_party",
+  "ohos_product_type":"",
+  "ohos_manufacture":"",
+  "ohos_brand":"",
+  "ohos_market_name":"",
+  "ohos_product_series":"",
+  "ohos_product_model":"",
+  "ohos_software_model":"",
+  "ohos_hardware_model":"",
+  "ohos_hardware_profile":"",
+  "ohos_serial":"",
+  "ohos_bootloader_version":"",
+  "ohos_secure_patch_level":"",
+  "ohos_abi_list":""
+}

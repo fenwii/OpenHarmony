@@ -1,0 +1,7 @@
+http-stress01
+	Verify the http server or the kernel is not down after a http client
+	requests large data via IPv4/IPv6
+
+http-stress02
+	Verify the http server or the kernel is not down after many http
+	clients request data over IPv4/IPv6 asynchronously for a long time

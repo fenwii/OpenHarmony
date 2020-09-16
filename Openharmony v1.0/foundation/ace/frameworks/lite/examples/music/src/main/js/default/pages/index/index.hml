@@ -1,0 +1,54 @@
+<!--
+Copyright (c) 2020 Huawei Device Co., Ltd.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<stack class="container" onswipe="swipeEvent">
+   <div onclick="changePage('close')" class="main">
+       <div class="header" onclick="exitApp">
+           <image class="back" src="common/ic_back.png"></image>
+           <text class="title">音乐</text>
+       </div>
+       <marquee class="musicName" scrollamount="15">{{curMusic.curMusicName}}</marquee>
+       <marquee class="songer" scrollamount="15">{{curMusic.songer}}</marquee>
+       <div class="progress-Wrapper">
+           <text class="playTime">{{curMusic.playTime}}</text>
+           <slider class="progressBar" min="0" max="100" value="{{playProgress}}" onchange="changeProgress"></slider>
+           <text class="allTime">{{curMusic.allTime}}</text>
+       </div>
+       <div class="controlBar">
+           <image class="modeBtn"  onclick="changeMode" src="{{modeImage}}"></image>
+           <image class="previousBtn" onclick="changeSong('previous')"  src="common/ic_music_previous.png"></image>
+           <image class="playBtn" onclick="playMusic"  src="{{playImage}}"></image>
+           <image class="nextBtn" onclick="changeSong('next')" src="common/ic_music_next.png"></image>
+           <image class="listBtn" onclick="changePage" src="common/ic_music_list.png"></image>
+       </div>
+   </div>
+    <div show="{{showMusicList}}" class="list-Wrapper">
+        <text class="listText">播放列表</text>
+        <list ref="musicList" class="musicList">
+            <list-item class="listItem" onclick="clickListItem($idx)" for="{{musicList}}">
+                <div class="space-Wrapper">
+                    <div class="item-Wrapper">
+                        <text class="itemName">
+                            {{$item.name}}
+                        </text>
+                        <text class="itemSonger">
+                            {{$item.songer}}
+                        </text>
+                    </div>
+                </div>
+            </list-item>
+        </list>
+    </div>
+</stack>

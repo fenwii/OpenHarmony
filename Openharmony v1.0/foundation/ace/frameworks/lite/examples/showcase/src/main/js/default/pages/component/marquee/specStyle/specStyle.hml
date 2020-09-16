@@ -1,0 +1,42 @@
+<!--
+Copyright (c) 2020 Huawei Device Co., Ltd.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+    <list class = "list">
+        <list-item style="height:60px;width:454px;">
+        </list-item>
+        <list-item class= "item-title">
+                <input type = "button" style="margin-left:85px;width:130px;height:60px;" onclick = "goHome" value = "首页"/>
+                <input type = "button" style="margin-left:20px;width:130px;height:60px;" onclick = "goPrevious" value = "上一页"/>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-types">
+            <text class = "whole-text">特有样式</text>
+        </list-item>
+        <list-item class="separatorContainerStyle">
+        </list-item>
+        <list-item class = "item-special" style="height:250px;">
+            <div class = "special-div" style="height:250px;">
+                <div class = "special-left-div" style="margin-left:30px;width:160px;height:250px;">
+                    <text class = "text" style="width:150px;height:250px;">scrollamount;color;font-size;font-family</text>
+                </div>
+                <div class = "special-right-div">
+                    <marquee scrollamount=30 style = "width:100px;height:50px;margin-left:100px;margin-top:10px;color:red;font-size:38px;font-family:HYQiHei-65S;">show-abcedfghijklmn</marquee>
+                </div>
+            </div>
+        </list-item>
+        <list-item style="height:80px;width:454px;">
+        </list-item>
+    </list>

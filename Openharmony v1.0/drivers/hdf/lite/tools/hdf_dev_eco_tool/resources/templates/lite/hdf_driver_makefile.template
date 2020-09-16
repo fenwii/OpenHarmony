@@ -1,0 +1,10 @@
+include $(LITEOSTOPDIR)/../../drivers/hdf/lite/lite.mk
+
+MODULE_NAME := hdf${module_lower_case}
+
+LOCAL_INCLUDE := ./include
+LOCAL_INCLUDE += ./src
+
+LOCAL_SRCS += $(wildcard ./src/*.c)
+
+include $(HDF_DRIVER)

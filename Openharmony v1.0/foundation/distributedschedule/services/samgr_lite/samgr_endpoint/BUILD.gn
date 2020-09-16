@@ -1,0 +1,69 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+config("endpoint_public") {
+    include_dirs = [
+        "../samgr/adapter",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/samgr",
+        "//foundation/distributedschedule/interfaces/kits/samgr_lite/registry",
+        "//utils/native/lite/include",
+        "//foundation/communication/interfaces/kits/ipc_lite",
+        "//third_party/bounds_checking_function/include",
+        "//base/security/services/iam_lite/ipc_auth/include",
+        "//kernel/liteos_a/kernel/include/",
+        "//kernel/liteos_a/kernel/common",
+    ]
+}
+
+source_set("endpoint_source") {
+    sources = [
+        "source/client_factory.c",
+        "source/default_client.c",
+        "source/endpoint.c",
+        "source/token_bucket.c"
+    ]
+
+    cflags = [
+        "-fPIC",
+        "-Wall"
+    ]
+
+    if (ohos_kernel_type == "linux") {
+        defines = ["LITE_LINUX_BINDER_IPC"]
+    }
+
+    public_configs = [":endpoint_public"]
+
+    public_deps = [
+        "//third_party/bounds_checking_function:libsec_shared",
+        "//foundation/communication/frameworks/ipc_lite:liteipc_adapter",
+        "//base/hiviewdfx/frameworks/hilog_lite/featured:hilog_shared",
+    ]
+}
+
+source_set("store_source") {
+    sources = [
+        "source/sa_store.c",
+    ]
+
+    cflags = [
+        "-fPIC",
+        "-Wall"
+    ]
+
+    public_configs = [":endpoint_public"]
+
+    public_deps = [
+        "//third_party/bounds_checking_function:libsec_shared",
+    ]
+}

@@ -1,0 +1,75 @@
+/dts-v1/;
+
+#include <config.h>
+
+/ {
+	#address-cells = <1>;
+	#size-cells = <1>;
+	model = "sandbox";
+
+	aliases {
+		i2c0 = &i2c_0;
+		pci0 = &pci;
+		rtc0 = &rtc_0;
+		axi0 = &axi;
+		spi0 = &spi;
+	};
+
+	memory {
+		reg = <0 CONFIG_SYS_SDRAM_SIZE>;
+	};
+
+	cros_ec: cros-ec {
+		reg = <0 0>;
+		u-boot,dm-pre-reloc;
+		compatible = "google,cros-ec-sandbox";
+	};
+
+	dsi_host: dsi_host {
+		compatible = "sandbox,dsi-host";
+		status = "okay";
+	};
+
+	ethrawbus {
+		compatible = "sandbox,eth-raw-bus";
+		skip-localhost = <0>;
+	};
+
+	eth@10002000 {
+		compatible = "sandbox,eth";
+		reg = <0x10002000 0x1000>;
+		fake-host-hwaddr = [00 00 66 44 22 00];
+	};
+
+	i2c_0: i2c@0 {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg = <0 0>;
+		compatible = "sandbox,i2c";
+		clock-frequency = <400000>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_i2c0>;
+	};
+
+	pci: pci-controller {
+		compatible = "sandbox,pci";
+		device_type = "pci";
+		#address-cells = <3>;
+		#size-cells = <2>;
+		ranges = <0x02000000 0 0x10000000 0x10000000 0 0x2000
+				0x01000000 0 0x20000000 0x20000000 0 0x2000>;
+	};
+
+	spi: spi@0 {
+		u-boot,dm-pre-reloc;
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg = <0 0>;
+		compatible = "sandbox,spi";
+		cs-gpios = <0>, <&gpio_a 0>;
+	};
+};
+
+#include "sandbox.dtsi"
+#include "cros-ec-keyboard.dtsi"
+#include "sandbox_pmic.dtsi"

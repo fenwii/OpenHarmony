@@ -1,0 +1,7 @@
+config FS_NFS
+    bool "Enable NFS"
+    default y
+    depends on FS_VFS
+    depends on NET_LWIP_SACK
+    help
+      Answer Y to enable LiteOS support nfs filesystem.

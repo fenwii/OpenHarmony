@@ -1,0 +1,36 @@
+version: "{build}"
+branches:
+  except:
+  - coverity_scan
+  - gh_pages
+skip_tags: true
+
+# Build matrix setup.
+image:
+  - Visual Studio 2017
+configuration:
+  - Debug
+  - Release
+platform:
+  - x64
+  - Win32
+
+environment:
+  matrix:
+    - FEATURE_DEBUGGER: ON
+    - FEATURE_DEBUGGER: OFF
+
+# Steps of a job.
+init:
+  - cmake -version
+before_build:
+  - if "%PLATFORM%"=="Win32" cmake -G"Visual Studio 15 2017" -Bbuild -H. -DFEATURE_DEBUGGER=%FEATURE_DEBUGGER%
+  - if "%PLATFORM%"=="x64" cmake -G"Visual Studio 15 2017 Win64" -Bbuild -H. -DFEATURE_DEBUGGER=%FEATURE_DEBUGGER%
+build:
+  project: build\Jerry.sln
+  parallel: true
+  verbosity: minimal
+
+artifacts:
+  - path: build\bin\$(configuration)\
+    name: JerryScriptBinary

@@ -1,0 +1,64 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/lite/config/component/lite_component.gni")
+
+generate_notice_file("bundle_daemon_lite_notice_file") {
+    module_name = "bundle_daemon_lite"
+    module_source_dir_list = [
+        "//third_party/cJSON",
+        "//third_party/zlib",
+    ]
+}
+
+executable("bundle_daemon") {
+    sources = [
+        "src/main.cpp",
+        "src/bundle_daemon.cpp",
+        "src/bundle_daemon_handler.cpp",
+        "src/bundle_file_utils.cpp",
+        "src/bundlems_client.cpp",
+        "../src/extractor_util.cpp",
+        "../src/zip_file.cpp",
+    ]
+
+    cflags = [
+        "-Wall",
+        "-Wno-format",
+    ]
+    cflags_cc = cflags
+
+    ldflags = [
+        "-lstdc++",
+        "-Wl,-Map=bundle_daemon_tool.map",
+    ]
+
+    deps = [
+        "//base/hiviewdfx/frameworks/hilog_lite/featured:hilog_shared",
+        "//foundation/distributedschedule/services/samgr_lite/samgr:samgr",
+        "//third_party/zlib:zlib_shared",
+    ]
+
+    include_dirs = [
+        "include",
+        "//foundation/appexecfwk/interfaces/innerkits/bundlemgr_lite",
+        "//foundation/appexecfwk/utils/bundle_lite",
+        "//foundation/appexecfwk/services/bundlemgr_lite/include",
+        "//foundation/distributedschedule/interfaces/innerkits/samgr_lite/samgr",
+        "//foundation/distributedschedule/interfaces/innerkits/samgr_lite/registry",
+        "//third_party/zlib/contrib/minizip",
+        "//kernel/liteos-a/kernel/include",
+        "//kernel/liteos-a/kernel/common",
+        "//utils/native/lite/include",
+        "//utils/native/lite/memory",
+    ]
+}

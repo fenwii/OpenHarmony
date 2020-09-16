@@ -1,0 +1,49 @@
+config PLATFORM
+    string
+    default "hi3516dv300"     if PLATFORM_HI3516DV300
+    default "hi3518ev300"     if PLATFORM_HI3518EV300
+
+choice
+    prompt "Board"
+    default PLATFORM_HI3516DV300
+    help
+      IPC has several chips:
+      hi3516dv300
+      hi3518ev300
+
+config PLATFORM_HI3516DV300
+    bool "hi3516dv300"
+    select ARCH_CORTEX_A7
+
+config PLATFORM_HI3518EV300
+    bool "hi3518ev300"
+    select ARCH_CORTEX_A7
+
+endchoice
+
+config TEE_ENABLE
+    bool "ENABLE TEE"
+    default n
+    depends on PLATFORM_HI3516DV300
+    help
+        ENABLE teeos in platform
+
+choice
+    prompt "IRQCHIP"
+    default PLATFORM_BSP_GIC_V2
+    help
+      Interrupt Controller.
+
+config PLATFORM_BSP_GIC_V2
+    bool "GIC Version 2"
+    help
+      This GIC(General Interrupt Controller) version 2 driver is compatatble with
+      GIC version 1 and version 2.
+
+config PLATFORM_BSP_GIC_V3
+    bool "GIC Version 3"
+    depends on ARCH_ARM_V8A || ARCH_ARM_V8R
+    help
+      General Interrupt Controller version 3.
+
+endchoice

@@ -1,0 +1,28 @@
+{
+    "description": "Config for bundlemgr test cases",
+    "environment": [
+        {
+            "type": "device",
+            "label": "ipcamera"
+        }
+    ],
+    "kits": [
+        {
+            "type": "MountKit",
+            "server": "NfsServer",
+            "mount": [
+                {
+                    "source": "testcases/appexecfwk",
+                    "target": "/test_root/appexecfwk"
+                },{
+                    "source": "resource/appexecfwk",
+                    "target": "/test_root/appexecfwk"
+                }
+            ]
+        }
+    ],
+    "driver": {
+        "type": "CppTestLite",
+        "execute": "/test_root/appexecfwk/ActsBundleMgrTest.bin"
+    }
+}

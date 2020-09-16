@@ -1,0 +1,44 @@
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/lite/config/component/lite_component.gni")
+
+sample_sources = [
+    "src/wpa_cli_sample.c",
+]
+
+sample_include_dirs = [
+    "//third_party/wpa_supplicant/wpa_supplicant-2.9/src/",
+    "//third_party/bounds_checking_function:libsec_shared/include/"
+]
+
+executable("wpa_cli_exe") {
+    output_name = "wpa_cli"
+    sources = sample_sources
+    include_dirs = sample_include_dirs
+    out_dir = rebase_path(root_build_dir)
+    deps = [
+        "//third_party/wpa_supplicant/wpa_supplicant-2.9:wpa_supplicant",
+        "//third_party/bounds_checking_function:libsec_shared"
+    ]
+    ldflags = [
+       "-L${out_dir}",
+       "-lwpa_client"
+    ]
+}
+
+group("wpa_cli_sample") {
+    deps = [
+        ":wpa_cli_exe",
+    ]
+}

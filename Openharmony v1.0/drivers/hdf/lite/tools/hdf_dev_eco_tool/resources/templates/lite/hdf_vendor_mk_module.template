@@ -1,0 +1,4 @@
+ifeq ($(LOSCFG_DRIVERS_HDF_${module_upper_case}), y)
+    LITEOS_BASELIB += -lhdf${module_lower_case}
+    LIB_SUBDIRS    += $(LITEOSTOPDIR)/../../vendor/${vendor_lower_case}/${drivers_path}/${module_lower_case}/driver
+endif

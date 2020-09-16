@@ -1,0 +1,55 @@
+<!--
+/*
+ * Copyright (c) 2020 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ -->
+<list style="top:67;left:67;width:321px;height:350px;">
+    <list-item style="width:321px;height:300px;">
+        <div style="width: 321px;height:300px;background-color:#000000;flex-direction:column;align-items:flex-start;">
+            <text style="width:321px;height:40px; color:#dcdcdc;">{{location}}</text>
+            <div class="line-div"></div>
+            <div class="info-div-width-height" style="margin-top:10px;">
+                <text class="gas-name">CO</text>
+                <text class="gas-value">{{airData[0]}}</text>
+            </div>
+             <div class="info-div-width-height" style="margin-top:10px;">
+                <text class="gas-name">NO2</text>
+                <text class="gas-value">{{airData[1]}}</text>
+            </div>
+             <div class="info-div-width-height" style="margin-top:10px;">
+                <text class="gas-name">PM10</text>
+                <text class="gas-value">{{airData[2]}}</text>
+             </div>
+             <div class="info-div-width-height" style="margin-top:10px;">
+                <text class="gas-name">PM2.5</text>
+                <text class="gas-value">{{airData[3]}}</text>
+            </div>
+             <div class="info-div-width-height" style="margin-top:10px;">
+                <text class="gas-name">SO2</text>
+                <text class="gas-value">{{airData[4]}}</text>
+            </div>
+        </div>
+    </list-item>
+    <list-item style="width:321px;height:220px;">
+        <div style="width:321px;height:220px;background-color:#000000;flex-direction:column;align-items:flex-start;">
+            <text class="config-info">{{updated}}:{{udpateStatus}}</text>
+            <text class="config-info">{{dataSourceName}}:{{dataSource}}</text>
+            <div class="line-div"></div>
+            <div style="width:321px; height:55px;align-items:center; margin-top:20px;">
+                <input type="button" value="History" style="border-width: 3px;margin-left:10px; border-color: #90ee90;width:146px;height:50;" onclick="openHistroy" />
+                <input type="button" value="Close" style="border-width: 3px;margin-left:5px; border-color:#ff0000;width:146px;height:50;"  onclick="backMain" />
+            </div>
+        </div>
+    </list-item>
+</list>
