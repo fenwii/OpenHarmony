@@ -1,0 +1,188 @@
+/*
+ * Copyright (c) [2019] Huawei Technologies Co.,Ltd.All rights reserved.
+ *
+ * OpenArkCompiler is licensed under the Mulan PSL v1.
+ * You can use this software according to the terms and conditions of the Mulan PSL v1.
+ * You may obtain a copy of Mulan PSL v1 at:
+ *
+ *     http://license.coscl.org.cn/MulanPSL
+ *
+ * THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT, MERCHANTABILITY OR
+ * FIT FOR A PARTICULAR PURPOSE.
+ * See the Mulan PSL v1 for more details.
+ */
+// Stmt & Notmmpl
+  // storage access opcodes
+  OPCODE(dassign, DassignNode, (OPCODEISSTMT | OPCODENOTMMPL | OPCODEHASSSADEF), 8)
+  OPCODE(maydassign, DassignNode, (OPCODEISSTMT | OPCODENOTMMPL | OPCODEHASSSADEF), 8)
+  OPCODE(iassign, IassignNode, (OPCODEISSTMT | OPCODENOTMMPL | OPCODEHASSSADEF), 12)
+  // hierarchical control flow opcodes
+  OPCODE(block, BlockNode, (OPCODEISSTMT | OPCODENOTMMPL), 0)
+  OPCODE(doloop, DoloopNode, (OPCODEISSTMT | OPCODENOTMMPL), 0)
+  OPCODE(dowhile, WhileStmtNode, (OPCODEISSTMT | OPCODENOTMMPL), 0)
+  OPCODE(if, IfStmtNode, (OPCODEISSTMT | OPCODENOTMMPL), 0)
+  OPCODE(while, WhileStmtNode, (OPCODEISSTMT | OPCODENOTMMPL), 0)
+  OPCODE(switch, SwitchNode, (OPCODEISSTMT | OPCODENOTMMPL), 8)
+  OPCODE(multiway, MultiwayNode, (OPCODEISSTMT | OPCODENOTMMPL), 8)
+  OPCODE(foreachelem, ForeachelemNode, (OPCODEISSTMT | OPCODENOTMMPL), 0)
+  // other opcodes
+  OPCODE(comment, CommentNode, (OPCODEISSTMT | OPCODENOTMMPL), 0)
+  OPCODE(eval, UnaryStmtNode, (OPCODEISSTMT | OPCODENOTMMPL), 8)
+  OPCODE(free, UnaryStmtNode, (OPCODEISSTMT | OPCODENOTMMPL), 8)
+  OPCODE(assertge, BinaryStmtNode, (OPCODEISSTMT | OPCODENOTMMPL), 8)
+  OPCODE(assertlt, BinaryStmtNode, (OPCODEISSTMT | OPCODENOTMMPL), 8)
+  OPCODE(assertnonnull, UnaryStmtNode, (OPCODEISSTMT | OPCODENOTMMPL), 8)
+// Expr & Notmmpl
+  // storage access opcodes
+  OPCODE(dread, AddrofNode, (OPCODENOTMMPL | OPCODEHASSSAUSE), 12)
+  OPCODE(iread, IreadNode, (OPCODENOTMMPL | OPCODEHASSSAUSE), 12)
+  // leaf opcodes
+  OPCODE(addrof, AddrofNode, OPCODENOTMMPL, 12)
+  OPCODE(iaddrof, IreadNode, OPCODENOTMMPL, 12)
+  OPCODE(sizeoftype, SizeoftypeNode, OPCODENOTMMPL, 8)
+  OPCODE(fieldsdist, FieldsDistNode, OPCODENOTMMPL, 8)
+  // N-ary expression opcodes
+  OPCODE(array, ArrayNode, (OPCODEISVARSIZE | OPCODENOTMMPL | OPCODEMAYTHROWEXCEPTION), 8)
+// Stmt
+  // storage access opcodes
+  OPCODE(iassignoff, IassignoffNode, OPCODEISSTMT, 8)
+  OPCODE(iassignfpoff, IassignFPoffNode, OPCODEISSTMT, 8)
+  OPCODE(regassign, RegassignNode, (OPCODEISSTMT | OPCODEHASSSADEF), 8)
+  // flat control flow opcodes
+  OPCODE(goto, GotoNode, OPCODEISSTMT, 8)
+  OPCODE(brfalse, CondGotoNode, OPCODEISSTMT, 8)
+  OPCODE(brtrue, CondGotoNode, OPCODEISSTMT, 8)
+  OPCODE(return, NaryStmtNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE), 0)
+  OPCODE(rangegoto, RangegotoNode, OPCODEISSTMT, 8)
+  // call opcodes
+  OPCODE(call, CallNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL), 8)
+  OPCODE(virtualcall, CallNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL), 8)
+  OPCODE(superclasscall, CallNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL), 8)
+  OPCODE(interfacecall, CallNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL), 8)
+  OPCODE(customcall, CallNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL), 8)
+  OPCODE(polymorphiccall, CallNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL), 12)
+  OPCODE(icall, IcallNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL), 8)
+  OPCODE(interfaceicall, CallNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL), 8)
+  OPCODE(virtualicall, CallNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL), 8)
+  OPCODE(intrinsiccall, IntrinsiccallNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL), 8)
+  OPCODE(intrinsiccallwithtype, IntrinsiccallNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL), 12)
+  OPCODE(xintrinsiccall, IntrinsiccallNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL), 8)
+  OPCODE(callassigned, CallNode,  (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL | OPCODEISCALLASSIGNED), 0)
+  OPCODE(virtualcallassigned, CallNode,  (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL | OPCODEISCALLASSIGNED), 0)
+  OPCODE(superclasscallassigned, CallNode,  (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL | OPCODEISCALLASSIGNED), 0)
+  OPCODE(interfacecallassigned, CallNode,  (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL | OPCODEISCALLASSIGNED), 0)
+  OPCODE(customcallassigned, CallNode,  (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL | OPCODEISCALLASSIGNED), 0)
+  OPCODE(polymorphiccallassigned, CallNode,  (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL | OPCODEISCALLASSIGNED), 0)
+  OPCODE(icallassigned, IcallNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL | OPCODEISCALLASSIGNED), 0)
+  OPCODE(interfaceicallassigned, CallNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL | OPCODEISCALLASSIGNED), 0)
+  OPCODE(virtualicallassigned, CallNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL | OPCODEISCALLASSIGNED), 0)
+  OPCODE(intrinsiccallassigned, IntrinsiccallNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL | OPCODEISCALLASSIGNED), 0)
+  OPCODE(intrinsiccallwithtypeassigned, IntrinsiccallNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL | OPCODEISCALLASSIGNED), 0)
+  OPCODE(xintrinsiccallassigned, IntrinsiccallNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL | OPCODEISCALLASSIGNED), 0)
+  // call with generic instantiation opcodes
+  OPCODE(callinstant, CallinstantNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL), 0)
+  OPCODE(callinstantassigned, CallinstantNode,  (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL | OPCODEISCALLASSIGNED), 0)
+  OPCODE(virtualcallinstant, CallinstantNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL), 0)
+  OPCODE(virtualcallinstantassigned, CallinstantNode,  (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL | OPCODEISCALLASSIGNED), 0)
+  OPCODE(superclasscallinstant, CallinstantNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL), 0)
+  OPCODE(superclasscallinstantassigned, CallinstantNode,  (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL | OPCODEISCALLASSIGNED), 0)
+  OPCODE(interfacecallinstant, CallinstantNode, (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL), 0)
+  OPCODE(interfacecallinstantassigned, CallinstantNode,  (OPCODEISSTMT | OPCODEISVARSIZE | OPCODEHASSSAUSE | OPCODEHASSSADEF | OPCODEISCALL | OPCODEISCALLASSIGNED), 0)
+  // exception handling
+  OPCODE(jstry, JsTryNode, OPCODEISSTMT, 8)
+  OPCODE(try, TryNode, (OPCODEISSTMT | OPCODENOTMMPL), 8)
+
+  OPCODE(throw, UnaryStmtNode, (OPCODEISSTMT | OPCODEHASSSAUSE), 0)
+  OPCODE(jscatch, BaseNode, OPCODEISSTMT, 4)
+  OPCODE(catch, CatchNode, OPCODEISSTMT, 8)
+
+  OPCODE(finally, StmtNode, OPCODEISSTMT, 6)
+  OPCODE(cleanuptry, StmtNode, OPCODEISSTMT, 6)
+  OPCODE(endtry, StmtNode, OPCODEISSTMT, 6)
+  OPCODE(gosub, GotoNode, (OPCODEISSTMT | OPCODEHASSSAUSE), 8)
+  OPCODE(retsub, StmtNode, (OPCODEISSTMT | OPCODEHASSSAUSE), 6)
+  // synchronizaion
+  OPCODE(syncenter, NaryStmtNode, (OPCODEISSTMT | OPCODEHASSSADEF | OPCODEHASSSAUSE), 0)
+  OPCODE(syncexit, NaryStmtNode, (OPCODEISSTMT | OPCODEHASSSADEF | OPCODEHASSSAUSE), 0)
+  OPCODE(decref, UnaryStmtNode, (OPCODEISSTMT | OPCODEHASSSAUSE | OPCODENOTMMPL), 0)
+  OPCODE(incref, UnaryStmtNode, (OPCODEISSTMT | OPCODEHASSSAUSE | OPCODENOTMMPL), 0)
+  OPCODE(decrefreset, UnaryStmtNode, (OPCODEISSTMT | OPCODEHASSSAUSE | OPCODENOTMMPL), 0)
+  // barriers
+  OPCODE(membaracquire, StmtNode, OPCODEISSTMT, 6)
+  OPCODE(membarrelease, StmtNode, OPCODEISSTMT, 6)
+  OPCODE(membarstoreload, StmtNode, OPCODEISSTMT, 6)
+  OPCODE(membarstorestore, StmtNode, OPCODEISSTMT, 6)
+  // other opcodes
+  OPCODE(label, LabelNode, OPCODEISSTMT, 8)
+// Expr
+  // storage access opcodes
+  OPCODE(ireadoff, IreadoffNode, 0, 8)
+  OPCODE(ireadfpoff, IreadFPoffNode, 0, 8)
+  OPCODE(regread, RegreadNode, OPCODEHASSSAUSE, 8)
+  // leaf opcodes
+  OPCODE(addroffunc, AddroffuncNode, 0, 8)
+  OPCODE(addroflabel, AddroflabelNode, 0, 8)
+  OPCODE(constval, ConstvalNode, 0, 8)
+  OPCODE(conststr, ConststrNode, OPCODENOTMMPL, 8)
+  OPCODE(conststr16, Conststr16Node, OPCODENOTMMPL, 8)
+  // type conversion expression opcodes
+  OPCODE(ceil, TypeCvtNode, OPCODEISTYPECVT, 8)
+  OPCODE(cvt, TypeCvtNode, OPCODEISTYPECVT, 8)
+  OPCODE(floor, TypeCvtNode, OPCODEISTYPECVT, 8)
+  OPCODE(retype, RetypeNode, OPCODEISTYPECVT, 8)
+  OPCODE(round, TypeCvtNode, OPCODEISTYPECVT, 8)
+  OPCODE(trunc, TypeCvtNode, OPCODEISTYPECVT, 8)
+  // unary expression opcodes
+  OPCODE(abs, UnaryNode, 0, 0)
+  OPCODE(bnot, UnaryNode, 0, 0)
+  OPCODE(lnot, UnaryNode, 0, 0)
+  OPCODE(neg, UnaryNode, 0, 0)
+  OPCODE(recip, UnaryNode, 0, 0)
+  OPCODE(sqrt, UnaryNode, 0, 0)
+  OPCODE(sext, ExtractbitsNode, 0, 8)
+  OPCODE(zext, ExtractbitsNode, 0, 8)
+  OPCODE(alloca, UnaryNode, OPCODENOTPURE, 0)
+  OPCODE(malloc, UnaryNode, OPCODENOTPURE, 0)
+  OPCODE(gcmalloc, GCMallocNode, OPCODENOTPURE, 8)
+  OPCODE(gcpermalloc, GCMallocNode, OPCODENOTPURE, 8)
+  OPCODE(gcmallocjarray, JarrayMallocNode, OPCODENOTPURE, 12)
+  OPCODE(gcpermallocjarray, JarrayMallocNode, OPCODENOTPURE, 12)
+  OPCODE(resolveinterfacefunc, ResolveFuncNode, 0, 8)
+  OPCODE(resolvevirtualfunc, ResolveFuncNode, 0, 8)
+  // binary expression opcodes
+  OPCODE(add, BinaryNode, 0, 0)
+  OPCODE(sub, BinaryNode, 0, 0)
+  OPCODE(mul, BinaryNode, 0, 0)
+  OPCODE(div, BinaryNode, OPCODEMAYTHROWEXCEPTION, 0)
+  OPCODE(rem, BinaryNode, OPCODEMAYTHROWEXCEPTION, 0)
+  OPCODE(ashr, BinaryNode, 0, 0)
+  OPCODE(lshr, BinaryNode, 0, 0)
+  OPCODE(shl, BinaryNode, 0, 0)
+  OPCODE(max, BinaryNode, 0, 0)
+  OPCODE(min, BinaryNode, 0, 0)
+  OPCODE(band, BinaryNode, 0, 0)
+  OPCODE(bior, BinaryNode, 0, 0)
+  OPCODE(bxor, BinaryNode, 0, 0)
+  OPCODE(CG_array_elem_add, BinaryNode, 0, 0)
+  OPCODE(eq, CompareNode, OPCODEISCOMPARE, 8)
+  OPCODE(ge, CompareNode, OPCODEISCOMPARE, 8)
+  OPCODE(gt, CompareNode, OPCODEISCOMPARE, 8)
+  OPCODE(le, CompareNode, OPCODEISCOMPARE, 8)
+  OPCODE(lt, CompareNode, OPCODEISCOMPARE, 8)
+  OPCODE(ne, CompareNode, OPCODEISCOMPARE, 8)
+  OPCODE(cmp, CompareNode, OPCODEISCOMPARE, 8)
+  OPCODE(cmpl, CompareNode, OPCODEISCOMPARE, 8)
+  OPCODE(cmpg, CompareNode, OPCODEISCOMPARE, 8)
+  OPCODE(land, BinaryNode, 0, 0)
+  OPCODE(lior, BinaryNode, 0, 0)
+  OPCODE(cand, BinaryNode, OPCODENOTMMPL, 0)
+  OPCODE(cior, BinaryNode, OPCODENOTMMPL, 0)
+  // ternary expression opcodes
+  OPCODE(select, TernaryNode, 0, 0)
+  // N-ary expression opcodes
+  OPCODE(intrinsicop, IntrinsicopNode, OPCODEISVARSIZE, 8)
+  OPCODE(intrinsicopwithtype, IntrinsicopNode, OPCODEISVARSIZE, 12)
+  // Other expression opcodes
+  OPCODE(extractbits, ExtractbitsNode, 0, 8)
+  OPCODE(depositbits, DepositbitsNode, 0, 8)

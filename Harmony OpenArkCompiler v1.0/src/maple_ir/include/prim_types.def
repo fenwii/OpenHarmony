@@ -1,0 +1,249 @@
+/*
+ * Copyright (c) [2019] Huawei Technologies Co.,Ltd.All rights reserved.
+ *
+ * OpenArkCompiler is licensed under the Mulan PSL v1.
+ * You can use this software according to the terms and conditions of the Mulan PSL v1.
+ * You may obtain a copy of Mulan PSL v1 at:
+ *
+ *     http://license.coscl.org.cn/MulanPSL
+ *
+ * THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT, MERCHANTABILITY OR
+ * FIT FOR A PARTICULAR PURPOSE.
+ * See the Mulan PSL v1 for more details.
+ */
+#ifdef LOAD_ALGO_PRIMARY_TYPE
+#undef LOAD_ALGO_PRIMARY_TYPE
+/* NOTE: this ordering needs to be in sync with ptypesizetable[] in
+         maplevm/src/vmfunc.cpp */
+  PRIMTYPE(void)
+  PRIMTYPE(i8)
+  PRIMTYPE(i16)
+  PRIMTYPE(i32)
+  PRIMTYPE(i64)
+  PRIMTYPE(u8)
+  PRIMTYPE(u16)
+  PRIMTYPE(u32)
+  PRIMTYPE(u64)
+  PRIMTYPE(u1)
+  PRIMTYPE(ptr)
+  PRIMTYPE(ref)
+  PRIMTYPE(a32)
+  PRIMTYPE(a64)
+  PRIMTYPE(f32)
+  PRIMTYPE(f64)
+  PRIMTYPE(f128)
+  PRIMTYPE(c64)
+  PRIMTYPE(c128)
+#ifdef DYNAMICLANG
+  PRIMTYPE(simplestr)
+  PRIMTYPE(simpleobj)
+  PRIMTYPE(dynany)
+  PRIMTYPE(dynundef)
+  PRIMTYPE(dynnull)
+  PRIMTYPE(dynbool)
+  PRIMTYPE(dyni32)
+  PRIMTYPE(dynstr)
+  PRIMTYPE(dynobj)
+  PRIMTYPE(dynf64)
+  PRIMTYPE(dynf32)
+  PRIMTYPE(dynnone)
+#endif
+  PRIMTYPE(constStr)
+  PRIMTYPE(gen)
+  PRIMTYPE(agg)
+  PRIMTYPE(unknown)
+#endif // ~LOAD_ALGO_PRIMARY_TYPE
+
+
+#ifdef LOAD_PRIMARY_TYPE_PROPERTY
+#undef LOAD_PRIMARY_TYPE_PROPERTY
+
+static const PrimitiveTypeProperty PTProperty_begin = {
+  /*type=*/PTY_begin, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_void = {
+  /*type=*/PTY_void, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_i8 = {
+  /*type=*/PTY_i8, /*isInteger=*/true, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_i16 = {
+  /*type=*/PTY_i16, /*isInteger=*/true, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_i32 = {
+  /*type=*/PTY_i32, /*isInteger=*/true, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_i64 = {
+  /*type=*/PTY_i64, /*isInteger=*/true, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_u8 = {
+  /*type=*/PTY_u8, /*isInteger=*/true, /*isUnsigned=*/true, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_u16 = {
+  /*type=*/PTY_u16, /*isInteger=*/true, /*isUnsigned=*/true, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_u32 = {
+  /*type=*/PTY_u32, /*isInteger=*/true, /*isUnsigned=*/true, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_u64 = {
+  /*type=*/PTY_u64, /*isInteger=*/true, /*isUnsigned=*/true, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_u1 = {
+  /*type=*/PTY_u1, /*isInteger=*/true, /*isUnsigned=*/true, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_ptr = {
+  /*type=*/PTY_ptr, /*isInteger=*/true, /*isUnsigned=*/true, /*isAddress=*/true, /*isFloat=*/false,
+  /*isPointer=*/true, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_ref = {
+  /*type=*/PTY_ref, /*isInteger=*/true, /*isUnsigned=*/true, /*isAddress=*/true, /*isFloat=*/false,
+  /*isPointer=*/true, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_a32 = {
+  /*type=*/PTY_a32, /*isInteger=*/true, /*isUnsigned=*/true, /*isAddress=*/true, /*isFloat=*/false,
+  /*isPointer=*/true, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_a64 = {
+  /*type=*/PTY_a64, /*isInteger=*/true, /*isUnsigned=*/true, /*isAddress=*/true, /*isFloat=*/false,
+  /*isPointer=*/true, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_f32 = {
+  /*type=*/PTY_f32, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/true,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_f64 = {
+  /*type=*/PTY_f64, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/true,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_f128 = {
+  /*type=*/PTY_f128, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/true,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_c64 = {
+  /*type=*/PTY_c64, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_c128 = {
+  /*type=*/PTY_c128, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+#ifdef DYNAMICLANG
+static const PrimitiveTypeProperty PTProperty_simplestr = {
+  /*type=*/PTY_simplestr, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/true, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/true, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_simpleobj = {
+  /*type=*/PTY_simpleobj, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/true, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/true, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_dynany = {
+  /*type=*/PTY_dynany, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/true, /*isDynamicAny=*/true, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_dynundef = {
+  /*type=*/PTY_dynundef, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/true, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_dynnull = {
+  /*type=*/PTY_dynnull, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/true, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_dynbool = {
+  /*type=*/PTY_dynbool, /*isInteger=*/true, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/true, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_dyni32 = {
+  /*type=*/PTY_dyni32, /*isInteger=*/true, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/true, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_dynstr = {
+  /*type=*/PTY_dynstr, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/true, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_dynobj = {
+  /*type=*/PTY_dynobj, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/true, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_dynf64 = {
+  /*type=*/PTY_dynf64, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/true,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/true, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_dynf32 = {
+  /*type=*/PTY_dynf32, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/true,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/true, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_dynnone = {
+  /*type=*/PTY_dynnone, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/true, /*isDynamicAny=*/false, /*isDynamicNone=*/true
+};
+#endif // ~DYNAMICLANG
+
+static const PrimitiveTypeProperty PTProperty_constStr = {
+  /*type=*/PTY_constStr, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/true, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_gen = {
+  /*type=*/PTY_gen, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_agg = {
+  /*type=*/PTY_agg, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_unknown = {
+  /*type=*/PTY_unknown, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+static const PrimitiveTypeProperty PTProperty_end = {
+  /*type=*/PTY_end, /*isInteger=*/false, /*isUnsigned=*/false, /*isAddress=*/false, /*isFloat=*/false,
+  /*isPointer=*/false, /*isSimple=*/false, /*isDynamic=*/false, /*isDynamicAny=*/false, /*isDynamicNone=*/false
+};
+
+#endif // ~LOAD_PRIMARY_TYPE_PROPERTY

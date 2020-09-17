@@ -1,0 +1,110 @@
+# This file is the master GN build configuration, all variables
+# declare here will be implicitly global.
+
+# List all the input args
+declare_args() {
+  GN_INSTALL_PREFIX = ""
+  GN_BUILD_TYPE = ""
+  HOST_ARCH = 64
+  MIR_JAVA = 1
+}
+
+# Define global args
+MAPLE_ROOT = "${GN_INSTALL_PREFIX}"
+DYNAMICLANG = true
+RC_V2 = true
+TEST_BENCHMARK = false
+MEMORY_LEAK_CHECK = false
+MARK_CYCLE_ROOTS = false
+
+OPENSOURCE_DEPS = "${MAPLE_ROOT}/src/deplibs"
+OPENSOURCE_OUTPUT = "${MAPLE_ROOT}/out"
+MAPLEALL_ROOT = "${MAPLE_ROOT}/src"
+THIRD_PARTY_ROOT = "${MAPLE_ROOT}/src/third_party"
+
+# Put all built library files under lib
+GN_ARCHIVE_OUTPUT_DIRECTORY = "${GN_INSTALL_PREFIX}/out/lib"
+GN_LIBRARY_OUTPUT_DIRECTORY = "${GN_INSTALL_PREFIX}/out/lib"
+
+# Put all built binary files under bin
+GN_BINARY_OUTPUT_DIRECTORY = "${GN_INSTALL_PREFIX}/out/bin"
+
+# Toolchain setup
+GN_C_COMPILER = "${MAPLE_ROOT}/tools/clang_llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04/bin/clang"
+GN_CXX_COMPILER = "${MAPLE_ROOT}/tools/clang_llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04/bin/clang++"
+GN_AR_COMPILER = "${MAPLE_ROOT}/tools/clang_llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04/bin/llvm-ar"
+target_toolchain = "//build/toolchain:clang"
+set_default_toolchain(target_toolchain)
+
+# Cross compile
+GN_C_CROSS_COMPILER = "/usr/bin/aarch64-linux-gnu-gcc-5"
+GN_CXX_CROSS_COMPILER = "/usr/bin/aarch64-linux-gnu-g++-5"
+GN_AR_CROSS_COMPILER = "/usr/bin/aarch64-linux-gnu-ar"
+GN_RANLIB_CROSS_COMPILER = "/usr/bin/aarch64-linux-gnu-ranlib"
+
+# C/CXX Build flags
+cflags = []
+if (GN_BUILD_TYPE == "RELEASE") {
+  cflags_cc = [ "-O3" ]
+  cflags_c = [ "-O3" ]
+} else if (GN_BUILD_TYPE == "DEBUG") {
+  cflags_cc = [
+    "-O0",
+    "-g3",
+  ]
+  cflags_c = [
+    "-O0",
+    "-g3",
+  ]
+}
+
+cflags_c += [
+  "-Wall",
+  "-fstack-protector-strong",
+  "-fPIC",
+  "-fPIE",
+]
+cflags_cc += [
+  "-Wall",
+  "-fstack-protector-strong",
+  "-fPIC",
+  "-fPIE",
+]
+
+if (HOST_ARCH == 64) {
+  cflags_c += [ "-m64" ]
+  cflags_cc += [ "-m64" ]
+} else {
+  cflags_c += [ "-m32" ]
+  cflags_cc += [ "-m32" ]
+}
+
+if (DYNAMICLANG) {
+  cflags_cc += [ "-DDYNAMICLANG" ]
+}
+
+if (RC_V2) {
+  cflags_cc += [ "-DRC_NO_MMAP" ]
+}
+
+if (TEST_BENCHMARK) {
+  cflags_cc += [ "-DTEST_BENCHMARK" ]
+}
+
+if (MEMORY_LEAK_CHECK) {
+  cflags_cc += [ "-DMEMORY_LEAK_CHECK" ]
+}
+
+if (MARK_CYCLE_ROOTS) {
+  cflags_cc += [ "-DMARK_CYCLE_ROOTS" ]
+}
+
+cflags_cc += [ "-DMIR_FEATURE_FULL=1" ]
+
+if (MIR_JAVA == 1) {
+  TARGET = "aarch64"
+  cflags_cc += [ "-DMIR_JAVA=1" ]
+} else {
+  TARGET = "vm"
+  cflags_cc += [ "-DMIR_JAVA=0" ]
+}

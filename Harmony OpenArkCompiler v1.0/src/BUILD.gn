@@ -1,0 +1,36 @@
+config("mapleallcompilecfg") {
+  cflags_cc = []
+  cflags_cc += [
+    "-std=c++11",
+    "-Werror",
+  ]
+
+  if (GN_BUILD_TYPE == "DEBUG") {
+    cflags_c += [
+      "-DDEBUG",
+    ]
+    cflags_cc += [
+      "-DDEBUG",
+    ]
+  }
+
+  if (HOST_ARCH == 64) {
+    ldflags = []
+    ldflags += [
+      "-fPIC",
+      "-std=c++11",
+      "-rdynamic",
+      "-lpthread",
+      "-Wl,-z,relro",
+      "-Wl,-z,now",
+      "-Wl,-z,noexecstack",
+      "-fPIE",
+    ]
+  }
+}
+
+group("mapleall") {
+  deps = [
+    "${MAPLEALL_ROOT}/maple_driver:maple",
+  ]
+}

@@ -1,0 +1,35 @@
+include_directories = [
+  "${MAPLEALL_ROOT}/maple_ir/include",
+  "${MAPLEALL_ROOT}/maple_me/include",
+  "${MAPLEALL_ROOT}/maple_ipa/include",
+  "${MAPLEALL_ROOT}/maple_phase/include",
+  "${MAPLEALL_ROOT}/maple_util/include",
+  "${MAPLEALL_ROOT}/mpl2mpl/include",
+  "${MAPLEALL_ROOT}/mempool/include",
+  "${MAPLEALL_ROOT}/huawei_secure_c/include",
+  "${MAPLEALL_ROOT}/third_party/zlib-1.2.11",
+]
+
+src_libmpl2mpl = [
+  "src/class_init.cpp",
+  "src/gen_check_cast.cpp",
+  "src/muid_replacement.cpp",
+  "src/reflection_analysis.cpp",
+  "src/vtable_analysis.cpp",
+  "src/java_intrn_lowering.cpp",
+  "src/java_eh_lower.cpp",
+  "src/native_stub_func.cpp",
+  "src/vtable_impl.cpp",
+  "src/class_hierarchy.cpp",
+]
+
+configs = [ "${MAPLEALL_ROOT}:mapleallcompilecfg" ]
+
+static_library("libmpl2mpl") {
+  sources = src_libmpl2mpl
+  include_dirs = include_directories
+  output_dir = "${root_out_dir}/lib/${HOST_ARCH}"
+  deps = [
+    "${MAPLEALL_ROOT}/third_party/zlib-1.2.11:libz_maple_host",
+  ]
+}

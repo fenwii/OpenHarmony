@@ -1,0 +1,6 @@
+#!/bin/bash
+OUTPUT=$1
+CORE_ALL_JAR=$2
+shift 2
+javac -g -d . -bootclasspath ${CORE_ALL_JAR} $@
+jar -cvf ${OUTPUT} *.class

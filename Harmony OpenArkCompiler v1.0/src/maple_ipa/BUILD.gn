@@ -1,0 +1,23 @@
+include_directories = [
+  "${MAPLEALL_ROOT}/maple_ir/include",
+  "${MAPLEALL_ROOT}/mempool/include",
+  "${MAPLEALL_ROOT}/maple_util/include",
+  "${MAPLEALL_ROOT}/maple_me/include",
+  "${MAPLEALL_ROOT}/maple_ipa/include",
+  "${MAPLEALL_ROOT}/mpl2mpl/include",
+  "${MAPLEALL_ROOT}/maple_phase/include",
+  "${MAPLEALL_ROOT}/huawei_secure_c/include",
+]
+
+src_libmplipa = [
+  "src/interleaved_manager.cpp",
+  "src/module_phase_manager.cpp",
+]
+
+configs = [ "${MAPLEALL_ROOT}:mapleallcompilecfg" ]
+
+static_library("libmplipa") {
+  sources = src_libmplipa
+  include_dirs = include_directories
+  output_dir = "${root_out_dir}/lib/${HOST_ARCH}"
+}

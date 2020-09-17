@@ -1,0 +1,184 @@
+toolchain("clang") {
+  tool("cc") {
+    depfile = "{{output}}.d"
+    command = "${GN_C_COMPILER} {{defines}} {{include_dirs}} {{cflags}} {{cflags_c}} -MD -MT {{output}} -MF $depfile -o {{output}} -c {{source}}"
+    depsformat = "gcc"
+    description = "Building C object {{output}}"
+    outputs = [
+      "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o",
+    ]
+  }
+
+  tool("cxx") {
+    depfile = "{{output}}.d"
+    command = "${GN_CXX_COMPILER} {{defines}} {{include_dirs}} {{cflags}} {{cflags_cc}} -MD -MT {{output}} -MF $depfile -o {{output}} -c {{source}}"
+    depsformat = "gcc"
+    description = "Building CXX object {{output}}"
+    outputs = [
+      "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o",
+    ]
+  }
+
+  tool("asm") {
+    depfile = "{{output}}.d"
+
+    #command = "${GN_C_COMPILER} -MMD -MF $depfile ${rebuild_string}{{defines}} {{include_dirs}} {{asmflags}}${extra_asmflags} -c {{source}} -o {{output}}"
+    command = "${GN_CXX_COMPILER} {{defines}} {{include_dirs}} {{asmflags}} -MD -MT {{output}} -MF $depfile -c {{source}} -o {{output}}"
+    depsformat = "gcc"
+    description = "ASM {{output}}"
+    outputs = [
+      "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o",
+    ]
+  }
+
+  tool("alink") {
+    rspfile = "{{output}}.rsp"
+    rspfile_content = "{{inputs}}"
+    command = "rm -f {{output}} && ${GN_AR_COMPILER} qc {{output}} ${rspfile_content} && ranlib {{output}}"
+    description = "AR {{target_output_name}}{{output_extension}}"
+    outputs = [
+      "{{output_dir}}/{{target_output_name}}{{output_extension}}",
+    ]
+    default_output_extension = ".a"
+    default_output_dir = "${GN_ARCHIVE_OUTPUT_DIRECTORY}"
+  }
+
+  tool("solink") {
+    soname = "{{target_output_name}}{{output_extension}}"
+    sofile = "{{output_dir}}/$soname"
+    rspfile = soname + ".rsp"
+
+    #command = "${GN_CXX_COMPILER} -shared {{ldflags}} -o $soname -Wl,-soname=$soname @$rspfile {{libs}}"
+    rspfile_content = "{{inputs}} {{solibs}} {{libs}}"
+    command = "${GN_CXX_COMPILER} {{ldflags}} -o $sofile -shared -Wl,-soname=$soname ${rspfile_content}"
+    description = "SOLINK $soname"
+
+    # Use this for {{output_extension}} expansions unless a target manually
+    # overrides it (in which case {{output_extension}} will be what the target
+    # specifies).
+    default_output_extension = ".so"
+    outputs = [
+      sofile,
+    ]
+    link_output = sofile
+    depend_output = sofile
+
+    #output_prefix = ""
+    default_output_dir = "${GN_LIBRARY_OUTPUT_DIRECTORY}"
+    restat = true
+  }
+
+  tool("link") {
+    outfile = "${GN_BINARY_OUTPUT_DIRECTORY}/{{target_output_name}}{{output_extension}}"
+    rspfile = "$outfile.rsp"
+    rspfile_content = "{{inputs}}"
+    command = "${GN_CXX_COMPILER} {{ldflags}} -o $outfile -Wl,--start-group ${rspfile_content} {{libs}} -Wl,--end-group {{solibs}}"
+    description = "LINK $outfile"
+    rspfile_content = "{{inputs}}"
+    outputs = [
+      outfile,
+    ]
+  }
+
+  tool("stamp") {
+    command = "touch {{output}}"
+    description = "STAMP {{output}}"
+  }
+
+  tool("copy") {
+    command = "cp -af {{source}} {{output}}"
+    description = "COPY {{source}} {{output}}"
+  }
+}
+
+toolchain("cross_compile") {
+  tool("cc") {
+    depfile = "{{output}}.d"
+    command = "${GN_C_CROSS_COMPILER} {{defines}} {{include_dirs}} {{cflags}} {{cflags_c}} -MD -MT {{output}} -MF $depfile -o {{output}} -c {{source}}"
+    depsformat = "gcc"
+    description = "Building C object {{output}}"
+    outputs = [
+      "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o",
+    ]
+  }
+
+  tool("cxx") {
+    depfile = "{{output}}.d"
+    command = "${GN_CXX_CROSS_COMPILER} {{defines}} {{include_dirs}} {{cflags}} {{cflags_cc}} -MD -MT {{output}} -MF $depfile -o {{output}} -c {{source}}"
+    depsformat = "gcc"
+    description = "Building CXX object {{output}}"
+    outputs = [
+      "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o",
+    ]
+  }
+
+  tool("asm") {
+    depfile = "{{output}}.d"
+    command = "${GN_CXX_CROSS_COMPILER} {{defines}} {{include_dirs}} {{asmflags}} -MD -MT {{output}} -MF $depfile -c {{source}} -o {{output}}"
+    depsformat = "gcc"
+    description = "ASM {{output}}"
+    outputs = [
+      "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o",
+    ]
+  }
+
+  tool("alink") {
+    rspfile = "{{output}}.rsp"
+    rspfile_content = "{{inputs}}"
+    command = "rm -f {{output}} && ${GN_AR_CROSS_COMPILER} qc {{output}} ${rspfile_content} && ${GN_RANLIB_CROSS_COMPILER} {{output}}"
+    description = "AR {{target_output_name}}{{output_extension}}"
+    rspfile_content = "{{inputs}}"
+    outputs = [
+      "{{output_dir}}/{{target_output_name}}{{output_extension}}",
+    ]
+    default_output_extension = ".a"
+    default_output_dir = "${GN_ARCHIVE_OUTPUT_DIRECTORY}"
+  }
+
+  tool("solink") {
+    soname = "{{target_output_name}}{{output_extension}}"
+    sofile = "{{output_dir}}/$soname"
+    rspfile = soname + ".rsp"
+    rspfile_content = "{{inputs}} {{solibs}} {{libs}}"
+    command = "${GN_CXX_CROSS_COMPILER} {{ldflags}} -o $sofile -shared -Wl,-soname=$soname ${rspfile_content}"
+    description = "SOLINK $soname"
+
+    # Use this for {{output_extension}} expansions unless a target manually
+    # overrides it (in which case {{output_extension}} will be what the target
+    # specifies).
+    default_output_extension = ".so"
+    outputs = [
+      sofile,
+    ]
+    link_output = sofile
+    depend_output = sofile
+
+    #output_prefix = ""
+    default_output_dir = "${GN_LIBRARY_OUTPUT_DIRECTORY}"
+    restat = true
+  }
+
+  tool("link") {
+    outfile = "${GN_BINARY_OUTPUT_DIRECTORY}/{{target_output_name}}{{output_extension}}"
+    rspfile = "$outfile.rsp"
+    rspfile_content = "{{inputs}}"
+
+    #command = "${GN_CXX_CROSS_COMPILER} {{ldflags}} -o $outfile @$rspfile {{solibs}} {{libs}}"
+    command = "${GN_CXX_CROSS_COMPILER} {{ldflags}} -o $outfile ${rspfile_content} {{solibs}} {{libs}}"
+    description = "LINK $outfile"
+    rspfile_content = "{{inputs}}"
+    outputs = [
+      outfile,
+    ]
+  }
+
+  tool("stamp") {
+    command = "touch {{output}}"
+    description = "STAMP {{output}}"
+  }
+
+  tool("copy") {
+    command = "cp -af {{source}} {{output}}"
+    description = "COPY {{source}} {{output}}"
+  }
+}

@@ -1,0 +1,113 @@
+/*
+ * Copyright (c) [2019] Huawei Technologies Co.,Ltd.All rights reserved.
+ *
+ * OpenArkCompiler is licensed under the Mulan PSL v1.
+ * You can use this software according to the terms and conditions of the Mulan PSL v1.
+ * You may obtain a copy of Mulan PSL v1 at:
+ *
+ *     http://license.coscl.org.cn/MulanPSL
+ *
+ * THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT, MERCHANTABILITY OR
+ * FIT FOR A PARTICULAR PURPOSE.
+ * See the Mulan PSL v1 for more details.
+ */
+// DEF_MIR_INTRINSIC(STR, NAME, INTRN_CLASS, RETURN_TYPE, ARG0, ARG1, ARG2, ARG3, ARG4, ARG5)
+DEF_MIR_INTRINSIC(UNDEFINED,\
+                  nullptr, kIntrnUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef)
+DEF_MIR_INTRINSIC(MPL_ATOMIC_EXCHANGE_PTR,\
+                  "__mpl_atomic_exchange_ptr", kIntrnIsAtomic, kArgTyPtr, kArgTyPtr, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef)
+DEF_MIR_INTRINSIC(MPL_CLINIT_CHECK,\
+                  "__mpl_clinit_check", INTRNISJAVA | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyDynany, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef)
+DEF_MIR_INTRINSIC(MPL_CLEAR_STACK,\
+                  "__mpl_clear_stack", kIntrnUndef, kArgTyVoid, kArgTyDynany, kArgTyDynany, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef)
+DEF_MIR_INTRINSIC(MPL_GET_VTAB_FUNC,\
+                  "MCC_getFuncPtrFromVtab", kIntrnUndef, kArgTyA64, kArgTyDynany, kArgTyDynany, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef)
+DEF_MIR_INTRINSIC(MPL_READ_OVTABLE_ENTRY,\
+                  "__mpl_const_offset", INTRNISPURE, kArgTyA32, kArgTyDynany, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef)
+DEF_MIR_INTRINSIC(MPL_READ_OVTABLE_ENTRY_VTAB_LAZY,\
+                  "__mpl_const_offset_vtab_lazy", INTRNISPURE, kArgTyA32, kArgTyDynany, kArgTyDynany, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef)
+DEF_MIR_INTRINSIC(MPL_READ_OVTABLE_ENTRY_FIELD_LAZY,\
+                  "__mpl_const_offset_field_lazy", INTRNISPURE, kArgTyA32, kArgTyDynany, kArgTyDynany, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef)
+DEF_MIR_INTRINSIC(MPL_BOUNDARY_CHECK,\
+                  "", INTRNISJAVA | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyU1, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef)
+
+// start of RC Intrinsics with one parameters
+DEF_MIR_INTRINSIC(MCCIncRef,\
+                  "MCC_IncRef_NaiveRCFast", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCDecRef,\
+                  "MCC_DecRef_NaiveRCFast", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCDecRefReset,\
+                  "MCC_ClearLocalStackRef", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyPtr)
+DEF_MIR_INTRINSIC(MCCLoadRefSVol,\
+                  "MCC_LoadVolatileStaticField", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCLoadRefS,\
+                  "MCC_LoadRefStatic", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef)
+
+// start of RC Intrinsics with two parameters
+DEF_MIR_INTRINSIC(MCCIncDecRef,\
+                  "MCC_IncDecRef_NaiveRCFast", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCIncDecRefReset,\
+                  "MCC_IncDecRefReset", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyPtr)
+DEF_MIR_INTRINSIC(MCCDecRefResetPair,\
+                  "MCC_DecRefResetPair", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyPtr, kArgTyPtr)
+DEF_MIR_INTRINSIC(MCCLoadWeakVol,\
+                  "MCC_LoadVolatileWeakField", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCLoadWeak,\
+                  "MCC_LoadWeakField", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCLoadRef,\
+                  "MCC_LoadRefField_NaiveRCFast", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCLoadRefVol,\
+                  "MCC_LoadVolatileField", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCWriteReferent,\
+                  "MCC_WriteReferent", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCWriteSVolNoInc,\
+                  "MCC_WriteVolatileStaticFieldNoInc", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCWriteSVolNoDec,\
+                  "MCC_WriteVolatileStaticFieldNoDec", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCWriteSVolNoRC,\
+                  "MCC_WriteVolatileStaticFieldNoRC", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCWriteSVol,\
+                  "MCC_WriteVolatileStaticField", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCWriteSNoInc,\
+                  "MCC_WriteRefFieldStaticNoInc", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCWriteSNoDec,\
+                  "MCC_WriteRefFieldStaticNoDec", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCWriteSNoRC,\
+                  "MCC_WriteRefFieldStaticNoRC", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCWriteS,\
+                  "MCC_WriteRefFieldStatic", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef)
+
+// start of RC intrinsics with three parameters
+DEF_MIR_INTRINSIC(MCCWriteVolNoInc,\
+                  "MCC_WriteVolatileFieldNoInc", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCWriteVolNoDec,\
+                  "MCC_WriteVolatileFieldNoDec", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCWriteVolNoRC,\
+                  "MCC_WriteVolatileFieldNoRC", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCWriteVol,\
+                  "MCC_WriteVolatileField", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCWriteNoInc,\
+                  "MCC_WriteRefFieldNoInc", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCWriteNoDec,\
+                  "MCC_WriteRefFieldNoDec", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCWriteNoRC,\
+                  "MCC_WriteRefFieldNoRC", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCWrite,\
+                  "MCC_WriteRefField", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCWriteVolWeak,\
+                  "MCC_WriteVolatileWeakField", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MCCWriteWeak,\
+                  "MCC_WriteWeakField", INTRNISRC | INTRNNOSIDEEFFECT, kArgTyVoid, kArgTyRef, kArgTyRef, kArgTyRef)
+
+DEF_MIR_INTRINSIC(MPL_CLEANUP_LOCALREFVARS,\
+                  "__mpl_cleanup_localrefvars", INTRNISJAVA | INTRNNOSIDEEFFECT, kArgTyUndef, kArgTyRef, kArgTyRef, kArgTyRef, kArgTyRef, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MPL_CLEANUP_LOCALREFVARS_SKIP,\
+                  "__mpl_cleanup_localrefvars_skip", INTRNISJAVA | INTRNNOSIDEEFFECT, kArgTyUndef, kArgTyRef, kArgTyRef, kArgTyRef, kArgTyRef, kArgTyRef, kArgTyRef)
+DEF_MIR_INTRINSIC(MPL_MEMSET_LOCALVAR,\
+                  "", kIntrnUndef, kArgTyPtr, kArgTyU32, kArgTyU8, kArgTyU32, kArgTyUndef, kArgTyUndef, kArgTyUndef)
+DEF_MIR_INTRINSIC(MPL_SET_CLASS,\
+                  "", kIntrnUndef, kArgTyPtr, kArgTyPtr, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef)
+#include "intrinsic_java.def"
+DEF_MIR_INTRINSIC(LAST,\
+                  nullptr, kIntrnUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef, kArgTyUndef)

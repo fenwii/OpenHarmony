@@ -1,0 +1,55 @@
+include_directories = [
+  "${MAPLEALL_ROOT}/maple_ir/include",
+  "${MAPLEALL_ROOT}/mempool/include",
+  "${MAPLEALL_ROOT}/huawei_secure_c/include",
+  "${MAPLEALL_ROOT}/maple_me/include",
+  "${MAPLEALL_ROOT}/maple_ipa/include",
+  "${MAPLEALL_ROOT}/mpl2mpl/include",
+  "${MAPLEALL_ROOT}/maple_util/include",
+  "${MAPLEALL_ROOT}/maple_phase/include",
+]
+
+src_libmplme = [
+  "src/me_alias_class.cpp",
+  "src/me_bb_layout.cpp",
+  "src/me_cfg.cpp",
+  "src/me_dominance.cpp",
+  "src/me_emit.cpp",
+  "src/me_function.cpp",
+  "src/me_irmap.cpp",
+  "src/me_option.cpp",
+  "src/me_phase_manager.cpp",
+  "src/me_rc_lowering.cpp",
+  "src/me_ssa.cpp",
+  "src/me_ssa_tab.cpp",
+  "src/me_ssa_update.cpp",
+]
+
+src_libmplmewpo = [
+  "src/alias_analysis_table.cpp",
+  "src/alias_class.cpp",
+  "src/bb.cpp",
+  "src/dominance.cpp",
+  "src/func_emit.cpp",
+  "src/irmap.cpp",
+  "src/irmap_emit.cpp",
+  "src/me_ir.cpp",
+  "src/orig_symbol.cpp",
+  "src/ssa.cpp",
+  "src/ssa_mir_nodes.cpp",
+  "src/ssa_tab.cpp",
+  "src/ver_symbol.cpp",
+]
+
+configs = [ "${MAPLEALL_ROOT}:mapleallcompilecfg" ]
+
+static_library("libmplme") {
+  sources = src_libmplme
+  include_dirs = include_directories
+  output_dir = "${root_out_dir}/lib/${HOST_ARCH}"
+}
+
+static_library("libmplmewpo") {
+  sources = src_libmplmewpo
+  include_dirs = include_directories
+}

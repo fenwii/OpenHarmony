@@ -1,0 +1,101 @@
+/*
+ * Copyright (c) [2019] Huawei Technologies Co.,Ltd.All rights reserved.
+ *
+ * OpenArkCompiler is licensed under the Mulan PSL v1.
+ * You can use this software according to the terms and conditions of the Mulan PSL v1.
+ * You may obtain a copy of Mulan PSL v1 at:
+ *
+ *     http://license.coscl.org.cn/MulanPSL
+ *
+ * THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT, MERCHANTABILITY OR
+ * FIT FOR A PARTICULAR PURPOSE.
+ * See the Mulan PSL v1 for more details.
+ */
+  // opcode keywords
+#define OPCODE(X, Y, Z, S) KEYWORD(X)
+#include "opcodes.def"
+#undef OPCODE
+  // primitive types
+#define LOAD_ALGO_PRIMARY_TYPE
+#define PRIMTYPE(P) KEYWORD(P)
+#include "prim_types.def"
+#undef PRIMTYPE
+  // intrinsic names
+#undef DEF_MIR_INTRINSIC
+#define DEF_MIR_INTRINSIC(X, NAME, INTRN_CLASS, RETURN_TYPE, ...)  KEYWORD(X)
+#include "intrinsics.def"
+#undef DEF_MIR_INTRINSIC
+  KEYWORD(else)
+  // declaration keywords
+  KEYWORD(var)
+  KEYWORD(tempvar)
+  KEYWORD(reg)
+  KEYWORD(type)
+  KEYWORD(func)
+  KEYWORD(struct)
+  KEYWORD(structincomplete)
+  KEYWORD(union)
+  KEYWORD(class)
+  KEYWORD(classincomplete)
+  KEYWORD(interfaceincomplete)
+  KEYWORD(javaclass)
+  KEYWORD(javainterface)
+  // type attribute keywords
+#define FUNC_ATTR
+#define TYPE_ATTR
+#define FIELD_ATTR
+#define ATTR(X) KEYWORD(X)
+#include "all_attributes.def"
+#undef ATTR
+#undef FUNC_ATTR
+#undef TYPE_ATTR
+#undef FIELD_ATTR
+  KEYWORD(align)
+  // per-function declaration keywords
+  KEYWORD(framesize)
+  KEYWORD(upformalsize)
+  KEYWORD(moduleid)
+  KEYWORD(funcsize)
+  KEYWORD(funcid)
+  KEYWORD(formalwordstypetagged)
+  KEYWORD(localwordstypetagged)
+  KEYWORD(formalwordsrefcounted)
+  KEYWORD(localwordsrefcounted)
+  // per-module declaration keywords
+  KEYWORD(flavor)
+  KEYWORD(srclang)
+  KEYWORD(globalmemsize)
+  KEYWORD(globalmemmap)
+  KEYWORD(globalwordstypetagged)
+  KEYWORD(globalwordsrefcounted)
+  KEYWORD(id)
+  KEYWORD(numfuncs)
+  KEYWORD(entryfunc)
+  // file related declaration keywords
+  KEYWORD(fileinfo)
+  KEYWORD(filedata)
+  KEYWORD(srcfileinfo)
+  KEYWORD(funcinfo)
+  // special float constants
+  KEYWORD(nanf)
+  KEYWORD(nan)
+  KEYWORD(inff)
+  KEYWORD(inf)
+  // pragma
+  KEYWORD(pragma)
+  KEYWORD(param)
+  KEYWORD(func_ex)
+  KEYWORD(func_var)
+  // staticvalue
+  KEYWORD(staticvalue)
+  // import
+  KEYWORD(import)
+  KEYWORD(importpath)
+  // source position information
+  KEYWORD(LOC)
+  // debug info source var and mpl var mapping
+  KEYWORD(ALIAS)
+  // storage class
+  KEYWORD(pstatic)
+  KEYWORD(fstatic)

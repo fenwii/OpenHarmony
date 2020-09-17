@@ -1,0 +1,46 @@
+sources_common = [
+  "adler32.c",
+  "compress.c",
+  "crc32.c",
+  "deflate.c",
+  "gzclose.c",
+  "gzlib.c",
+  "gzread.c",
+  "gzwrite.c",
+  "inflate.c",
+  "infback.c",
+  "inftrees.c",
+  "inffast.c",
+  "trees.c",
+  "uncompr.c",
+  "zutil.c",
+]
+
+include_common = [
+  "crc32.h",
+  "deflate.h",
+  "gzguts.h",
+  "inffast.h",
+  "inffixed.h",
+  "inflate.h",
+  "inftrees.h",
+  "trees.h",
+  "zutil.h",
+]
+
+static_library("libz_maple_host") {
+  sources = sources_common
+  include_dirs = include_common
+  cflags_c = []
+  cflags_cc = []
+  cflags_c += [
+    "-O3",
+    "-DUSE_MMAP",
+    "-DZLIB_CONST",
+    "-DZ_HAVE_UNISTD_H",
+    "-Wall",
+    "-Werror",
+    "-Wno-error=shift-negative-value",
+  ]
+  output_dir = "${root_out_dir}/lib/${HOST_ARCH}"
+}

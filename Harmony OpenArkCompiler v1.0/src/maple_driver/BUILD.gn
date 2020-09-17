@@ -1,0 +1,58 @@
+configs = [ "${MAPLEALL_ROOT}:mapleallcompilecfg" ]
+
+cflags_cc += [
+  "-DTARGAARCH64",
+  "-DMAPLE_ROOT=\"${MAPLE_ROOT}\"",
+]
+
+include_directories = [
+  "${MAPLEALL_ROOT}",
+  "${MAPLEALL_ROOT}/maple_driver/defs",
+  "${MAPLEALL_ROOT}/maple_driver/include",
+  "${MAPLEALL_ROOT}/maple_util/include",
+  "${MAPLEALL_ROOT}/mpl2mpl/include",
+  "${MAPLEALL_ROOT}/maple_me/include",
+  "${MAPLEALL_ROOT}/maplewpo/include",
+  "${MAPLEALL_ROOT}/maple_ipa/include",
+  "${MAPLEALL_ROOT}/maple_phase/include",
+  "${MAPLEALL_ROOT}/maplecomb/include",
+  "${MAPLEALL_ROOT}/maple_util/include",
+  "${MAPLEALL_ROOT}/maple_ir/include",
+  "${MAPLEALL_ROOT}/maple_me/include",
+  "${MAPLEALL_ROOT}/mempool/include",
+  "${MAPLEALL_ROOT}/huawei_secure_c/include",
+]
+
+executable("maple") {
+  sources = [
+    "src/compiler.cpp",
+    "src/compiler_factory.cpp",
+    "src/compiler_selector.cpp",
+    "src/driver_runner.cpp",
+    "src/file_utils.cpp",
+    "src/jbc2mpl_compiler.cpp",
+    "src/maple.cpp",
+    "src/maple_comb_compiler.cpp",
+    "src/mplcg_compiler.cpp",
+    "src/mpl_options.cpp",
+  ]
+
+  cflags_cc += [ "-DOPTION_PARSER_EXTRAOPT" ]
+
+  include_dirs = include_directories
+
+  deps = [
+    "${MAPLEALL_ROOT}/huawei_secure_c:libHWSecureC",
+    "${MAPLEALL_ROOT}/maple_ipa:libmplipa",
+    "${MAPLEALL_ROOT}/maple_ir:libmplir",
+    "${MAPLEALL_ROOT}/maple_me:libmplme",
+    "${MAPLEALL_ROOT}/maple_me:libmplmewpo",
+    "${MAPLEALL_ROOT}/mpl2mpl:libmpl2mpl",
+  ]
+  libs = []
+  libs += [
+    "${OPENSOURCE_DEPS}/libmplphase.a",
+    "${OPENSOURCE_DEPS}/libmempool.a",
+    "${OPENSOURCE_DEPS}/libmaple_driverutil.a",
+  ]
+}

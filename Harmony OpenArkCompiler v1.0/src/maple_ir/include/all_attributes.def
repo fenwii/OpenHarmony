@@ -1,0 +1,77 @@
+/*
+ * Copyright (c) [2019] Huawei Technologies Co.,Ltd.All rights reserved.
+ *
+ * OpenArkCompiler is licensed under the Mulan PSL v1.
+ * You can use this software according to the terms and conditions of the Mulan PSL v1.
+ * You may obtain a copy of Mulan PSL v1 at:
+ *
+ *     http://license.coscl.org.cn/MulanPSL
+ *
+ * THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT, MERCHANTABILITY OR
+ * FIT FOR A PARTICULAR PURPOSE.
+ * See the Mulan PSL v1 for more details.
+ */
+/* all possible attribute names from typeattrs.def, funcattrs.def and fieldattrs.def */
+  ATTR(const)
+  ATTR(final)
+  ATTR(generic)
+  ATTR(implicit)
+  ATTR(private)
+  ATTR(protected)
+  ATTR(public)
+  ATTR(static)
+  ATTR(synthetic)
+  ATTR(used)
+#ifdef FUNC_ATTR
+  ATTR(bridge)
+  ATTR(constructor)
+  ATTR(critical_native)
+  ATTR(declared_synchronized)
+  ATTR(default)
+  ATTR(destructor)
+  ATTR(delete)
+  ATTR(fast_native)
+  ATTR(inline)
+  ATTR(native)
+  ATTR(strict)
+  ATTR(varargs)
+  ATTR(virtual)
+  ATTR(nosideeffect)
+  ATTR(pure)
+  ATTR(noexcept)
+  ATTR(nouseeffect)
+  ATTR(nodefeffect)
+  ATTR(noret_newly_alloc_obj)
+  ATTR(nothrow_exception)
+  ATTR(noprivate_useeffect)
+  ATTR(noprivate_defeffect)
+  ATTR(ipaseen)
+  ATTR(rclocalunowned)
+  ATTR(callersensitive)
+#endif
+#if defined(FUNC_ATTR) || defined(TYPE_ATTR)
+  ATTR(abstract)
+  ATTR(extern)
+  ATTR(interface)
+  ATTR(local)
+  ATTR(optimized)
+  ATTR(synchronized)
+  ATTR(weak)
+#endif
+#if defined(TYPE_ATTR) || defined(FIELD_ATTR)
+#include "memory_order_attrs.def"
+  ATTR(enum)
+  ATTR(restrict)
+  ATTR(transient)
+  ATTR(volatile)
+  ATTR(rcunowned)
+  ATTR(rcweak)
+#endif
+#ifdef TYPE_ATTR
+  ATTR(annotation)
+  ATTR(readonly)
+  ATTR(verified)
+  ATTR(localrefvar)
+  ATTR(rcunownedthis)
+#endif

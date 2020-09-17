@@ -1,0 +1,44 @@
+include_directories = [
+  "${MAPLEALL_ROOT}/maple_ir/include",
+  "${MAPLEALL_ROOT}/mpl2mpl/include",
+  "${MAPLEALL_ROOT}/maple_util/include",
+  "${MAPLEALL_ROOT}/mempool/include",
+  "${MAPLEALL_ROOT}/huawei_secure_c/include",
+  "${MAPLEALL_ROOT}/maple_ipa/include",
+  "${MAPLEALL_ROOT}/maple_me/include",
+  "${MAPLEALL_ROOT}/maple_phase/include",
+]
+
+src_libmplir = [
+  "src/global_tables.cpp",
+  "src/intrinsics.cpp",
+  "src/lexer.cpp",
+  "src/mir_builder.cpp",
+  "src/mir_const.cpp",
+  "src/mir_function.cpp",
+  "src/mir_lower.cpp",
+  "src/mir_module.cpp",
+  "src/mir_nodes.cpp",
+  "src/mir_symbol.cpp",
+  "src/mir_type.cpp",
+  "src/opcode_info.cpp",
+  "src/option.cpp",
+  "src/parser.cpp",
+  "src/mir_parser.cpp",
+  "src/mir_pragma.cpp",
+  "src/printing.cpp",
+  "src/bin_mpl_import.cpp",
+  "src/bin_mpl_export.cpp",
+]
+
+configs = [ "${MAPLEALL_ROOT}:mapleallcompilecfg" ]
+
+cflags_cc += [ "-DSTORE_BACK_VTABLE_REF_AFTER_LOAD=1" ]
+
+static_library("libmplir") {
+  sources = src_libmplir
+  include_dirs = include_directories
+  output_dir = "${root_out_dir}/lib/${HOST_ARCH}"
+  libs = []
+  libs += [ "${OPENSOURCE_DEPS}/libmplutil.a" ]
+}

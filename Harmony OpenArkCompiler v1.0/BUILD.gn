@@ -1,0 +1,5 @@
+group("maple") {
+  deps = [
+    "${MAPLE_ROOT}/src:mapleall",
+  ]
+}
