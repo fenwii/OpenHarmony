@@ -44,6 +44,15 @@ https://developer.harmonyos.com
 鸿蒙开发IDE：Deveco studio
 https://developer.harmonyos.com/cn/develop/deveco-studio
 
+方舟编译器官网：
+https://www.openarkcompiler.cn
+
+
+ARK方舟编译器开源代码官方主仓库:
+提高安卓系统操作的流畅性24%，响应速度44%，第三方应用的流畅性高达60%。
+https://gitee.com/openarkcompiler/openarkcompiler
+
+
 华为LiteOS：
 https://github.com/LiteOS/LiteOS
 
