@@ -24,6 +24,12 @@ https://developer.harmonyos.com
 鸿蒙开发IDE：Deveco studio
 https://developer.harmonyos.com/cn/develop/deveco-studio
 
+华为LiteOS：
+https://github.com/LiteOS/LiteOS
+
+开发工具Huawei LiteOS Studio：
+https://static.huaweicloud.com/upload/files/sdk/LiteOS_IDE.zip
+
 ================鸿蒙OS开发社区================
 
 
