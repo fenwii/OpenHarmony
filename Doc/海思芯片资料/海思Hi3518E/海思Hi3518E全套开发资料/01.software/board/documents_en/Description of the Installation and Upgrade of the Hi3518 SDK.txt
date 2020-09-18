@@ -1,0 +1,223 @@
+ Description of the Installation and Upgrade of the Hi3518 SDK
+
+Chapter 1 Description of the Upgrade of the Hi3518_SDK_Vx.x.x.x
+   If you install the Hi3518 software development kit (SDK) for the first time, see chapter 2 "Initially Installing the Hi3518 SDK."
+    
+Chapter 2 Initially Installing the Hi3518 SDK
+1. Locate the Hi3518 SDK.
+    In Hi3518_V100R001***/01.software/board, you can find the file Hi3518_SDK_Vx.x.x.x.tgz. This file is the Hi3518 SDK.
+Hi3518_V100R001SPC01xxx corresponds to the uclib version, and Hi3518_V100R001SPC02xxx corresponds to the glibc version.
+
+2. Decompress the SDK.
+    On a Linux server or a PC running a mainstream Linux operating system (OS), run the tar -zxf Hi3518_SDK_Vx.x.x.x.tgz command to decompress the SDK. Then the Hi3518_SDK_Vx.x.x.x folder is created.
+
+3. Expand the SDK.
+   Before executing the installation script, you are advised to set the default shell to bash.
+    Open the Hi3518_SDK_Vx.x.x.x folder, run source sdk.unpack as the sudo or root user to display other compressed contents of the SDK by following instructions.
+To copy the SDK on Windows, run source sdk.cleanup to compress the SDK, copy the SDK to a new directory, and expand the SDK.
+
+4. Install the cross compiler on a Linux server.
+    1) Install the uclibc cross compiler (Note that you must have the sudo or root permission.)
+       Go to the Hi3518_SDK_Vx.x.x.x/osdrv/toolchain/arm-hisiv100nptl-linux directory, run chmod +x cross.install, and run ./cross.install. 
+    2) Install the glibc cross compiler (Note that you must have the sudo or root permission.)
+       Go to the Hi3518_SDK_Vx.x.x.x/osdrv/toolchain/arm-hisiv200-linux directory, run chmod +x cross.install, and run ./cross.install. 
+    3) Run source /etc/profile or log in to the server again for the environment variables to take effect. The environment variables are configured through the scripts that are used to install the cross compiler.
+
+5. Compile osdrv
+   Please read the <readme> in osdrv directory.
+
+6. Description of the SDK directory
+The structure of the Hi3518_SDK_Vx.x.x.x folder is as follows:    
+    |-- sdk.cleanup                 #Cleanup scripts of the SDK.
+    |-- sdk.unpack                  #Expansion scripts of the SDK.
+    |-- osdrv                       #OS and related drivers
+    |   |-- busybox                 # Source code of BusyBox
+    |   |-- drv                     # Source code of drivers
+    |   |-- kernel                  # Source code of the Linux kernel
+    |   |-- pub                     # compiled images/tools/drivers
+    |   |-- rootfs_scripts          # Root file system
+    |   |-- toolchain               # cross compiler
+    |   |-- tools                   # Source code of the Linux tools
+    |   |-- uboot                   # Universal boot loader (U-boot) source code
+    |   `-- Makefile                # osdrv Makefile
+    |-- package                     #Compressed packages of the SDK
+    |   |-- osdrv.tgz               #Compressed package of Linux and driver
+    |   |-- mpp.tgz                 #Compressed package of the media processing platform (MPP) software
+    |   `-- image                   #Images that can be burnt to the flash memory, such as the kernel or root file system
+    |-- scripts                     #Shell scripts
+    |-- mpp                         #MPP
+        |-- component               #Component source code 
+        |-- extdrv                  #Source code of the drivers of board-level peripherals
+        |-- include                 #External header files
+        |-- ko                      #Kernel driver
+        |-- lib                     #Audio library and the library of the release version
+        |-- tools                   #Tools used for media processing
+        `-- sample                  #Source code samples
+
+
+Chapter 3 Development Environment for Installing and Upgrading the U-boot on the Hi3518 Demo Board
+    #If you use the Hi3518 demo board, perform the following steps to burn the U-boot, kernel, and file system. The items such as U-boot, kernel, and file system described in the following steps are updated in network mode.
+    #Generally, the U-boot already exists on the board. If the U-boot does not exist in the board, you can to burn the U-boot to the board by using an emulator.
+    #For details, see the Linux Development Environment User Guide in 01.software\board\documents.
+    #In the following sections, it is assumed that the U-boot already exists on the board. The following describes how to burn the U-boot, kernel and rootfs to a flash memory over the Ethernet port.
+    #The demo board boots from the NAND flash by default.
+1. Configure the Trivial File Transfer Protocol (TFTP) server.
+    # Any TFTP server can be used.
+# For the Hi3518C, copy the related files in package/image_uclibc_hi3518c or package/image_glibc_hi3518c to the TFTP server directory.
+# For the Hi3516C, use the related images in package/image_uclibc_hi3516c or package/image_glibc_hi3516c.
+
+    
+2. Set parameters.
+    After the board is powered on, press any key to start the U-boot. Set serverip (IP address of the FTFP server), ipaddr (IP address of the board), and ethaddr (media access control (MAC) address of the board) by running the following commands:
+    setenv serverip xx.xx.xx.xx
+    setenv ipaddr xx.xx.xx.xx 
+    setenv ethaddr xx:xx:xx:xx:xx:xx
+    setenv netmask xx.xx.xx.xx
+    setenv gatewayip xx.xx.xx.xx
+    Ping the IP address of the FTFP server to ensure that the network connection is normal.
+
+3. Burn images to the SPI flash.
+   In this section, a 16 MB SPI flash is used as an example.
+1) Address space
+        |      1M       |      3M       |     12M       |
+        |---------------|---------------|---------------|
+        |     boot      |     kernel    |     rootfs    |
+        The following operations are performed based on the allocated address space. You can change the address space as required.
+    2) Burn the U-boot.
+        sf probe 0
+		sf erase 0 0x100000
+        mw.b 82000000 ff 100000
+		tftp 0x82000000 u-boot-200MHZ.bin #Replace u-boot-200MHZ.bin with u-boot-220MHZ.bin for the Hi3516C.
+        sf write 82000000 0 100000	
+        reset    
+　3) Burn the kernel.
+		sf probe 0
+		sf erase 100000 0x300000
+		mw.b 82000000 ff 300000
+		tftp 82000000 uImage
+		sf write 82000000 100000 300000
+　4) Burn the file system.
+		sf probe 0
+		sf erase 400000 0xc00000
+		mw.b 82000000 ff c00000
+		tftp 82000000 rootfs_64k.jffs2
+		sf write 82000000 400000 $(filesize)
+    5) Set boot parameters.
+		setenv bootargs 'mem=64M console=ttyAMA0,115200 root=/dev/mtdblock2 rootfstype=jffs2 mtdparts=hi_sfc:1M(boot),3M(kernel),12M(rootfs)'
+		setenv bootcmd 'sf probe 0;sf read 0x82000000 0x100000 0x300000;bootm 0x82000000'
+        save
+		
+		for 3518E use, the bootargs should be set as:
+		setenv bootargs 'mem=32M console=ttyAMA0,115200 root=/dev/mtdblock2 rootfstype=jffs2 mtdparts=hi_sfc:1M(boot),3M(kernel),12M(rootfs)'
+		
+4. Burn images to the NAND flash.
+    Note: 
+        a) The Hi3518C does not support the NAND flash.
+	b) To use the NAND flash, you need to modify the lowpower.sh script in mpp/ko/. To be specific, comment out the NAND flash disable setting and NANDC pin multiplexing setting as follows:
+
+		#Disable the NANDC: Set 0x200300D0 [1:0] to 2'b01.
+		#himm 0x200300D0 0x5
+
+		#Multiplex the NANDC pin as the GPIO pin.
+		#himm 0x200f00c8  0x1
+		#himm 0x200f00cc  0x1
+		#himm 0x200f00d0  0x1
+		#himm 0x200f00d4  0x1
+		#himm 0x200f00d8  0x1
+		#himm 0x200f00dc  0x1
+		#himm 0x200f00e0  0x1
+		#himm 0x200f00e4  0x1
+		#himm 0x200f00e8  0x1
+		#himm 0x200f00ec  0x1
+		#himm 0x200f00f0  0x1
+		#himm 0x200f00f4  0x1
+		#himm 0x200f00f8  0x1
+		#himm 0x200f00fc  0x1
+		#himm 0x200f0100  0x1
+		#himm 0x200f0104  0x1
+ 
+
+ In this section, a 128 MB Nand flash[h1] is used as an example.
+    1) Address space
+        |     1M     |      3M       |      12M              |      112M             |
+        |------------|---------------|-----------------------|-----------------------|
+        |    boot    |     kernel    |     rootfs            |     others            |
+        The following operations are performed based on the allocated address space. You can change the address space as required.
+    2) Burn the U-boot. 
+        mw.b 82000000 ff 100000
+        tftp 82000000 u-boot-200MHZ.bin		#Replace u-boot-200MHZ.bin with u-boot-220MHZ3518.bin for the Hi3516C.
+        nand erase 0 100000
+        nand write 82000000 0 100000
+        reset
+　3) Burn the kernel.
+        mw.b 82000000 ff f00000
+        tftp 82000000 uImage
+        nand erase 100000 300000
+        tftp 82000000 hi3518_SDK_V1.0.5.0/image_uclibc_hi3516c/uImage
+        nand write 82000000 100000 300000
+　4) Burn the file system.
+        mw.b 82000000 ff c00000
+        tftp 82000000 rootfs_2k_1bit.yaffs2
+        tftp 82000000 hi3518_SDK_V1.0.5.0/image_uclibc_hi3516c/rootfs_2k_1bit.yaffs2
+        nand erase 400000 c00000
+        nand write.yaffs 82000000 400000 (filesize)    
+    5) Set boot parameters.
+	setenv bootargs 'mem=64M console=ttyAMA0,115200 root=/dev/mtdblock2 rootfstype=yaffs2 mtdparts=hinand:1M(boot),3M(kernel),12M(rootfs),112M(others)'
+        setenv bootcmd 'nand read 0x82000000 0x100000 0x300000;bootm 0x82000000'
+        save
+5 Start the new system.
+    reset	#Restart to enter the new system.
+
+Chapter 4 Preparing the Development Environment
+Pin multiplexing
+    #The .sh script in mpp/ko_hi3518 is used to configure the multiplexing relationships between the pins related to media services. You can change the multiplexing relationships as required. The script is called by load3518, and is executed before the MPP kernel driver is loaded.
+    #The multiplexing relationships of other pins are configured in the U-boot. For details, see the U-boot Porting Development Guide.
+    
+Chapter 5 Using the SDK and Demo Board for Development
+1 Enable the network on Linux.
+    # Set network parameters.
+    ifconfig eth0 hw ether xx:xx:xx:xx:xx:xx;
+    ifconfig eth0 xx.xx.xx.xx netmask xx.xx.xx.xx;
+    route add default gw xx.xx.xx.xx
+    #Ping another machine. If the ping operation is successful, the network works properly.
+
+2. Use the network file system (NFS) for development.
+    #You are advised to use the NFS as the development environment. This ensures that you do not need to create and burn the root file system again.
+    #Mount the NFS by running the following command:
+    mount -t nfs -o nolock -o tcp xx.xx.xx.xx:/your-nfs-path /mnt
+    #Access the files in the server under /mnt, and develop related products or solution.
+
+3 Enable the telnet service.
+    # After the network works properly, run the telnetd& command to enable the telnet service of the board, and connect to the board over telnet.
+
+4 Run the MPP services.
+    #On the board running the Linux OS, go to the mpp/ko_hi3518 directory, and load the .ko file. Note that the sensor name such as ar0130 sensor must be added when the load3518 script is executed.
+    cd mpp/ko_hi3518
+    ./load3518 -iar0130
+    
+    #Go to the sample directories, run the samples that are compiled successfully on the server.
+    cd mpp/sample/vio
+    ./sample_vio 0
+    
+Chapter 6 Allocating and Using the Address Space
+1. Double-data rate (DDR) memory management
+    1) The DDR memory is classified into the OS memory and media memory zone (MMZ) memory. The OS memory is managed by the OS, and the MMZ memory is managed by the MMZ kernel module (mmz.ko in mpp/ko_hi35xx), and is available only for media services.
+    2) The start address of the OS memory is 0x80000000. The memory size can be changed by setting bootargs. For example, the parameter "setenv bootargs 'mem=64M ... " described in chapter 3 indicates that the OS memory is 64 MB. You can change the OS memory as required.
+    3) When the MMZ kernel module is loaded, the start address and size of the MMZ memory can be specified by setting parameters. For example:
+    insmod mmz.ko mmz=anonymous,0,0x84000000,64M anony=1
+    The MMZ memory is named anonymous. Its start address is 0x84000000, and its size is 64 MB. You can change the start address and memory size by specifying the MMZ parameters in the load3518 script in mpp/ko_hi3518.
+    4) The address ranges of the MMZ memory and OS memory cannot overlap.
+
+2. Memory management for the DDR on the demo board
+    The following is an example using the 128 MB DDR. The default memory configurations are as follows:
+    -----|-------|  0x80000000   # Memory managed by OS.              
+    64M  | OS    |                                                 
+         |       |                                                 
+    -----|-------|  0x84000000   # Memory managed by MMZ block anonymous.          
+    64M | MMZ   |                                                 
+         |       |                                                 
+    -----|-------|  0x88000000   # End of DDR.                     
+                                                                                                                          
+Note:                                                                                                                     
+	(1) Set the size of the memory managed by the OS to 64 MB by running setenv bootargs 'mem=64M ... when setting boot parameters.	  
+	(2) After the system starts, set the sizes of the memories managed by the MMZ to 64 MB  by running insmod mmz.ko mmz=anonymous,0,0x84000000,64M in the load3518 script.    

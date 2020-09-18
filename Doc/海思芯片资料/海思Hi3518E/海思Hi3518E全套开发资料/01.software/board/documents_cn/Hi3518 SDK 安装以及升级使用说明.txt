@@ -1,0 +1,232 @@
+Hi3518 SDK 安装以及升级使用说明
+
+第一章 Hi3518_SDK_Vx.x.x.x版本升级操作说明
+   如果您是首次安装本SDK，请直接参看第2章。
+
+第二章 首次安装SDK
+1、Hi3518 SDK包位置
+    在"Hi3518_V100R001SPC***/01.software/board"目录下，您可以看到一个 Hi3518_SDK_Vx.x.x.x.tgz 的文件，该文件就是Hi3518的软件开发包。
+其中，Hi3518_V100R001SPC01xxx对应的是uclib版本，Hi3518_V100R001SPC02xxx对应的是glibc版本。
+
+2、解压缩SDK包
+    在linux服务器上（或者一台装有linux的PC上，主流的linux发行版本均可以），使用命令：tar -zxf Hi3518_SDK_Vx.x.x.x.tgz ，
+解压缩该文件，可以得到一个Hi3518_SDK_Vx.x.x.x目录。
+
+3、展开SDK包内容
+    1) 在执行安装脚本前建议修改系统默认shell为bash。
+    2) 返回Hi3518_SDK_Vx.x.x.x目录，运行source sdk.unpack(请用root或sudo权限执行)将会展开SDK包打包压缩存放的内容，请按照提示完成操作。
+如果您需要通过WINDOWS操作系统中转拷贝SDK包，请先运行source sdk.cleanup，收起SDK包的内容，拷贝到新的目录后再展开。
+
+4、在linux服务器上安装交叉编译器
+    1）安装uclibc交叉编译器（注意，需要有sudo权限或者root权限）：
+       进入Hi3518_SDK_Vx.x.x.x/osdrv/toolchain/arm-hisiv100nptl-linux目录，运行chmod +x cross.install，然后运行./cross.install即可。
+    2) 安装glibc交叉编译器（注意，需要有sudo权限或者root权限）：
+       进入Hi3518_SDK_Vx.x.x.x/osdrv/toolchain/arm-hisiv200-linux目录，运行chmod +x cross.install，然后运行./cross.install即可。
+    3) 执行source /etc/profile， 安装交叉编译器的脚本配置的环境变量就可以生效了，或者请重新登陆也可。
+
+5、编译osdrv
+    参见osdrv目录下readme
+
+6、SDK目录介绍
+Hi3518_SDK_Vx.x.x.x 目录结构如下：    
+    |-- sdk.cleanup                 # SDK清理脚本
+    |-- sdk.unpack                  # SDK展开脚本
+    |-- osdrv                       # 存放操作系统及相关驱动的目录
+    |   |-- busybox                 # busybox源代码
+    |   |-- drv                     # drv源代码
+    |   |-- kernel                  # linux内核源代码
+    |   |-- pub                     # 编译好的镜像、工具、drv驱动等
+    |   |-- rootfs_scripts          # rootfs源代码
+    |   |-- toolchain               # 交叉编译器
+    |   |-- tools                   # linux工具源代码
+    |   |-- uboot                   # uboot源代码
+    |   `-- Makefile                # osdrv Makefile
+    |-- package                     # 存放SDK各种压缩包的目录
+    |   |-- osdrv.tgz               # linux内核/uboot/rootfs/tools源码压缩包
+    |   |-- mpp.tgz                 # 媒体处理平台软件压缩包
+    |   `-- image                   # 可供FLASH烧写的映像文件，如内核、根文件系统
+    |-- scripts                     # 存放shell脚本的目录
+    |-- mpp                         # 存放媒体处理平台的目录
+        |-- component               # 组件源代码 
+        |-- extdrv                  # 板级外围驱动源代码
+        |-- include                 # 对外头文件
+        |-- ko                      # 内核模块
+        |-- lib                     # release版本库以及音频库
+        |-- tools                   # 媒体处理相关工具
+        `-- sample                  # 样例源代码
+
+
+第三章、安装、升级Hi3518DEMO板开发开发环境
+    # 如果您使用的Hi3518的DEMO板，可以按照以下步骤烧写u-boot，内核以及文件系统，以下步骤均使用网络来更新。
+    # 通常，您拿到的单板中已经有烧写u-boot，如果没有的话，建议更换带u-boot的Flash。
+    # 更详细的操作步骤及说明，请参见01.software\board\documents目录下的《Linux开发环境用户指南》。
+    # 以下操作假设您的单板上已经有u-boot,使用网口烧写uboot、kernel及rootfs到Flash中。
+    # Demo单板默认为从SPI Flahs启动。
+
+1、配置tftp服务器
+    # 可以使用任意的tftp服务器；
+    # 如果使用hi3518a，将package/image_uclibc_hi3518a(或image_glibc_hi3518a)下的相关文件拷贝到tftp服务器目录下；
+    # 如果使用hi3518c，将package/image_uclibc_hi3518c(或image_glibc_hi3518c)下的相关文件拷贝到tftp服务器目录下；
+    # 如果使用hi3516c，则使用package/image_uclibc_hi3516c(或image_glibc_hi3516c)目录下的相关文件镜像。
+    
+2、参数配置
+    # 单板上电后，敲任意键进入u-boot。设置serverip（即tftp服务器的ip）、ipaddr（单板ip）和ethaddr（单板的MAC地址）。
+    setenv serverip xx.xx.xx.xx
+    setenv ipaddr xx.xx.xx.xx 
+    setenv ethaddr xx:xx:xx:xx:xx:xx
+    setenv netmask xx.xx.xx.xx
+    setenv gatewayip xx.xx.xx.xx
+    ping serverip，确保网络畅通。
+
+3、烧写映像文件到SPI Flash
+    以16M SPI Flash为例。
+    1）地址空间说明
+        |     1M     |      3M       |      12M              |
+        |------------|---------------|-----------------------|
+        |    boot    |     kernel    |     rootfs            |
+
+        以下的操作均基于图示的地址空间分配，您也可以根据实际情况进行调整。
+    2）烧写u-boot
+		sf probe 0
+		sf erase 0 0x100000
+		mw.b 82000000 ff 100000
+		tftp 0x82000000 u-boot-200MHZ.bin	#如果是hi3516c，使用u-boot-220MHZ.bin
+		sf write 82000000 0 100000
+        reset    
+    3）烧写内核
+		sf probe 0
+		sf erase 100000 0x300000
+		mw.b 82000000 ff 300000
+		tftp 82000000 uImage
+		sf write 82000000 100000 300000
+    4)烧写文件系统
+		sf probe 0
+		sf erase 400000 0xc00000
+		mw.b 82000000 ff c00000
+		tftp 82000000 rootfs_64k.jffs2
+		sf write 82000000 400000 0xc00000
+    5）设置启动参数
+		setenv bootargs 'mem=64M console=ttyAMA0,115200 root=/dev/mtdblock2 rootfstype=jffs2 mtdparts=hi_sfc:1M(boot),3M(kernel),12M(rootfs)'
+		setenv bootcmd 'sf probe 0;sf read 0x82000000 0x100000 0x300000;bootm 0x82000000'
+        save
+		
+		如果是3518E，bootargs需要设置为
+		setenv bootargs 'mem=32M console=ttyAMA0,115200 root=/dev/mtdblock2 rootfstype=jffs2 mtdparts=hi_sfc:1M(boot),3M(kernel),12M(rootfs)'
+
+4、烧写映像文件到NAND Flash
+    注意：
+	a). Hi3518c不支持nand flash
+	b). 使用Nand Flash时，需要修改脚本“mpp/ko/lowpower.sh”，注释掉NAND关闭开关和NAND管脚复用设置，即：
+
+		#关闭NANDC：0x200300D0 [1:0]配置为2'b01
+		#himm 0x200300D0 0x5
+
+		#NANDC管脚复用成gpio
+		#himm 0x200f00c8  0x1
+		#himm 0x200f00cc  0x1
+		#himm 0x200f00d0  0x1
+		#himm 0x200f00d4  0x1
+		#himm 0x200f00d8  0x1
+		#himm 0x200f00dc  0x1
+		#himm 0x200f00e0  0x1
+		#himm 0x200f00e4  0x1
+		#himm 0x200f00e8  0x1
+		#himm 0x200f00ec  0x1
+		#himm 0x200f00f0  0x1
+		#himm 0x200f00f4  0x1
+		#himm 0x200f00f8  0x1
+		#himm 0x200f00fc  0x1
+		#himm 0x200f0100  0x1
+		#himm 0x200f0104  0x1
+
+
+    下面以128M 2k1bit类型的Nand Flash为例。
+    1）地址空间说明
+        |     1M     |      3M       |      12M              |      112M             |
+        |------------|---------------|-----------------------|-----------------------|
+        |    boot    |     kernel    |     rootfs            |     others            |
+
+        以下的操作均基于图示的地址空间分配，您也可以根据实际情况进行调整。
+    2）烧写u-boot
+        mw.b 82000000 ff 100000
+        tftp 82000000 u-boot-200MHZ.bin		#如果是hi3516c，使用u-boot-220MHZ.bin
+        nand erase 0 100000
+        nand write 82000000 0 100000
+
+        reset
+    3）烧写内核
+        mw.b 82000000 ff f00000
+        tftp 82000000 uImage
+        nand erase 100000 300000
+tftp 82000000 hi3518_SDK_V1.0.5.0/image_uclibc_hi3516c/uImage
+        nand write 82000000 100000 300000
+    4)烧写文件系统
+        mw.b 82000000 ff c00000
+        tftp 82000000 rootfs_2k_1bit.yaffs2
+tftp 82000000 hi3518_SDK_V1.0.5.0/image_uclibc_hi3516c/rootfs_2k_1bit.yaffs2
+        nand erase 400000 c00000
+        nand write.yaffs 82000000 400000 $(filesize)    
+    5）设置启动参数
+setenv bootargs 'mem=64M console=ttyAMA0,115200 root=/dev/mtdblock2 rootfstype=yaffs2 mtdparts=hinand:1M(boot),3M(kernel),12M(rootfs),112M(others)'
+setenv bootcmd 'nand read 0x82000000 0x100000 0x300000;bootm 0x82000000'
+save
+    
+5、启动新系统
+    reset	# 重启进入新系统。
+
+第四章、开发前环境准备
+
+1、管脚复用
+    与媒体业务相关的管脚复用都在mpp/ko_Hi3518目录下的sh脚本中配置，如果与实际情况不符请直接修改，此脚本被load3518调用，在加载mpp内核模块之前被执行；
+    mpp之外的其他管脚复用统一在uboot中配置，详细说明请参见《U-boot移植应用开发指南》。
+    
+第五章、使用SDK和DEMO板进行开发
+1、开启Linux下的网络
+    # 设置网络
+    ifconfig eth0 hw ether xx:xx:xx:xx:xx:xx;
+    ifconfig eth0 xx.xx.xx.xx netmask xx.xx.xx.xx;
+    route add default gw xx.xx.xx.xx
+    # 然后ping一下其他机器，如无意外，网络将能正常工作。
+
+2、使用NFS文件系统进行开发
+    # 在开发阶段，推荐使用NFS作为开发环境，可以省去重新制作和烧写根文件系统的工作。
+    # 挂载NFS文件系统的操作命令：
+    mount -t nfs -o nolock -o tcp xx.xx.xx.xx:/your-nfs-path /mnt
+    # 然后就可以在/mnt目录下访问服务器上的文件，并进行开发工作。
+
+3、开启telnet服务
+    # 网络正常后，运行命令 telnetd& 就可以启动单板telnet服务，然后才能使用telnet登录到单板。
+
+4、运行MPP业务
+    # 在单板linux系统下，进入mpp/ko_Hi3518目录，加载KO。执行load3518脚本时需要带sensor名，如使用ar0130 sensor：
+    cd mpp/ko_hi3518
+    ./load3518 -i ar0130
+    
+    # 进入各sample目录下执行相应样例程序(sample需要先在服务器上成功编译过)
+    cd mpp/sample/vio
+    ./sample_vio 0
+    
+第六章 地址空间分配与使用
+1、DDR内存管理说明
+    1）所有DDR内存中，一部分由操作系统管理，称为OS内存；另一部分由MMZ模块管理，供媒体业务单独使用，称为MMZ内存。
+    2）OS内存起始地址为0x80000000，内存大小可通过bootargs进行配置，例如第三章中的setenv bootargs 'mem=64M ... ',表示分配给操作系统内存为64M，您可以根据实际情况进行调整。
+    3）MMZ内存由MMZ内核模块管理（mpp/ko_hi35xx目录下的mmz.ko），加载mmz模块时，通过模块参数指定其起始地址及大小，例如：
+    insmod mmz.ko mmz=anonymous,0,0x84000000,64M anony=1
+    表示mmz一块区域，区域的名称为anonymous，起始地址为0x84000000，大小为64M。
+    您可以通过修改mpp/ko_Hi3518目录下load3518脚本中的mmz模块参数，来修改其起始地址和总大小。
+    4）请注意MMZ内存地址范围不能与OS内存重叠。
+
+2、DEMO板DDR内存管理示意
+    1) 以容量为128MBytes的DDR内存为例，以下为根据本文档和SDK默认配置得到的内存管理示意图：
+    
+    -----|-------|  0x80000000   # Memory managed by OS.              
+    64M  | OS    |                                                 
+         |       |                                                 
+    -----|-------|  0x84000000   # Memory managed by MMZ block anonymous.          
+    64M  | MMZ   |                                                 
+         |       |                                                 
+    -----|-------|  0x88000000   # End of DDR.                     
+    
+    注意：
+	（1）用户在配置启动参数时需要设置OS的管理内存为64M，“setenv bootargs 'mem=64M ...”。	  
+	（2）系统启动后，配置load3518的脚本中mmz的管理内存为64M，“insmod mmz.ko mmz=anonymous,0,0x84000000,64M”。    

@@ -1,0 +1,52 @@
+
+Instructions for the CMA-based MMZ
+
+
+1. MMZ Allocation Modes
+   The media memory zone (MMZ) module supports two memory management modes.
+1) Default memory management mode
+   In this mode, the MMZ is a HiSilicon-developed independent memory management module based on the buddy algorithm. The memory managed by the MMZ module is not within the range of the memory managed by the OS. The usage method is the same as before:
+   insmod hi_osal.ko anony=1 mmz_allocator=hisi mmz=anonymous,0,0x88000000,384M
+  
+
+2) CMA-based memory management mode
+  This mode is added to support the file O_DIRECT operation. To use this mode, specify mmz_allocator as cma in the bootargs. Besides, in CMA mode, the MMZ needs to be specified by using the bootargs (for example: mem=512M mmz=anonymous,0,0x88000000,384M mmz_allocator=cma).
+
+2. Notice for Using the CMA-based MMZ Module
+1) The memory reserved by the MMZ is within the system memory range. The size of the reserved memory can only be configured by using the bootargs. The following is an example:
+mem=512M mmz=anonymous,0,0x88000000,384M mmz_allocator=cma console=ttyAMA0,115200 root=/dev/mtdblock2 rootfstype=jffs2 rw mtdparts=hi_sfc:1M(boot),4M(kernel),11M(rootfs)
+		
+   Note: The size of the memory management zone for the Linux kernel is 512 MB (0x8000000每0x9FFFFFFF). The starting 128 MB (0x80000000每0x87FFFFFF) memory can only be used by the system, and the remaining 384 MB (0x88000000每0x9FFFFFFF) memory is reserved by the CMA.
+
+2) When the MMZ module is loaded, ensure that the MMZ parameters are consistent with the parameters in the bootargs (for example: insmod hi_osal.ko anony=1 mmz_allocator=cma mmz=anonymous,0,0x88000000,384M).
+		
+3) The start address and size of each zone allocated by the MMZ must be 4-MB-aligned.
+
+4) The physical addresses allocated by the CMA cannot be directly mapped by using functions such as iounmap. Only the mapping function provided by the MMZ module can be used for address mapping.
+
+5) In a system with both the low memory and high memory (a typical example is ARM32), the CMA zone cannot span the low memory and high memory, and can only fall within one of the two types of memory.
+   The boundary of the low memory and high memory can be controlled by the vmalloc parameter in the bootargs. The highest address of the high memory is 0xff000000, and the location of the boundary is (0xff000000 每 vmalloc).
+
+6) CMA zone in the low memory: The maximum value of the low memory is calculated as follows: Maximum value = 0xff000000 每 0xc0000000 每 32 MB (high memory size) = 0x3d000000 = 976 MB. That is, the sum of the used system memory and the CMA zone cannot exceed 976 MB. In addition, the size of the virtual address space in the high memory is only 32 MB. Therefore, there is a risk that the high virtual addresses are insufficient.
+   The following is an example:
+   mem=948M console=ttyAMA0,115200 vmalloc=32M mmz=anonymous,0,0x88000000,820M root=/dev/mmcblk0p3 rootfstype=ext4 rw rootwait blkdevparts=mmcblk0:1M(boot),4M(kernel),32M(rootfs)
+ (Note: The size of vmalloc must be configured. Otherwise, the high memory interval uses the default value.)
+
+7) CMA zone in the high memory: The total size of the virtual address space of the high memory and the low memory is 1008 MB (0xff000000 每 0xc0000000). That is, the total size of the CMA-allocated memory that can be mapped is less than (1008 MB 每 lowmem_size). However, the size of the physical memory managed by the CMA is larger.
+   The following is an example:
+   mem=1024M console=ttyAMA0,115200 vmalloc=880M mmz=anonymous,0,0x88000000,860M root=/dev/mmcblk0p3 rootfstype=ext4 rw rootwait blkdevparts=mmcblk0:1M(boot),4M(kernel),32M(rootfs)
+
+8) The address of the memory used for the file O_DIRECT operation must be 512-byte-aligned. That is, the buffer base address transferred to the read/write function must be an integral multiple of 512.
+
+
+Note: 
+1. For Linux kernel, the O_DIRECT write mode is not supported in the FAT file system. The O_DIRECT write mode is not recommended in the FAT file system.
+
+2. If kernel node/dev/mem is used to map the CMA-based MMZ, you have to perform the following operations (taking Hi3516C V500 as an example):
+
+   Run the make ARCH=arm CROSS_COMPILE=arm-himix200-linux- menuconfig command, 
+   disable the kernel hacking ---->Filter access to /dev/mem option, and recompile the kernel to replace the original kernel.
+
+
+
+

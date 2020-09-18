@@ -1,0 +1,91 @@
+  Organizer:   HW_CC                          BOM Archive List of Huawei
+ 
+                                       -----------------------------------------
+Project Code  None   Description  Hi3518EDmeb   Project Type          Product Status            Current Environment         
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  Current Version A         Latest Version A  Prepared Date                          Effective Date                        To                          File Control Figure Number
+ 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  SN         Working Procedure Code  Description      Project Code   Project Description                      Substitute Item Substitute Item Description   Quantity  Unit Version  ECO Number      Implementation Diagram Number       Position Number                        
+ --- ---------- ---- ----- --------- --------- --------------------------    -------  ------------   ----  ---- ----  ---------- ---- -------------------------------------- 
+   1               1                 08070614   SMD ceramic capacitor-16 V-100 nF-¡À                               34  PCS                                    C1   C2  C3  C4  C5  C6  C7  C8
+                                                10%-X7R-0402-BT                                                                                    C9   C10  C11  C21  C22  C23  C24
+                                                                                                                                                   C25  C26  C27  C28  C29  C12
+                                                                                                                                                   C13  C14  C15  C16  C17  C18
+                                                                                                                                                   C19  C20  C30  C43  C46  C63
+                                                                                                                                                   C64
+   2               1                 08070667   SMD ceramic capacitor-6.3 V-2200 nF-¡À                             14  PCS                                    C31  C32  C33  C34  C35  C36
+                                                20%-X5R-0402-TS16949                                                                               C37  C38  C39  C50  C65  C66
+                                                                                                                                                   C67  C71
+   3               1                 08070612   SMD ceramic capacitor-10 V-1000 nF-¡À                               2  PCS                                    C40  C41
+                                                10%-X5R-0402-BT, TS16949                                                                            
+   4               1                 08071610   SMD ceramic capacitor-6.3 V-4700 nF-¡À                              5  PCS                                    C42  C44  C45  C70  C72
+                                                20%-X5R-0402                                                                                       
+   5               1                 08070649   SMD ceramic capacitor-6.3 V-10000 nF-¡À                            11  PCS                                    C47  C48  C49  C51  C52  C53
+                                                20%-X5R-0603-BT, TS16949                                                                            C54  C55  C68  C69  C73
+   6               1                 08070544   SMD ceramic capacitor-50 V-0.015 nF-¡À                              2  PCS                                    C56  C57
+                                                5%-NP0-0402-BT                                                                                     
+   7               1                 08070543   SMD ceramic capacitor-50 V-0.012 nF-¡À                              2  PCS                                    C58  C59
+                                                5%-NP0-0402                                                                                        
+   8               1                 08070654   SMD ceramic capacitor-6.3 V-100000 nF-                               3  PCS                                    C60  C61  C62
+                                                ¡À20%-X5R-1210                                                                                    
+   9               1                 15010248   Schottky diode-30 V-0.2 A-0.5 V-                              1  PCS                                    D1
+                                                SOD-523-1 A                                                                                         
+  10               1                 14050101   Pin-Common quad pin-1 pin-Single row-                             1  PCS                                    J1
+                                                In-line -5.84 mm-2.92 mm-2.54 mm-                                                                         
+                                                THT                                                                                                
+  11               1                 99051JBR   1.27 mm spacing-80 pins-                                        2  PCS                                    J2  J3
+                                                High-speed connector-Female connector                                                                                   
+  12               1                 10070019   EMI bead-¡À25%-1000 ohms-                                  6  PCS                                    LB1  LB2  LB3  LB4  LB5  LB6
+                                                1.25 ohms-0.25 A-0402-                                                                                
+                                                1400 ohms@1 GHz                                                                                       
+  13               1                 33010116   Temperature sensor IC--55 to 125 degree Celsius-3 V-                             1  PCS                                    Q1
+                                                5.5 V-Digital temperature-¡À2 degree Celsius-TO-                                                                         
+                                                TR-750000 ¦Ìs-9 bits-1-                                                                                
+                                                wire bus interface                                                                                       
+  14               1                 07090263   Thick film chip resistor-0.1 W-                                     1  PCS                                    R1
+                                                1000000 ohms-¡À5%-0603                                                                              
+  15               1                 07090836   Thick film chip resistor-0.0625 W-                                 11  PCS                                    R2   R3   R4   R5   R9  R38 
+                                                33 ohms-¡À1%-0402                                                                                   R34  R16  R35  R36  R37 
+  16               1                 07090634   Thick film chip resistor-0.1 W-43.2 ohms-                             1  PCS                                    R6
+                                                ¡À1%-0603                                                                                         
+  17               1                 07090809   Thick film chip resistor-0.0625 W-                                 10  PCS                                    R7   R11  R12  R13  R14  R15  R18
+                                                1000 ohms-¡À5%-0402-BT                                                                              R19  R20  R32
+ 
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  |Prepared By|                 |Date|                   |BOM Approved By|                  |Date|               |Standardization|                   |Date|                       
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|Reviewed By|                 |Date|                                                                   |Approved By|                     |Date|                        
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  %: Indicates optional             *: Indicates there is the BOM                                                                                                                             
+  Organizer:   HW_CC                          BOM Archive List of Huawei
+ 
+                                       -----------------------------------------
+Project Code  None   Description  Hi3518EDmeb   Project Type          Product Status            Current Environment         
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  Current Version A         Latest Version A  Prepared Date                          Effective Date                        To                          File Control Figure Number
+ 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  SN         Working Procedure Code  Description      Project Code   Project Description                      Substitute Item Substitute Item Description   Quantity  Unit Version  ECO Number      Implementation Diagram Number       Position Number                        
+ --- ---------- ---- ----- --------- --------- --------------------------    -------  ------------   ----  ---- ----  ---------- ---- -------------------------------------- 
+  18               1                 07091277   Thick film chip resistor-0.1 W-                                     1  PCS                                    R8
+                                                470000 ohms-¡À1%-0603                                                                               
+  19               1                 07091782   Thick film chip resistor-0.0625 W-                                  1  PCS                                    R10
+                                                240 ohms-¡À1%-0402-BT                                                                               
+  20               1                 07090522   Thick film chip resistor-0.1 W-0 ohms-                                4  PCS                                    R23  R26  R27  R29
+                                                < 50 Mohms-0603-1 A-BT, TS16949                                                                         
+  21               1                 07091282   Thick film chip resistor-0.0625 W-                                  2  PCS                                    R21  R22
+                                                1000 ohms-¡À1%-0402-BT                                                                              
+  22               1                 07090610   Thick film chip resistor-0.0625 W-                                  1  PCS                                    R31
+                                                51 ohms-¡À5%-0402                                                                                   
+  23               1                 18EDMBU1   SPI flash SOP16 32 MB                                     1  PCS                                    U1
+  24               1                 18EDBU02   RTC Super capacitor-Battery-R                                    1  PCS                                    U2
+  25               1                 18EDBU03   Hi3518E master chip                                            1  PCS                                    U3
+  26               1                 18EDMBX1   32.768 kHz-RTC crystal oscillator-SIP2-1_25                                1  PCS                                    X1
+  27               1                 18EDMBX2   24 MHz system clock-SX4-0302                                   1  PCS                                    X2
+  28               1                 None         Hi3518EDMEB  VER.A PCB                                    1  PCS                                   
+

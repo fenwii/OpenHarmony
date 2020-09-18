@@ -1,0 +1,46 @@
+基于 CMA 方式的 MMZ 使用说明
+
+
+1. MMZ内存分配方式
+   MMZ模块支持两种内存管理方式：
+1) 默认的内存管理方式
+   这是海思设计的一个基于伙伴算法的独立的内存管理模块。模块所管理的内存，不在操作系统管理的内存范围内。使用方法与之前保持一致：
+   insmod hi_osal.ko anony=1 mmz_allocator=hisi mmz=anonymous,0,0x88000000,384M
+
+
+2) 基于CMA 的内存管理方式
+  本方法是为支持文件 O_DIRECT 操作而新增的，需要在 bootargs 中指定 mmz_allocator=cma。CMA方式还需要通过 bootargs 指定 MMZ 区域，如：mem=512M mmz=anonymous,0,0x88000000,384M mmz_allocator=cma
+
+2.基于CMA方式的 MMZ 模块使用须知
+1) MMZ保留的内存在系统内存范围之内，保留内存大小只能通过 bootargs 配置，如：mem=512M mmz=anonymous,0,0x88000000,384M mmz_allocator=cma console=ttyAMA0,115200 root=/dev/mtdblock2 rootfstype=jffs2 rw mtdparts=hi_sfc:1M(boot),4M(kernel),11M(rootfs)
+		
+   说明：
+   Linux内核内存管理区域为 512M(0x8000000~0x9FFFFFFF)，前面128MB (0x80000000~0x87FFFFFF)内存只能被系统使用，后面384MB(0x88000000~0x9FFFFFFF)内存CMA保留的内存。
+
+2) 加载 MMZ 模块时，所带 MMZ 参数与 bootargs 的参数保持一致即可，如：insmod hi_osal.ko anony=1 mmz_allocator=cma mmz=anonymous,0,0x88000000,384M
+		
+3) MMZ 分配的每个 zone 起始地址和大小必须按 4M 对齐。
+
+4) 通过 CMA 分配得到的物理地址不能直接使用iounmap之类的函数直接进行映射，必须使用 MMZ 模块提供的映射函数。
+
+5) 在有 low memory 和 high memory 的系统上（典型的如 ARM32），CMA 的区域不能同时跨越 low memory 和 high memory，只能落在其中一侧
+   high memory 和 low memory 的界线可以通过 bootargs 的 vmalloc 参数控制，high memory 的最高地址为 0xff000000，界线的位置：0xff000000 - vmalloc
+
+6) CMA 区域分配在 low memory 上低内存的最大值：0xff000000 - 0xc0000000 - 32M（high memory size） = 0x3d000000 = 976MB，也就是说系统使用的内存和CMA区域加起来的总大小不能超过976MB。同时高内存的虚拟地址空间只有32MB，有存在高地址虚拟地址不足的风险。
+   实例：
+   mem=948M console=ttyAMA0,115200 vmalloc=32M mmz=anonymous,0,0x88000000,820M root=/dev/mmcblk0p3 rootfstype=ext4 rw rootwait blkdevparts=mmcblk0:1M(boot),4M(kernel),32M(rootfs)
+ （说明：必须配置 vmalloc大小，否则高内存区间使用默认值）
+
+7) CMA 区域分配在 high memory 上高低内存的虚拟地址空间总和为：0xff000000 - 0xc0000000 = 1008MB，也就是说同一时刻，CMA 分配的内存能够被映射的总和肯定小于 （1008M - lowmem_size），但是 CMA 能够管理的物理内存可以更大。
+   实例：
+   mem=1024M console=ttyAMA0,115200 vmalloc=880M mmz=anonymous,0,0x88000000,860M root=/dev/mmcblk0p3 rootfstype=ext4 rw rootwait blkdevparts=mmcblk0:1M(boot),4M(kernel),32M(rootfs)
+
+8) 用于文件 O_DIRECT 操作的内存地址必须512字节地址对齐，即传给 read/write 函数的 buf 基地址必须为 512的整数倍。
+
+
+注意：
+1. Linux内核对于FAT文件系统目前不支持O_DIRECT方式写文件。不建议在FAT文件系统中使用O_DIRECT。
+2. 如果需要使用内核节点/dev/mem进行映射基于 CMA 方式的 MMZ,需要客户进行以下操作(以Hi3516CV500为例)：
+    1）运行make ARCH=arm CROSS_COMPILE=arm-himix200-linux- menuconfig，
+    将kernel hacking ---->Filter access to /dev/mem 选项关掉，重新编译内核，并替换原来的内核。
+ 

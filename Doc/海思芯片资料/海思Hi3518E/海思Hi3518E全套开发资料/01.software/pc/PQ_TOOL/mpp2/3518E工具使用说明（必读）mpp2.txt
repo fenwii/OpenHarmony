@@ -1,0 +1,29 @@
+由于3518E整体内存较小，如果使用工具的预览点播功能（板端启动ittb_stream）请做以下修改：
+
+1、调整OS内存和MMZ内存
+    1）推荐修改OS内存为38M：OS内存大小可通过bootargs进行配置
+	所有DDR内存中，一部分由操作系统管理，称为OS内存；另一部分由MMZ模块管理，供媒体业务单独使用，称为MMZ内存。工具需要调整这两块内存大小。
+    配置方式：单板上电后，敲任意键进入u-boot，设置启动参数
+    setenv bootargs 'mem=38M console=ttyAMA0,115200 root=/dev/mtdblock2 rootfstype=jffs2 mtdparts=hi_sfc:1M(boot),3M(kernel),12M(rootfs)'
+    setenv bootcmd 'sf probe 0;sf read 0x82000000 0x100000 0x300000;bootm 0x82000000'
+    save
+    reset
+
+    2）推荐修改MMZ内存为26M
+    修改load3518e脚本，替换
+	insmod mmz.ko mmz=anonymous,0,0x82000000,32M anony=1 || report_error   #for 3518E use
+    为：insmod mmz.ko mmz=anonymous,0,0x82600000,26M anony=1 || report_error   #for 3518E use
+		
+2、打开板端工具文件根目录下的configs文件夹并找到对应sensor的配置，推荐修改其【VbCnt】字段的值为8
+    如：
+    [vb_conf]
+    VbCnt=8
+   
+3、打开板端工具文件根目录下的configs文件夹并找到对应sensor的配置，推荐修改其【TargetFrmRate】字段的值为25
+    如：
+    [venc]
+    TargetFrmRate=25
+   
+4、如果对希望有更高的帧率，可修改load3518e脚本，裁剪fb驱动以减小内存:
+   删除load3518e脚本中：insmod hifb.ko video="hifb:vram0_size:1620"
+   删除load3518e脚本中：rmmod hifb

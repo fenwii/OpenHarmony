@@ -1,0 +1,537 @@
+  Organizer:   HW_CC                          BOM Archive List of Huawei
+ 
+                                       -----------------------------------------
+Project Code  None   Description  HI3518PERB   Project Type          Product Status            Current Environment         
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  Current Version B         Latest Version B  Tabulation Date                          Effective Date                        To                          File Control Figure Number
+ 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  SN         Working Procedure Code  Description      Project Code   Project Description                      Substitute Item Substitute Item Description   Quantity  Unit Version  ECO Number      Implementation Diagram Number       Position Number                        
+ --- ---------- ---- ----- --------- --------- --------------------------    -------  ------------   ----  ---- ----  ---------- ---- -------------------------------------- 
+   1               1                                  08070230       SMD ceramic capacitor-50 V-0.1 nF-¡À5%-                             2  PCS                                    C1  C2
+                                                                     NPO-0603-TS16949                                                                                   
+   2               1                                  08070601       SMD ceramic capacitor-16 V-1000 nF-¡À                               4  PCS                                    C3  C4  C5  C6
+                                                                     10%-X5R-0603                                                                                       
+   3               1                                  08070729       SMD ceramic capacitor-10 V-10000 nF-¡À                              4  PCS                                    C7  C169 C171 C173
+                                                                     10%-X7R-1206                                                                                       
+   4               1                                  08070693       SMD ceramic capacitor-6.3 V-10000 nF-¡À                             2  PCS                                    C8  C9
+                                                                     10%-X7R-0805                                                                                       
+   5               1                                  08070614       SMD ceramic capacitor-16 V-100 nF-¡À                               26  PCS                                    C10  C11  C121 C122 C51  C55
+                                                                     10%-X7R-0402-BT                                                                                    C28  C35  C213 C60  C114 C80
+                                                                                                                                                   C120 C56  C59  C123 C74  C75
+                                                                                                                                                   C76  C77  C78  C79  C13  C14
+                                                                                                                                                   C72  C73
+   6               1                                  08070630       SMD ceramic capacitor-6.3 V-22000 nF-¡À                             4  PCS                                    C12  C215 C216 C217
+                                                                     20%-X5R-1206-BT, TS16949                                                                            
+   7               1                                  08070561       SMD ceramic capacitor-10 V-100 nF-¡À                               25  PCS                                    C15  C29  C110 C111 C112 C176
+                                                                     10%-X5R-0402                                                                                       C52  C96  C32  C33  C22  C23
+                                                                                                                                                   C24  C25  C26  C27  C16  C17
+                                                                                                                                                   C18  C19  C20  C21  C30  C31
+                                                                                                                                                   C34
+   8               1                                  08070627       SMD ceramic capacitor-50 V-100 nF-¡À                               14  PCS                                    C36  C37  C44  C45  C46  C47
+                                                                     10%-X7R-0603                                                                                       C49  C50  C38  C39  C42  C43
+                                                                                                                                                   C40  C41
+   9               1                                  08070472       SMD ceramic capacitor-100 V-1 nF-¡À10%-                             1  PCS                                    C48
+                                                                      X7R-0603                                                                                           
+  10               1                                  08070236       SMD ceramic capacitor-50 V-0.015 nF-¡À                              1  PCS                                    C53
+                                                                     5%-NPO-0603                                                                                        
+  11               1                                  08070231       SMD ceramic capacitor-50 V-0.047 nF-¡À                              1  PCS                                    C54
+                                                                     5%-NPO-0603                                                                                        
+  12               1                                  08070262       SMD ceramic capacitor-16 V-100 nF-¡À                               36  PCS                                    C57  C58  C90  C91  C99  C100
+                                                                     10%-X7R-0603-TS16949                                                                               C137 C180 C211 C342 C92  C93
+                                                                                                                                                   C97  C98  C86  C87  C88  C89
+                                                                                                                                                   C94  C95  C82  C83  C84  C85
+                                                                                                                                                   C65  C66  C67  C68  C69  C70
+                                                                                                                                                   C61  C62  C63  C64  C71  C81
+                                                                                                                                                   
+  13               1                                  08070731       SMD ceramic capacitor-25 V-10000 nF-¡À                             14  PCS                                    C101 C102 C196 C197 C202 C195
+                                                                     20%-X5R-1206                                                                                       C212 C200 C201 C198 C199 C138
+                                                                                                                                                   C177 C194 
+  14               1                                  08020067       Solid SMD tantalum capacitor-10 V-100 ¦ÌF-¡À                              4  PCS                                    C103 C104 C105 C178
+                                                                     20%-Rectangular tablet-7.3 mm x 4.3 mm x 2.8 mm-                                                                            
+                                                                     Low ESR (0.1 ohm)                                                                                    
+  15               1                                  08070649       SMD ceramic capacitor-6.3 V-10000 nF-¡À                            10  PCS                                    C106 C107 C108 C187 C192 C214
+ 
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  |Prepared by|                 |Date|                   |BOM approved by|                  |Date|               |Standardization|                   |Date|                       
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|Reviewed by|                 |Date|                                                                   |Approved by|                     |Date|                        
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  %: Indicates optional             *: Indicates there is the BOM                                                                                                                             
+  Organizer:   HW_CC                          BOM Archive List of Huawei
+ 
+                                       -----------------------------------------
+Project Code  None   Description  HI3518PERB   Project Type          Product Status            Current Environment         
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  Current Version B         Latest Version B  Tabulation Date                          Effective Date                        To                          File Control Figure Number
+ 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  SN         Working Procedure Code  Description      Project Code   Project Description                      Substitute Item Substitute Item Description   Quantity  Unit Version  ECO Number      Implementation Diagram Number       Position Number                        
+ --- ---------- ---- ----- --------- --------- --------------------------    -------  ------------   ----  ---- ----  ---------- ---- -------------------------------------- 
+                                                                     20%-X5R-0603-BT, TS16949                                                                            C190 C191 C188 C189
+  16               1                                  08070612       SMD ceramic capacitor-10 V-1000 nF-¡À                               9  PCS                                    C109 C116 C125 C113 C115 C117
+                                                                     10%-X5R-0402-BT, TS16949                                                                            C118 C119 C124
+  17               1                                  08070449       SMD ceramic capacitor-16 V-10 nF-¡À10%-                             2  PCS                                    C126 C131
+                                                                     X7R-0402-BT, TS16949                                                                                
+  18               1                                  08070808       SMD ceramic capacitor-50 V-10000 nF-¡À                              4  PCS                                    C127 C128 C129 C130
+                                                                     10%-X7S-1210                                                                                       
+  19               1                                  08070734       SMD ceramic capacitor-6.3 V-100000 nF-                               5  PCS                                    C132 C133 C208 C185 C186
+                                                                     ¡À20%-X5R-1206-TS16949                                                                            
+  20               1                                  08070562       SMD ceramic capacitor-6.3 V-1000 nF-¡À                              4  PCS                                    C134 C135 C181 C204
+                                                                     10%-X5R-0603                                                                                       
+  21               1                                  08110006       Solid SMD aluminum capacitor-16 V-220 ¦ÌF-¡À                              1  PCS                                    C139
+                                                                     20%-Polymer aluminum-8 mm x 10 mm-                                                                       
+                                                                     Low (18 mohms)-                                                                                       
+                                                                     Maximum soldering temperature 250 degrees Celsius, 5s                                                                                 
+  22               1                                  08010269       Non-solid SMD aluminum capacitor-16 V-100 ¦ÌF-                               1  PCS                                    C142
+                                                                     ¡À20%-6.3 mm x 5.4 mm-Polarity-                                                                             
+                                                                     105 degrees Celsius-1000 h-                                                                                     
+                                                                     Rectangular tablet, temperature-sensitive device-                                                                                 
+                                                                     Process temperature 250 degrees Celsius, 5s                                                                                 
+  23               1                                  08120006       Non-solid SMD aluminum capacitor-50 V-100 ¦ÌF-                               1  PCS                                    C143
+                                                                     ¡À20%-8 mm x 10 mm-8.3 mm x 8.3 mm-Polarity-                                                                        
+                                                                     105 degrees Celsius-2000 h-Cylinder-                                                                              
+                                                                     Temperature-sensitive device-                                                                                      
+                                                                     Process temperature 250 degrees Celsius, 5s                                                                                 
+  24               1                                  08070237       SMD ceramic capacitor-50 V-0.012 nF-¡À                              2  PCS                                    C144 C145
+                                                                     5%-NPO-0603                                                                                        
+  25               1                 08070531   SMD ceramic capacitor-50 V-1 nF-¡À10%-                             12  PCS                                    C146 C147 C148 C149 C156 C157
+                                                X7R-0402-BT                                                                                        C154 C155 C150 C151 C152 C153
+                                                                                                                                                   
+  26               1                 08070439   SMD ceramic capacitor-2000 V-1 nF-¡À                                1  PCS                                    C158
+                                                20%-X7R-1206                                                                                       
+  27               1                 08070780   SMD ceramic capacitor-10 V-10000 nF-¡À                              2  PCS                                    C159 C160
+                                                10%-X5R-0805-Only for terminal                                                                              
+  28               1                 08070565   SMD ceramic capacitor-6.3 V-10000 nF-¡À                            11  PCS                                    C161 C162 C163 C164 C170 C172
+                                                10%-X5R-0805-TS16949                                                                               C167 C168 C165 C166 C174
+  29               1                 08070249   SMD ceramic capacitor-50 V-1 nF-¡À10%-                              1  PCS                                    C175
+                                                X7R-0603                                                                                           
+  30               1                 08070247   SMD ceramic capacitor-50 V-10 nF-¡À10%-                             1  PCS                                    C179
+                                                X7R-0603-TS16949                                                                                   
+  31               1                 08010214   Non-solid in-line aluminum capacitor-25 V-220 ¦ÌF-                              1  PCS                                    C182
+                                                ¡À20%-8*11.5-3.5-0.6 mm-                                                                           
+                                                Polarity-105 degrees Celsius-1000 h                                                                                 
+ 
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  |Prepared by|                 |Date|                   |BOM approved by|                  |Date|               |Standardization|                   |Date|                       
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|Reviewed by|                 |Date|                                                                   |Approved by|                     |Date|                        
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  %: Indicates optional             *: Indicates there is the BOM                                                                                                                             
+  Organizer:   HW_CC                          BOM Archive List of Huawei
+ 
+                                       -----------------------------------------
+Project Code  None   Description  HI3518PERB   Project Type          Product Status            Current Environment         
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  Current Version B         Latest Version B  Tabulation Date                          Effective Date                        To                          File Control Figure Number
+ 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  SN         Working Procedure Code  Description      Project Code   Project Description                      Substitute Item Substitute Item Description   Quantity  Unit Version  ECO Number      Implementation Diagram Number       Position Number                        
+ --- ---------- ---- ----- --------- --------- --------------------------    -------  ------------   ----  ---- ----  ---------- ---- -------------------------------------- 
+  32               1                 08020061   Solid SMD tantalum capacitor-25 V-22 ¦ÌF-¡À                               2  PCS                                    C183 C184
+                                                20%-Rectangular tablet-7.3 mm x 4.3 mm x 2.8mm-                                                                            
+                                                Common (0.9 ohm)                                                                                       
+  33               1                 08070564   SMD ceramic capacitor-6.3 V-4700 nF-¡À                              1  PCS                                    C205
+                                                20%-X5R-0603-BT, TS16949                                                                            
+  34               1                 08110012   Solid SMD aluminum capacitor-16 V-100 ¦ÌF-¡À                              2  PCS                                    C206 C207
+                                                20%-Polymer-6.3 mm x 5.9 mm-                                                                           
+                                                Low ESR (24 mohms)                                                                                   
+  35               1                 08020109   Solid SMD tantalum capacitor-4 V-470 ¦ÌF-¡À                               1  PCS                                    C209
+                                                20%-Rectangular tablet-7.3 mm x 4.3 mm x 2.8 mm-                                                                            
+                                                Low ESR (12 mohms)-Polymer                                                                            
+  36               1                 08020132   Solid SMD tantalum capacitor-6.3 V-220 ¦ÌF-¡À                             1  PCS                                    C210
+                                                20%-Rectangular tablet-3.5 mm x 2.8 mm x 1.9 mm-                                                                            
+                                                Low ESR (35 mohms)-Polymer-                                                                           
+                                                Only for power supply                                                                                           
+  37               1                 08070654   SMD ceramic capacitor-6.3 V-100000 nF-                               1  PCS                                    C218
+                                                ¡À20%-X5R-1210                                                                                    
+  38               1                 15040173   Transient suppression diode-17.1¨C25.2 V-                              1  PCS                                    D1
+                                                1500 W-59.5 A-SMC (DO-214AB)                                                                          
+  39               1                 15040135   Transient suppression diode-14.2 V-15.8 V-                              9  PCS                                    D2  D3  D4  D5  D6  D7  D15  D13
+                                                300 W-0A-SOT-23                                                                                     D14
+  40               1                 15010248   Schottky diode-30 V-0.2 A-0.5 V-                              1  PCS                                    D8
+                                                SOD-523-Default                                                                                    
+  41               1                 15020097   Infrared remote control receiver -2.7¨C5.5 V-                                 1  PCS                                    D9
+                                                0.001 A-0.015 km-38 kHz-940 nm-                                                                        
+                                                6.95 mm x 6.0 mm x 5.6 mm-                                                                                    
+  42               1                 15020062   Light emitting diode-0.015 cd-                                      1  PCS                                    D10
+                                                Red/630 nm-15 mA-0805                                                                               
+  43               1                 15040241   Transient suppression diode-350 V-275 V-                                1  PCS                                    D11
+                                                100 A-SMB                                                                                           
+  44               1                 15010252   Schottky diode-10 V-3 A-0.24 V-                               1  PCS                                    D12
+                                                SOD323-BT                                                                                          
+  45               1                 19040108   Fuse kit-fast fuse-125 V-5 A-                               1  PCS                                    F1
+                                                UL specifications-0.016 ohm-5.5A*A*Sec-                                                                        
+                                                Yes                                                                                                 
+  46               1                 14050006   Pin-Common quad pin-3 pins-Single row-                             1  PCS                                    J1
+                                                In-line-5.84 mm-3.9 mm-2.54 mm-THT                                                                       
+  47               1                 14050101   Pin-Common quad pin-1 pin-Single row-                             8  PCS                                    J2  J3  J4  J5  J6  J7  J8  J9
+                                                In-line-5.84 mm-2.92 mm-2.54 mm-                                                                         
+                                                THT                                                                                                
+  48               1                 PERB0J10   FPC-40 connector                                             1  PCS                                    J10
+  49               1                 PERB0J11   CVBS socket                                                 1  PCS                                    J11
+  50               1                 PERB0J12   60-pin connector                                              1  PCS                                    J12
+ 
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  |Prepared by|                 |Date|                   |BOM approved by|                  |Date|               |Standardization|                   |Date|                       
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|Reviewed by|                 |Date|                                                                   |Approved by|                     |Date|                        
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  %: Indicates optional             *: Indicates there is the BOM                                                                                                                             
+  Organizer:   HW_CC                          BOM Archive List of Huawei
+ 
+                                       -----------------------------------------
+Project Code  None   Description  HI3518PERB   Project Type          Product Status            Current Environment         
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  Current Version B         Latest Version B  Tabulation Date                          Effective Date                        To                          File Control Figure Number
+ 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  SN         Working Procedure Code  Description      Project Code   Project Description                      Substitute Item Substitute Item Description   Quantity  Unit Version  ECO Number      Implementation Diagram Number       Position Number                        
+ --- ---------- ---- ----- --------- --------- --------------------------    -------  ------------   ----  ---- ----  ---------- ---- -------------------------------------- 
+  51               1                 PERB0J13   2-pin connector                                              1  PCS                                    J13
+  52               1                 14050007   Pin-Common quad pin-6 pins-Single row-                             2  PCS                                    J14  J17
+                                                In-line-5.84 mm-2.92 mm-2.54 mm-                                                                         
+                                                THT                                                                                                
+  53               1                 14190002   Power connector-DC header-1 pin-50 V-                                1  PCS                                    J15
+                                                0.5 A-Right angle-Male socket-Soldering                                                                                
+  54               1                 PERB0J16   Microphone socket                                                  1  PCS                                    J16
+  55               1                 PERB0J18   SD card socket                                                   1  PCS                                    J18
+  56               1                 14200041   Socket-Cable connector-20 pins-                                   1  PCS                                    J19
+                                                Dual in-line socket-2.54 mm-9.3 mm-2.9 mm-                                                                       
+                                                THT                                                                                                
+  57               1                 PERB0J20   LINE IN socket                                              1  PCS                                    J20
+  58               1                 14100074   Common socket-2 pins-Single row-In-line-                                 2  PCS                                    J21  J28
+                                                2.5 mm-2 mm-THT-3 A                                                                                   
+  59               1                 99051JBQ   80-pin connector                                              2  PCS                                    J22  J23
+  60               1                 14060033   Cable connector-D-SUB type-9 pins-                                 1  PCS                                    J24
+                                                Right angle male-PCB soldering-                                                                                    
+                                                Nut specifications UNC 4-                                                                                     
+                                                40, pin length 3.1 mm-5 A                                                                                  
+  61               1                 14080105   Ethernet port connector-Single line-Single port-4 pins-                             1  PCS                                    J25
+                                                4-bit-Mask-                                                                                         
+                                                USB A-type socket/Side entry-                                                                            
+                                                Pin length 3.0 mm-THT                                                                                    
+  62               1                 PERB0J26   RCA socket                                              1  PCS                                    J26
+  63               1                 PERB0J27   32-pin connector                                              1  PCS                                    J27
+  64               1                 PERB0J30   26-pin connector                                              1  PCS                                    J30
+  65               1                 PERB0J31   HDMI socket                                                 1  PCS                                    J31
+  66               1                 14050090   Pin-Common quad pin-4 pins-Two rows-                             1  PCS                                    J32
+                                                In-line-5.84 mm-2.92 mm-2.54 mm-                                                                         
+                                                THT                                                                                                
+  67               1                 14080091   Ethernet port connector-Single row-Single port-8 pins-                             1  PCS                                    J33
+                                                8-bit-Mask-Socket/Side entry-                                                                         
+                                                Pin length 2.54 mm (for the board with 1.6 mm thickness)-                                                                       
+                                                With positioning pin/indicator                                                                                      
+  68               1                 10031094   SMT inductor-4.7 ¦ÌH-¡À30%-                                 2  PCS                                    L1  L2
+                                                0.032 ohm-4 A-30 degrees Celsius max.-                                                                            
+                                                7.0 mm x 7.0 mm x4.0 mm-                                                                                     
+                                                The working temperature range includes the risen temperature of the inductor.                                                                           
+  69               1                 10031116   SMT inductor-4.7 ¦ÌH-20%-                                    1  PCS                                    L3
+                                                0.26 ohm-0.43 A-20 degrees Celsius-                                                                              
+                                                2.5 mm x 1.8 mm x 1.8 mm                                                                                      
+  70               1                 10030103   SMT inductor-10 ¦ÌH-¡À20%-                                   1  PCS                                    L4
+                                                0.025 ohm-3.8 A-40 degrees Celsius-                                                                              
+ 
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  |Prepared by|                 |Date|                   |BOM approved by|                  |Date|               |Standardization|                   |Date|                       
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|Reviewed by|                 |Date|                                                                   |Approved by|                     |Date|                        
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  %: Indicates optional             *: Indicates there is the BOM                                                                                                                             
+  Organizer:   HW_CC                          BOM Archive List of Huawei
+ 
+                                       -----------------------------------------
+Project Code  None   Description  HI3518PERB   Project Type          Product Status            Current Environment         
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  Current Version B         Latest Version B  Tabulation Date                          Effective Date                        To                          File Control Figure Number
+ 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  SN         Working Procedure Code  Description      Project Code   Project Description                      Substitute Item Substitute Item Description   Quantity  Unit Version  ECO Number      Implementation Diagram Number       Position Number                        
+ --- ---------- ---- ----- --------- --------- --------------------------    -------  ------------   ----  ---- ----  ---------- ---- -------------------------------------- 
+                                                12.95*9.40*5.21                                                                                    
+  71               1                 10031075   SMT inductor-10 ¦ÌH-¡À20%-                                  1  PCS                                    L5
+                                                0.05 ohm-2.1 A-40 degrees Celsius-                                                                               
+                                                7.5*7.5*4.8                                                                                        
+  72               1                 10070008   EMI bead-¡À25%-100 ohms-0.1 ohm-                             6  PCS                                    LB1  LB2  LB3  LB10 LB11 LB12
+                                                0.9 A-0805                                                                                          
+  73               1                 10070019   EMI bead-¡À25%-1000 ohms-                                  2  PCS                                    LB4  LB13
+                                                1.25 ohms-0.25 A-0402-                                                                                
+                                                1400 ohms@1GHz                                                                                       
+  74               1                 10070003   EMI bead-30 ohms-0.05 ohm-0.4 A-                              2  PCS                                    LB14 LB15
+                                                0603-                                                                                              
+  75               1                 10070011   EMI bead-¡À25%-60 ohms-                                    1  PCS                                    LB17
+                                                0.01 ohm-4 A-1206-TS16949                                                                            
+  76               1                 10070012   EMI bead-220 ohms-0.05 ohm-2 A-                               1  PCS                                    LB18
+                                                0805                                                                                               
+  77               1                 12010178   Clock oscillator-27 MHz-¡À25 ppm-20 degrees Celsius-                             1  PCS                                    OSC1
+                                                70 degrees Celsius-+5 V-TTL/HCMOS-                                                                              
+                                                4 pins/SMD-One-step package                                                                                  
+  78               1                 12010139   Clock oscillator-25 MHz-¡À50 ppm-10 degrees Celsius-                             1  PCS                                    OSC3
+                                                70 degrees Celsius-3.3 V-CMOS-SMD5*7-                                                                          
+                                                TS16949                                                                                            
+  79               1                 12010114   Clock oscillator-50 MHz-¡À50 ppm-0 degrees Celsius-                               1  PCS                                    OSC5
+                                                70 degrees Celsius-3.3-TTL/HCMOS-SMD                                                                           
+  80               1                 15060138   MOSFET-P Channel-30 V-3 A-                                   1  PCS                                    Q1
+                                                98 mohms-20 V-SOT23                                                                                  
+  81               1                 15050086   Triode-NPN-40 V-500 mA-200 mW-                              4  PCS                                    Q2  Q3  Q5  Q6
+                                                250 mV-SC-59/sot-23-50                                                                              
+  82               1                 15050206   Triode-NPN-45 V-100 mA-225 mW-                              1  PCS                                    Q4
+                                                200 mV@100 mA-SOT-23-180@2 mA                                                                         
+  83               1                 07090800   Thick film chip resistor-0.0625 W-0 ohms-                             9  PCS                                    R1  R61  R112 R113 R64  R111 R62
+                                                < 50 mohms-0402-1 A-BT                                                                                R63  R116
+  84               1                 07090836   Thick film chip resistor-0.0625 W-                                  7  PCS                                    R5  R42  R122 R120 R121 R118 R119
+                                                33 ohms-¡À1%-0402                                                                                   
+  85               1                 07090263   Thick film chip resistor-0.1 W-                                     1  PCS                                    R6
+                                                1000000 ohms-¡À5%-0603                                                                               
+  86               1                 07090639   Thick film chip resistor-0.1 W-33 ohms-                               5  PCS                                    R7  R8  R9  R10  R11
+                                                ¡À5%-0603                                                                                         
+  87               1                 07090288   Thick film chip resistor-0.25 W-                                    1  PCS                                    R12
+                                                1000 ohms-¡À1%-1206-BT                                                                              
+  88               1                 07090937   Thick film chip resistor-0.1 W-                                     1  PCS                                    R13
+                                                27000 ohms-¡À1%-0603                                                                                
+  89               1                 07090829   Thick film chip resistor-0.0625 W-                                  1  PCS                                    R14
+                                                47000 ohms-¡À1%-0402                                                                                
+ 
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  |Prepared by|                 |Date|                   |BOM approved by|                  |Date|               |Standardization|                   |Date|                       
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|Reviewed by|                 |Date|                                                                   |Approved by|                     |Date|                        
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  %: Indicates optional             *: Indicates there is the BOM                                                                                                                             
+  Organizer:   HW_CC                          BOM Archive List of Huawei
+ 
+                                       -----------------------------------------
+Project Code  None   Description  HI3518PERB   Project Type          Product Status            Current Environment         
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  Current Version B         Latest Version B  Tabulation Date                          Effective Date                        To                          File Control Figure Number
+ 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  SN         Working Procedure Code  Description      Project Code   Project Description                      Substitute Item Substitute Item Description   Quantity  Unit Version  ECO Number      Implementation Diagram Number       Position Number                        
+ --- ---------- ---- ----- --------- --------- --------------------------    -------  ------------   ----  ---- ----  ---------- ---- -------------------------------------- 
+  90               1                 07090935   Thick film chip resistor-0.1 W-                                     1  PCS                                    R15
+                                                40200 ohms-¡À1%-0603                                                                                
+  91               1                 07090826   Thick film chip resistor-0.1 W-7680 ohms-                             1  PCS                                    R16
+                                                ¡À1%-0603                                                                                         
+  92               1                 07090495   Thick film chip resistor-0.1 W-5600 ohms-                             1  PCS                                    R17
+                                                ¡À5%-0603                                                                                         
+  93               1                 07090861   Thick film chip resistor-0.0625 W-                                 23  PCS                                    R18  R19  R32  R33  R30  R31
+                                                33 ohms-¡À5%-0402-ELOM                                                                              R34  R35  R226 R36  R37  R38
+                                                                                                                                                   R117 R26  R27  R28  R29  R20
+                                                                                                                                                   R21  R22  R23  R24  R25
+  94               1                 07090840   Thick film chip resistor-0.0625 W-                                  2  PCS                                    R39  R129
+                                                120 ohms-¡À5%-0402                                                                                  
+  95               1                 07090885   Thick film chip resistor-0.1 W-1000 ohms-                             2  PCS                                    R40  R41
+                                                ¡À1%-0603                                                                                         
+  96               1                 07090247   Thick film chip resistor-0.1 W-                                    16  PCS                                    R43  R44  R54  R55  R84  R85
+                                                10000 ohms-¡À5%-0603-TS16949                                                                        R52  R53  R45  R46  R82  R83
+                                                                                                                                                   R48  R49  R50  R51
+  97               1                 07091239   Thick film chip resistor-0.1 W-                                     1  PCS                                    R56
+                                                150000 ohms-¡À1%-0603                                                                               
+  98               1                 07091266   Thick film chip resistor-0.1 W-                                     1  PCS                                    R57
+                                                120000 ohms-¡À1%-0603                                                                               
+  99               1                 07090934   Thick film chip resistor-0.1 W-                                     2  PCS                                    R58  R59
+                                                90900 ohms-¡À1%-0603                                                                                
+ 100               1                 07090079   Thick film chip resistor-0.125 W-                                   1  PCS                                    R60
+                                                56000 ohms-¡À5%-0805                                                                                 
+ 101               1                 07091372   Thick film chip resistor-0.0625 W-                                  2  PCS                                    R65  R66
+                                                15000 ohms-¡À1%-0402-BT                                                                             
+ 102               1                 07090889   Thick film chip resistor-0.1 W-                                     6  PCS                                    R67  R68  R69  R70  R71  R72
+                                                10000 ohms-¡À1%-0603                                                                                
+ 103               1                 07090815   Thick film chip resistor-0.0625 W-                                  2  PCS                                    R73  R74
+                                                10000 ohms-¡À5%-0402-BT                                                                             
+ 104               1                 07090246   Thick film chip resistor-0.1 W-4700 ohms-                            29  PCS                                    R75  R76  R192 R105 R106 R107
+                                                ¡À5%-0603-TS16949                                                                                 R108 R109 R110 R98  R99  R101
+                                                                                                                                                   R102 R103 R104 R92  R93  R94
+                                                                                                                                                   R95  R96  R97  R79  R80  R81
+                                                                                                                                                   R86  R89  R91  R77  R78
+ 105               1                 07090793   Thick film chip resistor-0.0625 W-                                 19  PCS                                    R87  R88  R149 R150 R207 R143
+                                                4700 ohms-¡À5%-0402-BT                                                                              R144 R145 R146 R147 R148 R139
+                                                                                                                                                   R140 R141 R142 R125 R135 R137
+                                                                                                                                                   R138
+ 106               1                 07091653   Thick film chip resistor-0.0625 W-                                  2  PCS                                    R114 R115
+                                                33000 ohms-¡À5%-0402--                                                                              
+                                                Only for power supply 07090828-Only for power supply                                                                         
+ 
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  |Prepared by|                 |Date|                   |BOM approved by|                  |Date|               |Standardization|                   |Date|                       
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|Reviewed by|                 |Date|                                                                   |Approved by|                     |Date|                        
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  %: Indicates optional             *: Indicates there is the BOM                                                                                                                             
+  Organizer:   HW_CC                          BOM Archive List of Huawei
+ 
+                                       -----------------------------------------
+Project Code  None   Description  HI3518PERB   Project Type          Product Status            Current Environment         
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  Current Version B         Latest Version B  Tabulation Date                          Effective Date                        To                          File Control Figure Number
+ 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  SN         Working Procedure Code  Description      Project Code   Project Description                      Substitute Item Substitute Item Description   Quantity  Unit Version  ECO Number      Implementation Diagram Number       Position Number                        
+ --- ---------- ---- ----- --------- --------- --------------------------    -------  ------------   ----  ---- ----  ---------- ---- -------------------------------------- 
+ 107               1                 07090272   Thick film chip resistor-0.1 W-220 ohms-                              2  PCS                                    R126 R127
+                                                ¡À5%-0603                                                                                          
+ 108               1                 07091374   Thick film chip resistor-0.0625 W-                                  1  PCS                                    R128
+                                                20000 ohms-¡À1%-0402-TS16949                                                                        
+ 109               1                 07090269   Thick film chip resistor-0.1 W-100 ohms-                              7  PCS                                    R130 R131 R281 R279 R280 R277
+                                                ¡À5%-0603                                                                                         R278
+ 110               1                 07090603   Thick film chip resistor-0.1 W-100 ohms-                              2  PCS                                    R133 R134
+                                                ¡À1%-0603                                                                                         
+ 111               1                 07090266   Thick film chip resistor-0.1 W-51 ohms-                               3  PCS                                    R136 R185 R271
+                                                ¡À5%-0603                                                                                         
+ 112               1                 07090522   Thick film chip resistor-0.1 W-0 ohms-                               14  PCS                                    R157 R182 R247 R248 R254 R255
+                                                <50 mohms-0603-1 A-BT, TS16949                                                                         R261 R268 R237 R239 R256 R260
+                                                                                                                                                   R241 R246
+ 113               1                 07090845   Thick film chip resistor-0.0625 W-                                  1  PCS                                    R170
+                                                4300 ohms-¡À5%-0402                                                                                 
+ 114               1                 07090253   Thick film chip resistor-0.1 W-                                     3  PCS                                    R171 R172 R275
+                                                47000 ohms-¡À5%-0603                                                                                 
+ 115               1                 07090867   Thick film chip resistor-0.0625 W-                                  1  PCS                                    R173
+                                                10000 ohms-¡À1%-0402-BT                                                                             
+ 116               1                 07090777   Thick film chip resistor-0.1 W-3400 ohms-                             1  PCS                                    R174
+                                                ¡À1%-0603                                                                                         
+ 117               1                 07091272   Thick film chip resistor-0.1 W-1500 ohms-                             1  PCS                                    R175
+                                                ¡À1%-0603                                                                                         
+ 118               1                 07091350   Thick film chip resistor-0.0625W-                                  1  PCS                                    R176
+                                                1500 ohms-¡À1%-0402-BT                                                                              
+ 119               1                 07090693   Thick film chip resistor-0.1 W-4990 ohms-                             2  PCS                                    R177 R178
+                                                ¡À1%-0603                                                                                         
+ 120               1                 07091362   Thick film chip resistor-0.0625 W-                                  1  PCS                                    R179
+                                                3900 ohms-¡À1%-0402-BT                                                                              
+ 121               1                 07091355   Thick film chip resistor-0.0625 W-                                  1  PCS                                    R180
+                                                2430 ohms-¡À1%-0402                                                                                 
+ 122               1                 07090637   Thick film chip resistor-0.1 W-75 ohms-                               2  PCS                                    R183 R215
+                                                ¡À5%-0603                                                                                         
+ 123               1                 07090277   Thick film chip resistor-0.1 W-1000 ohms-                            16  PCS                                    R184 R186 R191 R193 R194 R196
+                                                ¡À5%-0603-TS16949                                                                                 R209 R210 R199 R208 R187 R188
+                                                                                                                                                   R189 R190 R197 R198
+ 124               1                 07090643   Thick film chip resistor-0.1 W-2000 ohms-                             5  PCS                                    R211 R212 R265 R213 R228
+                                                ¡À5%-0603                                                                                         
+ 125               1                 07090941   Thick film chip resistor-0.1 W-                                    14  PCS                                    R216 R217 R233 R274 R227 R230
+                                                100000 ohms-¡À1%-0603                                                                               R231 R232 R220 R221 R222 R223
+                                                                                                                                                   R224 R225
+ 126               1                 07090388   Thick film chip resistor-0.1 W-560 ohms-                              2  PCS                                    R269 R270
+                                                ¡À5%-0603                                                                                          
+ 
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  |Prepared by|                 |Date|                   |BOM approved by|                  |Date|               |Standardization|                   |Date|                       
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|Reviewed by|                 |Date|                                                                   |Approved by|                     |Date|                        
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  %: Indicates optional             *: Indicates there is the BOM                                                                                                                             
+  Organizer:   HW_CC                          BOM Archive List of Huawei
+ 
+                                       -----------------------------------------
+Project Code  None   Description  HI3518PERB   Project Type          Product Status            Current Environment         
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  Current Version B         Latest Version B  Tabulation Date                          Effective Date                        To                          File Control Figure Number
+ 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  SN         Working Procedure Code  Description      Project Code   Project Description                      Substitute Item Substitute Item Description   Quantity  Unit Version  ECO Number      Implementation Diagram Number       Position Number                        
+ --- ---------- ---- ----- --------- --------- --------------------------    -------  ------------   ----  ---- ----  ---------- ---- -------------------------------------- 
+ 127               1                 07090875   Thick film chip resistor-0.0625 W-                                  2  PCS                                    R272 R273
+                                                100000 ohms-¡À1%-0402                                                                               
+ 128               1                 07090784   Thick film chip resistor-0.1 W-2490 ohms-                             3  PCS                                    R276 R284 R285
+                                                ¡À1%-0603                                                                                         
+ 129               1                 07090275   Thick film chip resistor-0.1 W-470 ohms-                              1  PCS                                    R282
+                                                ¡À5%-0603                                                                                          
+ 130               1                 07090949   Thick film chip resistor-0.1 W-49.9 ohms-                             1  PCS                                    R283
+                                                ¡À1%-0603                                                                                         
+ 131               1                 07070079   Glass glazed potentiometer-0.25 W-20000 ohms-                             2  PCS                                    RP2  RP3
+                                                ¡À10%-6.35*4.32*6.86-0.46-                                                                        
+                                                2.54 mm-3 pins-THT-Top adjustable-12 cycles-                                                                         
+                                                Ceramic                                                                                               
+ 132               1                 16100017   Micro switch-SPST-12VDC-0.05 A-                               1  PCS                                    S1
+                                                SMT-0 mm-6 mm x 6 mm x 5 mm-100,000                                                                            
+ 133               1                 16040061   Rocker switch-SPDT-AC 250 V-5 A-                                 1  PCS                                    S2
+                                                PCB in-line&Panel installation-4.6 mm-                                                                            
+                                                PCB soldering-Symmetric circuit (On-On)-                                                                           
+                                                14.8 mm x 20.8 mm x 14.0 mm-Black-                                                                             
+                                                Side switch with tab baffle                                                                                     
+ 134               1                 16070017   DIP switch-SPST-DC 24 V-0.025 A-                              3  PCS                                    SW1  SW2  SW3
+                                                SMT-3.5 mm-4 bits-Top rocker-                                                                               
+                                                10.1 mm x 6.6 mm x 3.5 mm                                                                                     
+ 135               1                 09050085   LAN transformer-1CT:1CT-0.35 mH-                                1  PCS                                    T1
+                                                0 ¦ÌH-1-channel-2-100BASE-T-interface module-                                                                       
+                                                SMT                                                                                                
+ 136               1                 42040089   CPLD-ftBGA324 (lead free)-                                     1  PCS                                    U1
+                                                271 I/Os-4 global clocks-3.6 ns-                                                                        
+                                                1.8 V/2.5 V/3.3 V-                                                                                    
+                                                1.2 V/1.5 V/1.8 V/2.5 V/3.3 V                                                                           
+ 138               1                 99050WFE   Low-voltage 24-bit FET bus exchange switch
+                              2  PCS                                    U3  U4
+ 139               1                 PERB00U5   Supercapacitor                                                 1  PCS                                    U5
+ 140               1                 39130083   RTC-uSOP8                                1  PCS                                    U6
+ 141               1                 99051JTC   3 A, 500 kHz Synchronous step-down DC-DC converter
+                                  2  PCS                                    U7  U8
+ 142               1                 39130056   Clock driver-10¨C133 MHz-                               1  PCS                                    U9
+                                                TTL-3¨C3.6 V-SO8-1:5-PLL no delay                                                                       
+ 143               1                 41030069   Monitor-SOP8-3.3 V-Power surveillance-                             1  PCS                                    U10
+                                                2.63 V power surveillance threshold-500 mW-                                                                           
+ 144               1                 38090077   RS485|422-                                              2  PCS                                    U11  U12
+                                                RS485/422 interface transceiver-12 MB/s-                                                                        
+                                                SOIC8                                                                                              
+ 145               1                 PERB0U14   MIC2505BM                                                1  PCS                                    U14
+ 146               1                 36020312   CMOS-Single-gate tristate buffer-SOT23-                               2  PCS                                    U15  U16
+ 
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  |Prepared by|                 |Date|                   |BOM approved by|                  |Date|               |Standardization|                   |Date|                       
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|Reviewed by|                 |Date|                                                                   |Approved by|                     |Date|                        
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  %: Indicates optional             *: Indicates there is the BOM                                                                                                                             
+  Organizer:   HW_CC                          BOM Archive List of Huawei
+ 
+                                       -----------------------------------------
+Project Code  None   Description  HI3518PERB   Project Type          Product Status            Current Environment         
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  Current Version B         Latest Version B  Tabulation Date                          Effective Date                        To                          File Control Figure Number
+ 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  SN         Working Procedure Code  Description      Project Code   Project Description                      Substitute Item Substitute Item Description   Quantity  Unit Version  ECO Number      Implementation Diagram Number       Position Number                        
+ --- ---------- ---- ----- --------- --------- --------------------------    -------  ------------   ----  ---- ----  ---------- ---- -------------------------------------- 
+                                                6.9 ns-24 mA-LVTTL-LVTTL-0 ns-                                                                        
+                                                0 ns-0 ns                                                                                            
+ 147               1                 PERB0U17   8201f_vb                                                 1  PCS                                    U17
+ 148               1                 99050VDX   HDMI transmitter                                       1  PCS                                    U18
+ 149               1                 PERB0U19   lm833                                                    1  PCS                                    U19
+ 150               1                 99051CSG   Single-end HDMI transmission protection device                                 1  PCS                                    U20
+ 151               1                 38090076   RS232-2-channel transceiver-3.0¨C5.5 V-                               1  PCS                                    U22
+                                                SSOP16-0.25 MB/s                                                                                    
+ 152               1                 39110458   LDO-Adjustable-1.4 V-6 V-0.5 V-2%-                              2  PCS                                    U23  U24
+                                                2 A-0.6 Vdrop Max-SO8 EP-                                                                            
+                                                EN high active                                                                                     
+ 153               1                 99051JTB   2 A, 1.2 MHz Synchronous step-down DC-DC converter                                  2  PCS                                    U25  U26
+ 154               1                 PERB00X1   RTC crystal                                                  1  PCS                                    X1
+ 155               1                 None         Manufactured board_HI3518PERB                                        1  PCS     
