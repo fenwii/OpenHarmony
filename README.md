@@ -3,7 +3,7 @@
 华为鸿蒙分布式操作系统（Huawei OpenHarmony）开发技术交流，鸿蒙技术资料，手册，指南，共建万物互联新生态。
 </p>
 <p align="center">
-  <a href="https://github.com/OpenHarmony/">
+  <a href="https://github.com/fenwii/OpenHarmony">
     <img src="assets/img/architecture.png" width="750px">
   </a>
 </p>
