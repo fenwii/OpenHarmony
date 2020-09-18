@@ -1,15 +1,17 @@
 # 鸿蒙OS分布式操作系统 OpenHarmony  
+<p align="center">
 华为鸿蒙分布式操作系统（Huawei OpenHarmony）开发技术交流，鸿蒙技术资料，手册，指南，共建万物互联新生态。
-
+</p>
 <p align="center">
   <a href="https://github.com/OpenHarmony/">
     <img src="assets/img/architecture.png" width="750px">
   </a>
 </p>
 
-
+<p align="center">
 ================鸿蒙系统简介================
-
+</p>
+  
 鸿蒙OS分布式操作系统简介
 `鸿蒙系统（HarmonyOS）`，是第一款基于微内核的全场景分布式OS，是华为自主研发的操作系统。2019年8月9日，鸿蒙系统在华为开发者大会`<HDC.2019>`上正式发布，华为会率先部署在智慧屏、车载终端、穿戴等智能终端上，未来会有越来越多的智能设备使用开源的`鸿蒙OS`。2020年9月10日,在华为开发者大会2020上,华为消费者业务CEO余承东发布鸿蒙系统HarmonyOS 2.0，计划12月份支持手机，2021发布带鸿蒙OS的华为手机，平板等所有设备。
 
@@ -26,9 +28,12 @@
 
 3、2021年10⽉以后⾯向4GB以上所有设备开源。
 
+<p align="center">
 ================鸿蒙系统简介================
-
+</p>
+<p align="center">
 ================鸿蒙OS开发社区================
+</p>
 
 鸿蒙 OS 开源量子基金会：
 https://www.openatom.org/openharmony
@@ -63,12 +68,13 @@ https://github.com/LiteOS/LiteOS
 开发工具Huawei LiteOS Studio：
 https://static.huaweicloud.com/upload/files/sdk/LiteOS_IDE.zip
 
+<p align="center">
 ================鸿蒙OS开发社区================
+</p>
 
-
-
+<p align="center">
 ================鸿蒙OS开发板================
-
+</p>
 
 鸿蒙开发板：
 1、HarmonyOS HiSpark AI Camera 支持OpenHarmony（Hi3516）
@@ -80,12 +86,14 @@ https://item.taobao.com/item.htm?spm=a1z10.3-c.w4002-18447093278.21.46a24c57weAW
 3、HarmonyOS HiSpark Wi-Fi IoT智能家居开发套件 支持OpenHarmony（Hi3861）
 https://item.taobao.com/item.htm?spm=a1z10.3-c.w4002-18447093278.24.46a24c57weAWXH&id=622343426064
 
+<p align="center">
 ================鸿蒙OS开发板================
+</p>
 
 
-
-
+<p align="center">
 ================鸿蒙OS核心文档================
+</p>
 
 # OpenHarmony开发者文档<a name="ZH-CN_TOPIC_0000001054183022"></a>
 
@@ -116,13 +124,14 @@ https://item.taobao.com/item.htm?spm=a1z10.3-c.w4002-18447093278.24.46a24c57weAW
 
 卓越贡献者将会在开发者社区文档贡献专栏表彰公示。
 
+<p align="center">
 ================鸿蒙OS核心文档================
+</p>
 
 
-
-
+<p align="center">
 ================鸿蒙OS交流================
-
+</p>
 
 QQ交流群1:184548177
 
@@ -131,8 +140,9 @@ QQ交流群2:374825209
 知识星球交流：C语言C++汇编研究中心   https://t.zsxq.com/jeYVJuj
 
 
+<p align="center">
 ================鸿蒙OS交流================
-
+</p>
 
 
 
