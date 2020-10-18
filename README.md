@@ -130,29 +130,15 @@ https://item.taobao.com/item.htm?spm=a1z10.3-c.w4002-18447093278.24.46a24c57weAW
 
 
 <p align="center">
-================鸿蒙OS交流================
-</p>
-
-QQ交流群1:184548177
-
-QQ交流群2:374825209
-
-知识星球交流：C语言C++汇编研究中心   https://t.zsxq.com/jeYVJuj
-
-
-<p align="center">
-================鸿蒙OS交流================
-</p>
-<p align="center">
 ================深度交流================
 </p>
 
 
 <p align="center">
   
-     QQ交流群1:184548177
-     QQ交流群2:374825209
-     微信公众号(fenwii-tec)：分微科技
+		 QQ交流群1:184548177
+		 QQ交流群2:374825209
+		 微信公众号(fenwii-tec)：分微科技
 		 头条，抖音：苏格拉底学堂
 		 Github: https://github.com/fenwii
 		 微信小助理号：SocratesSchool
