@@ -59,7 +59,7 @@ https://www.openarkcompiler.cn
 
 ARK方舟编译器开源代码官方主仓库:
 提高安卓系统操作的流畅性24%，响应速度44%，第三方应用的流畅性高达60%。
-https://gitee.com/openarkcompiler/openarkcompiler
+https://gitee.com/openarkcompiler/OpenArkCompiler
 
 
 华为LiteOS：
