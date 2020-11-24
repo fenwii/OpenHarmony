@@ -1,0 +1,24 @@
+device: USE_CPU
+quantize_algo: HALF_OFFSET
+bin: 150
+type: KL
+preprocess_parameter:
+{
+    input_type: IMAGE
+    mean_value: 103.939
+    mean_value: 116.779
+    mean_value: 123.68
+    standard_deviation: 1.0
+    input_file_path: './img_set'
+}
+inference_with_data_quantized: false
+inference_with_weight_quantized: true
+weight_type: VECTOR_TYPE
+super_parameter:
+{
+    min_percentile: PERCENTILE_MID
+    max_percentile: PERCENTILE_MID
+    start_ratio: 0.7
+    end_ratio: 1.3
+    step_ratio: 0.01
+}

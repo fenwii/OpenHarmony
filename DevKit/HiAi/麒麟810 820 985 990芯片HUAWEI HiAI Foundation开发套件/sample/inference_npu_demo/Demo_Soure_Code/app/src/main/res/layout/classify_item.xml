@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/classify_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    app:cardElevation="20dp"
+    app:cardUseCompatPadding="false">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imgClassify"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="12dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/test" />
+
+        <TextView
+            android:id="@+id/tv_top1Result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/imgClassify"
+            android:layout_margin="16dp"
+            android:text="Egyptian cat - 55.3967%"
+            android:textColor="@android:color/holo_red_light"
+            android:typeface="serif" />
+
+        <TextView
+            android:id="@+id/tv_otherResults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_top1Result"
+            android:layout_marginLeft="16dp"
+            android:text="tabby,tabby cat - 13.1579%
+tiger cat - 10.9989%"
+            android:textColor="@android:color/holo_purple"
+            android:layout_toLeftOf="@+id/imgClassify"
+            android:layout_alignParentLeft="true"
+            android:typeface="serif" />
+
+        <TextView
+            android:id="@+id/tv_inferenceTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_otherResults"
+            android:layout_margin="16dp"
+            android:text="inference time:26.241ms"
+            android:textColor="@android:color/holo_blue_light"
+            android:typeface="serif" />
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>

@@ -1,0 +1,33 @@
+# Network architecture search scenario
+scenario:
+  strategy:
+    name:               HiAIMLEA
+    framework:          TensorFlow
+    batch_size: 32 # required, warm-up batch size, must be greater than 0
+    epochs: 75 # required, warm-up epochs, must be greater than 0
+    supernet:
+      input_shape: (300, 300, 3) # optional, supports format is CHW or HWC
+      data_format: "channels_last" # optional, supports "channels_first" or "channels_last"
+      filters: [64, 64, 128, 128, 256, 256, 512, 512]  # optional, supports format is [cout,...,cout]
+      strides: [1, 1, 2, 1, 2, 1, 2, 1]
+      feature_choose: [3, 5]
+    constraint:
+      application_type: "object_detection" # required, supports "image_classification" or "object_detection" or "semantic_segmentation"
+      constraint_type: "flops" # required, supports "size" or "flops"
+      constraint_value: 4472019995 # required, relate to the configuration of "constraint_type", and must be greater than 0.
+    optimizer:
+      weights_optimizer:
+        type: "Adam" # optional, supports "Adam" or "SGD" or "Momentum"
+        betas: [0.9, 0.999] # optional, two beta, between 0 and 1
+        learning_rate: 0.0001 # optional, learning rate, must between 0 and 1
+    dataset:
+      pre_train_dir: "/tmp/dataset/resnet18_ckpt/8TBSs/" # training dataset path to pre_train or path to your checkpoint
+      train_dir: "/tmp/dataset/COCO/" # required, path to your training dataset
+      val_dir: "/tmp/dataset/COCO/" # required, path to your validation dataset
+    searcher:
+      generation_num: 25 # optional, generation number of evolutionary algorithm, must be greater than 0, default value is 100
+      pop_size: 40 # optional, population size of evolutionary algorithm, must be greater than 0, default value is 40
+  resource:
+    name: tensorflow_standalone # required, resource name, only support 'tensorflow_standalone'
+    gpu_id: "0" # required, configure the gpu id list you want to use
+

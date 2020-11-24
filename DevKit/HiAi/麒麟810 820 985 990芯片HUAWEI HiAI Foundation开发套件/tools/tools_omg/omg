@@ -1,0 +1,141 @@
+#!/bin/bash
+# Copyright 2019 Huawei Technologies Co., Ltd. All rights reserved.
+#
+# DDK wrapper for multi-version execution
+
+SCRIPT=`realpath $0`
+SCRIPTPATH=`dirname $SCRIPT`
+CUR_PATH=`pwd`
+CUR_PATH=`realpath $CUR_PATH`
+cd $SCRIPTPATH
+V_dir=$(find -type d -iname "V[0-9]*" | sed 's/\.\///' | sort | xargs | sed 's/ /,/g')
+# default version as master
+cd $CUR_PATH
+if [ -d "$SCRIPTPATH/master" ];then
+    HIAI_VERSION=master
+elif [ -d "$SCRIPTPATH/IR" ];then
+    HIAI_VERSION=IR
+elif [ -n "$V_dir" ];then
+    HIAI_VERSION=${V_dir:0-4}
+else
+    echo "there is no ddk version in current path"
+    exit 1
+fi
+
+# command line arguments
+ARGS=("$@")
+for i in "${!ARGS[@]}"
+do
+    ARGS[$i]=`echo "${ARGS[$i]}"|sed "s? ??g"`
+done
+
+# judge execute_device_config argument if present.
+function judge_execute_device_config {
+    for i in ${!ARGS[*]}; do
+        local v="${ARGS[$i]}"
+        # printf "BUG: %d: %s\n" "$i"  "$v"
+        case $v in
+            -execute_device_config=* | --execute_device_config=*)  # for format: --execute_device_config=*
+                execute_device_switch=1
+                return 0
+                ;;
+            -execute_device_config | --execute_device_config)  # for format: --execute_device_config
+                execute_device_switch=1
+                return 0
+                ;;
+            -mode=4 | --mode=4) # for format: --mode=4 or -mode=4
+                execute_device_switch=1
+                return 0
+                ;;
+            -mode | --mode)  # for format: --mode xxx or -mode xxx
+                next=`expr $i + 1`
+                if [ ${ARGS[$next]} -eq 4 ]; then
+                    execute_device_switch=1
+                fi
+                return 0
+                ;;
+        esac
+    done
+    #echo "INFO: use default HIAI_VERSION: $HIAI_VERSION"
+}
+
+# get hiai_version argument if present.
+function get_hiai_version_argument {
+    for i in ${!ARGS[*]}; do
+        local v="${ARGS[$i]}"
+        # printf "DEBUG: %d: %s\n" "$i"  "$v"
+        case $v in
+            -hiai_version=* | --hiai_version=*) # for format: --hiai_version=Vxxx or -hiai_version=Vxxx
+                HIAI_VERSION=`echo $v | sed 's/^.*hiai_version=//g'`
+                if [ $execute_device_switch -eq 0 ] || [ "${HIAI_VERSION}" == "master" ] || [ "${HIAI_VERSION}" == "IR" ]; then
+                    unset ARGS[$i] # remove hiai_version argument
+                    # printf "execute_device_switch: %d: %s\n" "execute_device_switch"  "execute_device_switch"
+                fi
+                # echo "DEBUG: get ddk version $HIAI_VERSION, then ARGS is: ${ARGS[*]}"
+                return 0
+                ;;
+            -hiai_version | --hiai_version)  # for format: --hiai_version Vxxx or -hiai_version Vxxx
+                next=`expr $i + 1`
+                HIAI_VERSION="${ARGS[$next]}"
+                if [ $execute_device_switch -eq 0 ] || [ "${HIAI_VERSION}" == "master" ] || [ "${HIAI_VERSION}" == "IR" ]; then
+                    unset ARGS[$next] # remove hiai_version value
+                    unset ARGS[$i] # remove hiai_version argument
+                fi
+                # echo "DEBUG: get hiai version $HIAI_VERSION, then ARGS is: ${ARGS[*]}"
+                return 0
+                ;;
+        esac
+    done
+    echo "INFO: use default hiai_version: $HIAI_VERSION, Support IR, v320, v310, v300."
+}
+
+execute_device_switch=0
+judge_execute_device_config
+get_hiai_version_argument
+
+HIAI_VERSION=`echo $HIAI_VERSION | tr '[:lower:]' '[:upper:]'`
+hiai_version=`echo $HIAI_VERSION | tr '[:upper:]' '[:lower:]'`
+
+if [ $execute_device_switch -eq 1 ]; then
+    if [ -d "$SCRIPTPATH/master" ]; then
+        export LD_LIBRARY_PATH=$SCRIPTPATH/master/lib64/
+        OMG=$SCRIPTPATH/master/omg
+    else
+        export LD_LIBRARY_PATH=$SCRIPTPATH/IR/lib64/
+        OMG=$SCRIPTPATH/IR/omg
+    fi
+else
+    # check hiai_version dir exists
+    if [ ! -e $SCRIPTPATH/$HIAI_VERSION -a ! -e $SCRIPTPATH/$hiai_version ]; then
+        echo "ERROR: version dir $HIAI_VERSION and $hiai_version not exists!"
+        exit 1
+    fi
+    if [ -e $SCRIPTPATH/$hiai_version ]; then
+        HIAI_VERSION=$hiai_version # lowercase dir name exists, use it!
+    fi
+    #echo "INFO: ddk version $HIAI_VERSION, ARGS: ${ARGS[*]}"
+    export LD_LIBRARY_PATH=$SCRIPTPATH/$HIAI_VERSION/lib64/
+    OMG=$SCRIPTPATH/$HIAI_VERSION/omg
+fi
+
+if [ ! -e $OMG ]; then
+    echo "ERROR: $OMG not exists!"
+    exit 1
+fi
+
+if [ "`ls -al $OMG | cut -d' ' -f1 | grep x`" == "" ]; then
+    chmod +x $OMG
+fi
+omg_path=${OMG//\/\//\/}
+echo "INFO: execute command: $omg_path ${ARGS[*]}"
+V_info=$V_dir
+if [ -d "$SCRIPTPATH/master"  ];then
+    if [ -n "$V_dir"  ];then
+        V_info+=","
+    fi
+    V_info+="master"
+fi
+V_info+="(default)"
+
+$OMG ${ARGS[*]}
+exit $result

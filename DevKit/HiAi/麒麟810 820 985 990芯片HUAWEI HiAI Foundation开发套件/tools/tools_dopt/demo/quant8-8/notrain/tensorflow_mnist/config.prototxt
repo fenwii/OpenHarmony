@@ -1,0 +1,9 @@
+strategy: 'Quant_INT8-8'
+device: USE_CPU
+preprocess_parameter:
+{
+    input_type:IMAGE
+    mean_value:0.0
+    standard_deviation:1.0
+    input_file_path: "./mnist_test"
+}

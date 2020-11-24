@@ -1,0 +1,24 @@
+# Network architecture search scenario
+scenario:
+  strategy:
+    name: HiAIMLEA
+    framework: TensorFlow
+    batch_size: 128 # required, warm-up batch size, must be greater than 0
+    epochs: 60 # required, warm-up epochs, must be greater than 0
+    supernet:
+      input_shape: (224, 224, 3) # optional, supports format is CHW or HWC
+      data_format: "channels_last" # optional, supports "channels_first" or "channels_last"
+      filters: [64, 64, 128, 128, 256, 256] # optional, supports format is [cout,...,cout]
+      strides: [1, 1, 2, 1, 2, 1] # optional
+    constraint:
+      application_type: "image_classification" # required, supports "image_classification" or "object_detection" or "semantic_segmentation"
+      constraint_type: "size" # required, supports "size" or "flops"
+      constraint_value: 11000000 # required, relate to the configuration of "constraint_type", and must be greater than 0.
+    dataset:
+      train_dir: "/tmp/ImageNet_tf/" # required, path to your training dataset
+      val_dir: "/tmp/ImageNet_tf/" # required, path to your validation dataset
+    searcher:
+      generation_num: 100 # optional, generation number of evolutionary algorithm, must be greater than 0, default value is 100
+  resource:
+    name: tensorflow_standalone # required, resource name, only support 'tensorflow_standalone'
+    gpu_id: "0,1,2,3,4,5,6,7" # required, configure the gpu id list you want to use

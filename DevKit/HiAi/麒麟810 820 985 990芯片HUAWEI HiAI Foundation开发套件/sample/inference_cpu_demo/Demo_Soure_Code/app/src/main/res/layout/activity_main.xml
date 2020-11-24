@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.huawei.hiaidemo.view.MainActivity">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:layout_margin="12dp"
+        app:cardElevation="20dp"
+        app:cardUseCompatPadding="false"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="    Please select a model:"
+                android:textSize="16dp" />
+
+            <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="match_parent"
+                android:layout_height="34dp" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_margin="12dp"
+        app:cardElevation="20dp"
+        app:cardUseCompatPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/btn_sync"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="12dp"
+                android:layout_weight="1.0"
+                android:background="@drawable/ic_launcher_background"
+                android:gravity="center"
+                android:text="Sync Classify"
+                android:textAllCaps="false"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/btn_async"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="12dp"
+                android:layout_weight="1.0"
+                android:background="@drawable/ic_launcher_background"
+                android:gravity="center"
+                android:text="Async Classify"
+                android:textAllCaps="false"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        app:cardElevation="20dp"
+        app:cardUseCompatPadding="false">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imgClassify1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="12dp"
+                android:src="@drawable/tabby_cat" />
+
+            <TextView
+                android:id="@+id/tv_top1Result1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/imgClassify1"
+                android:layout_margin="16dp"
+                android:text="tabby,tabby cat - 74.8893%"
+                android:textColor="@android:color/holo_red_light"
+                android:typeface="serif" />
+
+            <TextView
+                android:id="@+id/tv_otherResults1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_top1Result1"
+                android:layout_marginLeft="16dp"
+                android:text="Egyptian cat - 16.1959%\ntiger cat - 4.8629%"
+                android:textColor="@android:color/holo_purple"
+                android:typeface="serif" />
+
+            <TextView
+                android:id="@+id/tv_inferenceTime1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_otherResults1"
+                android:layout_margin="16dp"
+                android:text="inference time:12.241ms"
+                android:textColor="@android:color/holo_blue_light"
+                android:typeface="serif" />
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+
+
+    <include layout="@layout/classify_layout" />
+
+</LinearLayout>

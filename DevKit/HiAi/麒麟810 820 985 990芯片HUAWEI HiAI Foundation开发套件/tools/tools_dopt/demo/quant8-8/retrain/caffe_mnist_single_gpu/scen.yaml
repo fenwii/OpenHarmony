@@ -1,0 +1,18 @@
+# Optimization Scenario
+scenario:
+  strategy:
+    name:                Quant_INT8-8
+    framework:           caffe
+    version:             "1.0"
+    accuracy_name:      accuracy
+    accuracy_val:       0.91
+    skip_layers:
+    model:            /path/to/demo/quant8-2/caffe_mnist_single_gpu/basemodel/basemodel.caffemodel
+    train_prototxt:   /path/to/demo/quant8-2/caffe_mnist_single_gpu/basemodel/train.prototxt
+    test_prototxt:    /path/to/demo/quant8-2/caffe_mnist_single_gpu/basemodel/test.prototxt
+    test_iter:               100
+    train_one_epoch_iter:  1000
+
+  resource:
+    name:             caffe_standalone
+    gpu_id:           1

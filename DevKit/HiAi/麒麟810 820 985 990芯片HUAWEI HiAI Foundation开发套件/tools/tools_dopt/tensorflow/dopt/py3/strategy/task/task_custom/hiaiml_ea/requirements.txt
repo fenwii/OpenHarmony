@@ -1,0 +1,12 @@
+tensorflow-gpu==1.12
+ruamel.yaml
+PyYAML==3.13
+Cython==0.29.14
+pycocotools==2.0.0
+pathlib
+pymoo==0.3.2
+sklearn
+opencv-python
+matplotlib
+numpy==1.17.4
+imgaug==0.3.0

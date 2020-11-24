@@ -1,0 +1,4700 @@
+{
+    "Version": "1.0",
+    "InstrTag": "6.3",
+    "CheckSum": "aaaaaa",
+    "ConvolutionDepthwise": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "compute": {
+                "cost": 10,
+                "overload": 10
+            },
+            "partial": {
+                "flag": false
+            }
+        },
+        "support": {
+            "format": [
+                [
+                    0,
+                    0,
+                    0,
+                    0
+                ]
+            ]
+        },
+        "output": [
+            {
+                "name": "output",
+                "tensor": {
+                    "format": [
+                        "NC1HWC0"
+                    ],
+                    "dtype": [
+                        "float16"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            }
+        ],
+        "input": [
+            {
+                "name": "input",
+                "tensor": {
+                    "format": [
+                        "NC1HWC0"
+                    ],
+                    "dtype": [
+                        "float16"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            },
+            {
+                "name": "filter",
+                "tensor": {
+                    "format": [
+                        "FRACTAL_Z"
+                    ],
+                    "dtype": [
+                        "float16"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            },
+            {
+                "name": "bias",
+                "tensor": {
+                    "format": [
+                        "NC1HWC0"
+                    ],
+                    "dtype": [
+                        "float16"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            }
+        ]
+    },
+    "Convolution": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "compute": {
+                "cost": 10,
+                "overload": 10
+            },
+            "partial": {
+                "flag": false
+            }
+        },
+        "support": {
+            "format": [
+                [
+                    0,
+                    0,
+                    0,
+                    0
+                ]
+            ]
+        },
+        "output": [
+            {
+                "name": "output",
+                "tensor": {
+                    "format": [
+                        "NC1HWC0"
+                    ],
+                    "dtype": [
+                        "float16"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            }
+        ],
+        "input": [
+            {
+                "name": "input",
+                "tensor": {
+                    "format": [
+                        "NC1HWC0"
+                    ],
+                    "dtype": [
+                        "float16"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            },
+            {
+                "name": "filter",
+                "tensor": {
+                    "format": [
+                        "FRACTAL_Z"
+                    ],
+                    "dtype": [
+                        "float16"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            },
+            {
+                "name": "bias",
+                "tensor": {
+                    "format": [
+                        "NC1HWC0"
+                    ],
+                    "dtype": [
+                        "float16"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            }
+        ]
+    },
+    "Pooling": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "compute": {
+                "cost": 10,
+                "overload": 10
+            },
+            "partial": {
+                "flag": false
+            }
+        },
+        "support": {
+            "format": [
+                [
+                    0,
+                    0
+                ]
+            ]
+        },
+        "output": [
+            {
+                "name": "output",
+                "tensor": {
+                    "format": [
+                        "NC1HWC0"
+                    ],
+                    "dtype": [
+                        "float"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            }
+        ],
+        "input": [
+            {
+                "name": "input",
+                "tensor":{
+                    "format": [
+                        "NC1HWC0"
+                    ],
+                    "dtype": [
+                        "float"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            }
+        ],
+        "attr_mode": [
+            {
+                "dtype" : "int",
+                "value" : [
+                    0,
+                    1
+                ]
+            }
+        ],
+        "attr_pad_mode": [
+            {
+                "dtype" : "int",
+                "value" : [
+                    0,
+                    1
+                ]
+            }
+        ],
+        "attr_global_pooling": [
+            {
+                "dtype" : "bool"
+            }
+        ],
+        "attr_window": [
+            {
+                "dtype" : "listInt",
+                "shape": [
+                    65504,
+                    65504
+                ]
+            }
+        ],
+        "attr_pad": [
+            {
+                "dtype" : "listInt",
+                "shape": [
+                    65504,
+                    65504,
+                    65504,
+                    65504
+                ]
+            }
+        ],
+        "attr_stride": [
+            {
+                "dtype" : "listInt",
+                "shape": [
+                    65504,
+                    65504
+                ]
+            }
+        ],
+        "attr_ceil_mode": [
+            {
+                "dtype" : "int",
+                "value" : [
+                    0,
+                    1
+                ]
+            }
+        ],
+        "attr_data_mode": [
+            {
+                "dtype" : "int",
+                "value" : [
+                    0,
+                    1
+                ]
+            }
+        ]
+    },
+    "ReduceMean": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "compute": {
+                "cost": 10,
+                "overload": 10
+            },
+            "partial": {
+                "flag": false
+            }
+        },
+        "support": {
+            "format": [
+                [
+                    0,
+                    0
+                ]
+            ]
+        },
+        "output": [
+            {
+                "name": "output",
+                "tensor": {
+                    "format": [
+                        "NC1HWC0"
+                    ],
+                    "dtype": [
+                        "float"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            }
+        ],
+        "input": [
+            {
+                "name": "input",
+                "tensor": {
+                    "format": [
+                        "NC1HWC0"
+                    ],
+                    "dtype": [
+                        "float"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            }
+        ],
+        "reduction_indices": [
+            {
+                "name": "input",
+                "tensor": {
+                    "format": [
+                        "NCHW"
+                    ],
+                    "dtype": [
+                        "int32"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            }
+        ],
+        "keep_dims": [
+            {
+                "dtype" : "bool"
+            }
+        ]
+    },
+    "Add": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "compute": {
+                "cost": 10,
+                "overload": 10
+            },
+            "partial": {
+                "flag": false
+            }
+        },
+        "support": {
+            "format": [[1,1,1],[0,0,0]]
+        },
+        "output": [
+            {
+                "name": "output",
+                "tensor":{
+                    "format": [
+                        "NC1HWC0",
+                        "ND"
+                    ],
+                    "dtype": [
+                        "float16"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            }
+        ],
+        "input": [
+            {
+                "name": "input",
+                "tensor":{
+                    "format": [
+                        "NC1HWC0",
+                        "ND"
+                    ],
+                    "dtype": [
+                        "float"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            },
+            {
+                "name": "input2",
+                "tensor":{
+                    "format": [
+                        "NC1HWC0",
+                        "ND"
+                    ],
+                    "dtype": [
+                        "float16"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            }
+        ]
+    },
+    "Deconvolution": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "compute": {
+                "cost": 10,
+                "overload": 10
+            },
+            "partial": {
+                "flag": false
+            }
+        },
+        "support": {
+            "format": [
+                [
+                    0,
+                    0,
+                    0,
+                    0
+                ]
+            ]
+        },
+        "output": [
+            {
+                "name": "output",
+                "tensor": {
+                    "format": [
+                        "NC1HWC0"
+                    ],
+                    "dtype": [
+                        "float16"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            }
+        ],
+        "input": [
+            {
+                "name": "input_size",
+                "tensor": {
+                    "format": [
+                        "NC1HWC0"
+                    ],
+                    "dtype": [
+                        "int32"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            },
+            {
+                "name": "filter",
+                "tensor": {
+                    "format": [
+                        "FRACTAL_DECONV"
+                    ],
+                    "dtype": [
+                        "float16"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            },
+            {
+                "name": "input",
+                "tensor": {
+                    "format": [
+                        "NC1HWC0"
+                    ],
+                    "dtype": [
+                        "float16"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            }
+        ]
+    },
+    "transdata": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "compute": {
+                "cost": 10,
+                "overload": 10
+            },
+            "partial": {
+                "flag": false
+            }
+        },
+        "support": {
+            "format": [
+                [
+                    0,
+                    0
+                ],
+                [
+                    1,
+                    0
+                ],
+                [
+                    2,
+                    0
+                ]
+            ]
+        },
+        "output": [
+            {
+                "name": "output",
+                "tensor": {
+                    "format": [
+                        "NC1HWC0"
+                    ],
+                    "dtype": [
+                        "float"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            }
+        ],
+        "input": [
+            {
+                "name": "input",
+                "tensor": {
+                    "format": [
+                        "NHWC",
+                        "ND",
+                        "NCHW"
+                    ],
+                    "dtype": [
+                        "float"
+                    ],
+                    "shapeType": "range",
+                    "paramType": "required",
+                    "shape": [
+                        65504,
+                        65504,
+                        65504,
+                        65504
+                    ]
+                }
+            }
+        ]
+    },
+    "ROIPooling": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Atan": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "UnidirectionalSequenceLstm": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "MatMul": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Erf": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "LayerNorm": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "MaxPoolGradWithArgmax": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "MeanGrad": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AddN": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Asin": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "BatchMatMul": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "LeakyRelu": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Pow": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "NetOutput": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "StridedSlice": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "BidirectionalSeqLstm": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnNotEqual": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "LogicalNot": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "UnidirectionalSequenceRnn": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "LogicalXor": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Maximum": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "MVN": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Pack": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "FastrcnnPredictions": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "BoxWithNmsLimit": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnDiv": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "RandomNormal": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Reciprocal": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ImageResize": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Minimum": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "FractionalPooling": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Mul": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Rsqrt": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ReduceMax": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Atanh": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Conv2D": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "LogicalOr": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Assign": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Quantized16BitLstm": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Less": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnNetOutput": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "TruncateMod": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "VarIsInitializedOp": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ExpandDims": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "SpaceToBatchND": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ReduceAll": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Cumprod": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ReverseSequence": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Quantize": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "NonMaxSuppression": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AttentionDecoder": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnResizeBilinear": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "RealDiv": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ExtractImagePatches": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnMean": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "RandomUniformInt": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ImageColorSpaceConvertion": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Correlation": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Softplus": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Variable": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Where": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "SegmentSum": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "DetectionOutput": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "DynamicImageData": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Detectpostprocess": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "FakeQuantWithMinMaxVarsPerChannel": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnPad": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "OneHot": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "GroupedConv2D": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "SpaceToDepth": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AssignAddVariableOp": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Transpose": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "RandomUniform": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "BiasAdd": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Split": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "MaxPoolWithArgmax": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "BiasAddGrad": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Scale": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "MultiShape": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ImagePadding": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "SparseToDense": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "GreaterEqual": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "HeatmapMaxKeypoint": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "SSDPostProcessor": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Upsample": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "SegmentMin": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "SSDDetectionOutput": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "FusedBatchNorm": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Yolo": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnSin": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Snapshot": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ReduceAny": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnEltwise": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Range": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "SPP": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "BatchReindex": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "SSDPriorBox": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "VariableV2": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ReduceProd": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ApplyMomentum": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "FakeQuantWithMinMaxVars": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Translate": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ResizeNearestNeighbor": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Softsign": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "LessEqual": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "BidirectionalSequenceRnn": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ResourceApplyMomentum": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Proposal": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Expm1": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ReluGrad": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Multiply": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Log": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "TransData": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Unpack": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Acosh": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Softmax": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Power": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ImageCrop": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ImageData": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnDequant": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AssignSubVariableOp": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "GenerateProposal": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ImageChannelSwap": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Tile": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "LRN": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Const": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "EmbedLookup": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnQuant": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Cosh": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Dropout": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "L2Loss": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnMINIMUM": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ReduceSum": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Threshold": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "TopKV2": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ArgMin": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Sqrt": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "DecodeBBox": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ChannelAxpy": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnLessEqual": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Conv2DBackpropFilter": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "FSRDetectionOutput": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Slice": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Cumsum": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Plus": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Round": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnConvolution": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "StopGradient": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AssignVariableOp": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "SSDAnchorGenerator": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ArgMax": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnLess": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnArgMin": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "DetectionPostprocessing": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Copy": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "HashLookup": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "NNReduceSum": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Data": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "YoloDetectionOutput": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AxisAlignedBboxTransform": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Asinh": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ReduceMin": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Permute": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ZerosLike": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Correlation_V2": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Ceil": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AssignAdd": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Python": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Reshape": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Select": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Reverse": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Size": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "SSDNormalize": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Gather": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Tan": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ShuffleChannel": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "InstanceNorm": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "PSROIPooling": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Switch": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnSub": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "LogicalAnd": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "VarHandleOp": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Region": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Sub": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "LshProject": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "GatherNd": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Rank": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "PadV2": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnFullConnection": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "SVDF": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Acos": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "RNN": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Exp": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "FullConnection": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "_Arg": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Rint": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "FloorDiv": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "LSTM": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "TanH": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "SpatialTransform": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "GenerateRpnProposals": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Merge": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnGreater": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Shape": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "NotEqual": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "FloorMod": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Var": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Sign": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ChannelShuffle": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "CropAndResize": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "SquaredDifference": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnMAXIMUM": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Pad": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ImageDataTypeConversion": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Concat": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "FusionBatchNorm": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Eltwise": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Yolo2Reorg": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ScatterNd": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Floor": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Swish": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "DepthToSpace": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ReLU6": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnEqual": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ROIAlign": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Neg": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnReshape": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ReLU": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Identity": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Cos": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "HighWay": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Square": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "BNLL": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AbsVal": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "LogSoftmax": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Sinh": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "ResizeBilinear": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Activation": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AssignSub": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Squeeze": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "BatchToSpaceND": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Sigmoid": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "InvertPermutation": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Clip": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnAdd": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Multinomial": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnMul": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "RequiredSpaceToBatchPaddings": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnDepthConv": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Flatten": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Fill": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "NoOp": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AippConfig": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "L2Normalize": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Log1p": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "PReLU": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "RNNV3": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Greater": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "VarAssign": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Conv2DBackpropInput": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "MirrorPad": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Clipboxes": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "SegmentProd": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Elu": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Interp": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Aipp": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Cast": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnGreaterEqual": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Assert": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "SplitV": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "SegmentMax": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "SegmentMean": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Sin": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "FusedBatchNormGrad": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "RandomShuffle": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "UnsortedSegmentSum": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Equal": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Selu": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnData": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "BatchNorm": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Mean": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "AnnArgMax": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Bias": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "SparseSoftmaxCrossEntropyWithLogits": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "UnusedConst": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    },
+    "Dequantize": {
+        "Cap": {
+            "async": {
+                "flag": false
+            },
+            "partial": {
+                "flag": false
+            },
+            "compute": {
+                "overload": 10,
+                "cost": 10
+            }
+        }
+    }
+}

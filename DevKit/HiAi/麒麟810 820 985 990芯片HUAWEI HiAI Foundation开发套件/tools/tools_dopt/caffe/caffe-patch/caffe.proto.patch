@@ -1,0 +1,34 @@
+--- src/caffe/proto/caffe.proto	2019-09-06 11:12:07.657447835 +0000
++++ src/caffe/proto/caffe.proto	2019-09-12 13:04:32.123298883 +0000
+@@ -420,6 +420,7 @@
+   optional ThresholdParameter threshold_param = 128;
+   optional TileParameter tile_param = 138;
+   optional WindowDataParameter window_data_param = 129;
++  optional OptParameter opt_param = 155;
+ }
+ 
+ // Message that stores parameters used to apply transformation
+@@ -1434,3 +1435,22 @@
+   // Whether or not slope parameters are shared across channels.
+   optional bool channel_shared = 2 [default = false];
+ }
++
++message OptParameter {
++  optional uint32 input_type         = 1 [default = 32]; 
++  optional uint32 weight_type        = 2 [default = 2];
++  
++  optional uint32 algo_type          = 3 [default = 1]; 
++  optional float input_scale         = 4 [default = 1.0]; 
++  optional float input_offset        = 5 [default = 0.0];  
++  optional float weight_scale        = 6 [default = 1.0];
++  optional float weight_offset       = 7 [default = 0.0];
++  
++  
++  optional FillerParameter weight_q     = 8;    // Reserved Parameter
++  optional FillerParameter w_scale      = 9;    // Reserved Parameter
++  optional FillerParameter w_offset     = 10;   // Reserved Parameter
++  optional FillerParameter i_max        = 11;   // Reserved Parameter
++  optional FillerParameter i_min        = 12;   // Reserved Parameter
++  optional FillerParameter moving_factor= 13;   // Reserved Parameter
++}
+\ No newline at end of file

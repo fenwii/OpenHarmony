@@ -1,0 +1,8 @@
+resource:
+  name:              caffe_standalone # 默认值
+
+  framework:
+    type:                  caffe # 默认值
+    version:               "1.0" # 默认值，用户可改写
+    framework_path:        /root/ddk/tools/tools_dopt/caffe/caffe-mod/ # 用户填写
+  computing_type:     3  #默认值，用户可改写
