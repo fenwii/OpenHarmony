@@ -35,9 +35,6 @@
 ================鸿蒙OS开发社区================
 </p>
 
-鸿蒙 OS 开源量子基金会：
-https://www.openatom.org/openharmony
-
 鸿蒙 OS 官方代码仓库：
 https://openharmony.gitee.com/
 
