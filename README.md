@@ -38,6 +38,12 @@
 鸿蒙 OS 官方代码仓库：
 https://openharmony.gitee.com/
 
+鸿蒙OpenHarmony1.1.0LTS版本
+https://repo.huaweicloud.com/harmonyos/os/1.1.0/code-1.1.0.tar.gz
+
+鸿蒙OS开发者Beta公测招募：截止日期2021年4月30日
+https://developer.huawei.com/consumer/cn/activity/301607581257578636/signup
+
 华为开发者联盟官方论坛：
 https://developer.huawei.com/consumer
 
@@ -64,6 +70,71 @@ https://github.com/LiteOS/LiteOS
 
 开发工具Huawei LiteOS Studio：
 https://static.huaweicloud.com/upload/files/sdk/LiteOS_IDE.zip
+
+华为主题开发，华为手表主题设计（如太空人），手机主题设计
+https://developer.huawei.com/consumer/cn/huaweithemes
+
+鸿蒙生态合作企业：润和软件
+http://www.hihope.org/index.aspx
+
+
+开发刷机经验参考
+https://www.cnblogs.com/xusw/p/13757614.html
+
+
+https://developer.51cto.com/art/202102/647152.htm
+
+Mate30Pro5G版刷机包下载链接
+https://it360.org.cn/view/7828?continueFlag=5ca4b2015aedda218954371fe98d8ee8
+
+华为开发者学院
+https://developer.huawei.com/consumer/cn/training/
+
+鸿蒙学堂
+https://hmxt.org
+
+w3cschool鸿蒙文档
+https://www.w3cschool.cn/harmonyos/
+
+鸿蒙技术社区
+https://bbs.elecfans.com/harmonyos
+
+https://harmonyos.51cto.com
+
+https://www.oschina.net/group/harmonyos
+
+
+鸿蒙海思最全芯片资料
+百度云盘链接: https://pan.baidu.com/s/1tLjthBQzmqYOqmdIzRClvw  密码: 3s18
+
+操作系统内核巩固系列资料
+http://www.oldlinux.org
+
+第一款编译器，贝尔实验室出品
+https://github.com/pavel-krivanek/legacy-cc
+
+https://github.com/mortdeus/legacy-cc
+
+经典操作系统学习windows xp sq1源码
+百度云盘链接: https://pan.baidu.com/s/1BL3tyXVtf7XwJ6gYSbXFXw  密码: q8rj
+
+贝尔实验室鼻祖级操作系统Plan9
+https://github.com/brho/plan9
+
+https://github.com/Earnestly/plan9
+
+算法基础：数据结构算法动态可视化
+https://algorithm-visualizer.org
+
+https://visualgo.net/
+
+
+优秀电子硬件设计博客网站
+https://www.mr-wu.cn
+
+
+免费的计算机编程类中文书籍
+https://github.com/justjavac/free-programming-books-zh_CN
 
 <p align="center">
 ================鸿蒙OS开发社区================
