@@ -115,7 +115,7 @@ https://github.com/pavel-krivanek/legacy-cc
 
 https://github.com/mortdeus/legacy-cc
 
-经典操作系统学习windows xp sq1源码
+经典操作系统学习windows xp sp1源码
 百度云盘链接: https://pan.baidu.com/s/1BL3tyXVtf7XwJ6gYSbXFXw  密码: q8rj
 
 贝尔实验室鼻祖级操作系统Plan9
@@ -143,6 +143,9 @@ https://github.com/justjavac/free-programming-books-zh_CN
 <p align="center">
 ================鸿蒙OS开发板================
 </p>
+
+
+润和社区 http://www.hihope.org/
 
 鸿蒙开发板：
 1、HarmonyOS HiSpark AI Camera 支持OpenHarmony（Hi3516）
