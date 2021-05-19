@@ -26,7 +26,10 @@
 
 2、2021年4⽉底前，向RAM在128MB-4GB终端设备，包括平板、低内存⼿机等开源，并在适当时候发布商⽤版本；
 
-3、2021年10⽉以后⾯向4GB以上所有设备开源。
+3、鸿蒙系统 2.0 在 5 月 16 到 6 月 2 号陆续开源 L2 分支，无安卓代码的纯鸿蒙系统，只支持纯鸿蒙的应用。
+同时发布L3-L5是双框架版本，开发者公测的Beta3版本，支持运行纯鸿蒙应用，也支持运行所有的Android应用。
+
+4、2021年10⽉以后⾯向4GB以上所有设备开源。
 
 <p align="center">
 ================鸿蒙系统简介================
@@ -156,6 +159,9 @@ https://item.taobao.com/item.htm?spm=a1z10.3-c.w4002-18447093278.21.46a24c57weAW
 
 3、HarmonyOS HiSpark Wi-Fi IoT智能家居开发套件 支持OpenHarmony（Hi3861）
 https://item.taobao.com/item.htm?spm=a1z10.3-c.w4002-18447093278.24.46a24c57weAWXH&id=622343426064
+
+4、最便宜的鸿蒙开发版：Neptune HarmonyOS物联网 IOT模组，Wi-Fi&蓝牙双模模块，开发板
+https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-21152782427.26.410945fbVVmXcb&id=635868903111
 
 <p align="center">
 ================鸿蒙OS开发板================
