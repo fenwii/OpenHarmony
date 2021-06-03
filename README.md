@@ -225,6 +225,7 @@ https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-21152782427.26.410945fbVV
 		 微信公众号(fenwii-tec)：分微科技
 		 头条，抖音：苏格拉底学堂
 		 Github: https://github.com/fenwii
+		 Gitee:  https://gitee.com/samir/OpenHarmony
 		 微信小助理号：SocratesSchool
 		 鸿蒙开发者交流知识星球：鸿蒙开发者联盟   https://t.zsxq.com/2Nj6UnY 
 		 技术交流知识星球：C语言C++汇编研究中心   https://t.zsxq.com/jeYVJuj
