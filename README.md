@@ -47,6 +47,10 @@ https://repo.huaweicloud.com/harmonyos/os/1.1.0/code-1.1.0.tar.gz
 鸿蒙OpenHarmonyOS2.0 Canary版本
 https://repo.huaweicloud.com/harmonyos/os/2.0/code-2.0-canary.tar.gz
 
+鸿蒙OS2.0尝鲜体验入口指南
+https://mp.weixin.qq.com/s/GyClqZp4PoAroKteFuf3Wg
+
+
 鸿蒙OS开发者Beta公测招募：截止日期2021年4月30日
 https://developer.huawei.com/consumer/cn/activity/301607581257578636/signup
 
