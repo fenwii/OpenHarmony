@@ -220,8 +220,8 @@ https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-21152782427.26.410945fbVV
 
 <p align="center">
   
-		 QQ交流群1:184548177
-		 QQ交流群2:374825209
+		 鸿蒙开发者联盟QQ交流群1:184548177
+		 鸿蒙开发者联盟QQ交流群2:374825209
 		 微信公众号(fenwii-tec)：分微科技
 		 头条，抖音：苏格拉底学堂
 		 Github: https://github.com/fenwii
