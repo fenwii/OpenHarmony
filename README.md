@@ -51,6 +51,9 @@ https://repo.huaweicloud.com/harmonyos/os/2.0/code-2.0-canary.tar.gz
 https://mp.weixin.qq.com/s/GyClqZp4PoAroKteFuf3Wg
 
 
+OpenHarmony 教育资源仓已于 2021 年 5 月在 Gitee（码云）平台正式启用
+https://gitee.com/openatom-university/openharmony-oer
+
 鸿蒙OS开发者Beta公测招募：截止日期2021年4月30日
 https://developer.huawei.com/consumer/cn/activity/301607581257578636/signup
 
