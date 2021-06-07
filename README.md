@@ -41,6 +41,9 @@
 鸿蒙 OS 官方代码仓库：
 https://openharmony.gitee.com/
 
+鸿蒙官方代码下载库：
+https://repo.huaweicloud.com/harmonyos/os/
+
 鸿蒙OpenHarmonyOS 1.1..0LTS版本
 https://repo.huaweicloud.com/harmonyos/os/1.1.0/code-1.1.0.tar.gz
 
