@@ -38,10 +38,10 @@
 ================鸿蒙OS开发社区================
 </p>
 
-鸿蒙 OS 官方代码仓库：
+开放原子基金会鸿蒙OpenHarmonyOS官方代码仓库：
 https://openharmony.gitee.com/
 
-鸿蒙官方代码下载库：
+华为鸿蒙HarmonyOS官方代码下载库：
 https://repo.huaweicloud.com/harmonyos/os/
 
 鸿蒙OpenHarmonyOS 1.1..0LTS版本
