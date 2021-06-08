@@ -41,7 +41,7 @@
 开放原子基金会鸿蒙OpenHarmonyOS官方代码仓库：
 https://openharmony.gitee.com/
 
-华为鸿蒙HarmonyOS官方代码下载库：
+华为发行版鸿蒙HarmonyOS官方代码下载库：
 https://repo.huaweicloud.com/harmonyos/os/
 
 鸿蒙OpenHarmonyOS 1.1..0LTS版本
