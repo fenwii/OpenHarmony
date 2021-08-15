@@ -48,11 +48,18 @@ https://openharmony.gitee.com/
 华为发行版鸿蒙HarmonyOS官方代码下载库：
 https://repo.huaweicloud.com/harmonyos/os/
 
-鸿蒙OpenHarmonyOS 1.1..0LTS版本
+鸿蒙OpenHarmonyOS 1.1.0LTS版本
 https://repo.huaweicloud.com/harmonyos/os/1.1.0/code-1.1.0.tar.gz
 
 鸿蒙OpenHarmonyOS2.0 Canary版本
 https://repo.huaweicloud.com/harmonyos/os/2.0/code-2.0-canary.tar.gz
+
+鸿蒙OpenHarmonyOS 1.1.2LTS版本
+https://repo.huaweicloud.com/harmonyos/os/1.1.2/code-v1.1.2-LTS.tar.gz
+
+鸿蒙OpenHarmonyOS2.2 Beta2版本
+https://repo.huaweicloud.com/harmonyos/os/2.2-Beta2/code-v2.2-beta2_20210730.tar.gz
+https://repo.huaweicloud.com/harmonyos/os/2.2-Beta2/standard-2.2-Beta2.tar.gz
 
 鸿蒙OS2.0尝鲜体验入口指南
 https://mp.weixin.qq.com/s/GyClqZp4PoAroKteFuf3Wg
