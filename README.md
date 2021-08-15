@@ -74,6 +74,22 @@ https://developer.huawei.com/consumer/cn/activity/301607581257578636/signup
 华为开发者联盟官方论坛：
 https://developer.huawei.com/consumer
 
+博客园华为开发者论坛
+https://www.cnblogs.com/developer-huawei/
+
+鸿蒙开发初探
+https://zhuanlan.zhihu.com/p/384499498
+
+鸿蒙NDK开发
+http://t.zoukankan.com/zjutzz-p-13855758.html
+
+成为华为鸿蒙OS开发者，应该学习什么编程语言？
+https://zhuanlan.zhihu.com/p/382898719
+
+
+鸿蒙os吧
+https://tieba.baidu.com/f?kw=鸿蒙os&ie=utf-8
+
 鸿蒙官网：
 https://www.harmonyos.com
 
