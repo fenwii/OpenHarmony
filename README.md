@@ -66,6 +66,12 @@ https://repo.huaweicloud.com/harmonyos/os/1.1.2/code-v1.1.2-LTS.tar.gz
 https://repo.huaweicloud.com/harmonyos/os/2.2-Beta2/code-v2.2-beta2_20210730.tar.gz
 https://repo.huaweicloud.com/harmonyos/os/2.2-Beta2/standard-2.2-Beta2.tar.gz
 
+鸿蒙OpenHarmonyOS 1.1.3LTS版本
+https://repo.huaweicloud.com/harmonyos/os/1.1.3/code-v1.1.3-LTS.tar.gz
+
+鸿蒙OpenHarmonyOS 3.0LTS版本
+https://repo.huaweicloud.com/harmonyos/os/3.0/code-v3.0-LTS.tar.gz
+
 鸿蒙OS2.0尝鲜体验入口指南
 https://mp.weixin.qq.com/s/GyClqZp4PoAroKteFuf3Wg
 
