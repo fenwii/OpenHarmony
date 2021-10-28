@@ -107,8 +107,33 @@ https://zhuanlan.zhihu.com/p/382898719
 鸿蒙os吧
 https://tieba.baidu.com/f?kw=鸿蒙os&ie=utf-8
 
-鸿蒙官网：
+鸿蒙官网
 https://www.harmonyos.com
+
+OpenHarmony 网站
+国内用户访问: https://www.openharmony.cn
+
+海外用户访问:https://www.openharmony.io
+
+OpenHarmony SIG 组织地址
+https://gitee.com/openharmony-sig
+
+OpenHarmony 三方库组织地址
+https://gitee.com/openharmony-tpc
+
+
+OpenHarmony 在线交流平台
+https://zulip.openharmony.cn/
+
+
+OpenHarmony 社区贡献指南
+https://gitee.com/openharmony/docs/blob/master/zh-cn/contribute/%E5%8F%82%E4%B8%8E%E8%B4%A1%E7%8C%AE.md
+
+OpenHarmony Dev 邮件列表
+dev@openharmony.io
+
+openatom订阅链接
+https://lists.openatom.io/postorius/lists/dev.openharmony.io/
 
 鸿蒙开发者官网：
 https://developer.harmonyos.com
