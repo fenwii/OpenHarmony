@@ -209,6 +209,10 @@ https://developer.huawei.com/consumer/cn/training/
 鸿蒙学堂
 https://hmxt.org
 
+鸿蒙研究站
+百文说内核｜百万注源码｜百图画鸿蒙
+http://www.weharmonyos.com
+
 w3cschool鸿蒙文档
 https://www.w3cschool.cn/harmonyos/
 
