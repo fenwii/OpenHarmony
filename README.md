@@ -86,27 +86,27 @@ https://openharmony.gitee.com/
 华为发行版鸿蒙HarmonyOS官方代码下载库：
 https://repo.huaweicloud.com/harmonyos/os/
 
-鸿蒙OpenHarmonyOS 1.1.0LTS版本
+鸿蒙HarmonyOS 1.1.0LTS版本
 https://repo.huaweicloud.com/harmonyos/os/1.1.0/code-1.1.0.tar.gz
 
-鸿蒙OpenHarmonyOS2.0 Canary版本
+鸿蒙HarmonyOS2.0 Canary版本
 https://repo.huaweicloud.com/harmonyos/os/2.0/code-2.0-canary.tar.gz
 
-鸿蒙OpenHarmonyOS 1.1.2LTS版本
+鸿蒙HarmonyOS 1.1.2LTS版本
 https://repo.huaweicloud.com/harmonyos/os/1.1.2/code-v1.1.2-LTS.tar.gz
 
-鸿蒙OpenHarmonyOS2.2 Beta2版本
+鸿蒙HarmonyOS2.2 Beta2版本
 https://repo.huaweicloud.com/harmonyos/os/2.2-Beta2/code-v2.2-beta2_20210730.tar.gz
 https://repo.huaweicloud.com/harmonyos/os/2.2-Beta2/standard-2.2-Beta2.tar.gz
 
-鸿蒙OpenHarmonyOS 1.1.3LTS版本
+鸿蒙HarmonyOS 1.1.3LTS版本
 https://repo.huaweicloud.com/harmonyos/os/1.1.3/code-v1.1.3-LTS.tar.gz
 
-鸿蒙OpenHarmonyOS 3.0LTS版本
+鸿蒙HarmonyOS 3.0LTS版本
 https://repo.huaweicloud.com/harmonyos/os/3.0/code-v3.0-LTS.tar.gz
 
 
-鸿蒙OpenHarmonyOS 3.0 standard版本
+鸿蒙HarmonyOS 3.0 standard版本
 https://repo.huaweicloud.com/harmonyos/os/3.0/standard.tar.gz
 
 鸿蒙OS2.0尝鲜体验入口指南
@@ -280,8 +280,20 @@ https://item.taobao.com/item.htm?spm=a1z10.3-c.w4002-18447093278.24.46a24c57weAW
 4、最便宜的鸿蒙开发版：Neptune HarmonyOS物联网 IOT模组，Wi-Fi&蓝牙双模模块，开发板
 https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-21152782427.26.410945fbVVmXcb&id=635868903111
 
+深开鸿
+https://www.kaihong.com/products/KaihongOS
+
 <p align="center">
 ================鸿蒙OS开发板================
+</p>
+
+<p align="center">
+================鸿蒙SIG兴趣组================
+</p>
+
+
+<p align="center">
+================鸿蒙SIG兴趣组================
 </p>
 
 
