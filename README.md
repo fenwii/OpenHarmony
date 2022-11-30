@@ -1,6 +1,6 @@
-# 鸿蒙OS分布式操作系统 OpenHarmony  
+# 鸿蒙HarmonyOS分布式操作系统 开源鸿蒙系统OpenHarmony分布式操作系统  
 <p align="center">
-华为鸿蒙分布式操作系统（Huawei OpenHarmony）开发技术交流，鸿蒙技术资料，手册，指南，共建万物互联新生态。
+华为鸿蒙分布式操作系统（Huawei OpenHarmony），开源鸿蒙系统（OpenHarmony）分布式操作系统开发技术交流，鸿蒙技术资料，手册，指南，共建万物互联新生态。
 </p>
 <p align="center">
   <a href="https://github.com/fenwii/OpenHarmony">
@@ -290,7 +290,7 @@ https://www.kaihong.com/products/KaihongOS
 <p align="center">
 ================鸿蒙SIG兴趣组================
 </p>
-
+https://www.openharmony.cn/sig
 
 <p align="center">
 ================鸿蒙SIG兴趣组================
