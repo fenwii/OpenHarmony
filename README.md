@@ -149,6 +149,9 @@ OpenHarmony 网站
 OpenHarmony SIG 组织地址
 https://gitee.com/openharmony-sig
 
+OpenHarmony开发样例
+https://growing.openharmony.cn/
+
 OpenHarmony 三方库组织地址
 https://gitee.com/openharmony-tpc
 
@@ -282,6 +285,9 @@ https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-21152782427.26.410945fbVV
 
 深开鸿
 https://www.kaihong.com/products/KaihongOS
+
+Opengharymony共建样例
+https://growing.openharmony.cn/
 
 <p align="center">
 ================鸿蒙OS开发板================
