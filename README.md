@@ -343,7 +343,6 @@ https://www.openharmony.cn/sig
 </p>
 
 
-
 <p align="center">
 =================深度交流==================
 </p>
@@ -357,8 +356,9 @@ https://www.openharmony.cn/sig
 </p>
 
 <p align="center">
-       
-        [分微开源鸿蒙社区]
+	
+	
+	[分微开源鸿蒙社区]
 	鸿蒙开发者联盟QQ交流群1:184548177
 	鸿蒙开发者联盟QQ交流群2:374825209
 	鸿蒙开发者交流知识星球：鸿蒙开发者联盟   https://t.zsxq.com/2Nj6UnY 
