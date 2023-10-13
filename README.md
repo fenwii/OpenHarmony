@@ -348,7 +348,7 @@ https://www.openharmony.cn/sig
 </p>
 
 <p align="center">
-      人生90%的机会来自于人脉和有效信息
+      核心技术是独立自主出来的
 </p>
 
 <p align="center">
