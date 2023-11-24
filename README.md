@@ -373,9 +373,10 @@ https://www.openharmony.cn/sig
 	
 	
 	[分微开源鸿蒙社区]
+ 	智联网开发者交流知识星球：人工智能AGI开发者联盟   https://t.zsxq.com/2Nj6UnY 
 	鸿蒙开发者联盟QQ交流群1:184548177
 	鸿蒙开发者联盟QQ交流群2:374825209
-	鸿蒙开发者交流知识星球：鸿蒙开发者联盟   https://t.zsxq.com/2Nj6UnY 
+	
 	
 	[分微社区公众号官网]
 	微信公众号(fenwii-tec)：分微科技
@@ -384,9 +385,8 @@ https://www.openharmony.cn/sig
 	
 	[分微技术社区]
 	头条，抖音： ChatGPT中国应用社区
-	ChatGPT应用实践知识星球：ChatGPT中国应用社区 https://t.zsxq.com/0af53ee8J
+	AGI人工智能中国知识星球：AGI人工智能中国社区 https://t.zsxq.com/0af53ee8J
 	编程技术交流知识星球：C语言C++汇编研究中心   https://t.zsxq.com/jeYVJuj
-	架构师知识星球：架构设计师之家 https://t.zsxq.com/0aWGqWZgQ
 </p>  
 </p>  
 <p align="center">
