@@ -232,6 +232,15 @@ https://hmxt.org
 百文说内核｜百万注源码｜百图画鸿蒙
 http://www.weharmonyos.com
 
+华为鸿蒙 HarmonyOS 开发资料全面汇总
+https://segmentfault.com/a/1190000040594200
+
+鸿蒙 (操作系统)wiki
+https://zh.wikipedia.org/wiki/%E9%B8%BF%E8%92%99_(%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F)
+
+OpenHarmony Wiki
+https://zh.wikipedia.org/wiki/OpenHarmony
+
 w3cschool鸿蒙文档
 https://www.w3cschool.cn/harmonyos/
 
