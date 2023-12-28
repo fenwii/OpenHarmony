@@ -1,4 +1,5 @@
-![image](https://github.com/fenwii/OpenHarmony/assets/30862898/87eb770a-59d2-4249-a33e-3fe1ed19e0af)# 鸿蒙HarmonyOS分布式操作系统 开源鸿蒙系统OpenHarmony分布式操作系统  
+
+# 鸿蒙HarmonyOS、开源鸿蒙系统OpenHarmony分布式操作系统
 <p align="center">
 华为鸿蒙分布式操作系统（Huawei OpenHarmony），开源鸿蒙系统（OpenHarmony）分布式操作系统开发技术交流，鸿蒙技术资料，手册，指南，共建万物互联新生态。
 </p>
