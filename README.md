@@ -1,4 +1,4 @@
-# 鸿蒙HarmonyOS分布式操作系统 开源鸿蒙系统OpenHarmony分布式操作系统  
+![image](https://github.com/fenwii/OpenHarmony/assets/30862898/87eb770a-59d2-4249-a33e-3fe1ed19e0af)# 鸿蒙HarmonyOS分布式操作系统 开源鸿蒙系统OpenHarmony分布式操作系统  
 <p align="center">
 华为鸿蒙分布式操作系统（Huawei OpenHarmony），开源鸿蒙系统（OpenHarmony）分布式操作系统开发技术交流，鸿蒙技术资料，手册，指南，共建万物互联新生态。
 </p>
@@ -73,7 +73,9 @@
 
 25、2023年12月20，开源鸿蒙开发者手机在装配工厂下线。
 
-26、鸿蒙生态列表
+26、2023年12月26日报道，从华为内部人士了解到，除手机鸿蒙之外，PC端的鸿蒙操作系统已经接近完成（21财经），可以预测2024年华为将发布鸿蒙PC操作系统，鸿蒙将成为Windows，Linux，macOS后的第四大操作系统，相关的生态发展对开发者都是一个大的机会。
+
+27、鸿蒙生态列表
 开发版厂商
 
 <p align="center">
