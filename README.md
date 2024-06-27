@@ -82,7 +82,21 @@
 
 29、2024年6月21，华为开发者大会（HDC 2024）于6月21日至23日在东莞松山湖举行，主要聚焦于HarmonyOS NEXT全场景智能操作系统的发布和未来规划。发布全新的纯血鸿蒙HarmonyOS NEXT，支持鸿蒙原生智能全系列Ai生态。小艺升级为小艺智能体，实现意图交互框架。支持星盾安全架构，重新定义隐私安全，支持生态纯净（从源头构建新秩序），隐私可控（从权限到管数据），数据高安（从个热岸区到协同安全），禁止开发九类不合理权限，每次访问允许，只单允许，分享转发实现系统级授权，只有指定的用户才能查看，转发无效。支持全局未成年人模式，一键切换所有数据内容为青少年内容。红的行业最高等级安全等级认证，鸿蒙内核 CC EAL 6+，HarmonyOS Next IP产品信息安全认证证书评估保障级（EAL）。余承东发文五年前8月9日，HarmonyOS重磅登场，1778天以来，经历4次重磅系统迭代，鸿蒙生态拥用了9亿多台设备、超过254万开发者，5000多个常用应用已全部启动开发。做有底座，有生态，真正的智能操作系统。
 
-30、鸿蒙生态列表
+30、2024年6月21日发表仓颉编程语言。
+
+仓颉编程语言白皮书
+https://developer.huawei.com/consumer/cn/doc/openharmony-cangjie/cj-wp-abstract
+
+仓颉编程语言开发指南
+https://developer.huawei.com/consumer/cn/doc/openharmony-cangjie/89_u7f16_u7a0b_u8bed_u8a00_u5f00_u53d1_u6307_u5357
+
+仓颉编程语言语言规约
+https://developer.huawei.com/consumer/cn/doc/openharmony-cangjie/cj-lan-spec
+
+仓颉编程语言库 API
+https://developer.huawei.com/consumer/cn/doc/openharmony-cangjie/libs_overview_ohos
+
+31、鸿蒙生态列表
 开发版厂商
 
 <p align="center">
