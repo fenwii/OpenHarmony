@@ -84,6 +84,9 @@
 
 30、2024年6月21日发表仓颉编程语言。
 
+仓颉编程语言助手（智谱清言智能体）基于华为仓颉官方数据，动态更新知识库
+https://chatglm.cn/main/gdetail/667d249b8ef6d812fc36988e
+
 仓颉编程语言白皮书
 https://developer.huawei.com/consumer/cn/doc/openharmony-cangjie/cj-wp-abstract
 
@@ -95,6 +98,7 @@ https://developer.huawei.com/consumer/cn/doc/openharmony-cangjie/cj-lan-spec
 
 仓颉编程语言库 API
 https://developer.huawei.com/consumer/cn/doc/openharmony-cangjie/libs_overview_ohos
+
 
 31、鸿蒙生态列表
 开发版厂商
