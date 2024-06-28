@@ -99,6 +99,10 @@ https://developer.huawei.com/consumer/cn/doc/openharmony-cangjie/cj-lan-spec
 仓颉编程语言库 API
 https://developer.huawei.com/consumer/cn/doc/openharmony-cangjie/libs_overview_ohos
 
+仓颉编程语言教程介绍
+https://developer.huawei.com/consumer/cn/training/course/slightMooc/C101718903607800132
+
+
 
 31、鸿蒙生态列表
 开发版厂商
