@@ -105,6 +105,15 @@ https://developer.huawei.com/consumer/cn/training/course/slightMooc/C10171890360
 
 
 31、鸿蒙生态列表
+
+生态合作伙伴
+
+<p align="center">
+  <a href="https://github.com/fenwii/OpenHarmony">
+    <img src="assets/img/shengtailist.png" width="750px">
+  </a>
+</p>
+
 开发版厂商
 
 <p align="center">
