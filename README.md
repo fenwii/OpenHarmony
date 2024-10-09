@@ -103,7 +103,7 @@ https://developer.huawei.com/consumer/cn/doc/openharmony-cangjie/libs_overview_o
 https://developer.huawei.com/consumer/cn/training/course/slightMooc/C101718903607800132
 
 
-31、2024年10月8日，华为HarmonyOS NEXT正式公测纯血鸿蒙项所有用户开放。微信鸿蒙生态版正式开始邀请内测，WPS鸿蒙版也开启内测。
+31、2024年10月8日，华为HarmonyOS NEXT正式公测纯血鸿蒙向所有用户开放。微信鸿蒙生态版正式开始邀请内测，WPS鸿蒙版也开启内测，支付宝鸿蒙版发布。
 
 32、鸿蒙生态列表
 
