@@ -169,8 +169,147 @@ https://repo.huaweicloud.com/harmonyos/os/1.1.3/code-v1.1.3-LTS.tar.gz
 https://repo.huaweicloud.com/harmonyos/os/3.0/code-v3.0-LTS.tar.gz
 
 
-鸿蒙HarmonyOS 3.0 standard版本
-https://repo.huaweicloud.com/harmonyos/os/3.0/standard.tar.gz
+鸿蒙HarmonyOS 3.0.1 版本
+https://repo.huaweicloud.com/harmonyos/os/3.0.1/
+
+鸿蒙HarmonyOS 3.0.2 版本
+https://repo.huaweicloud.com/harmonyos/os/3.0.2/
+
+鸿蒙HarmonyOS 3.0.3 版本
+https://repo.huaweicloud.com/harmonyos/os/3.0.3/
+
+鸿蒙HarmonyOS 3.0.5 版本
+https://repo.huaweicloud.com/harmonyos/os/3.0.5/
+
+鸿蒙HarmonyOS 3.0.6 版本
+https://repo.huaweicloud.com/harmonyos/os/3.0.6/
+
+鸿蒙HarmonyOS 3.0.7 版本
+https://repo.huaweicloud.com/harmonyos/os/3.0.7/
+
+
+鸿蒙HarmonyOS 3.0.8 版本
+https://repo.huaweicloud.com/harmonyos/os/3.0.8/
+
+
+鸿蒙HarmonyOS 3.1-Beta 版本
+https://repo.huaweicloud.com/harmonyos/os/3.1-Beta/
+
+鸿蒙HarmonyOS 3.1-Release 版本
+https://repo.huaweicloud.com/harmonyos/os/3.1-Release/
+
+
+鸿蒙HarmonyOS 3.1.1 版本
+https://repo.huaweicloud.com/harmonyos/os/3.1.1/
+
+
+鸿蒙HarmonyOS 3.1.2 版本
+https://repo.huaweicloud.com/harmonyos/os/3.1.2/
+
+鸿蒙HarmonyOS 3.1.3 版本
+https://repo.huaweicloud.com/harmonyos/os/3.1.3/
+
+
+鸿蒙HarmonyOS 3.1.4 版本
+https://repo.huaweicloud.com/harmonyos/os/3.1.4/
+
+鸿蒙HarmonyOS 3.1.5 版本
+https://repo.huaweicloud.com/harmonyos/os/3.1.5/
+
+鸿蒙HarmonyOS 3.1.6 版本
+https://repo.huaweicloud.com/harmonyos/os/3.1.6/
+
+
+鸿蒙HarmonyOS 3.1.7 版本
+https://repo.huaweicloud.com/harmonyos/os/3.1.7/
+
+
+鸿蒙HarmonyOS 3.2-Beta1 版本
+https://repo.huaweicloud.com/harmonyos/os/3.2-Beta1/
+
+鸿蒙HarmonyOS 3.2-Beta2 版本
+https://repo.huaweicloud.com/harmonyos/os/3.2-Beta2/
+
+
+鸿蒙HarmonyOS 3.2-Beta3 版本
+https://repo.huaweicloud.com/harmonyos/os/3.2-Beta3/
+
+
+鸿蒙HarmonyOS 3.2-Beta4 版本
+https://repo.huaweicloud.com/harmonyos/os/3.2-Beta4/
+
+鸿蒙HarmonyOS 3.2-Beta5 版本
+https://repo.huaweicloud.com/harmonyos/os/3.2-Beta5/
+
+鸿蒙HarmonyOS 3.2-Release 版本
+https://repo.huaweicloud.com/harmonyos/os/3.2-Release/
+
+
+鸿蒙HarmonyOS 3.2.1 版本
+https://repo.huaweicloud.com/harmonyos/os/3.2.1/
+
+鸿蒙HarmonyOS 3.2.2 版本
+https://repo.huaweicloud.com/harmonyos/os/3.2.2/
+
+
+鸿蒙HarmonyOS 3.2.3 版本
+https://repo.huaweicloud.com/harmonyos/os/3.2.3/
+
+
+鸿蒙HarmonyOS 3.2.4 版本
+https://repo.huaweicloud.com/harmonyos/os/3.2.4/
+
+
+鸿蒙HarmonyOS 4.0-Beta1 版本
+https://repo.huaweicloud.com/harmonyos/os/4.0-Beta1/
+
+
+鸿蒙HarmonyOS 4.0-Beta2 版本
+https://repo.huaweicloud.com/harmonyos/os/4.0-Beta2/
+
+鸿蒙HarmonyOS 4.0-Release 版本
+https://repo.huaweicloud.com/harmonyos/os/4.0-Release/
+
+
+鸿蒙HarmonyOS 4.0.1-Release 版本
+https://repo.huaweicloud.com/harmonyos/os/4.0.1-Release/
+
+
+鸿蒙HarmonyOS 4.0.2-Release 版本
+https://repo.huaweicloud.com/harmonyos/os/4.0.2-Release/
+
+鸿蒙HarmonyOS 4.0.3-Release 版本
+https://repo.huaweicloud.com/harmonyos/os/4.0.3-Release/
+
+
+鸿蒙HarmonyOS 4.1-Beta1 版本
+https://repo.huaweicloud.com/harmonyos/os/4.1-Beta1/
+
+鸿蒙HarmonyOS 4.1-Release 版本
+https://repo.huaweicloud.com/harmonyos/os/4.1-Release/
+
+
+鸿蒙HarmonyOS 4.1.1-Release 版本
+https://repo.huaweicloud.com/harmonyos/os/4.1.1-Release/
+
+
+鸿蒙HarmonyOS 5.0-Beta1 版本
+https://repo.huaweicloud.com/harmonyos/os/5.0-Beta1/
+
+鸿蒙HarmonyOS 5.0-Release 版本
+https://repo.huaweicloud.com/harmonyos/os/5.0-Release/
+
+鸿蒙HarmonyOS 5.0.0-Release 版本
+https://repo.huaweicloud.com/harmonyos/os/5.0.0-Release/
+
+
+鸿蒙HarmonyOS windows_code 工具
+https://repo.huaweicloud.com/harmonyos/os/windows_code/
+
+鸿蒙HarmonyOS code-v5.0.0-Release 版本
+https://repo.huaweicloud.com/harmonyos/os/code-v5.0.0-Release.tar.gz
+
+
 
 鸿蒙OS2.0尝鲜体验入口指南
 https://mp.weixin.qq.com/s/GyClqZp4PoAroKteFuf3Wg
