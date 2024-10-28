@@ -8,11 +8,10 @@
     <img src="assets/img/architecture.png" width="750px">
   </a>
 </p>
-
+</p>
 <p align="center">
-
-================纯血鸿蒙Harmony NEXT核心创新================
- <p align="center">
+====纯血鸿蒙Harmony NEXT核心创新====
+<p align="center">
 纯血鸿蒙分布式智能操作系统核心技术。
 </p>
 <p align="center">
@@ -20,10 +19,10 @@
     <img src="assets/img/core.png" width="750px">
   </a>
 </p>
-
 <p align="center">
 	
 ================鸿蒙系统简介================
+
 </p>
   
 鸿蒙OS分布式操作系统简介
