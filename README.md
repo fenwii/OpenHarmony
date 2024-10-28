@@ -147,10 +147,9 @@ https://developer.huawei.com/consumer/cn/training/course/slightMooc/C10171890360
 
 
 <p align="center">
-
-
 ================鸿蒙系统简介================
 </p>
+
 <p align="center">
 ================鸿蒙OS开发社区================
 </p>
