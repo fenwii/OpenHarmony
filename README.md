@@ -313,6 +313,9 @@ https://repo.huaweicloud.com/harmonyos/os/5.0-Release/
 鸿蒙HarmonyOS 5.0.0-Release 版本
 https://repo.huaweicloud.com/harmonyos/os/5.0.0-Release/
 
+鸿蒙HarmonyOS 5.0.1-Release 版本
+https://repo.huaweicloud.com/harmonyos/os/5.0.1-Release/
+
 
 鸿蒙HarmonyOS windows_code 工具
 https://repo.huaweicloud.com/harmonyos/os/windows_code/
