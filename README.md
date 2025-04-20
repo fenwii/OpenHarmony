@@ -119,7 +119,10 @@ https://developer.huawei.com/consumer/cn/training/course/slightMooc/C10171890360
 
 32、2024年10月22日，华为在深圳湾体育中心发布HarmonyOS NEXT正式版，也称为鸿蒙5，余承东说 “我们实现了操作系统领域的全面突破！原生鸿蒙来了！”中国首个实现全栈自研的分布式智能操作系统，全球第三大移动操作系统，标志着我国在操作系统领域取得突破性进展。据介绍，HarmonyOS自2015年立项以来，华为数万名研发工程师，与上万家合作伙伴、百万开发者日夜攻关，帮助鸿蒙不断迭代完善。目前，HarmonyOS已历经四代发展，代码超过1.1亿行，覆盖生态设备超10亿台，在中国市场的份额已经超过iOS成为第二大操作系统，从2023年9月25日至今，鸿蒙原生应用和元服务核心厂商达到15000+。在原生智能方面，HarmonyOS NEXT将AI与操作系统深度融合，让AI能力无处不在。华为的智能助手小艺升级为小艺智能体，可执行更复杂的操作，并在端云大模型协同和意图框架的加持下获得更好的场景感知、意图识别和用户理解能力，能够帮助用户更好地获取所需个性化服务。此外，HarmonyOS NEXT在方舟引擎技术加持下，带来系统流畅、动效流畅、上网流畅，游戏和应用流畅的多维度流畅体验。“HarmonyOS NEXT通过深度整合软硬芯云，实现整机性能提升30%。”
 
-33、鸿蒙生态列表
+33、2025年3月社区发布OpenHarmony 5.0.3 Release 版本，筹备3个专项SIG（XR，AI Model，软件工程），Ai Model SIG计划支持编译工具链 Musl版本升级 ，2025计划Llama.cpp, ASR、TTS模型、CV模型，MCP协议，A2A协议，ASR、TTS应用，Deepseek App， 图像识别应用。2026计划RAG，Agent Cangjie。提供Deepseek 蒸馏模型， Embedding模型部署知道文档。 依赖OH共建AMD GPU驱动，Mesa 3D开源驱动，Vulkan，NPU驱动，Python3，MindSpore Lite，向量数据库，MindSpore Lite Kit，Ai Kit。
+
+
+34、鸿蒙生态列表
 
 生态合作伙伴
 
