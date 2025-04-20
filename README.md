@@ -3,9 +3,19 @@
 <p align="center">
 华为鸿蒙分布式操作系统（Huawei OpenHarmony），开源鸿蒙系统（OpenHarmony）分布式操作系统开发技术交流，鸿蒙技术资料，手册，指南，共建万物互联新生态。
 </p>
+
+鸿蒙体系架构
 <p align="center">
   <a href="https://github.com/fenwii/OpenHarmony">
     <img src="assets/img/architecture.png" width="750px">
+  </a>
+</p>
+
+
+鸿蒙体系架构
+<p align="center">
+  <a href="https://github.com/fenwii/OpenHarmony">
+    <img src="assets/img/openharymony.png" width="750px">
   </a>
 </p>
 </p>
