@@ -12,7 +12,7 @@
 </p>
 
 
-鸿蒙体系架构
+开源鸿蒙体系架构
 <p align="center">
   <a href="https://github.com/fenwii/OpenHarmony">
     <img src="assets/img/openharymony.png" width="750px">
