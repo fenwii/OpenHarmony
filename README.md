@@ -327,6 +327,8 @@ https://repo.huaweicloud.com/harmonyos/os/windows_code/
 https://repo.huaweicloud.com/harmonyos/os/code-v5.0.0-Release.tar.gz
 
 
+Magic基于仓颉编程语言构建的 LLM Agent 开发框架，其主要特点包括：Agent DSL、支持 MCP 协议，支持模块化调用，支持任务智能规划。
+https://gitcode.com/Cangjie-TPC/CangjieMagic
 
 鸿蒙OS2.0尝鲜体验入口指南
 https://mp.weixin.qq.com/s/GyClqZp4PoAroKteFuf3Wg
