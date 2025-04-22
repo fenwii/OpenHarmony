@@ -468,7 +468,8 @@ https://www.oschina.net/group/harmonyos
 
 
 鸿蒙海思最全芯片资料
-百度云盘链接: https://pan.baidu.com/s/1tLjthBQzmqYOqmdIzRClvw  密码: 3s18
+百度云盘链接:  https://pan.baidu.com/s/1kL7_XJaeAsgDVBAbGQIyxA 密码: sv5m
+
 
 操作系统内核巩固系列资料
 http://www.oldlinux.org
