@@ -132,7 +132,9 @@ https://developer.huawei.com/consumer/cn/training/course/slightMooc/C10171890360
 33、2025年3月社区发布OpenHarmony 5.0.3 Release 版本，筹备3个专项SIG（XR，AI Model，软件工程），Ai Model SIG计划支持编译工具链 Musl版本升级 ，2025计划Llama.cpp, ASR、TTS模型、CV模型，MCP协议，A2A协议，ASR、TTS应用，Deepseek App， 图像识别应用。2026计划RAG，Agent Cangjie。提供Deepseek 蒸馏模型， Embedding模型部署知道文档。 依赖OH共建AMD GPU驱动，Mesa 3D开源驱动，Vulkan，NPU驱动，Python3，MindSpore Lite，向量数据库，MindSpore Lite Kit，Ai Kit。
 
 
-34、鸿蒙生态列表
+34、2025年5月19日，华为正式发布全新鸿蒙电脑HUAWEI MateBook Pro与HUAWEI MateBook Fold 非凡大师。这两款鸿蒙电脑的发布，标志着我国拥有了从内核层开始自主可控的电脑操作系统，也意味着国产操作系统在个人电脑（PC）领域实现重要突破。
+
+35、鸿蒙生态列表
 
 生态合作伙伴
 
